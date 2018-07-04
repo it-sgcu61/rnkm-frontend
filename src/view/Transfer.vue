@@ -7,6 +7,7 @@
     </div>
     <div v-if='!final_confirm'>
     <button v-for='(detail, baan) in info'
+      :key='baan'
       class='button house-select is-outlined is-success'
       :class="{'is-danger': detail.now == detail.max}"
       :disabled='detail.now == detail.max || baan == curr || !Boolean(cid)'
@@ -54,16 +55,15 @@ export default {
 }
 </script>
 
-<style scoped>
-.house-select {
-  width: 140px;
-  height: 160px;
-  margin: .4em .4em;
-  padding: auto auto;
-  display: inline-block;
-  text-align: center;
-}
-p, h1 {
-  margin: 5px auto;
-}
+<style lang='stylus' scoped>
+.house-select
+  width 140px;
+  height 160px;
+  margin .4em .4em;
+  padding auto auto;
+  display inline-block;
+  text-align center
+
+p, h1
+  margin 5px auto
 </style>

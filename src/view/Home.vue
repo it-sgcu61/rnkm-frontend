@@ -1,6 +1,6 @@
 <template>
 <div id='_home_wrapper'>
-    <img src='../theme/wall_top_2.jpg' @click='$router.push("\introduction")'>
+    <img src='Theme/wallpaper/header.jpg' @click='$router.push("\introduction")'>
 </div>
 </template>
 

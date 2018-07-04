@@ -1,44 +1,29 @@
-<template>
-  <div class='bg'>
-    <div class="overlay"></div>
-    <!-- head form -->
-    <div class="container">
-      <FormTemplate v-model='head_result' :fieldList='fieldList.head'>
-        <template slot='info' slot-scope="o">
-          <transition name='_slide-fade' mode='out-in' duration='85'>
-            <div :key='o.lang'>
-              <h1 v-html='o.lang == "TH" ?
-                "กรอกข้อมูลสำหรับ <strong>รับน้องก้าวใหม่</strong>" :
-                "registration for <strong>rub nong kaow mai</strong>"
-              '></h1>
-              <h2 v-html='o.lang == "TH" ?
-                "สามารถลงทะเบียนได้ไม่เกิน 3 คน" :
-                "maximum team member is 3"
-              '></h2>
-            </div>
-          </transition>
-        </template>
-      </FormTemplate>
-    </div>
-    <!-- individual dynamic form -->
-    <transition-group name='fade' duration='300'>
-      <template v-for='_, x in dynm_result'>
-        <div class='container' :key='x' v-show='dynm_result[x] !== null'>
-          <FormTemplate v-model='dynm_result' ref='dynamic_refs' :fieldList='fieldList.dynamic' @delete='del_user(x)' :deletable='true'>
-            <div slot-scope="o" class="has-text-centered" style='margin-bottom: 50px'>
-              <croppa-img ref='rfimg' :desc='o.lang == "TH" ? "คลิกเพื่อเพิ่มรูปภาพ" : "click to add picture"' />
-            </div>
-          </FormTemplate>
-        </div>
-      </template>
-    </transition-group>
-    <!-- submit button -->
-    <div class="__form-template-wrapper container __form-template-header" v-if='validIdx.length != 3'>
-      <input value='เพิ่มสมาชิก' class="button" @click='add_dynm_result'>
-    </div>
-    <div class="__form-template-wrapper container __form-template-header" v-if='validIdx.length != 0'>
-      <input value='ส่ง' class="button" @click='submit' dynamic_form>
-    </div>
+/* eslint-plugin-disable angular */
+<template lang='pug'>
+  div
+    div.overlay
+
+    // <!-- head form -->
+    div.container
+      FormTemplate(v-model='head_result', :fieldList='fieldList.head')
+        template(slot='info', slot-scope="o")
+          transition(name='_slide-fade', mode='out-in', duration='85')
+            div(:key='o.lang')
+              h1(v-html='o.lang == "TH" ? "กรอกข้อมูลสำหรับ <strong>รับน้องก้าวใหม่</strong>" : "registration for <strong>rub nong kaow mai</strong>"')
+              h2(v-html='o.lang == "TH" ? "สามารถลงทะเบียนได้ไม่เกิน 3 คน" : "maximum team member is 3"')
+
+    // <!-- individual dynamic form -->
+    transition-group(name='fade', duration='300')
+      div.container(v-for='(vl, x) in dynm_result', :key='vl', v-show='dynm_result[x] !== null')
+        FormTemplate(v-model='dynm_result', ref='dynamic_refs', :fieldList='fieldList.dynamic', @delete='del_user(x)', :deletable='true')
+          div.has-text-centered(slot-scope="o", style='margin-bottom: 50px')
+            croppa-img(ref='rfimg', :desc='o.lang == "TH" ? "คลิกเพื่อเพิ่มรูปภาพ" : "click to add picture"')
+
+    // <!-- submit button -->
+    div.__form-template-wrapper.container.__form-template-header(v-if='validIdx.length != 3')
+      input.button(value='เพิ่มสมาชิก', @click='add_dynm_result')
+    div.__form-template-wrapper.container.__form-template-header(v-if='validIdx.length != 0')
+      input.button(value='ส่ง', class="button", @click='submit')
   </div>
 </template>
 
@@ -126,7 +111,6 @@
       validIdx() {
         let ar = []
         for (let [o, x] in this.dynm_result) {
-          console.log(o)
           if (o != null) {
             ar.push(x)
           }
@@ -224,6 +208,7 @@
     text-align: center;
     padding: 5px;
     border-radius: 10px 10px 0 0;
+    min-height: 20px;
   }
 
 </style>

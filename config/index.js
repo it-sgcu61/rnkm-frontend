@@ -20,12 +20,13 @@ module.exports = {
     notifyOnErrors: true,
     poll: false, // https://webpack.js.org/configuration/dev-server/#devserver-watchoptions-
 
-    
+
     /**
      * Source Maps
      */
 
     // https://webpack.js.org/configuration/devtool/#development
+    useEslint: false, // by krist
     devtool: 'cheap-module-eval-source-map',
 
     // If you have problems debugging vue-files in devtools,

@@ -1,6 +1,6 @@
 <template>
 <div id='_home_wrapper'>
-    <img src='../theme/4_2.png'>
+    <img src='Theme/4_2.png'>
     <rnkm-nav></rnkm-nav>
 </div>
 </template>

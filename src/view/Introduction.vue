@@ -1,16 +1,16 @@
 <template>
-  <div style='background-color: black'>
+  <div class='bg'>
 
     <div class='bg bg-top'>
       <rnkm-nav></rnkm-nav>
-      <img class='big-logo' src='../theme/logo.png'>
+      <img class='big-logo' src='@/theme/material/Introduction.png'>
       <div style='min-height: 15vmin'></div>
     </div>
 
     <div class="section _flex">
-      <div v-for='url in img_list' class="_flax-item">
+      <div v-for='url in img_list' class="_flax-item" :key='url.id'>
         <div class='_img_square'>
-          <img style='object-fit: fill;' :src='require(`@/assets/house/${url}`)'>
+          <img style='object-fit: fill;' :src='require(`@/theme/house/${url}`)'>
         </div>
       </div>
 
@@ -85,88 +85,72 @@
 
 </script>
 
-<style scoped>
-  .section {
+<style lang='stylus' scoped>
+  .section
     background-color: transparent;
-  }
-  .section._flex {
-    padding: 3rem 1rem;
-  }
+    &._flex
+      padding: 3rem 1rem;
+      @media screen and (min-width: 1000px)
+        padding: 3rem 3rem;
 
-  .bg {
+  .bg
     color: red;
     width: 100%;
     background-repeat: no-repeat;
     background-size: cover;
     background-color: black;
     text-align: center;
-  }
+    &.bg-top
+      background-image: url('../theme/wallpaper/header.jpg');
+      background-position: bottom right;
+    &.bg-bot
+      background-image: url('../theme/wallpaper/footer.jpg');
+      background-position: top right;
 
-  .bg.bg-top {
-    background-image: url(../theme/wall_top.jpg);
-    background-position: bottom right;
-  }
-
-  .bg.bg-bot {
-    background-image: url(../theme/wall_bottom.jpg);
-    background-position: top right;
-  }
-
-  img.big-logo {
-    padding: 20px;
+  img.big-logo
+    margin-top: -60px;
+    padding: 10px;
     min-width: 280px;
-    max-width: 70vmin;
-  }
+    max-width: 70vw;
 
-  ._flex {
+  ._flex
     display: flex;
     flex-direction: row;
     flex-wrap: wrap;
     justify-content: space-between;
-  }
 
-  ._flex ._flax-item {
-    flex-basis: 30%;
-    margin: calc(100% - 89vw) auto;
-  }
+    ._flax-item
+      flex-basis: 30%;
+      margin: calc(1px + 2%) auto;
+      @media screen and (min-width: 400px)
+        flex-basis: 25%;
+        margin: 5px auto;
+      @media screen and (min-width: 1000px)
+        flex-basis: 25%;
+        margin: 10px auto;
 
-
-  ._img_square {
+  ._img_square
     width: 29vw;
     height: 29vw;
     overflow: hidden;
     position: relative;
-    background: rgba(25, 15, 53, 0.212);
+    background: rgba(75, 45, 93, 0.512);
     margin: auto auto;
     border: 1px white solid;
-  }
-  /* on PC */
-  @media screen and (min-width: 600px) {
-    ._flex ._flax-item {
-      flex-basis: 25%;
-      margin: calc(100% - 95.5vw) auto;
-    }
-    ._img_square {
+    @media screen and (min-width: 600px)
       width: 22vw;
       height: 22vw;
-    }
-  }
 
-  ._img_square img {
-    position: absolute;
-    left: 0;
-    top: 50%;
-    transform: translateY(-50%);
-    opacity: .7;
-    transition-duration: .2s;
-  }
+    img
+      transition-duration: .2s;
+      opacity: .7;
 
-  ._img_square:hover img {
-    content: "555";
-    opacity: 1;
-    transform: rotate(2deg) translateY(-50%) scale(1.2, 1.2);
-    transition-duration: .6s;
-  }
+    &:hover img
+      content: "555";
+      opacity: 1;
+      transform-origin: center center 0
+      transform: rotate(2deg) scale(1.2, 1.2);
+      transition-duration: .6s;
 
 
 </style>
