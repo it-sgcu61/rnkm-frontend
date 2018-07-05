@@ -2,7 +2,6 @@ import Vue from 'vue'
 import Router from 'vue-router'
 import Main from '@/view/Main.vue'
 import Home from '@/view/Home.vue'
-import Form from '@/view/Form.vue'
 import Transfer from '@/view/Transfer.vue'
 import Instruction from '@/view/Instruction.vue'
 import Introduction from '@/view/Introduction.vue'
@@ -21,11 +20,6 @@ export default new Router({
       path: '/home',
       name: 'Home',
       component: Home
-    },
-    {
-      path: '/register',
-      name: 'Register',
-      component: Form
     },
     {
       path: '/transfer',

@@ -11,4 +11,4 @@ for line in body:
     ac.append(s.replace(u'\xa0', u' '))
 
 ac = ",\n".join(ac)
-print(f'[\n{ac}\n]')
+print('{"data":\n' + f'[\n{ac}\n]' + "}")

@@ -7,7 +7,6 @@ div(style='overflow: hidden')
       button(@click='toggle_show') h
       button(@click='delete_elem' v-if='deletable') x
 
-
   collapse-transition
     div.wrap_body(ref='inner' class="" v-show='show')
 
@@ -24,6 +23,7 @@ div(style='overflow: hidden')
             option(v-if='f.desc' value="" disabled hidden) {{f.desc}}
             option(v-for='o in f.option' :value='o.value' style='color: #353535') {{o.label}}
           textarea-auto(v-if='f.type == "lg_string"' v-model='form[f.name]' :placeholder='f.desc')
+
           div.error
 
 </template>
@@ -127,7 +127,7 @@ export default {
     line-height: 20px;
     margin-left 5px;
     padding: 15px 15px 5px 15px;
-    border: 5px solid white;
+    border: 0 solid white;
     border-width 0 2px 2px 0
     border-radius: 0;
     background: none;
@@ -139,7 +139,7 @@ export default {
     -webkit-box-shadow: none;
     box-shadow: none;
     color #ff7999
-    &:focus
+    &:hover
       outline: none;
       border-color: #ef4a6b;
 

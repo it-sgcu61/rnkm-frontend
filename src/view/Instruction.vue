@@ -17,7 +17,7 @@ div
   img.big-logo
     position: relative;
     z-index: 40;
-    margin-top: -60px;
+    margin-top: -40px;
     padding: 10px;
     min-width: 280px;
     max-width: 70vw;

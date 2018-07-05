@@ -49,7 +49,7 @@
       height: 400vh;
       background-size: cover;
       background-position: bottom right;
-      background-image: linear-gradient(to bottom, #ac422577, #002f4b00);
+      background-image: linear-gradient(to bottom, #ac422544, #002f4b00);
       opacity: 0.6;
       z-index: 0;
     &.top

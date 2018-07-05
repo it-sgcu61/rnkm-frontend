@@ -1,74 +1,55 @@
 <template lang='pug'>
-div.section._flex
-  div._flax-item(v-for='url in img_list' :key='url.id')
-    div._img_square
-      img(style='object-fit: fill;' :src='require(`@/theme/house/${url}`)')
+div.section
+  div(v-for='grp in ["S", "M", "L", "XL"]' :key='grp.id')
+    div.container._flex._flex-center
+      img.size_btn(:src='require(`@/theme/material/${grp}_btn.png`)')
+    div._flex(:n-item='siz_list[grp].length')
+      div._flex-item(v-for='obj in siz_list[grp]' :key='obj.id')
+        div._img_square
+          img(:src="require(`@/theme/house/${obj.nameTH}.png`)")
+    // random all
+    // div._flex
+    //   div._flex-item(v-for='obj in obj_list' :key='obj.id')
+    //     div._img_square
+    //       img(style='object-fit: fill;' :src='require(`@/theme/house/${obj.nameTH}.png`)')
 </template>
 
 <script>
 export default {
   data() {
     return {
-      img_list: []
+      rnd_list: [],
+      obj_list: {},
+      siz_list: {}
     }
   },
   created(){
-    this.img_list = _.shuffle([
-      "บ้านสด.png",
-      "บ้านผี.png",
-      "บ้านไหน.png",
-      "บ้านดัง.png",
-      "บ้านแรง.png",
-      "บ้านพ่อ.png",
-      "บ้านดอก.png",
-      "บ้านโจ๋.png",
-      "บ้านโคะ.png",
-      "บ้านแอ๊บ.png",
-      "บ้านยิ้ม.png",
-      "บ้านเต็ม.png",
-      "บ้านหรอย.png",
-      "บ้านคุ้ม.png",
-      "บ้านบึ้ม.png",
-      "บ้านหวัง.png",
-      "บ้านคิดส์.png",
-      "บ้านเสี่ยว.png",
-      "บ้านเฟี้ยว.png",
-      "บ้านอะอึ๋ม.png",
-      "บ้านเอช้วน.png",
-      "บ้านเวิร์ค.png",
-      "บ้านอินดี้.png",
-      "บ้านจัดสัน.png",
-      "บ้านคุณหนู.png",
-      "บ้านหลายใจ.png",
-      "บ้านว้อนท์.png",
-      "บ้านเปรี้ยว.png",
-      "บ้านหมีน้อย.png",
-      "บ้านบูชายัญ.png",
-      "บ้านอากาเป้.png",
-      "บ้านดุ๊ยดุ่ย.png",
-      "บ้านโจ๊ะเด๊ะ.png",
-      "บ้านอินเดียน่า.png",
-      "บ้านพักตากอากาศ.png",
-      "บ้านโซ้ยตี๋หลีหมวย.png"
-    ]);
+    let raw_data = _.shuffle(require('@/others/house_data.json').data)
+    this.obj_list = _.keyBy(raw_data, "nameTH")
+    this.siz_list = _.groupBy(raw_data, "size")
   }
 }
 </script>
 
 <style lang='stylus' scoped>
- .section
+  .section
     background-color: transparent;
-    &._flex
-      padding: 3rem 1rem;
-      @media screen and (min-width: 1000px)
-        padding: 3rem 3rem;
+    padding: 3rem 1rem;
+    @media screen and (min-width: 1000px)
+      padding: 3rem 3rem;
 
   ._flex
     display: flex;
     flex-direction: row;
     flex-wrap: wrap;
-    justify-content: space-between;
+    justify-content: center;
+    margin calc(5vmin + 40px) auto 3vmin auto
 
+    &._flex-center
+      align-items: center
+      justify-content: center;
+      padding 190px auto 20px auto
+      margin-top 15vmin
     ._flax-item
       flex-basis: 30%;
       margin: calc(1px + 2%) auto;
@@ -78,6 +59,21 @@ export default {
       @media screen and (min-width: 1000px)
         flex-basis: 25%;
         margin: 10px auto;
+
+    &[n-item="5"]
+      padding-left: 10vw;
+      padding-right: 10vw;
+      // background-color: red;
+
+
+  .size_btn
+    display block
+    width calc(10vw + 120px)
+    height calc(10vw + 120px)
+    @media screen and (min-width: 1000px)
+      width 250px
+      height 250px
+      display block
 
   ._img_square
     width: 29vw;
@@ -92,6 +88,7 @@ export default {
       height: 22vw;
 
     img
+      object-fit: fill
       position: relative;
       transition-duration: .2s;
       opacity: .7;

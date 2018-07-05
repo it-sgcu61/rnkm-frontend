@@ -22,8 +22,7 @@ Vue.config.productionTip = false
 
 import RnkmNavbar from './components/RnkmNavbar.vue'
 Vue.component('rnkm-nav', RnkmNavbar)
-import RnkmButton from './components/RnkmButton.vue'
-Vue.component('rnkm-btn', RnkmButton)
+
 
 firebase.initializeApp({
   apiKey: "AIzaSyCOsTn0sJAU7BJLB9NeZUYUaSCUkbe_EZE",

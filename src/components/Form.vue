@@ -157,11 +157,12 @@
     border: 1px solid #be5877;
     border-radius: 0;
     background-color: #be5877;
-    font-size: 16px;
+    font-size: 19px;
     color: #fff;
     text-transform: uppercase;
     cursor: pointer;
     -webkit-transition: all 0.25s;
     transition: all 0.25s;
+    margin-top 4px
 
 </style>

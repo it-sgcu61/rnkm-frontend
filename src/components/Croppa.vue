@@ -1,7 +1,7 @@
 <template>
   <div>
     <croppa v-model='userimg' :width='225' :height='300' :quality='2' :prevent-white-space='true' initial-image='' :placeholder='desc'
-      placeholder-color="#be5877" :placeholder-font-size='13' canvas-color="transparent" :show-remove-button='true' remove-button-color="#be5877"
+      placeholder-color="#fff" :placeholder-font-size='13' canvas-color="transparent" :show-remove-button='true' remove-button-color="#be5877"
       :show-loading='true' :loading-size='50' :zoom-speed="4" :reverse-scroll-to-zoom='true' initial-size='cover' accept=".jpg,.jpeg,.png">
     </croppa>
     <div v-if='tools'>
@@ -96,41 +96,25 @@
 <style>
   .croppa-container {
     padding: 10px 10px;
-    border: 1px solid #959595;
+    border: 0 white solid;
+    border-width: 0 0px 2px 2px;
     border-radius: 0;
     background: none;
-    color: #303030;
     outline: none;
     outline-style: none;
     -webkit-appearance: none;
     -moz-appearance: none;
     -webkit-box-shadow: none;
     box-shadow: none;
+    opacity: 1;
+    transition-duration: 0
   }
 
   .croppa-container:hover {
     opacity: 1;
-    background-color: #f7cdea;
+    border-color: #be5877;
+    transition-duration: 0
+    /* background-color: #f7cdea; */
   }
-
-  .label-text {
-    color: #959595;
-    font-size: 13px;
-  }
-
-  .label-text:hover {
-    color: #be5877;
-  }
-
-  /* ._slide-fade-enter-active {
-  transition: all .3s ease;
-}
-._slide-fade-leave-active {
-  transition: all .3s cubic-bezier(1.0, 0.5, 0.8, 1.0);
-}
-._slide-fade-enter, ._slide-fade-leave-to {
-  transform: translateX(5px);
-  opacity: 0;
-} */
 
 </style>

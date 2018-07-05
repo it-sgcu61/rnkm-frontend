@@ -31,5 +31,6 @@ export default {
   display: inline-block;
   text-align: center;
   vertical-align: middle;
+  text-shadow: 5px 5px 15px #2228;
 }
 </style>

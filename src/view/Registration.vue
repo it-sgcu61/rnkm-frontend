@@ -5,7 +5,6 @@ div
 
   rnkm-form
 
-
   div(style='height: 400px; background-color: black')
   absolute-background(bot)
 </template>
@@ -22,7 +21,7 @@ div
   img.big-logo
     position: relative;
     z-index: 40;
-    margin-top: -60px;
+    margin-top: -40px;
     padding: 10px;
     min-width: 280px;
     max-width: 70vw;
