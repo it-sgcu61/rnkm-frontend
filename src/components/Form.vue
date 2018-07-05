@@ -17,6 +17,7 @@
           div.has-text-centered(slot-scope="o", style='margin-bottom: 50px')
             croppa-img(ref='rfimg', :desc='o.lang == "TH" ? "คลิกเพื่อเพิ่มรูปภาพ" : "click to add picture"')
 
+    div(style='height: 10vh')
     // submit button
     div(v-if='valid_user_len != 3')
       div.button(@click='add_dynm_result') เพิ่มสมาชิก

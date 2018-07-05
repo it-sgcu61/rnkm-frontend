@@ -46,7 +46,7 @@
       left: 0;
       right: 0;
       bottom: 0;
-      height: 400vh;
+      height: 100vh;
       background-size: cover;
       background-position: bottom right;
       background-image: linear-gradient(to bottom, #ac422544, #002f4b00);

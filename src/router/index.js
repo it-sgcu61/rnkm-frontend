@@ -2,6 +2,7 @@ import Vue from 'vue'
 import Router from 'vue-router'
 import Main from '@/view/Main.vue'
 import Home from '@/view/Home.vue'
+import House from '@/view/House.vue'
 import Transfer from '@/view/Transfer.vue'
 import Instruction from '@/view/Instruction.vue'
 import Introduction from '@/view/Introduction.vue'
@@ -46,6 +47,12 @@ export default new Router({
       path: '/announcement',
       name: 'Announcement',
       component: Announcement
-    }
+    },
+    {
+      path: '/house/:name',
+      name: 'House',
+      component: House
+    },
+
   ]
 })

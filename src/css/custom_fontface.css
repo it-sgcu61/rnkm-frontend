@@ -2,3 +2,18 @@
   font-family: ZingRust;
   src: url('../font/ZingRustDemo-Base.otf');
 }
+
+@font-face {
+  font-family: Superspace;
+  src: url("../font/Superspace/SuperspaceRegular.otf");
+}
+@font-face {
+  font-family: Superspace;
+  src: url("../font/Superspace/SuperspaceBold.otf");
+  font-weight: bold;
+}
+@font-face {
+  font-family: Superspace;
+  src: url("../font/Superspace/SuperspaceLight.otf");
+  font-weight: light;
+}

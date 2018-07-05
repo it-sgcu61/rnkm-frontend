@@ -5,7 +5,7 @@ div.section
       img.size_btn(:src='require(`@/theme/material/${grp}_btn.png`)')
     div._flex(:n-item='siz_list[grp].length')
       div._flex-item(v-for='obj in siz_list[grp]' :key='obj.id')
-        div._img_square
+        div._img_square(@click='$router.push(`/house/${obj.nameEN}`)')
           img(:src="require(`@/theme/house/${obj.nameTH}.png`)")
     // random all
     // div._flex
