@@ -4,10 +4,7 @@ import Vue from 'vue'
 import firebase from 'firebase'
 import App from './App.vue'
 import router from './router'
-// import 'stylus'
-// import 'stylus-loader'
 
-// import 'pug'
 import './css/bulma.css'
 import './css/cu_style.css'
 import './css/vue2-animate.css'
@@ -23,8 +20,10 @@ Vue.use(Resource)
 
 Vue.config.productionTip = false
 
-import Navbar from './components/Navbar.vue'
-Vue.component('rnkm-nav', Navbar)
+import RnkmNavbar from './components/RnkmNavbar.vue'
+Vue.component('rnkm-nav', RnkmNavbar)
+import RnkmButton from './components/RnkmButton.vue'
+Vue.component('rnkm-btn', RnkmButton)
 
 firebase.initializeApp({
   apiKey: "AIzaSyCOsTn0sJAU7BJLB9NeZUYUaSCUkbe_EZE",

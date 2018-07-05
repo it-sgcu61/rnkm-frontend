@@ -1,6 +1,13 @@
 import Vue from 'vue'
 import Router from 'vue-router'
-import Main from '../view/Main.vue'
+import Main from '@/view/Main.vue'
+import Home from '@/view/Home.vue'
+import Form from '@/view/Form.vue'
+import Transfer from '@/view/Transfer.vue'
+import Instruction from '@/view/Instruction.vue'
+import Introduction from '@/view/Introduction.vue'
+import Registration from '@/view/Registration.vue'
+import Announcement from '@/view/Announcement.vue'
 Vue.use(Router)
 
 export default new Router({
@@ -13,38 +20,38 @@ export default new Router({
     {
       path: '/home',
       name: 'Home',
-      component: (r) => require(['../view/Home.vue'], r)
+      component: Home
     },
     {
       path: '/register',
       name: 'Register',
-      component: (r) => require(['../view/Form.vue'], r)
+      component: Form
     },
     {
       path: '/transfer',
       name: 'Transfer',
-      component: r => require(['../view/Transfer.vue'], r),
+      component: Transfer,
       props: true
     },
     {
       path: '/instruction',
       name: 'Instruction',
-      component: r => require(['../view/Instruction.vue'], r)
+      component: Instruction
     },
     {
       path: '/introduction',
       name: 'Introduction',
-      component: (r) => require(['../view/Introduction.vue'], r)
+      component: Introduction
     },
     {
       path: '/registration',
       name: 'Registration',
-      component: r => require(['../view/Registration.vue'], r)
+      component: Registration
     },
     {
       path: '/announcement',
       name: 'Announcement',
-      component: r => require(['../view/Announcement.vue'], r)
+      component: Announcement
     }
   ]
 })

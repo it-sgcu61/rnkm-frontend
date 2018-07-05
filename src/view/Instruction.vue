@@ -1,21 +1,25 @@
-<template>
-<div id='_home_wrapper'>
-    <img src='Theme/prototype/2.png'>
-    <rnkm-nav></rnkm-nav>
-</div>
+<template lang='pug'>
+div
+    absolute-background(top)
+      img.big-logo(src='@/theme/material/Instruction.png')
+    div(style='height: 500px; background-color: black')
+    absolute-background(bot)
 </template>
 
 <script>
-export default {
-}
+  import AbsoluteBackground from '@/components/AbsoluteBackground.vue'
+  export default {
+    components: {AbsoluteBackground},
+  }
 </script>
 
-<style scoped>
-#_home_wrapper {
-    line-height: 0;
-}
-img {
-    width: 100vw;
-    position: absolute;
-}
+<style lang='stylus' scoped>
+  img.big-logo
+    position: relative;
+    z-index: 40;
+    margin-top: -60px;
+    padding: 10px;
+    min-width: 280px;
+    max-width: 70vw;
+    filter: drop-shadow(20px 10px 12px #222f)
 </style>

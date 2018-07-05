@@ -1,7 +1,7 @@
 /* eslint-plugin-disable angular */
 <template lang='pug'>
-  div
-    // <!-- head form -->
+  div.bg
+    // head form
     div.container
       FormTemplate(v-model='head_result', :fieldList='fieldList.head')
         template(slot='info', slot-scope="o")
@@ -10,18 +10,19 @@
               h1(v-html='o.lang == "TH" ? "กรอกข้อมูลสำหรับ <strong>รับน้องก้าวใหม่</strong>" : "registration for <strong>rub nong kaow mai</strong>"')
               h2(v-html='o.lang == "TH" ? "สามารถลงทะเบียนได้ไม่เกิน 3 คน" : "maximum team member is 3"')
 
-    // <!-- individual dynamic form -->
+    // individual dynamic form
     transition-group(name='fade', duration='300')
       div.container(v-for='(vl, x) in dynm_result', :key='vl', v-show='dynm_result[x] !== null')
         FormTemplate(v-model='dynm_result', ref='dynamic_refs', :fieldList='fieldList.dynamic', @delete='del_user(x)', :deletable='true')
           div.has-text-centered(slot-scope="o", style='margin-bottom: 50px')
             croppa-img(ref='rfimg', :desc='o.lang == "TH" ? "คลิกเพื่อเพิ่มรูปภาพ" : "click to add picture"')
 
-    // <!-- submit button -->
+    // submit button
     div.__form-template-wrapper.container.__form-template-header(v-if='validIdx.length != 3')
       input.button(value='เพิ่มสมาชิก', @click='add_dynm_result')
     div.__form-template-wrapper.container.__form-template-header(v-if='validIdx.length != 0')
       input.button(value='ส่ง', class="button", @click='submit')
+
   </div>
 </template>
 
@@ -152,24 +153,14 @@
   }
 
   .bg {
-    width: 100vw;
-    min-height: 100vh;
-    margin: 0;
-    padding: 10px;
-    background: #f5f5f5 url(http://wirelesssoul.net/amazing-wallpapers/neon-lights-wallpaper-hd-resolution-On-HD-Wallpaper.jpg) 50% 50% no-repeat;
-    /* background-color: #f5f5f5; */
-    background-size: cover;
-    background-attachment: fixed;
-    font-family: 'Lato', 'Kanit', sans-serif;
-    font-size: 16px;
-    font-size: 1em;
+    background-color: #000
   }
 
   .container {
     z-index: 10;
     position: relative;
     width: 100%;
-    max-width: 480px;
+    max-width: 600px;
     margin: 0 auto 10px auto;
     padding: 0;
     border-radius: 0;
