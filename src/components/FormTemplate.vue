@@ -1,17 +1,15 @@
 <template lang='pug'>
-div.__form-template-wrapper(style='overflow: hidden')
+div(style='overflow: hidden')
 
-  div.__form-template-header
-    div.is-pulled-left(style="color: white")
-      slot(name='head')
-    div.is-pulled-right
+  div.wrap_head
+    div.is-pulled-right.group_btn
       button(@click='lang = lang == "TH" ? "EN" : "TH"') {{lang}}
       button(@click='toggle_show') h
       button(@click='delete_elem' v-if='deletable') x
 
 
   collapse-transition
-    div.container-inner._borderbutt(ref='inner' class="" v-show='show')
+    div.wrap_body(ref='inner' class="" v-show='show')
 
       slot(name='info' v-bind='$data')
       form
@@ -94,26 +92,26 @@ export default {
 </script>
 
 <style lang='stylus' scoped>
-.__form
-  &-template-wrapper
-    border-bottom: 5px solid #6f2e44;
-    border-radius: 0;
-    background-color: transparent;
-    box-shadow: 0 0 1em 0 rgba(51, 51, 51, 0.25);
-
-  &-template-header
-    position: relative;
-    min-height: 60px;
-    background: #be5877;
-    background-size: contain;
-    text-align: center;
-    padding: 15px;
-    border-radius: 10px 10px 0 0;
 
 
-.container-inner
-  padding: 35px 30px 35px 30px;
-  background-color: #fff;
+.wrap_
+  &head
+    padding: 0 0 35px 30px;
+    background: transparent;
+    border: 0 solid white;
+    border-width 5px 0 0 5px
+    .group_btn
+      background-color white
+      border-radius 0 0 5px 5px
+      button
+        color blue
+        border none
+        background-color transparent
+  &body
+    padding: 35px 30px 35px 30px;
+    background: transparent;
+    border: 0 solid white;
+    border-width 0 0 0 5px
 
 .group
   display: block;
@@ -127,17 +125,20 @@ export default {
   input, textarea, select
     width: 100%;
     line-height: 20px;
-    padding: 15px 15px;
-    border: 1px solid #959595;
+    margin-left 5px;
+    padding: 15px 15px 5px 15px;
+    border: 5px solid white;
+    border-width 0 2px 2px 0
     border-radius: 0;
     background: none;
-    font-size: 13px;
+    font-size: 14px;
     outline: none;
     outline-style: none;
     -webkit-appearance: none;
     -moz-appearance: none;
     -webkit-box-shadow: none;
     box-shadow: none;
+    color #ff7999
     &:focus
       outline: none;
       border-color: #ef4a6b;
@@ -148,12 +149,12 @@ export default {
     height: 42px;
   select
     height: 42px;
-    padding: 0px 15px;
+    padding: 10px 15px 0 12px;
 
   .error
     margin: 0 0 20px 0;
     padding: 0 0 15px 0;
-    color: #ef4a6b;
+    color: yellow;
     font-size: 13px;
     line-height: 20px;
 
@@ -165,21 +166,16 @@ export default {
     line-height: 16px;
     margin: 0 0 0 10px;
     padding: 0 6px;
-    background-color: #fff;
-    color: #be5877;
-    font-size: 13px;
+    padding-left: 4px
+    color: white;
+    font-size: 16px;
     text-transform: uppercase;
     -webkit-transition: all 0.25s;
     transition: all 0.25s;
 
-.placeholder
-::placeholder
-:-ms-input-placeholder
-::-ms-input-placeholder
-  color: red
-
-button
-  color: blue;
-  background-color: white;
-  border: none;
+  .placeholder
+  ::placeholder
+  :-ms-input-placeholder
+  ::-ms-input-placeholder
+    color: blue
 </style>
