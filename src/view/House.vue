@@ -7,7 +7,7 @@ div
     div.head-wrap
       div.is-inline.title {{data.nameTH}} - {{data.nameEN}}
       img.is-inline.icon(:src='require(`../theme/material/${data.size}_btn.png`)')
-    div.body-wrap
+    div.body-wrap.has-text-centered
       div.subtitle {{data.description}}
   absolute-background(bot)
 </template>
@@ -46,23 +46,27 @@ div
 
   .subtitle
     font-weight light
-    font-size 8vmin
+    font-size 6vmin
+    line-height 1.7em
 
   .logo-wrap
     text-align: center;
-    padding-top: 7vmin;
+    padding-top: 10vmin;
 
   .head-wrap
     display inline-block
     align-items: center;
     justify-content: center;
-    padding-bottom 5px
+    padding-bottom calc(5px + 5vmin + 5vh)
     display flex
     vertical-align middle
 
   .body-wrap
+    white-space:pre-wrap;
     text-align center
-    max-width 700px
+    max-width 1100px
+    margin 0 auto
+    padding 0 calc(5px + 2vw)
 
   .section
     color: white
