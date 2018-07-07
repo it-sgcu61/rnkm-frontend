@@ -1,6 +1,4 @@
 import Vue from 'vue'
-import Router from 'vue-router'
-import Main from '@/view/Main.vue'
 import Home from '@/view/Home.vue'
 import House from '@/view/House.vue'
 import Transfer from '@/view/Transfer.vue'
@@ -8,14 +6,15 @@ import Instruction from '@/view/Instruction.vue'
 import Introduction from '@/view/Introduction.vue'
 import Registration from '@/view/Registration.vue'
 import Announcement from '@/view/Announcement.vue'
+
+import Router from 'vue-router'
 Vue.use(Router)
 
 export default new Router({
   routes: [
     {
       path: '/',
-      name: 'Main',
-      component: Main
+      redirect: '/home'
     },
     {
       path: '/home',
@@ -34,11 +33,6 @@ export default new Router({
       component: Instruction
     },
     {
-      path: '/introduction',
-      name: 'Introduction',
-      component: Introduction
-    },
-    {
       path: '/registration',
       name: 'Registration',
       component: Registration
@@ -49,9 +43,24 @@ export default new Router({
       component: Announcement
     },
     {
+      path: '/introduction',
+      name: 'Introduction',
+      component: Introduction,
+    },
+    {
+      path: '/house',
+      name: 'House',
+      component: Introduction,
+    },
+    {
       path: '/house/:name',
       name: 'House',
       component: House
+    },
+    {
+      path: '/house/:name',
+      name: 'House',
+      component: House,
     },
 
   ]

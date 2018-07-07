@@ -1,7 +1,7 @@
 <template lang='pug'>
 div
     absolute-background(top)
-      img.big-logo(src='@/theme/material/Announcment.png')
+      img.big-logo(src='@/theme/material/Annoucment.png')
     div(style='height: 500px; background-color: black')
     absolute-background(bot)
 </template>

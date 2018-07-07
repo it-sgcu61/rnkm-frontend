@@ -1,6 +1,6 @@
 /* eslint-plugin-disable angular */
 <template lang='pug'>
-  div.bg
+  div
     // head form
     div.container
       FormTemplate(v-model='head_result', :fieldList='fieldList.head')
@@ -19,10 +19,16 @@
 
     div(style='height: 10vh')
     // submit button
-    div(v-if='valid_user_len != 3')
-      div.button(@click='add_dynm_result') เพิ่มสมาชิก
-    div(v-if='valid_user_len != 0')
-      div.button(@click='submit') ส่ง
+    div.section.has-text-centered
+      div.is-inline(v-if='valid_user_len != 3')
+        img.btn(@click='add_dynm_result' src='../theme/material/add_member.png')
+      div.is-inline(v-if='valid_user_len != 0')
+        img.btn(@click='submit' src='../theme/material/submit_btn.png')
+
+    // div(v-if='valid_user_len != 3')
+    //   div.button(@click='add_dynm_result') เพิ่มสมาชิก
+    // div(v-if='valid_user_len != 0')
+    //   div.button(@click='submit') ส่ง
 
   </div>
 </template>
@@ -137,9 +143,6 @@
     margin: 0 0 40px 0;
     text-align: center;
 
-  .bg
-    background-color: #000
-
   .container
     z-index: 10;
     position: relative;
@@ -150,20 +153,7 @@
     margin-bottom 2em
 
 
-  .button
-    display: block;
-    width: 100%;
-    height: 44px;
-    line-height: 42px;
-    border: 1px solid #be5877;
-    border-radius: 0;
-    background-color: #be5877;
-    font-size: 19px;
-    color: #fff;
-    text-transform: uppercase;
-    cursor: pointer;
-    -webkit-transition: all 0.25s;
-    transition: all 0.25s;
-    margin-top 4px
+  img.btn
+    max-height 350px
 
 </style>

@@ -16,7 +16,11 @@ html {
   min-height: 100%;
 }
 #app {
-  background-color: black;
+  background-color: #020202;
+  /* background-image: */
   color: white;
+}
+.section {
+  background-color: transparent;
 }
 </style>

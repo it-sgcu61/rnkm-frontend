@@ -6,6 +6,7 @@
 @font-face {
   font-family: Superspace;
   src: url("../font/Superspace/SuperspaceRegular.otf");
+  font-weight: normal;
 }
 @font-face {
   font-family: Superspace;
@@ -15,5 +16,12 @@
 @font-face {
   font-family: Superspace;
   src: url("../font/Superspace/SuperspaceLight.otf");
-  font-weight: light;
+  font-weight: lighter;
 }
+@font-face {
+  font-family: Superspace;
+  src: url("../font/Superspace/SuperspaceRegularItalic.otf");
+  font-weight: normal;
+  font-style: italic;
+}
+

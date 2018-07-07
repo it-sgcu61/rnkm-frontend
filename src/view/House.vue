@@ -2,13 +2,15 @@
 div
   absolute-background(top)
     div.logo-wrap
-      img.big-logo(:src='require(`@/theme/house/${data.nameTH}.png`)')
+      img.big-logo(:src='require(`@/theme/house/${data.nameURL}.png`)' :alt='data.nameTH')
   div.section.has-text-centered
-    div.head-wrap
-      div.is-inline.title {{data.nameTH}} - {{data.nameEN}}
-      img.is-inline.icon(:src='require(`../theme/material/${data.size}_btn.png`)')
+    div.head-wrap.level
+      div.title {{data.nameTH}} - {{data.nameEN}}
+      // img.is-inline.icon(:src='require(`../theme/material/${data.size}_btn.png`)')
+    div.subtitle.slogan "{{data.slogan}}"
     div.body-wrap.has-text-centered
       div.subtitle {{data.description}}
+    img.back(@click='$router.push("/house")' src='../theme/material/back_btn.png')
   absolute-background(bot)
 </template>
 
@@ -23,12 +25,11 @@ div
       }
     },
     created(){
-      let raw_data = _.keyBy(require('@/others/house_data.json').data, "nameEN")[this.name]
-      console.log(this.data)
+      let raw_data = _.keyBy(require('@/others/house_data.json').data, "nameURL")[this.name]
       if (raw_data) {
         this.data = raw_data
       } else {
-        alert('Bad request')
+        this.$router.push('/house')
       }
     }
   }
@@ -42,12 +43,18 @@ div
 
   .title
     font-weight bold
-    font-size 13vmin
+    font-size 10vmin
+    margin 0
+
+
 
   .subtitle
-    font-weight light
-    font-size 6vmin
-    line-height 1.7em
+    font-weight lighter
+    font-size 5vmin
+    line-height 1.5em
+    &.slogan
+      font-style: italic
+      font-size: 6vmin
 
   .logo-wrap
     text-align: center;
@@ -57,21 +64,21 @@ div
     display inline-block
     align-items: center;
     justify-content: center;
-    padding-bottom calc(5px + 5vmin + 5vh)
+    padding-bottom calc(5px + 3vmin + 5vh)
     display flex
     vertical-align middle
 
   .body-wrap
     white-space:pre-wrap;
     text-align center
-    max-width 1100px
+    max-width 900px
     margin 0 auto
     padding 0 calc(5px + 2vw)
 
   .section
     color: white
-    min-height: 500px;
     background-color: black
+    padding: 3rem 3rem
 
 
   img
@@ -84,4 +91,9 @@ div
       width: calc(10px + 7vmin)
       height: @width
       margin-bottom 2.4em
+    &.back
+      margin-top 5em
+      width: calc(100px + 7vmin)
+      height: @width
+
 </style>

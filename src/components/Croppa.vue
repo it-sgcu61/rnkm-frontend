@@ -98,8 +98,9 @@
     padding: 10px 10px;
     border: 0 white solid;
     border-width: 0 0px 2px 2px;
+    border-width: 0 0 0 0;
     border-radius: 0;
-    background: none;
+    background-color: #222;
     outline: none;
     outline-style: none;
     -webkit-appearance: none;

@@ -25,12 +25,12 @@ Vue.component('rnkm-nav', RnkmNavbar)
 
 
 firebase.initializeApp({
-  apiKey: "AIzaSyCOsTn0sJAU7BJLB9NeZUYUaSCUkbe_EZE",
-  authDomain: "rnkm-7ec9a.firebaseapp.com",
-  databaseURL: "https://rnkm-7ec9a.firebaseio.com",
-  projectId: "rnkm-7ec9a",
-  storageBucket: "rnkm-7ec9a.appspot.com",
-  messagingSenderId: "62061746282"
+  apiKey: "AIzaSyDQLSoNkP8FbxlbbkgCBafxCpR567XFCko",
+  authDomain: "rnkm-cu102.firebaseapp.com",
+  databaseURL: "https://rnkm-cu102.firebaseio.com",
+  projectId: "rnkm-cu102",
+  storageBucket: "rnkm-cu102.appspot.com",
+  messagingSenderId: "947832976689"
 });
 
 new Vue({

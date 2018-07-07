@@ -19,7 +19,6 @@ div
 
 <style lang='stylus' scoped>
   .section
-    background-color: black
     padding: calc(100px + 5vmax) 0 0 0
     margin-bottom: -400px
   img.big-logo

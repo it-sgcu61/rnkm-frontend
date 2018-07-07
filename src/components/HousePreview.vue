@@ -5,13 +5,8 @@ div.section
       img.size_btn(:src='require(`@/theme/material/${grp}_btn.png`)')
     div._flex(:n-item='siz_list[grp].length')
       div._flex-item(v-for='obj in siz_list[grp]' :key='obj.id')
-        div._img_square(@click='$router.push(`/house/${obj.nameEN}`)')
-          img(:src="require(`@/theme/house/${obj.nameTH}.png`)")
-    // random all
-    // div._flex
-    //   div._flex-item(v-for='obj in obj_list' :key='obj.id')
-    //     div._img_square
-    //       img(style='object-fit: fill;' :src='require(`@/theme/house/${obj.nameTH}.png`)')
+        div._img_square(@click='$router.push(`/house/${obj.nameURL}`)')
+          img(:src="require(`@/theme/house/${obj.nameURL}.png`)" :alt='obj.nameTH')
 </template>
 
 <script>
@@ -19,13 +14,11 @@ export default {
   data() {
     return {
       rnd_list: [],
-      obj_list: {},
       siz_list: {}
     }
   },
   created(){
     let raw_data = _.shuffle(require('@/others/house_data.json').data)
-    this.obj_list = _.keyBy(raw_data, "nameTH")
     this.siz_list = _.groupBy(raw_data, "size")
   }
 }
@@ -60,10 +53,10 @@ export default {
         flex-basis: 25%;
         margin: 10px auto;
 
-    &[n-item="5"]
-      padding-left: 10vw;
-      padding-right: 10vw;
-      // background-color: red;
+  @media screen and (min-width: 600px)
+    ._flex[n-item="5"]
+      padding-left: 12vw;
+      padding-right: 12vw;
 
 
   .size_btn
@@ -80,18 +73,22 @@ export default {
     height: 29vw;
     overflow: hidden;
     position: relative;
-    background-color black
+    background-color white
     margin: auto auto;
     border: 1px white solid;
+    filter: brightness(50%);
     @media screen and (min-width: 600px)
       width: 22vw;
       height: 22vw;
+    &:hover
+      transition-duration 700ms
+      filter: brightness(100%)
 
     img
       object-fit: fill
       position: relative;
       transition-duration: .2s;
-      opacity: .7;
+      opacity: .8;
 
     &:hover img
       content: "555";

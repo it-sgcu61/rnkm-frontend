@@ -1,11 +1,11 @@
 <template lang='pug'>
   div
     absolute-background(top)
-      div(style='overflow: hidden')
+      div
         img.big-logo(src='@/theme/material/Introduction.png')
         div(style='min-height: 15vmin')
-    div(style='background-color: black')
-      div.section.bg_tran LIST BAAN
+    div
+      div.header LIST BAAN
       house-preview
     absolute-background(bot)
 </template>
@@ -20,12 +20,12 @@
 </script>
 
 <style lang='stylus' scoped>
-  .bg_tran
+  .header
     font-size 5rem
     font-family ZingRust
     color white
     text-align center
-    background-color transparent
+
   img.big-logo
     position: relative;
     z-index: 40;

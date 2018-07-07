@@ -1,5 +1,5 @@
 <template lang='pug'>
-div(style='overflow: hidden')
+div.wrap_
 
   div.wrap_head
     div.is-pulled-right.group_btn
@@ -20,7 +20,7 @@ div(style='overflow: hidden')
 
           input(v-if='f.type == "string"' v-model='form[f.name]' :placeholder='f.desc')
           select(v-if='f.type == "choice"' v-model='form[f.name]' :class='{"placeholder": !form[f.name]}')
-            option(v-if='f.desc' value="" disabled hidden) {{f.desc}}
+            // option(v-if='f.desc' value="" disabled hidden) {{f.desc}}
             option(v-for='o in f.option' :value='o.value' style='color: #353535') {{o.label}}
           textarea-auto(v-if='f.type == "lg_string"' v-model='form[f.name]' :placeholder='f.desc')
 
@@ -95,14 +95,21 @@ export default {
 
 
 .wrap_
+  overflow: hidden
+  background-color #111a
+  border: 0 solid white;
+  border-width 4px 0 0 4px
+  border-top-left-radius 30px
   &head
     padding: 0 0 35px 30px;
     background: transparent;
-    border: 0 solid white;
-    border-width 5px 0 0 5px
+    // border: 0 solid white;
+    // border-top-left-radius 30px
+    // border-width 4px 0 0 4px
     .group_btn
       background-color white
       border-radius 0 0 5px 5px
+      margin-top -1px
       button
         color blue
         border none
@@ -110,8 +117,8 @@ export default {
   &body
     padding: 35px 30px 35px 30px;
     background: transparent;
-    border: 0 solid white;
-    border-width 0 0 0 5px
+    // border: 0 solid white;
+    // border-width 0 0 0 4px
 
 .group
   display: block;
@@ -121,17 +128,21 @@ export default {
   margin: 0;
   -webkit-transition: all 0.25s;
   transition: all 0.25s;
+  font-weight bold
+  font-family: Superspace;
 
   input, textarea, select
+    font-family: Superspace;
     width: 100%;
     line-height: 20px;
     margin-left 5px;
     padding: 15px 15px 5px 15px;
     border: 0 solid white;
     border-width 0 2px 2px 0
+    border-width 0 0 0 0
     border-radius: 0;
-    background: none;
-    font-size: 14px;
+    background: #222e
+    font-size: 16px;
     outline: none;
     outline-style: none;
     -webkit-appearance: none;
@@ -168,7 +179,7 @@ export default {
     padding: 0 6px;
     padding-left: 4px
     color: white;
-    font-size: 16px;
+    font-size: 19px;
     text-transform: uppercase;
     -webkit-transition: all 0.25s;
     transition: all 0.25s;
