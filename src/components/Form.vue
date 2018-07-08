@@ -1,6 +1,6 @@
 /* eslint-plugin-disable angular */
 <template lang='pug'>
-  div
+  div.bg
     // head form
     div.container
       FormTemplate(v-model='head_result', :fieldList='fieldList.head')
@@ -17,7 +17,6 @@
           div.has-text-centered(slot-scope="o", style='margin-bottom: 50px')
             croppa-img(ref='rfimg', :desc='o.lang == "TH" ? "คลิกเพื่อเพิ่มรูปภาพ" : "click to add picture"')
 
-    div(style='height: 10vh')
     // submit button
     div.section.has-text-centered
       div.is-inline(v-if='valid_user_len != 3')
@@ -127,6 +126,8 @@
 </script>
 
 <style lang='stylus' scoped>
+  .bg
+    background-color #020202
   h1
     font-weight: 300;
     font-size: 1.5em;
@@ -151,6 +152,7 @@
 
 
   img.btn
-    max-height 350px
+    margin 0 auto
+    max-height 250px
 
 </style>

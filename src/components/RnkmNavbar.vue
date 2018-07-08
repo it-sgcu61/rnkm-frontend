@@ -4,7 +4,7 @@
     <router-link class='__k_nav' to='/instruction'><div>Instruction</div></router-link>
     <router-link class='__k_nav' to='/introduction'><div>Introduction</div></router-link>
     <router-link class='__k_nav' to='/registration'><div>Registration</div></router-link>
-    <router-link class='__k_nav' to='/announcement'><div>Final<br/>Announcement</div></router-link>
+    <router-link class='__k_nav' to='/announcement'><div>Announcement</div></router-link>
   </div>
 </template>
 

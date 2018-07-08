@@ -11,6 +11,7 @@ div.wrap_
     div.wrap_body(ref='inner' class="" v-show='show')
 
       slot(name='info' v-bind='$data')
+      // span {{errors}}
       form
         slot(v-bind='$data')
 
@@ -18,24 +19,27 @@ div.wrap_
           transition(name='_slide-fade' mode='out-in' duration='100')
             div.label-text(:key='f.label') {{f.label}}
 
-          input(v-if='f.type == "string"' v-model='form[f.name]' :placeholder='f.desc')
-          select(v-if='f.type == "choice"' v-model='form[f.name]' :class='{"placeholder": !form[f.name]}')
-            // option(v-if='f.desc' value="" disabled hidden) {{f.desc}}
+          input(  v-if = 'f.name.endsWith("tel")'   v-model.trim='form[f.name]' :name='f.name' v-validate="{required: f.required, regex: f.validate}" :placeholder='f.desc' v-mask="'###-###-####'")
+          input(  v-else-if='f.type == "string"'    v-model.trim='form[f.name]' :name='f.name' v-validate="{required: f.required, regex: f.validate}" :placeholder='f.desc')
+          txtarea(v-else-if='f.type == "lg_string"' v-model.trim='form[f.name]' :name='f.name' v-validate="{required: f.required, regex: f.validate}" :placeholder='f.desc')
+          select( v-else-if='f.type == "choice"'    v-model.trim='form[f.name]' :name='f.name' v-validate="{required: f.required}")
             option(v-for='o in f.option' :value='o.value' style='color: #353535') {{o.label}}
-          textarea-auto(v-if='f.type == "lg_string"' v-model='form[f.name]' :placeholder='f.desc')
 
-          div.error
-
+          div.error {{ errors.has(f.name) ? errors.first(f.name) : '' }}
+          // div.error {{f}}
+        // | {{form}}
+  div.container
+    button.burron(@click='check_valid_all') check
 </template>
 
 <script>
 import _ from "lodash";
-import TextareaAuto from "./TextareaAuto.vue";
+import Txtarea from "./TextareaAuto.vue";
+import { mask } from "vue-the-mask";
 
 export default {
-  components: {
-    TextareaAuto
-  },
+  components: { Txtarea },
+  directives: { mask },
   props: {
     value: {
       type: Object,
@@ -86,41 +90,57 @@ export default {
     },
     toggle_show() {
       this.show = !this.show;
+    },
+    check_valid_all() {
+      this.$validator.validateAll().then(result => {
+        if (result) {
+          // do axois or whatever on validate true
+          console.log("All is well");
+          return;
+        }
+        if (!result) {
+          console.log("Oops!");
+          console.log(result)
+        }
+      });
     }
   }
 };
 </script>
 
 <style lang='stylus' scoped>
-
-
-.wrap_
-  overflow: hidden
-  background-color #111a
+.wrap_ {
+  overflow: hidden;
+  background-color: #111a;
   border: 0 solid white;
-  border-width 4px 0 0 4px
-  border-top-left-radius 30px
-  &head
-    padding: 0 0 35px 30px;
+  border-width: 4px 0 0 4px;
+  border-top-left-radius: 30px;
+  border-bottom-right-radius: 30px;
+
+  &head {
+    padding: 0 0 60px 30px;
     background: transparent;
-    // border: 0 solid white;
-    // border-top-left-radius 30px
-    // border-width 4px 0 0 4px
-    .group_btn
-      background-color white
-      border-radius 0 0 5px 5px
-      margin-top -1px
-      button
-        color blue
-        border none
-        background-color transparent
-  &body
+
+    .group_btn {
+      background-color: white;
+      border-radius: 0 0 5px 5px;
+      margin-top: -1px;
+
+      button {
+        color: blue;
+        border: none;
+        background-color: transparent;
+      }
+    }
+  }
+
+  &body {
     padding: 35px 30px 35px 30px;
     background: transparent;
-    // border: 0 solid white;
-    // border-width 0 0 0 4px
+  }
+}
 
-.group
+.group {
   display: block;
   float: none;
   position: relative;
@@ -128,67 +148,74 @@ export default {
   margin: 0;
   -webkit-transition: all 0.25s;
   transition: all 0.25s;
-  font-weight bold
+  font-weight: bold;
   font-family: Superspace;
 
-  input, textarea, select
+  input, textarea, select {
     font-family: Superspace;
     width: 100%;
     line-height: 20px;
-    margin-left 5px;
+    margin-left: 5px;
     padding: 15px 15px 5px 15px;
     border: 0 solid white;
-    border-width 0 2px 2px 0
-    border-width 0 0 0 0
-    border-radius: 0;
-    background: #222e
-    font-size: calc(15px + .7vw);
-    font-weight bold
+    border-width: 0 0 0 0;
+    border-radius: 0 10px 0 0;
+    background: #222e;
+    font-size: calc(14px + 0.5vw);
+    font-weight: bold;
     outline: none;
     outline-style: none;
     -webkit-appearance: none;
     -moz-appearance: none;
     -webkit-box-shadow: none;
     box-shadow: none;
-    color #ff7999
-    &:hover
+    color: #ff7999;
+
+    &:hover {
       outline: none;
       border-color: #ef4a6b;
+    }
+  }
 
-  textarea
+  textarea {
     height: calc(85px + 1vh);
-  input
+  }
+
+  input {
     height: calc(47px + 1vh);
-  select
+  }
+
+  select {
     height: calc(47px + 1vh);
     padding: 10px 15px 0 12px;
+  }
 
-  .error
+  .error {
     margin: 0 0 20px 0;
-    padding: 0 0 15px 0;
+    padding: 0 0 15px 10px;
     color: yellow;
     font-size: 13px;
     line-height: 20px;
+  }
 
-
-  .label-text
+  .label-text {
     display: inline-block;
     position: absolute;
     top: -8px;
     line-height: 16px;
     margin: 0 0 0 10px;
     padding: 0 6px;
-    padding-left: 4px
+    padding-left: 4px;
     color: white;
-    font-size: calc(16px + .6vw);
-    font-weight normal
+    font-size: calc(15px + 0.5vw);
+    font-weight: normal;
     text-transform: uppercase;
     -webkit-transition: all 0.25s;
     transition: all 0.25s;
+  }
 
-  .placeholder
-  ::placeholder
-  :-ms-input-placeholder
-  ::-ms-input-placeholder
-    color: blue
+  .placeholder, ::placeholder, :-ms-input-placeholder, ::-ms-input-placeholder {
+    color: blue;
+  }
+}
 </style>

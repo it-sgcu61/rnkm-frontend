@@ -68,10 +68,6 @@ export default {
         transform: scale(1.1, 1.1) rotate(10deg)
         filter: drop-shadow(2px 5px 9px #ff05)
 
-  @-moz-keyframes spin    { 100% { -moz-transform:    rotate(360deg); } }
-  @-webkit-keyframes spin { 100% { -webkit-transform: rotate(360deg); } }
-  @keyframes spin         { 100% { -webkit-transform: rotate(360deg); transform:rotate(360deg); } }
-
   h1
     font-size calc(20px + 5vmin)
     margin: 0.3em 0;
@@ -89,7 +85,7 @@ export default {
 
 </style>
 
-<style scoped>
+<!-- style scoped>
   @-webkit-keyframes rotating /* Safari and Chrome */ {
     from {
       -webkit-transform: rotate(0deg);
@@ -146,4 +142,4 @@ export default {
   }
 
 
-</style>
+</style -->

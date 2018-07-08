@@ -14,8 +14,8 @@ import './css/custom_fontface.css'
 
 import Transitions from 'vue2-transitions'
 Vue.use(Transitions)
-// import Validate from 'vee-validate'
-// Vue.use(Validate)
+import Validate from 'vee-validate'
+Vue.use(Validate)
 
 import Resource from 'vue-resource'
 Vue.use(Resource)

@@ -1,5 +1,6 @@
 <template lang='pug'>
 div.section
+  div.header List Baan
   div(v-for='grp in ["S", "M", "L", "XL"]' :key='grp.id')
     div.container._flex._flex-center
       img.size_btn(:src='require(`@/theme/material/${grp}_btn.png`)')
@@ -26,10 +27,16 @@ export default {
 
 <style lang='stylus' scoped>
   .section
-    background-color: transparent;
-    padding: 3rem 1rem;
+    background-color: #020202;
+    padding: 7rem 1rem;
     @media screen and (min-width: 1000px)
-      padding: 4rem 3rem;
+      padding: 11rem 3rem;
+
+  .header
+    font-size 4rem
+    font-family ZingRust
+    color white
+    text-align center
 
   ._flex
     display: flex;
@@ -64,8 +71,8 @@ export default {
     width calc(12vw + 70px)
     height calc(12vw + 70px)
     @media screen and (min-width: 1000px)
-      width 250px
-      height 250px
+      width 200px
+      height 200px
       display block
 
   ._img_square
@@ -90,7 +97,7 @@ export default {
       opacity: .8;
 
     &:hover img
-      content: "555";
+      content: "";
       opacity: 1;
       transform-origin: center center 0
       transform: rotate(2deg) scale(1.2, 1.2);

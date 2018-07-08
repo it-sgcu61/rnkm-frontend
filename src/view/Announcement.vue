@@ -13,7 +13,8 @@ div
           img.back(@click='result.show = false' src='../theme/material/back_btn.png')
       form.container(v-else)
         div.field
-          input.input(v-model='login.usr' type="number" placeholder='phone number' pattern='[0-9]{10}' title="10 digit tel number")
+          input.input(v-model='login.usr' type="tel" v-mask="'###-###-####'" :masked="false" placeholder='phone number' pattern='[0-9]{10}' title="10 digit tel number")
+          div {{login.usr}}
         div.field
           input.input(v-model='login.pwd' type='password' placeholder='personal ID')
         div.field
@@ -23,8 +24,11 @@ div
 
 <script>
   import AbsoluteBackground from '@/components/AbsoluteBackground.vue'
+  import {mask} from 'vue-the-mask'
+
   export default {
     components: {AbsoluteBackground},
+    directives: {mask},
     data() {
       return {
         login: {
@@ -65,7 +69,7 @@ div
   img.big-logo
     position: relative;
     z-index: 40;
-    margin-top: -60px;
+    margin-top: -40px;
     padding: 10px;
     min-width: 280px;
     max-width: 70vw;
@@ -87,10 +91,8 @@ div
     background-color #eee
     @media screen and (min-width: 600px)
       width 550px
-      // background-color blue
     @media screen and (min-width: 1025px)
       width 1000px
-      // background-color red
 
   #submit
     margin-top -30px

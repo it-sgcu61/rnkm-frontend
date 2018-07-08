@@ -5,8 +5,6 @@
         img.big-logo(src='@/theme/material/Introduction.png')
         div(style='min-height: 15vmin')
     div
-      div.section
-      div.header LIST BAAN
       house-preview
     absolute-background(bot)
 </template>
@@ -22,12 +20,7 @@
 
 <style lang='stylus' scoped>
   .section
-    background-color transparentify
-  .header
-    font-size 4rem
-    font-family ZingRust
-    color white
-    text-align center
+    background-color #020202
 
   img.big-logo
     position: relative;

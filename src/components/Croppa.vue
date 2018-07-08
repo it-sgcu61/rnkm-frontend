@@ -3,6 +3,7 @@
     <croppa v-model='userimg' :width='225' :height='300' :quality='2' :prevent-white-space='true' initial-image='' :placeholder='desc'
       placeholder-color="#fff" :placeholder-font-size='13' canvas-color="transparent" :show-remove-button='true' remove-button-color="#be5877"
       :show-loading='true' :loading-size='50' :zoom-speed="4" :reverse-scroll-to-zoom='true' initial-size='cover' accept=".jpg,.jpeg,.png">
+      <img slot="initial" :src="require('../theme/material/blank_user.png')" />
     </croppa>
     <div v-if='tools'>
       <hr/>ch
@@ -116,6 +117,11 @@
     border-color: #be5877;
     transition-duration: 0
     /* background-color: #f7cdea; */
+  }
+  img.default {
+    /* -webkit-filter: grayscale(100%);
+    filter: grayscale(100%); */
+    filter: blur(50px);
   }
 
 </style>
