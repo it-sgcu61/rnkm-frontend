@@ -1,9 +1,9 @@
 <template>
   <div id="app">
     <transition name="fade" mode='out-in' duration='400'>
-      <keep-alive>
+      <!-- <keep-alive> -->
         <router-view/>
-      </keep-alive>
+      <!-- </keep-alive> -->
     </transition>
   </div>
 </template>

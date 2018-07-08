@@ -3,12 +3,12 @@ div
   absolute-background(top)
     div.logo-wrap
       img.big-logo(:src='require(`@/theme/house/${data.nameURL}.png`)' :alt='data.nameTH')
-  div.section.has-text-centered
+  div.section.has-text-centered.body-wrap
     div.head-wrap.level
       div.title {{data.nameTH}} - {{data.nameEN}}
       // img.is-inline.icon(:src='require(`../theme/material/${data.size}_btn.png`)')
     div.subtitle.slogan "{{data.slogan}}"
-    div.body-wrap.has-text-centered
+    div.info-wrap.has-text-centered
       div.subtitle {{data.description}}
     img.back(@click='$router.push("/house")' src='../theme/material/back_btn.png')
   absolute-background(bot)
@@ -29,6 +29,7 @@ div
       let raw_data = _.keyBy(require('@/others/house_data.json').data, "nameURL")[this.name]
       if (raw_data) {
         this.data = raw_data
+        window.scrollTo(0, 0);
       } else {
         this.$router.push('/house')
       }
@@ -71,9 +72,12 @@ div
     vertical-align middle
 
   .body-wrap
+    max-width 1000px
+    margin 0 auto
+
+  .info-wrap
     white-space:pre-wrap;
     text-align center
-    max-width 900px
     margin 0 auto
     padding 0 calc(5px + 2vw)
 
@@ -88,6 +92,7 @@ div
       padding: 10px;
       min-width: 280px;
       max-width: 80vmin;
+      border-radius 30px
       filter: drop-shadow(7px 8px 25px #000f)
     &.icon
       width: calc(10px + 7vmin)

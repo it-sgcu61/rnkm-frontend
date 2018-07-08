@@ -74,15 +74,23 @@ div
   .field
     text-align center
 
-  input.input
+  .input
     background-color #eee
     text-align center
-    max-width 400px
-    font-size calc(5vmin + 1vw)
+    font-size calc(10px + 2vmin + 1vw)
     font-family ZingRust
     font-weight regular
     font-style normal
     letter-spacing: .07em
+    padding 0
+    width 450px
+    background-color #eee
+    @media screen and (min-width: 600px)
+      width 550px
+      // background-color blue
+    @media screen and (min-width: 1025px)
+      width 1000px
+      // background-color red
 
   #submit
     margin-top -30px

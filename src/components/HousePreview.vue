@@ -29,7 +29,7 @@ export default {
     background-color: transparent;
     padding: 3rem 1rem;
     @media screen and (min-width: 1000px)
-      padding: 3rem 3rem;
+      padding: 4rem 3rem;
 
   ._flex
     display: flex;
@@ -61,8 +61,8 @@ export default {
 
   .size_btn
     display block
-    width calc(10vw + 120px)
-    height calc(10vw + 120px)
+    width calc(12vw + 70px)
+    height calc(12vw + 70px)
     @media screen and (min-width: 1000px)
       width 250px
       height 250px
@@ -72,10 +72,9 @@ export default {
     width: 29vw;
     height: 29vw;
     overflow: hidden;
-    position: relative;
     background-color white
-    margin: auto auto;
-    border: 1px white solid;
+    margin 2px
+    border-radius 7px
     filter: brightness(50%);
     @media screen and (min-width: 600px)
       width: 22vw;
