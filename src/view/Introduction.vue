@@ -5,6 +5,7 @@
         img.big-logo(src='@/theme/material/Introduction.png')
         div(style='min-height: 15vmin')
     div
+      div.section
       div.header LIST BAAN
       house-preview
     absolute-background(bot)
@@ -20,8 +21,10 @@
 </script>
 
 <style lang='stylus' scoped>
+  .section
+    background-color transparentify
   .header
-    font-size 5rem
+    font-size 4rem
     font-family ZingRust
     color white
     text-align center

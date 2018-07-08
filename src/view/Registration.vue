@@ -21,6 +21,7 @@ div
   .section
     padding: calc(100px + 5vmax) 0 0 0
     margin-bottom: -400px
+    background-color transparentify
   img.big-logo
     position: relative;
     z-index: 40;

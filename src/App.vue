@@ -1,7 +1,9 @@
 <template>
   <div id="app">
     <transition name="fade" mode='out-in' duration='400'>
-      <router-view/>
+      <keep-alive>
+        <router-view/>
+      </keep-alive>
     </transition>
   </div>
 </template>
@@ -17,7 +19,6 @@ html {
 }
 #app {
   background-color: #020202;
-  /* background-image: */
   color: white;
 }
 .section {

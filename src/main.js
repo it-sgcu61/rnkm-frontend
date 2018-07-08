@@ -14,6 +14,8 @@ import './css/custom_fontface.css'
 
 import Transitions from 'vue2-transitions'
 Vue.use(Transitions)
+// import Validate from 'vee-validate'
+// Vue.use(Validate)
 
 import Resource from 'vue-resource'
 Vue.use(Resource)
@@ -23,16 +25,15 @@ Vue.config.productionTip = false
 import RnkmNavbar from './components/RnkmNavbar.vue'
 Vue.component('rnkm-nav', RnkmNavbar)
 
-
-firebase.initializeApp({
+var config = {
   apiKey: "AIzaSyDQLSoNkP8FbxlbbkgCBafxCpR567XFCko",
   authDomain: "rnkm-cu102.firebaseapp.com",
   databaseURL: "https://rnkm-cu102.firebaseio.com",
   projectId: "rnkm-cu102",
   storageBucket: "rnkm-cu102.appspot.com",
   messagingSenderId: "947832976689"
-});
-
+};
+firebase.initializeApp(config);
 new Vue({
   el: '#app',
   router: router,

@@ -25,12 +25,16 @@ div
       }
     },
     created(){
+      console.log('house created')
       let raw_data = _.keyBy(require('@/others/house_data.json').data, "nameURL")[this.name]
       if (raw_data) {
         this.data = raw_data
       } else {
         this.$router.push('/house')
       }
+    },
+    mounted(){
+      window.scrollTo(0, 0);
     }
   }
 </script>
@@ -45,8 +49,6 @@ div
     font-weight bold
     font-size 10vmin
     margin 0
-
-
 
   .subtitle
     font-weight lighter

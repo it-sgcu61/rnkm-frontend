@@ -142,7 +142,8 @@ export default {
     border-width 0 0 0 0
     border-radius: 0;
     background: #222e
-    font-size: 16px;
+    font-size: calc(15px + .7vw);
+    font-weight bold
     outline: none;
     outline-style: none;
     -webkit-appearance: none;
@@ -155,11 +156,11 @@ export default {
       border-color: #ef4a6b;
 
   textarea
-    height: 80px;
+    height: calc(85px + 1vh);
   input
-    height: 42px;
+    height: calc(47px + 1vh);
   select
-    height: 42px;
+    height: calc(47px + 1vh);
     padding: 10px 15px 0 12px;
 
   .error
@@ -179,7 +180,8 @@ export default {
     padding: 0 6px;
     padding-left: 4px
     color: white;
-    font-size: 19px;
+    font-size: calc(16px + .6vw);
+    font-weight normal
     text-transform: uppercase;
     -webkit-transition: all 0.25s;
     transition: all 0.25s;

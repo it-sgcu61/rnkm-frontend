@@ -67,12 +67,13 @@
       }
       for (let h of this.fieldList['hidden']) {
         if (h['TH'].name == 'hidden/groupID') {
-          console.log('construct grou0p ID')
+          console.log('construct group ID')
           this.hidd_result[h['TH'].name] = this.random_str()
         } else if (h['TH'].name != "hidden/imageURL") {
           console.assert('wtf is ' + h['TH'].name + ' attribute')
         }
       }
+      this.add_dynm_result()
     },
     methods: {
       random_str(){
@@ -108,10 +109,6 @@
             ar.push(_.assign({
               'hidden/imageURL': await c.$children[0].$children[0].uploadImg()
             }, a, b, c.form))
-            console.log('create form')
-            console.log(a)
-            console.log(b)
-            console.log(c.form)
           }
           console.log('[success] image have been uploaded')
           console.log(await post_regist_form(ar))
