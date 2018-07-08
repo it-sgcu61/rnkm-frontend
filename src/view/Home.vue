@@ -1,13 +1,11 @@
 <template lang='pug'>
-div#home-wrapper
+div#home-wrapper(@click='$router.push("/introduction")')
     div.animated.rotateInDownLeft
       img.logo(src='../theme/material/Title_name.png')
     div.columns(style='margin-top: 2vh')
       div.column.field
-        // div.animated.fadeIn(style='animation-delay: 1.5s')
-        // img.icon.big.spin(src='../theme/material/home_base_btn.png')
-        div
-          img.icon.small(src='../theme/material/power_btn.png' @click='$router.push("/introduction")')
+        div.logo-wrap
+          img.icon(src='../theme/material/power_btn.png' @click='$router.push("/introduction")')
       div.column.field
         div.animated.rotateInUpRight(style='animation-delay: .7s')
           h1 rubnongkaomai
@@ -32,7 +30,7 @@ export default {
     overflow hidden
     background-image: url('../theme/wallpaper/background.jpg')
     background-size cover
-    z-index 10
+    z-index 0
     .columns
       padding 10px 10vmin
       @media screen and (min-width 1000px)
@@ -62,23 +60,13 @@ export default {
         filter: drop-shadow(2px 5px 9px #f005)
 
     &.icon
-      &.small
-        width: 35vmin
-        height: @width;
-        transition: transform .2s;
-        &:hover
-          transform: scale(1.1, 1.1) rotate(10deg)
-          filter: drop-shadow(2px 5px 9px #ff05)
-      &.big
-        opacity .6
-        filter: blur(.5px)
-        width: 70vmin
-        height: @width;
-
-      &.spin
-        -webkit-animation: spin 10s linear infinite;
-        -moz-animation: spin 10s linear infinite;
-        animation: spin 10s linear infinite;
+      width: 35vmin
+      height: @width;
+      transition: transform .2s;
+      z-index 100
+      &:hover
+        transform: scale(1.1, 1.1) rotate(10deg)
+        filter: drop-shadow(2px 5px 9px #ff05)
 
   @-moz-keyframes spin    { 100% { -moz-transform:    rotate(360deg); } }
   @-webkit-keyframes spin { 100% { -webkit-transform: rotate(360deg); } }
@@ -97,6 +85,65 @@ export default {
     &:hover
       transform: scale(1.2, 1.1)
       filter: drop-shadow(2px 5px 9px #00f5)
+
+
+</style>
+
+<style scoped>
+  @-webkit-keyframes rotating /* Safari and Chrome */ {
+    from {
+      -webkit-transform: rotate(0deg);
+      -o-transform: rotate(0deg);
+      transform: rotate(0deg);
+    }
+    to {
+      -webkit-transform: rotate(360deg);
+      -o-transform: rotate(360deg);
+      transform: rotate(360deg);
+    }
+  }
+  @keyframes rotating {
+    from {
+      -ms-transform: rotate(0deg);
+      -moz-transform: rotate(0deg);
+      -webkit-transform: rotate(0deg);
+      -o-transform: rotate(0deg);
+      transform: rotate(0deg);
+    }
+    to {
+      -ms-transform: rotate(360deg);
+      -moz-transform: rotate(360deg);
+      -webkit-transform: rotate(360deg);
+      -o-transform: rotate(360deg);
+      transform: rotate(360deg);
+    }
+  }
+  .logo-wrap::before {
+    position: absolute;
+    margin: 0;
+    top: 0;
+    left: 0;
+    right: 0;
+    margin-left: auto;
+    margin-right: auto;
+    margin-top: calc(140px);
+    transform-origin: 50% 50%;
+    content: "";
+    background: url("../theme/material/home_base_btn.png");
+    background-size: 100% 100%;
+    width: calc(200px + 29vw);
+    height: calc(200px + 29vw);
+    z-index: 1;
+    opacity: .7;
+
+    -webkit-animation: rotating 2s linear infinite;
+    -moz-animation: rotating 2s linear infinite;
+    -ms-animation: rotating 2s linear infinite;
+    -o-animation: rotating 2s linear infinite;
+    animation: rotating 2s linear infinite;
+
+    float: left;
+  }
 
 
 </style>

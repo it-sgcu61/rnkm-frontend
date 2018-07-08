@@ -13,7 +13,7 @@ div
           img.back(@click='result.show = false' src='../theme/material/back_btn.png')
       form.container(v-else)
         div.field
-          input.input(v-model='login.usr' name="usr_name" placeholder='phone number' pattern='[0-9]{10}' title="10 digit tel number")
+          input.input(v-model='login.usr' type="number" placeholder='phone number' pattern='[0-9]{10}' title="10 digit tel number")
         div.field
           input.input(v-model='login.pwd' type='password' placeholder='personal ID')
         div.field
