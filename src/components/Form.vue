@@ -1,4 +1,3 @@
-/* eslint-plugin-disable angular */
 <template lang='pug'>
   div.bg
     // head form

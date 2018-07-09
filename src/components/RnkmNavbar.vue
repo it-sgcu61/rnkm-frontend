@@ -1,5 +1,5 @@
 <template>
-  <div class='_flex has-text-centered' style='padding: 2em 3em'>
+  <div class='_flex has-text-centered'>
     <router-link class='__k_nav' to='/home'><div>Home</div></router-link>
     <router-link class='__k_nav' to='/instruction'><div>Instruction</div></router-link>
     <router-link class='__k_nav' to='/introduction'><div>Introduction</div></router-link>
@@ -13,24 +13,28 @@ export default {
 }
 </script>
 
-<style scoped>
-._flex {
-  display: flex;
-  flex-direction: row;
-  flex-wrap: nowrap;
-  justify-content: space-between;
-  align-items: center;
-}
-.__k_nav div {
-  position: relative;
-  color: white;
-  font-size: 2.2vw;
-  font-family: ZingRust;
-  line-height: 1em;
-  margin: 10px 2vw;
-  display: inline-block;
-  text-align: center;
-  vertical-align: middle;
-  text-shadow: 5px 5px 15px #2228;
-}
+<style lang='stylus' scoped>
+  ._flex
+    display: flex;
+    flex-direction: row;
+    flex-wrap: nowrap;
+    justify-content: space-between;
+    align-items: center;
+    background-color: rgba(20, 20, 20, .3);
+    padding: .7em 3em
+    @media screen and (max-width: 400px)
+      padding: .3em 1em
+
+  .__k_nav div
+    position: relative;
+    color: white;
+    font-size: 2.2vw;
+    font-family: ZingRust;
+    line-height: .5em;
+    margin: 1vmin 2vw;
+    display: inline-block;
+    text-align: center;
+    vertical-align: middle;
+    text-shadow: 5px 5px 15px #2228;
+
 </style>

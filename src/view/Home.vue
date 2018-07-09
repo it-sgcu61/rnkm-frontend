@@ -5,13 +5,13 @@ div#home-wrapper(@click='$router.push("/introduction")')
     div.columns(style='margin-top: 2vh')
       div.column.field
         div.logo-wrap
+         div.animated.bounceIn(style='animation-delay: 1.7s')
           img.icon(src='../theme/material/power_btn.png' @click='$router.push("/introduction")')
       div.column.field
-        div.animated.rotateInUpRight(style='animation-delay: .7s')
+        div.animated.rotateInUpRight(style='animation-delay: .4s')
           h1 rubnongkaomai
           h2 4-5 August 2018
           h3 Chulalongkorn University
-    div.section
 </div>
 </template>
 

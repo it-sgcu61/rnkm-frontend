@@ -1,5 +1,5 @@
 <template>
-  <section class='' style="text-align: center; background: white">
+  <section style="text-align: center; background: white">
     <!-- status -->
     <div class='section hero'>
       <h1 class='is-size-1'>ย้ายบ้าน<span v-if='final_confirm'>สำเร็จ</span></h1>

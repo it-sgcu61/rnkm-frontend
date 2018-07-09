@@ -1,11 +1,10 @@
 <template lang='pug'>
 div
   absolute-background(top)
-    img.big-logo(src='@/theme/material/Instruction.png')
+    img.big-logo(src='@/theme/material/Registeration.png')
   div.section
     rnkm-form
 
-  div(style='height: 400px; background-color: black')
   absolute-background(bot)
 </template>
 
@@ -18,16 +17,15 @@ div
 </script>
 
 <style lang='stylus' scoped>
-  .section
-    padding: calc(100px + 5vmax) 0 0 0
-    margin-bottom: -400px
-    background-color transparentify
-  img.big-logo
+  .big-logo
     position: relative;
-    z-index: 40;
-    margin-top: -40px;
     padding: 10px;
     min-width: 280px;
-    max-width: 70vw;
+    max-width: 90vw;
+    max-height: 70vh;
     filter: drop-shadow(20px 10px 12px #222f)
+    @media screen and (orientation: landscape)
+      margin-top: calc(-70px + 20vh - 1vw)
+    @media screen and (orientation: portrait)
+      margin-top: calc(-120px + 37vh - 5vw)
 </style>

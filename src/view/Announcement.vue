@@ -2,7 +2,7 @@
 div
     absolute-background(top)
       img.big-logo(src='@/theme/material/Annoucment.png')
-    section.section(style='height: 700px; background-color: black')
+    section.section(style='height: 700px;')
       div.container
         div.field
           h1 Check For House
@@ -61,19 +61,24 @@ div
 </script>
 
 <style lang='stylus' scoped>
+  .section
+    background-color: #020202
 
   h1
     font-size: calc(7vmin + 2vw)
     font-family: ZingRust
 
-  img.big-logo
+  .big-logo
     position: relative;
-    z-index: 40;
-    margin-top: -40px;
     padding: 10px;
     min-width: 280px;
-    max-width: 70vw;
+    max-width: 90vw;
+    max-height: 70vh;
     filter: drop-shadow(20px 10px 12px #222f)
+    @media screen and (orientation: landscape)
+      margin-top: calc(-70px + 20vh - 1vw)
+    @media screen and (orientation: portrait)
+      margin-top: calc(-120px + 37vh - 5vw)
 
   .field
     text-align center
@@ -95,8 +100,8 @@ div
       width 1000px
 
   #submit
-    margin-top -30px
-    max-width 200px
+    margin-top 10px
+    max-width 180px
     cursor pointer
 
   #result-wrapper

@@ -1,9 +1,10 @@
 <template>
-  <div>
-    <croppa v-model='userimg' :width='225' :height='300' :quality='2' :prevent-white-space='true' initial-image='' :placeholder='desc'
-      placeholder-color="#fff" :placeholder-font-size='13' canvas-color="transparent" :show-remove-button='true' remove-button-color="#be5877"
-      :show-loading='true' :loading-size='50' :zoom-speed="4" :reverse-scroll-to-zoom='true' initial-size='cover' accept=".jpg,.jpeg,.png">
-      <img slot="initial" :src="require('../theme/material/blank_user.png')" />
+  <div id=''>
+    <croppa ref='croppa' v-model='userimg' :width='225' :height='300' :quality='2' :prevent-white-space='true' :placeholder='desc' placeholderColor='#222'
+      placeholder-color="#fff" :placeholder-font-size='13' :show-remove-button='true' remove-button-color="#be5877" canvasColor='transparent'
+      :show-loading='true' :loading-size='50' :zoom-speed="4" :reverse-scroll-to-zoom='true' initial-size='cover' accept=".jpg,.jpeg,.png"
+    >
+      <!-- <img slot='initial' :src='require("../theme/material/blank_user.png")' /> -->
     </croppa>
     <div v-if='tools'>
       <hr/>ch
@@ -87,7 +88,7 @@
         return Promise.race([upload_p, new Promise((_, reject) => {
           setTimeout(() => reject('upload img : timed out in 10 sec'), 10000)
         })])
-      },
+      }
     }
   }
 
@@ -95,33 +96,33 @@
 
 
 <style>
+  #wrapper{
+    white-space: nowrap;
+    background-color: red;
+  }
   .croppa-container {
-    padding: 10px 10px;
-    border: 0 white solid;
-    border-width: 0 0px 2px 2px;
-    border-width: 0 0 0 0;
+    padding: 10px;
+    border: 0 rgb(0, 0, 0) solid;
     border-radius: 0;
     background-color: #222;
+    background-image: url('../theme/material/blank_user.png');
+    background-size: cover;
+    background-position: 50% 50%;
+    /* background-origin: content-box; */
     outline: none;
     outline-style: none;
     -webkit-appearance: none;
     -moz-appearance: none;
     -webkit-box-shadow: none;
     box-shadow: none;
-    opacity: 1;
-    transition-duration: 0
+    opacity: .95;
   }
 
-  .croppa-container:hover {
+  .croppa-container.croppa--has-target {
     opacity: 1;
-    border-color: #be5877;
-    transition-duration: 0
-    /* background-color: #f7cdea; */
-  }
-  img.default {
-    /* -webkit-filter: grayscale(100%);
-    filter: grayscale(100%); */
-    filter: blur(50px);
+    transition: all 1000ms ease;
+    transition-duration: 1000ms;
+    background-image: none;
   }
 
 </style>
