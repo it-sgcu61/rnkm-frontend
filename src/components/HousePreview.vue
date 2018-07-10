@@ -9,7 +9,7 @@ div.section
     div._flex(:n-item='siz_list[grp].length')
       div._flex-item(v-for='obj in siz_list[grp]' :key='obj.id')
         div._img_square(@click='$router.push(`/house/${obj.nameURL}`)')
-          img(:src="require(`@/theme/house/${obj.nameURL}.png`)" :alt='obj.nameTH')
+          img(:src="require(`@/theme/house/${obj.nameURL}.jpg`)" :alt='obj.nameTH')
 </template>
 
 <script>

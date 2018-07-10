@@ -6,11 +6,11 @@ import App from './App.vue'
 import router from './router'
 
 import './css/bulma.css'
-// import './css/cu_style.css'
 import './css/vue2-animate.css'
 import './css/animate.css'
 import './css/k_transition.css'
 import './css/custom_fontface.css'
+import 'font-awesome/css/font-awesome.css'
 
 import Transitions from 'vue2-transitions'
 Vue.use(Transitions)

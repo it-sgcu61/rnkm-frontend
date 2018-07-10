@@ -9,6 +9,21 @@ div
     div.subtitle.slogan "{{data.slogan}}"
     div.info-wrap.has-text-centered
       div.subtitle {{data.description}}
+
+    div.social-btn
+      a(href='https://line.me')
+        img(src='../theme/material/line.svg')
+      a(href='https://facebook.com')
+        img(src='../theme/material/facebook-square.svg')
+      a(href='https://www.instagram.com')
+        img(src='../theme/material/instagram.svg')
+      a(href='https://twitter.com')
+        img(src='../theme/material/twitter-square.svg')
+
+    div.social-btn
+      a.is-block(href='https://goo.gl/forms/7hJjvI418Vhe70YY2') ประสานบ้านกรอก link
+      a.is-block(href='https://docs.google.com/spreadsheets/d/1iC9097qVOkSIqARIhlvavPVB_erGyJ4sGf1kHL83Eik')  ตรวจสอบข้อมูล
+      h1 เดียวจะอัพเดต link ให้ภายในวันนี้
     img.back(@click='$router.push("/house")' src='../theme/material/back_btn.png')
   absolute-background(bot)
 </template>
@@ -58,6 +73,16 @@ div
       font-style: italic
       font-size: 6vmin
 
+  .social-btn
+    & img
+      width 20%
+      padding 1em
+      padding-top 6em
+      min-width 50px
+      max-width 100px
+      filter: invert(100%)
+
+    margin 20px
   .logo-wrap
     text-align: center;
     @media screen and (orientation: landscape)
@@ -106,5 +131,9 @@ div
       margin-top 5em
       width: calc(100px + 7vmin)
       height: @width
+
+  .fa
+    font-size 30px
+    max-width 20%
 
 </style>
