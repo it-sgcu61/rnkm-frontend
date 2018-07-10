@@ -60,7 +60,12 @@ div
 
   .logo-wrap
     text-align: center;
-    padding-top: 10vmin;
+    @media screen and (orientation: landscape)
+      padding-top: calc(5vh);
+      padding-button: calc(5vh);
+    @media screen and (orientation: portrait)
+      padding-top: calc(15vh);
+      padding-button: calc(5vh);
 
   .head-wrap
     display inline-block

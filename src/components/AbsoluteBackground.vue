@@ -49,7 +49,7 @@
       z-index: 0;
     &.top
       z-index: -10;
-      height 100vh;
+      height 90vh;
       background-position: bottom right;
       background-image: url('../theme/wallpaper/top_violet_1280x950.png')
     &.bot

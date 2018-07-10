@@ -1,10 +1,9 @@
 <template>
   <div class='_flex has-text-centered'>
-    <router-link class='__k_nav' to='/home'><div>Home</div></router-link>
-    <router-link class='__k_nav' to='/instruction'><div>Instruction</div></router-link>
-    <router-link class='__k_nav' to='/introduction'><div>Introduction</div></router-link>
-    <router-link class='__k_nav' to='/registration'><div>Registration</div></router-link>
-    <router-link class='__k_nav' to='/announcement'><div>Announcement</div></router-link>
+    <router-link class='__k_nav' to='/instruction'><div>Home</div></router-link>
+    <router-link class='__k_nav' to='/introduction'><div>Baan</div></router-link>
+    <router-link class='__k_nav' to='/registration'><div>Register</div></router-link>
+    <router-link class='__k_nav' to='/announcement'><div>Announce</div></router-link>
   </div>
 </template>
 

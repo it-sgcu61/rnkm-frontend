@@ -3,7 +3,8 @@ div
   absolute-background(top)
     img.big-logo(src='@/theme/material/Registeration.png')
   div.section
-    rnkm-form
+    condition(v-if='!accept' @accept-condition='accept = true')
+    rnkm-form(v-else)
 
   absolute-background(bot)
 </template>
@@ -11,8 +12,14 @@ div
 <script>
   import AbsoluteBackground from '@/components/AbsoluteBackground.vue'
   import RnkmForm from '@/components/Form.vue'
+  import Condition from '@/components/Condition.vue'
   export default {
-    components: {AbsoluteBackground, RnkmForm},
+    components: {AbsoluteBackground, RnkmForm, Condition},
+    data() {
+      return {
+        accept: false
+      }
+    }
   }
 </script>
 

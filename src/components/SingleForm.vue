@@ -19,13 +19,13 @@
         <div class='error'></div>
       </div>
 
-      <div v-for='f in fieldListLang' class="group">
+      <div v-for='f in fieldListLang' :key='f.name' class="group">
         <span class="label-text">{{f.label}}</span>
 
         <input  v-if='f.type == "string"' v-model='form[f.name]' :placeholder='f.desc'>
         <select v-if='f.type == "choice"' v-model='form[f.name]' :class='{"placeholder": !form[f.name]}'>
           <option v-if='f.desc' value="" disabled hidden>{{f.desc}}</option>
-          <option v-for='o in f.option' :value='o.value' style='color: #353535'>{{o.label}}</option>
+          <option v-for='o in f.option' :key='o.value' :value='o.value' style='color: #353535'>{{o.label}}</option>
         </select>
         <textarea-auto v-if='f.type == "lg_string"' v-model='form[f.name]' :placeholder='f.desc'></textarea-auto>
 

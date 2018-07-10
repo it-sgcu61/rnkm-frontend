@@ -1,12 +1,12 @@
 <template lang='pug'>
-div#home-wrapper(@click='$router.push("/introduction")')
+div#home-wrapper(@click='$router.push("/instruction")')
     div.animated.rotateInDownLeft
       img.logo(src='../theme/material/Title_name.png')
     div.columns.space-top
       div.column.field
         div.logo-wrap
          div.animated.bounceIn(style='animation-delay: 1.7s')
-          img.icon(src='../theme/material/power_btn.png' @click='$router.push("/introduction")')
+          img.icon(src='../theme/material/power_btn.png' @click='$router.push("/instruction")')
       div.column.field
         div.animated.rotateInUpRight(style='animation-delay: .4s')
           h1 rubnongkaomai

@@ -133,7 +133,8 @@
 </script>
 
 <style lang='stylus' scoped>
-  .bg
+  .bg,
+  .section
     background-color #020202
   h1
     font-weight: 300;

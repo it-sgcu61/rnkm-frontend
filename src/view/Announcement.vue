@@ -14,7 +14,6 @@ div
       form.container(v-else)
         div.field
           input.input(v-model='login.usr' type="tel" v-mask="'###-###-####'" :masked="false" placeholder='phone number' pattern='[0-9]{10}' title="10 digit tel number")
-          div {{login.usr}}
         div.field
           input.input(v-model='login.pwd' type='password' placeholder='personal ID')
         div.field
@@ -86,7 +85,7 @@ div
   .input
     background-color #eee
     text-align center
-    font-size calc(10px + 2vmin + 1vw)
+    font-size calc(9px + 1vmin + 1vw)
     font-family ZingRust
     font-weight regular
     font-style normal
