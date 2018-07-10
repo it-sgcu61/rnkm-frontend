@@ -1,9 +1,11 @@
 <template lang='pug'>
 div.section
-  div.header List Baan
+  div.header
+    h1 รายชื่อบ้าน
   div(v-for='grp in ["S", "M", "L", "XL"]' :key='grp.id')
     div.container._flex._flex-center
       img.size_btn(:src='require(`@/theme/material/${grp}_btn.png`)')
+      h2 {{siz_desc[grp]}}
     div._flex(:n-item='siz_list[grp].length')
       div._flex-item(v-for='obj in siz_list[grp]' :key='obj.id')
         div._img_square(@click='$router.push(`/house/${obj.nameURL}`)')
@@ -12,14 +14,26 @@ div.section
 
 <script>
 export default {
+  props: {
+    shuffle: {
+      default: false
+  }},
   data() {
     return {
       rnd_list: [],
-      siz_list: {}
-    }
+      siz_list: {},
+      siz_desc: {
+        "S": "บ้านขนาดเล็ก\nมีจำนวนคนประมาณ 160 คน",
+        "M": "บ้านขนาดกลาง\nมีจำนวนคนประมาณ 220 คน",
+        "L": "บ้านขนาดใหญ่\nมีจำนวนคนประมาณ 350 คน",
+        "XL": "บ้านขนาดใหญ่มาก\nมีจำนวนคนประมาณ 400 คน",
+    }}
   },
   created(){
-    let raw_data = _.shuffle(require('@/others/house_data.json').data)
+    let raw_data = require('@/others/house_data.json').data
+    if (this.shuffle) {
+      raw_data = _.shuffle(raw_data)
+    }
     this.siz_list = _.groupBy(raw_data, "size")
   }
 }
@@ -34,9 +48,17 @@ export default {
 
   .header
     font-size 4rem
-    font-family ZingRust
     color white
     text-align center
+    &.en
+      font-family ZingRust
+
+  h1, h2, h3, p, span, div
+    font-family Superspace
+    white-space: pre-line
+
+  h2
+    font-size calc(10px + 3.2vw)
 
   ._flex
     display: flex;

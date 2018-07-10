@@ -4,7 +4,6 @@
       placeholder-color="#fff" :placeholder-font-size='13' :show-remove-button='true' remove-button-color="#be5877" canvasColor='transparent'
       :show-loading='true' :loading-size='50' :zoom-speed="4" :reverse-scroll-to-zoom='true' initial-size='cover' accept=".jpg,.jpeg,.png"
     >
-      <!-- <img slot='initial' :src='require("../theme/material/blank_user.png")' /> -->
     </croppa>
     <div v-if='tools'>
       <hr/>ch

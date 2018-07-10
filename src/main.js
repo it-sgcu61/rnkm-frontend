@@ -6,7 +6,7 @@ import App from './App.vue'
 import router from './router'
 
 import './css/bulma.css'
-import './css/cu_style.css'
+// import './css/cu_style.css'
 import './css/vue2-animate.css'
 import './css/animate.css'
 import './css/k_transition.css'
