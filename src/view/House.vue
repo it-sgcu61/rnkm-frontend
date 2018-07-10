@@ -6,7 +6,6 @@ div
   div.section.has-text-centered.body-wrap
     div.head-wrap.level
       div.title {{data.nameTH}} - {{data.nameEN}}
-      // img.is-inline.icon(:src='require(`../theme/material/${data.size}_btn.png`)')
     div.subtitle.slogan "{{data.slogan}}"
     div.info-wrap.has-text-centered
       div.subtitle {{data.description}}

@@ -3,7 +3,6 @@
     absolute-background(top)
       div
         img.big-logo(src='@/theme/material/Introduction.png')
-        div(style='min-height: 15vmin')
     div
       house-preview
     absolute-background(bot)

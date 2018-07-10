@@ -17,6 +17,8 @@ div
 </script>
 
 <style lang='stylus' scoped>
+  .section
+    background-color #020202
   .big-logo
     position: relative;
     padding: 10px;

@@ -1,18 +1,12 @@
-<template>
-  <div>
-    <div v-if='top' class='bg top'>
-        <rnkm-nav></rnkm-nav>
-        <slot></slot>
-      <div>
-      </div>
-    </div>
-
-    <div v-if='bot' class='bg bot' style='height: 200px;'>
-      <slot></slot>
-      <div style='height: 155px'></div>
-      <rnkm-nav></rnkm-nav>
-    </div>
-  </div>
+<template lang='pug'>
+  div
+    div.bg.top(v-if='top')
+      rnkm-nav
+      slot
+    div.bg.bot(v-if='bot' style='height: 40vh')
+      slot
+      div(style='padding-top: 30vh')
+      rnkm-nav
 </template>
 
 <script>
@@ -60,7 +54,7 @@
       background-image: url('../theme/wallpaper/top_violet_1280x950.png')
     &.bot
       z-index: -10;
-      margin-top -20vh;
+      padding-bottom 5vmin
       background-position: top right;
       background-image: url('../theme/wallpaper/bottom_violet_1280x950.png');
 

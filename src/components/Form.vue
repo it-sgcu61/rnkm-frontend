@@ -14,19 +14,15 @@
       div.container(v-for='(vl, x) in dynm_result' :key='x' v-show='dynm_result[x]')
         FormTemplate(v-model='dynm_result[x]' ref='dynamic_refs' :fieldList='fieldList.dynamic' @delete='del_user(x)', :deletable='true')
           div.has-text-centered(slot-scope="o", style='margin-bottom: 50px')
-            croppa-img(ref='rfimg', :desc='o.lang == "TH" ? "คลิกเพื่อเพิ่มรูปภาพ" : "click to add picture"')
+            croppa-img(ref='rfimg', :desc='o.lang == "TH" ? "เพิ่มรูปภาพ หน้าตรงเห็นชัด" : "add clear face picture"')
+
 
     // submit button
+    img.btn(@click='add_dynm_result' src='../theme/material/add_member.png')
     div.section.has-text-centered
       div.is-inline(v-if='valid_user_len != 3')
-        img.btn(@click='add_dynm_result' src='../theme/material/add_member.png')
       div.is-inline(v-if='valid_user_len != 0')
-        img.btn(@click='submit' src='../theme/material/submit_btn.png')
-
-    // div(v-if='valid_user_len != 3')
-    //   div.button(@click='add_dynm_result') เพิ่มสมาชิก
-    // div(v-if='valid_user_len != 0')
-    //   div.button(@click='submit') ส่ง
+        img.btn(@click='submit' src='../theme/material/submit_btn.png' :disable='!submitable')
 
   </div>
 </template>
@@ -118,6 +114,18 @@
     computed: {
       valid_user_len() {
         return this.dynm_result.filter(Boolean).length
+      },
+      submitable(){
+        if (!this.$refs) return false;
+        for (let x in this.$refs.dynamic_refs) {
+          let node = this.$refs.dynamic_refs[x];
+          console.log(node)
+          if (!node) continue;
+          if (!node.check_valid_all()){
+            return false;
+          }
+        }
+        return true
       }
     }
   }
@@ -151,7 +159,8 @@
 
 
   img.btn
+    display block
     margin 0 auto
-    max-height 250px
+    max-width 250px
 
 </style>

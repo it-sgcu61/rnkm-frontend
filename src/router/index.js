@@ -1,7 +1,6 @@
 import Vue from 'vue'
 import Home from '@/view/Home.vue'
 import House from '@/view/House.vue'
-import Transfer from '@/view/Transfer.vue'
 import Instruction from '@/view/Instruction.vue'
 import Introduction from '@/view/Introduction.vue'
 import Registration from '@/view/Registration.vue'
@@ -20,12 +19,6 @@ export default new Router({
       path: '/home',
       name: 'Home',
       component: Home
-    },
-    {
-      path: '/transfer',
-      name: 'Transfer',
-      component: Transfer,
-      props: true
     },
     {
       path: '/instruction',

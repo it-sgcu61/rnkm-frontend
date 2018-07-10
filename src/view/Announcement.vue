@@ -2,7 +2,7 @@
 div
     absolute-background(top)
       img.big-logo(src='@/theme/material/Annoucment.png')
-    section.section(style='height: 700px;')
+    section.section
       div.container
         div.field
           h1 Check For House
