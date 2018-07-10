@@ -20,14 +20,17 @@ export default {
     justify-content: space-between;
     align-items: center;
     background-color: rgba(20, 20, 20, .3);
-    padding: .7em 3em
-    @media screen and (max-width: 400px)
-      padding: .3em 1em
+    padding: .7em 2em
+    @media screen and (min-width: 400px)
+      padding: .5em 4em
+    @media screen and (min-width: 600px)
+      padding: .7em 7em
+    @media screen and (min-width: 1000px)
+      padding: .9em 12em
 
   .__k_nav div
     position: relative;
     color: white;
-    font-size: 2.2vw;
     font-family: ZingRust;
     line-height: .5em;
     margin: 1vmin 2vw;
@@ -35,5 +38,13 @@ export default {
     text-align: center;
     vertical-align: middle;
     text-shadow: 5px 5px 15px #2228;
+    font-size: 5vw;
+    @media screen and (min-width: 400px)
+      font-size: 4vw;
+    @media screen and (min-width: 600px)
+      font-size: 3vw;
+    @media screen and (min-width: 1000px)
+      font-size: 2.5vw;
+
 
 </style>

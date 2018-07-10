@@ -99,7 +99,7 @@ div
       width 1000px
 
   #submit
-    margin-top 10px
+    margin-top 10vmin
     max-width 180px
     cursor pointer
 

@@ -1,7 +1,7 @@
 <template lang='pug'>
 div#body-wrapper
   div.section.has-text-centered
-    img(style='max-width: 80vw' src='../theme/material/logo_1.jpg')
+    img(style='max-width: 80vmin' src='../theme/material/logo_1.jpg')
   div.section
     h1 การรับน้องก้าวใหม่คืออะไร?
     p การรับน้องก้าวใหม่ คือ การที่ให้เฟรชชี่ได้มาเจอเพื่อนๆ พี่ๆ ทั้งคณะเดียวกันและต่างคณะ ได้มาร่วมกันทำกิจกรรมที่ไม่ได้มีดีแค่ความสนุกอย่างการสันทนาการ แต่ยังเป็นกิจกรรมที่สร้างสรรค์สิ่งดี ๆ ออกสู่สังคม รวมถึงการได้พบปะพูดคุยแลกเปลี่ยนประสบการณ์ระหว่างพี่น้องและเพื่อน ๆ ซึ่งกิจกรรมจะจัดเป็นเวลา 3 วัน โดยน้อง ๆ สามารถติดตามข่าวสารเพิ่มเติมในการจัดกิจกรรมรับน้องก้าวใหม่ได้ที่ <a>facebook</a>
@@ -32,8 +32,6 @@ div#body-wrapper
       div.column.is
         img(src='http://p3.isanook.com/ca/0/rp/rc/w620h0/ya0xa0m1/aHR0cDovL3AzLmlzYW5vb2suY29tL2NhLzAvdWkvMjczLzEzNjg2NzEvNzBhM2M0MTBlMDJkZjg4YTQ4MzczMmY0NWUxNTlhZmZfMTM2OTAzODEwMS5qcGc=.jpg')
         img(src='http://p3.isanook.com/ca/0/rp/rc/w620h0/ya0xa0m1/aHR0cDovL3AzLmlzYW5vb2suY29tL2NhLzAvdWkvMjczLzEzNjg2NzEvNDZhNmJhMWNlYTg4ZTdkYmJhMDA3ZDYwMTM4NDVjMGJfMTM2OTAzODEwMi5qcGc=.jpg')
-  div.section
-    a(href='https://web.facebook.com/chulafreshmen/videos/993800830783367/') video
   div.section
     a(href='http://www.trueplookpanya.com/tcas/article/detail/59437') ref : trueplookpanya
     a(href='https://blog.eduzones.com/rubnongkaomai2559/164061') ref2 : blog.eduzones
