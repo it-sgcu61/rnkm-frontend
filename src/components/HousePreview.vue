@@ -45,25 +45,27 @@ export default {
     justify-content: center;
     margin calc(5vmin + 40px) auto 3vmin auto
 
+    // @media screen and (min-width: 600px)
+    //   ._flex[n-item="5"]
+    //     padding-left: 12vw;
+    //     padding-right: 12vw;
+
     &._flex-center
       align-items: center
       justify-content: center;
       padding 190px auto 20px auto
       margin-top 15vmin
-    ._flax-item
-      flex-basis: 30%;
-      margin: calc(1px + 2%) auto;
-      @media screen and (min-width: 400px)
-        flex-basis: 25%;
-        margin: 5px auto;
-      @media screen and (min-width: 1000px)
-        flex-basis: 25%;
-        margin: 10px auto;
 
-  @media screen and (min-width: 600px)
-    ._flex[n-item="5"]
-      padding-left: 12vw;
-      padding-right: 12vw;
+    ._flax-item
+      flex-basis: 26%;
+      // margin: calc(1px + 2%) auto;
+      // @media screen and (min-width: 400px)
+      //   flex-basis: 25%;
+      //   margin: 5px auto;
+      // @media screen and (min-width: 1000px)
+      //   flex-basis: 25%;
+      //   margin: 10px auto;
+
 
 
   .size_btn

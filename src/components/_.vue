@@ -13,3 +13,10 @@ export default {
 
 <style lang='stylus' scoped>
 </style>
+
+<style scoped>
+  div {
+    color: rgb(253, 211, 72);
+  }
+</style>
+

@@ -3,7 +3,6 @@ div.wrap_
 
   div.wrap_head
     div.is-pulled-right.group_btn
-      button(@click='lang = lang == "TH" ? "EN" : "TH"') {{lang}}
       button(@click='toggle_show') h
       button(@click='delete_elem' v-if='deletable') x
 
@@ -15,7 +14,7 @@ div.wrap_
       form
         slot(v-bind='$data')
 
-        div.group.animated.fadeIn(v-for='f in fieldListLang')
+        div.group.animated.fadeIn(v-for='f in fieldList')
           transition(name='_slide-fade' mode='out-in' duration='100')
             div.label-text(:key='f.label') {{f.label}}
 
@@ -67,20 +66,14 @@ export default {
   data: function() {
     return {
       show: true,
-      lang: "TH",
       form: {}
     };
   },
   created() {
     this.form = this.fieldList.reduce((a, b) => {
-      this.$set(a, _.get(b, [this.lang, "name"]), "");
+      this.$set(a, b.name, "");
       return a;
     }, {});
-  },
-  computed: {
-    fieldListLang() {
-      return _.map(this.fieldList, this.lang);
-    }
   },
   methods: {
     delete_elem() {
@@ -160,7 +153,7 @@ export default {
     border: 0 solid white;
     border-width: 0 0 0 0;
     border-radius: 0 10px 0 0;
-    background: #222e;
+    background: #333e;
     font-size: calc(14px + 0.5vw);
     font-weight: bold;
     outline: none;
@@ -188,6 +181,10 @@ export default {
   select {
     height: calc(47px + 1vh);
     padding: 10px 15px 0 12px;
+  }
+
+  option {
+    background-color #eee
   }
 
   .error {

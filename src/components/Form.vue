@@ -2,12 +2,12 @@
   div.bg
     // head form
     div.container
-      FormTemplate(v-model='head_result', :fieldList='fieldList.head')
-        template(slot='info', slot-scope="o")
-          transition(name='_slide-fade', mode='out-in', duration='85')
-            div(:key='o.lang')
-              h1(v-html='o.lang == "TH" ? "กรอกข้อมูลสำหรับ รับน้องก้าวใหม่" : "registration for rub nong kaow mai"')
-              h2(v-html='o.lang == "TH" ? "สามารถลงทะเบียนได้ไม่เกิน 3 คน" : "maximum team member is 3"')
+      FormTemplate(v-model='head_result' :fieldList='fieldList.head')
+        template(slot='info')
+          transition(name='_slide-fade' mode='out-in' duration='85')
+            div
+              h1(v-html='lang == "TH" ? "กรอกข้อมูลสำหรับ รับน้องก้าวใหม่" : "registration for rub nong kaow mai"')
+              h2(v-html='lang == "TH" ? "สามารถลงทะเบียนได้ไม่เกิน 3 คน" : "maximum team member is 3"')
 
     // individual dynamic form
     transition-group(name='fade', duration='300')
@@ -33,6 +33,7 @@
   import CroppaImg from '../components/Croppa.vue'
   import {get_regist_form, post_regist_form} from '../dtnl_api.js'
   export default {
+    props: ['lang'],
     components: {
       FormTemplate,
       CroppaImg
@@ -50,21 +51,17 @@
       }
     },
     async created() {
-      let fieldList = await get_regist_form()
-      for (let [i, j] of _.zip(fieldList['TH'], fieldList['EN'])) {
-        console.assert(i.name === j.name)
+      let fieldList = await get_regist_form(this.lang)
+      for (let i of fieldList) {
         let f = i.name.split('/')[0]
-        this.fieldList[f].push({
-          'TH': i,
-          'EN': j
-        })
+        this.fieldList[f].push(i)
       }
       for (let h of this.fieldList['hidden']) {
-        if (h['TH'].name == 'hidden/groupID') {
+        if (h.name == 'hidden/groupID') {
           console.log('construct group ID')
-          this.hidd_result[h['TH'].name] = this.random_str()
-        } else if (h['TH'].name != "hidden/imageURL") {
-          console.assert('wtf is ' + h['TH'].name + ' attribute')
+          this.hidd_result[h.name] = this.random_str()
+        } else if (h.name != "hidden/imageURL") {
+          console.assert('some thing is wrong on ' + h.name + ' attribute')
         }
       }
       this.add_dynm_result()
@@ -77,7 +74,7 @@
       add_dynm_result() {
         if (this.valid_user_len < 3) {
           this.dynm_result.push(this.fieldList['dynamic'].reduce((a, b) => {
-            a[b['TH'].name] = ''
+            a[b.name] = ''
             return a
           }, {}))
         }
