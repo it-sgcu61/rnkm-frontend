@@ -1,12 +1,17 @@
 <template lang='pug'>
 div
   div.wrapper
-    h1.title term and condition
-    ol
+    div.control
+      h1.title.is-inline term and condition
+      span.wrap-radio
+        label.radio(v-for='l in ["TH", "EN"]')
+          input(type="radio" v-model='lang' name="lang" :value="l")
+          |  {{l}}
+    ol(v-if='lang == "TH"')
       li.subtitle การตัดสินของกรรมการ ถือเป็นที่สิ้นสุด
       li.subtitle อาหารที่จัดเตรียม จะถูกจัดเตรียมโดยอิสลาม
       li.subtitle ข้อมูลของนิสิตจะถูกเก็บเป็นความลับ
-    ol
+    ol(v-else)
       li.subtitle judge .... . ... . .
       li.subtitle food is provide by ....
       li.subtitle this information will be secret
@@ -25,6 +30,7 @@ div
 export default {
   data() {
     return {
+      lang: "TH",
       accept: false
     }
   },
@@ -56,6 +62,11 @@ export default {
     border-top-width 50px
     &.clear
       padding 0
+
+  .wrap-radio
+    padding-top .5em
+    float right
+
   h1, li
     color white
   ol
