@@ -13,7 +13,7 @@
     div(v-else)
       // head form
       div.container
-        FormTemplate(v-model='head_result' ref='head_refs' :fieldList='fieldList.head')
+        FormTemplate(v-model='head_result' ref='head_refs' :fieldList='fieldList.head' :initialValue="head_result")
           template(slot='info')
             transition(name='_slide-fade' mode='out-in' duration='85')
               div
@@ -69,7 +69,11 @@
     data: function () {
       return {
         dynm_result: [],
-        head_result: {},
+        head_result: {
+          "head/house1":localStorage.getItem('flavoriteHouse1.name'),
+          "head/house2":localStorage.getItem('flavoriteHouse2.name'),
+          "head/house3":localStorage.getItem('flavoriteHouse3.name'),
+        },
         hidd_result: {},
         fieldList: {
           'head': [],
@@ -131,9 +135,15 @@
               if (c.$children.length != 1 || c.$children[0].$children.length != 1) {
                 reject('invalid number of children component')
               }
-              ar.push(_.assign({
-                'hidden/imageURL': await c.$children[0].$children[0].uploadImg()
-              }, a, b, c.form))
+              try {
+                ar.push(_.assign({
+                  'hidden/imageURL': await c.$children[0].$children[0].uploadImg()
+                }, a, b, c.form))
+              } catch (error) {
+                this.submissionState="none"
+                alert("no image selected.")
+                return
+              }
             }
             console.log(ar)
             console.log('[success] image have been uploaded')

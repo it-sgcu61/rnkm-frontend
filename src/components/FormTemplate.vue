@@ -3,7 +3,9 @@ div.wrap_
 
   div.wrap_head
     div.is-pulled-right.group_btn
-      button(@click='toggle_show') h
+      button(@click='toggle_show')
+        <i v-if="show" class="fa fa-minus-square-o" aria-hidden="true"></i>
+        <i v-else class="fa fa-plus-square-o" aria-hidden="true"></i>
       button(@click='delete_elem' v-if='deletable') x
 
   collapse-transition
@@ -51,6 +53,10 @@ export default {
       type: Boolean,
       require: false,
       default: false
+    },
+    initialValue:{
+      type:Object,
+      required:false
     }
   },
   watch: {
@@ -68,8 +74,9 @@ export default {
     };
   },
   created() {
+    const initialValue = this.$props.initialValue
     this.form = this.fieldList.reduce((a, b) => {
-      this.$set(a, b.name, "");
+      this.$set(a, b.name, initialValue?initialValue[b.name]:"");
       return a;
     }, {});
   },

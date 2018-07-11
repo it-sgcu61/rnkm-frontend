@@ -27,6 +27,7 @@
     "vue-material": "^1.0.0-beta-10.2",
     "vue-resource": "^1.5.1",
     "vue-router": "^3.0.1",
+    "vue-sticky": "^3.3.4",
     "vue-textarea-autosize": "^1.0.4",
     "vue-the-mask": "^0.11.1",
     "vue2-animate": "^2.0.0",

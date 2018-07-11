@@ -10,16 +10,16 @@
 </template>
 
 <script>
-
   export default {
     props: {
       top: Boolean,
       bot: Boolean,
-      url: String
+      url: String,
     },
     data(){
-      return {}
-    }
+      return {
+      }
+    },
   }
 
 </script>
