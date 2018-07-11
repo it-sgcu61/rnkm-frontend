@@ -1,22 +1,30 @@
 <template lang='pug'>
   div
-    div.wrapper
-      label Choose your language:
-      img(@click='set_lang("TH")' :src="lang=='TH'?require('@/theme/material/checked.png'):require('@/theme/material/TH-LANG.png')" alt='TH language' :style='`height:40px; width:80px;background-size: contain;background-image:${lang=="TH"?`url(${require("@/theme/material/TH-LANG.png")})`:"none"}; margin-left:5px`')
-      img(@click='set_lang("EN")' :src="lang=='EN'?require('@/theme/material/checked.png'):require('@/theme/material/EN-LANG.png')" alt='EN language' :style='`height:40px; width:80px;background-size: contain;background-image:${lang=="EN"?`url(${require("@/theme/material/EN-LANG.png")})`:"none"}; margin-left:5px`')
-      div.warning.has-text-centered(style="margin-top:10px")
-        span ** ระบบภาษาอังกฤษ สำหรับนิสิตต่างชาติเท่านั้น **
-      h1.title Term and Condition
-      ol
-        li.subtitle การตัดสินของกรรมการ ถือเป็นที่สิ้นสุด
-        li.subtitle อาหารที่จัดเตรียม จะถูกจัดเตรียมโดยอิสลาม
-        li.subtitle ข้อมูลของนิสิตจะถูกเก็บเป็นความลับ
-      ol
-        li.subtitle judge .... . ... . .
-        li.subtitle food is provide by ....
-        li.subtitle this information will be secret
-      button.button.accept(@click='acceptedCondition' :class="buttonClass")
-        strong {{buttonVal}}
+    div#wrapper
+
+      div#head
+        div.is-block
+          h1.title.is-inline Term and Condition
+          div.flag-grp
+            div.flag.th(@click='set_lang("TH")')
+              img.chk(v-show='lang == "TH"' src="../theme/material/checked.png" alt='TH language')
+            div.flag.en(@click='set_lang("EN")')
+              img.chk(v-show='lang == "EN"' src="../theme/material/checked.png" alt='EN language')
+        span.warning.is-block ** ระบบภาษาอังกฤษ สำหรับนิสิตต่างชาติเท่านั้น **
+
+      div#body
+        ol(v-show='lang == "TH"')
+          li.subtitle การตัดสินของกรรมการ ถือเป็นที่สิ้นสุด
+          li.subtitle อาหารที่จัดเตรียม จะถูกจัดเตรียมโดยอิสลาม
+          li.subtitle ข้อมูลของนิสิตจะถูกเก็บเป็นความลับ
+        ol(v-show='lang == "EN"')
+          li.subtitle judge .... . ... . .
+          li.subtitle food is provide by ....
+          li.subtitle this information will be secret
+
+      div#foot
+        button.button.accept.is-warning(@click='acceptedCondition')
+          strong accept
 
 </template>
 
@@ -24,7 +32,7 @@
 export default {
   data() {
     return {
-      lang: "",
+      lang: "TH",
       buttonClass:"is-warning",
       buttonVal:"please choose your language.",
     }
@@ -32,7 +40,7 @@ export default {
   methods: {
     set_lang(lang){
       this.lang=lang
-      this.buttonClass="is-success"
+      // this.buttonClass="is-success"
       this.buttonVal="accept"
     },
     acceptedCondition(){
@@ -53,7 +61,7 @@ export default {
   $green  = rgb( 72, 211, 72)
   $red    = rgb(211,  72, 72)
 
-  .wrapper
+  #wrapper
     overflow hidden
     max-width 500px
     margin 2em auto
@@ -64,6 +72,36 @@ export default {
     border-top-width 50px
     &.clear
       padding 0
+
+  #head
+    text-align center
+    margin-top 10px
+
+    .title
+      font-size: calc(1.3rem + 50%);
+    .flag-grp
+      display inline-block
+      margin 5px
+      .flag
+        height 30px
+        width  55px
+        margin 0 0 0 4px
+        background-size 100% 100%
+        background-repeat no-repeat;
+        border-radius 5px
+        text-align center
+        display inline-block
+        &.th
+          background-image: url("../theme/material/TH-LANG.png")
+        &.en
+          background-image: url("../theme/material/EN-LANG.png")
+
+        img.chk
+          height 30px
+          width  30px
+          margin 0
+          padding 0
+
 
   .wrap-radio
     padding-top .5em
