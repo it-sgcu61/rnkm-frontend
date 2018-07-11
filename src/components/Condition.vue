@@ -1,23 +1,30 @@
 <template lang='pug'>
   div
-    div.wrapper
-      // <p align="middle"> Choose your language:
-      img(@click='set_lang("TH")' :src="lang=='TH'?require('@/theme/material/checked.png'):require('@/theme/material/TH-LANG.png')" alt='TH language' :style='`height:40px; width:80px;background-size: contain;background-image:${lang=="TH"?`url(${require("@/theme/material/TH-LANG.png")})`:"none"}; margin-left:5px`')
-      img(@click='set_lang("EN")' :src="lang=='EN'?require('@/theme/material/checked.png'):require('@/theme/material/EN-LANG.png')" alt='EN language' :style='`height:40px; width:80px;background-size: contain;background-image:${lang=="EN"?`url(${require("@/theme/material/EN-LANG.png")})`:"none"}; margin-left:5px`')
-      // </p>
-      div.warning.has-text-centered(style="margin-top:10px")
-        span ** ระบบภาษาอังกฤษ สำหรับนิสิตต่างชาติเท่านั้น **
-      h1.title Term and Condition | ข้อตกลงและเงื่อนไข
-      ol
-        li.subtitle ระบบจะทำการ "สุ่ม" บ้านที่น้องๆ เลือกมา และลำดับในการเลือกจะมีผลต่อการสุ่ม
-        li.subtitle อาหารในกิจกรรมทั้งหมดจะเป็นฮาลาล
-        li.subtitle ข้อมูลของน้องๆ ทุกคนที่เข้าร่วมกิจกรรมจะถูกเก็บเป็นความลับ
-      ol
-        li.subtitle The system will " randomly " select  Baan Rub Nong of your chioce for you and the orders of your choices will affect the random selection of the system.
-        li.subtitle All the meals in this activity will be Halal Food.
-        li.subtitle All your information will be kept confidential.
-      button.button.accept(@click='acceptedCondition' :class="buttonClass")
-        strong {{buttonVal}}
+    div#wrapper
+
+      div#head
+        div.is-block
+          h1.title.is-inline Term and Condition
+          div.flag-grp
+            div.flag.th(@click='set_lang("TH")')
+              img.chk(v-show='lang == "TH"' src="../theme/material/checked.png" alt='TH language')
+            div.flag.en(@click='set_lang("EN")')
+              img.chk(v-show='lang == "EN"' src="../theme/material/checked.png" alt='EN language')
+        span.warning.is-block ** ระบบภาษาอังกฤษ สำหรับนิสิตต่างชาติเท่านั้น **
+
+      div#body
+        ol(v-show='lang == "TH"')
+          li.subtitle การตัดสินของกรรมการ ถือเป็นที่สิ้นสุด
+          li.subtitle อาหารที่จัดเตรียม จะถูกจัดเตรียมโดยอิสลาม
+          li.subtitle ข้อมูลของนิสิตจะถูกเก็บเป็นความลับ
+        ol(v-show='lang == "EN"')
+          li.subtitle judge .... . ... . .
+          li.subtitle food is provide by ....
+          li.subtitle this information will be secret
+
+      div#foot
+        button.button.accept.is-warning(@click='acceptedCondition')
+          strong accept
 
 </template>
 
@@ -27,7 +34,7 @@ export default {
     return {
       lang: "TH",
       buttonClass:"is-warning",
-      buttonVal:"choose your language first.",
+      buttonVal:"please choose your language.",
     }
   },
   methods: {
@@ -39,7 +46,7 @@ export default {
     acceptedCondition(){
       if(this.lang == ""){
         this.buttonClass="is-warning"
-        this.buttonVal="choose your language first."
+        this.buttonVal="please choose your language."
       }else{
         this.$emit("accept-condition",this.lang)
       }
