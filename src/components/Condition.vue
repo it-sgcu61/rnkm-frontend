@@ -25,7 +25,7 @@
 export default {
   data() {
     return {
-      lang: "",
+      lang: "TH",
       buttonClass:"is-warning",
       buttonVal:"choose your language first.",
     }
@@ -33,7 +33,7 @@ export default {
   methods: {
     set_lang(lang){
       this.lang=lang
-      this.buttonClass="is-success"
+      // this.buttonClass="is-success"
       this.buttonVal="accept"
     },
     acceptedCondition(){
@@ -54,7 +54,7 @@ export default {
   $green  = rgb( 72, 211, 72)
   $red    = rgb(211,  72, 72)
 
-  .wrapper
+  #wrapper
     overflow hidden
     max-width 500px
     margin 2em auto
@@ -65,6 +65,36 @@ export default {
     border-top-width 50px
     &.clear
       padding 0
+
+  #head
+    text-align center
+    margin-top 10px
+
+    .title
+      font-size: calc(1.3rem + 50%);
+    .flag-grp
+      display inline-block
+      margin 5px
+      .flag
+        height 30px
+        width  55px
+        margin 0 0 0 4px
+        background-size 100% 100%
+        background-repeat no-repeat;
+        border-radius 5px
+        text-align center
+        display inline-block
+        &.th
+          background-image: url("../theme/material/TH-LANG.png")
+        &.en
+          background-image: url("../theme/material/EN-LANG.png")
+
+        img.chk
+          height 30px
+          width  30px
+          margin 0
+          padding 0
+
 
   .wrap-radio
     padding-top .5em
