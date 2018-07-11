@@ -1,10 +1,11 @@
 <template>
-  <div id=''>
+  <div>
     <croppa ref='croppa' v-model='userimg' :width='225' :height='300' :quality='2' :prevent-white-space='true' :placeholder='desc' placeholderColor='#333'
       placeholder-color="#fff" :placeholder-font-size='13' :show-remove-button='true' remove-button-color="#be5877" canvasColor='transparent'
       :show-loading='true' :loading-size='50' :zoom-speed="4" :reverse-scroll-to-zoom='true' initial-size='cover' accept=".jpg,.jpeg,.png"
     >
     </croppa>
+    <span class='error is-block' v-if='first_check && !$refs.croppa.imageSet'>please select image</span>
     <div v-if='tools'>
       <hr/>ch
       <button type='button' @click='userimg.zoomIn()'>+</button>
@@ -39,7 +40,9 @@
     },
     data() {
       return {
-        userimg: null
+        userimg: null,
+        userurl: '',
+        first_check: false
       }
     },
     methods: {
@@ -61,7 +64,7 @@
       uploadImg() {
         let upload_p = new Promise((resolve, reject) => {
           if (!this.userimg.hasImage()) {
-            reject('no image select')
+            reject('[fail] no image select')
           }
           this.userimg.generateBlob(blob => {
             var fbref = firebase.storage().ref(`image/${this.generate_random_string()}.jpeg`);
@@ -69,15 +72,16 @@
             var self = this;
             tasku.on('state_changed',
               function progress(snapshot) {
-                console.log(`upload img : ${snapshot.bytesTransferred / snapshot.totalBytes * 100}%`)
+                console.log(`[process] upload img : ${snapshot.bytesTransferred / snapshot.totalBytes * 100}%`)
               },
               function error(err) {
-                reject(`upload img err : ${err.message}`);
+                reject(`[fail] upload img err : ${err.message}`);
               },
               function complete() {
                 fbref.getDownloadURL().then(url => {
-                  console.log(`upload img complete : ${url}`);
+                  console.log(`[success] upload img complete : ${url}`);
                   self.$emit('input', url);
+                  this.userurl = url
                   resolve(url);
                 });
               }
@@ -87,6 +91,14 @@
         return Promise.race([upload_p, new Promise((_, reject) => {
           setTimeout(() => reject('upload img : timed out in 10 sec'), 10000)
         })])
+      },
+      async getURL(){
+        this.first_check = true
+        return this.userurl ? this.userurl : await this.uploadImg()
+      },
+      async hasImage(){
+        this.first_check = true
+        return await this.$refs.croppa.hasImage()
       }
     }
   }
@@ -122,6 +134,14 @@
     transition: all 1000ms ease;
     transition-duration: 1000ms;
     background-image: none;
+  }
+
+  .error {
+    margin: 0 0 20px 0;
+    padding: 0 0 15px 10px;
+    color: yellow;
+    font-size: 13px;
+    line-height: 20px;
   }
 
 </style>

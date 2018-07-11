@@ -33,6 +33,7 @@ div
 <style lang='stylus' scoped>
   .section
     background-color #020202
+    padding 2em 1em
   .big-logo
     position: relative;
     padding: 10px;

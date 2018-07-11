@@ -11,6 +11,47 @@ import './css/animate.css'
 import './css/k_transition.css'
 import './css/custom_fontface.css'
 import 'font-awesome/css/font-awesome.css'
+import '@fortawesome/fontawesome'
+
+// import FontAwesome from '@fortawesome/fontawesome'
+// import { library } from '@fortawesome/fontawesome-svg-core'
+import { FontAwesomeIcon } from '@fortawesome/vue-fontawesome'
+
+// import { faSquare } from '@fortawesome/free-regular-svg-icons'
+// import { faCoffee, faMinus, faTimes } from '@fortawesome/free-solid-svg-icons'
+// import { faTwitter } from '@fortawesome/free-brands-svg-icons'
+
+// FontAwesome.library.add(
+//   faCoffee,
+//   faMinus,
+//   faTimes
+// )
+// library.add(
+//   faCoffee,
+//   faMinus,
+//   faTimes
+// )
+
+// import { faCoffee, faChild, faCircle, faArchive } from '@fortawesome/free-solid-svg-icons'
+// import { FontAwesomeIcon, FontAwesomeLayers, FontAwesomeLayersText } from '@fortawesome/vue-fontawesome'
+
+// library.add(
+//   faCoffee,
+//   faChild,
+//   faCircle,
+//   faArchive,
+//   faComment,
+//   faTwitter
+// )
+
+Vue.component('font-awesome-icon', FontAwesomeIcon)
+// Vue.component('font-awesome-layers', FontAwesomeLayers)
+// Vue.component('font-awesome-layers-text', FontAwesomeLayersText)
+
+// library.add(faCoffee)
+
+// Vue.component('font-awesome-icon', FontAwesomeIcon)
+Vue.component('fa', FontAwesomeIcon)
 
 import Transitions from 'vue2-transitions'
 Vue.use(Transitions)
