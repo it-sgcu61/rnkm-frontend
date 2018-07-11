@@ -27,8 +27,6 @@ div.wrap_
           div.error {{ errors.has(f.name) ? errors.first(f.name) : '' }}
           // div.error {{f}}
         // | {{form}}
-  div.container
-    button.burron(@click='check_valid_all') check
 </template>
 
 <script>
@@ -84,18 +82,12 @@ export default {
     toggle_show() {
       this.show = !this.show;
     },
-    check_valid_all() {
-      this.$validator.validateAll().then(result => {
-        if (result) {
-          // do axois or whatever on validate true
-          console.log("All is well");
-          return;
-        }
-        if (!result) {
-          console.log("Oops!");
-          console.log(result)
-        }
-      });
+    async check_valid_all() {
+       if(await this.$validator.validateAll()){
+         return true;
+       }else{
+         return false;
+       }
     }
   }
 };

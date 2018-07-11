@@ -1,28 +1,22 @@
 <template lang='pug'>
-div
-  div.wrapper
-    div.control
-      h1.title.is-inline term and condition
-      span.wrap-radio
-        label.radio(v-for='l in ["TH", "EN"]')
-          input(type="radio" v-model='lang' name="lang" :value="l")
-          |  {{l}}
-    ol(v-if='lang == "TH"')
-      li.subtitle การตัดสินของกรรมการ ถือเป็นที่สิ้นสุด
-      li.subtitle อาหารที่จัดเตรียม จะถูกจัดเตรียมโดยอิสลาม
-      li.subtitle ข้อมูลของนิสิตจะถูกเก็บเป็นความลับ
-    ol(v-else)
-      li.subtitle judge .... . ... . .
-      li.subtitle food is provide by ....
-      li.subtitle this information will be secret
-    button.button.accept(@click='accept = !accept' :class='accept_class')
-      strong {{accept_text}}
-  div(v-if='accept')
-    div.wrapper.clear.columns.is-mobile
-      div.column.has-text-centered.lang(@click='$emit("accept", "TH")') TH
-      div.column.has-text-centered.lang(@click='$emit("accept", "EN")') EN
-    div.warning.has-text-centered
-      span **ฟอร์มภาษาอังกฤษ สำหรับนิสิตต่างชาติเท่านั้น
+  div
+    div.wrapper
+      label Choose your language:
+      img(@click='set_lang("TH")' :src="lang=='TH'?require('@/theme/material/checked.png'):require('@/theme/material/TH-LANG.png')" alt='TH language' :style='`height:40px; width:80px;background-size: contain;background-image:${lang=="TH"?`url(${require("@/theme/material/TH-LANG.png")})`:"none"}; margin-left:5px`')
+      img(@click='set_lang("EN")' :src="lang=='EN'?require('@/theme/material/checked.png'):require('@/theme/material/EN-LANG.png')" alt='EN language' :style='`height:40px; width:80px;background-size: contain;background-image:${lang=="EN"?`url(${require("@/theme/material/EN-LANG.png")})`:"none"}; margin-left:5px`')
+      div.warning.has-text-centered(style="margin-top:10px")
+        span ** ระบบภาษาอังกฤษ สำหรับนิสิตต่างชาติเท่านั้น **
+      h1.title Term and Condition
+      ol
+        li.subtitle การตัดสินของกรรมการ ถือเป็นที่สิ้นสุด
+        li.subtitle อาหารที่จัดเตรียม จะถูกจัดเตรียมโดยอิสลาม
+        li.subtitle ข้อมูลของนิสิตจะถูกเก็บเป็นความลับ
+      ol
+        li.subtitle judge .... . ... . .
+        li.subtitle food is provide by ....
+        li.subtitle this information will be secret
+      button.button.accept(@click='acceptedCondition' :class="buttonClass")
+        strong {{buttonVal}}
 
 </template>
 
@@ -30,16 +24,24 @@ div
 export default {
   data() {
     return {
-      lang: "TH",
-      accept: false
+      lang: "",
+      buttonClass:"is-warning",
+      buttonVal:"please choose your language.",
     }
   },
-  computed: {
-    accept_text() {
-      return this.accept ? "cancel" : "accept"
+  methods: {
+    set_lang(lang){
+      this.lang=lang
+      this.buttonClass="is-success"
+      this.buttonVal="accept"
     },
-    accept_class() {
-      return {'is-warning': !this.accept, 'is-success': this.accept}
+    acceptedCondition(){
+      if(this.lang == ""){
+        this.buttonClass="is-warning"
+        this.buttonVal="please choose your language."
+      }else{
+        this.$emit("accept-condition",this.lang)
+      }
     }
   }
 }

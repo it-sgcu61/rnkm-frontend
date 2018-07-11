@@ -6,24 +6,16 @@ async function get_regist_form(lang) {
   let field =  lang == "TH" ?
     await Vue.http.get(th_form).then(res => res.body, err => err) :
     await Vue.http.get(en_form).then(res => res.body, err => err)
-  console.log(lang)
-  console.log(field)
-  return field.result.fieldList
+  return field.result
 }
 async function post_regist_form(ar) {
   console.assert(ar instanceof Array)
-  return new Promise((resolve, reject) => {
-    let post_url = 'https://datanaliez.com/api/v1/form/submit/c71b2019e1b82f4bdfdf2edff8e28efc3f3c2df14284e7c3ea2e3aea7d5d87ac'
-    for (let obj in ar) {
-      console.log('>>> ')
-      console.log(obj)
-      Vue.http.post(post_url, obj).then(res => {console.log(res)}, err => {
-        console.log('error');
-        console.log(err)
-      })
-    }
-    console.log('resolve')
-    resolve(ar)
-  })
+  let post_url = 'https://datanaliez.com/api/v1/form/submit/c71b2019e1b82f4bdfdf2edff8e28efc3f3c2df14284e7c3ea2e3aea7d5d87ac'
+  ar.forEach(obj => {
+    Vue.http.post(post_url, obj).then(null, err => {
+      console.log('error');
+      console.log(err)
+    })
+  });
 }
 export {get_regist_form, post_regist_form};

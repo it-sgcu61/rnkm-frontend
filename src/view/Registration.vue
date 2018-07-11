@@ -3,9 +3,8 @@ div
   absolute-background(top)
     img.big-logo(src='@/theme/material/Registeration.png')
   div.section
-    transition(name='fadeIn' mode='out-in' duration='1000')
-      condition(v-if='!lang' @accept='choose_lang')
-      rnkm-form(:lang='lang' v-else)
+    condition(v-if='!accept' @accept-condition='acceptedCondition')
+    rnkm-form(v-else :lang="lang")
 
   absolute-background(bot)
 </template>
@@ -23,8 +22,9 @@ div
       }
     },
     methods: {
-      choose_lang(lang) {
-        this.lang = lang
+      acceptedCondition(lang) {
+        this.lang=lang
+        this.accept=true
       }
     }
   }
