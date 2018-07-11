@@ -1,6 +1,10 @@
 <template lang='pug'>
 div
-  absolute-background(top)
+  div(v-sticky="stickyConfig")
+    nav(style="position:absolute;")
+      div
+        house-pinterest(@click="setFavoriteHouse", :houses="houses")
+  absolute-background(top, showCart)
     div.logo-wrap
       img.big-logo(:src='require(`@/theme/house/${data.nameURL}.png`)' :alt='data.nameTH')
   div.section.has-text-centered.body-wrap
@@ -30,13 +34,26 @@ div
 
 <script>
   import AbsoluteBackground from '@/components/AbsoluteBackground.vue'
+  import HousePinterest from '@/components/PinterestOnHouse.vue'
+  import VueSticky from 'vue-sticky'
   export default {
-    components: {AbsoluteBackground},
+    components: {AbsoluteBackground, HousePinterest},
     data() {
       return {
         name: this.$route.params.name,
-        data: {}
+        data: {},
+        localStorage:localStorage,
+        stickyConfig: {
+          zIndex: 80,
+          stickyTop: 50,
+          postition:"absolute",
+          disabled: false
+        },
+        houses: [localStorage.getItem('flavoriteHouse1') || "unknown", localStorage.getItem('flavoriteHouse2') || "unknown", localStorage.getItem('flavoriteHouse3') || "unknown"]
       }
+    },
+    directives: {
+      'sticky': VueSticky,
     },
     created(){
       console.log('house created')
@@ -50,6 +67,13 @@ div
     },
     mounted(){
       window.scrollTo(0, 0);
+    },
+    methods:{
+      setFavoriteHouse(index){
+        localStorage.setItem(`flavoriteHouse${index}`, this.name)
+        localStorage.setItem(`flavoriteHouse${index}.name`, `${this.data.nameTH} - ${this.data.nameEN}`)
+        this.$set(this.houses, index-1, this.name)
+      }
     }
   }
 </script>

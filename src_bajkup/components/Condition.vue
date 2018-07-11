@@ -1,0 +1,137 @@
+<template lang='pug'>
+  div
+    div#wrapper
+
+      div#head
+        div.is-block
+          h1.title.is-inline Term and Condition
+          div.flag-grp
+            div.flag.th(@click='set_lang("TH")')
+              img.chk(v-show='lang == "TH"' src="../theme/material/checked.png" alt='TH language')
+            div.flag.en(@click='set_lang("EN")')
+              img.chk(v-show='lang == "EN"' src="../theme/material/checked.png" alt='EN language')
+        span.warning.is-block ** ระบบภาษาอังกฤษ สำหรับนิสิตต่างชาติเท่านั้น **
+
+      div#body
+        ol(v-show='lang == "TH"')
+          li.subtitle การตัดสินของกรรมการ ถือเป็นที่สิ้นสุด
+          li.subtitle อาหารที่จัดเตรียม จะถูกจัดเตรียมโดยอิสลาม
+          li.subtitle ข้อมูลของนิสิตจะถูกเก็บเป็นความลับ
+        ol(v-show='lang == "EN"')
+          li.subtitle judge .... . ... . .
+          li.subtitle food is provide by ....
+          li.subtitle this information will be secret
+
+      div#foot
+        button.button.accept.is-warning(@click='acceptedCondition')
+          strong accept
+
+</template>
+
+<script>
+export default {
+  data() {
+    return {
+      lang: "TH",
+      buttonClass:"is-warning",
+      buttonVal:"please choose your language.",
+    }
+  },
+  methods: {
+    set_lang(lang){
+      this.lang=lang
+      // this.buttonClass="is-success"
+      this.buttonVal="accept"
+    },
+    acceptedCondition(){
+      if(this.lang == ""){
+        this.buttonClass="is-warning"
+        this.buttonVal="please choose your language."
+      }else{
+        this.$emit("accept-condition",this.lang)
+      }
+    }
+  }
+}
+</script>
+
+<style lang='stylus' scoped>
+
+  $yellow = rgb(253, 211, 72)
+  $green  = rgb( 72, 211, 72)
+  $red    = rgb(211,  72, 72)
+
+  #wrapper
+    overflow hidden
+    max-width 500px
+    margin 2em auto
+    padding 1em 2em
+    background-color #222
+    border-radius 25px 0 25px 0
+    border-color #f00
+    border-top-width 50px
+    &.clear
+      padding 0
+
+  #head
+    text-align center
+    margin-top 10px
+
+    .title
+      font-size: calc(1.3rem + 50%);
+    .flag-grp
+      display inline-block
+      margin 5px
+      .flag
+        height 30px
+        width  55px
+        margin 0 0 0 4px
+        background-size 100% 100%
+        background-repeat no-repeat;
+        border-radius 5px
+        text-align center
+        display inline-block
+        &.th
+          background-image: url("../theme/material/TH-LANG.png")
+        &.en
+          background-image: url("../theme/material/EN-LANG.png")
+
+        img.chk
+          height 30px
+          width  30px
+          margin 0
+          padding 0
+
+
+  .wrap-radio
+    padding-top .5em
+    float right
+
+  h1, li
+    color white
+  ol
+    margin 3em 2em
+  li
+    font-size 15px
+    margin-bottom: 1rem
+
+  .button
+    &.accept
+      width 100%
+      border-radius 15px 0 15px 0
+      &.is-warning:hover
+        background-color $yellow
+
+  .lang
+    padding 20px
+    font-size 20px
+    font-weight bold
+
+  .is-success,
+  .lang:hover
+    cursor: pointer
+    background-color $green
+
+  .warning
+    color: $red
+</style>

@@ -3,14 +3,14 @@ div.wrap_
 
   div.wrap_head
     div.is-pulled-right.group_btn
-      button(@click='toggle_show') h
-      button(@click='delete_elem' v-if='deletable') x
+      button(@click='toggle_show')
+        i.fa.fa-minus.blue
+      button(@click='delete_elem' v-if='deletable')
+        i.fa.fa-times.blue
 
   collapse-transition
     div.wrap_body(ref='inner' class="" v-show='show')
-
       slot(name='info' v-bind='$data')
-      // span {{errors}}
       form
         slot(v-bind='$data')
 
@@ -25,8 +25,7 @@ div.wrap_
             option(v-for='o in f.option' :value='o.value' style='color: #353535') {{o.label}}
 
           div.error {{ errors.has(f.name) ? errors.first(f.name) : '' }}
-          // div.error {{f}}
-        // | {{form}}
+
 </template>
 
 <script>
@@ -51,6 +50,10 @@ export default {
       type: Boolean,
       require: false,
       default: false
+    },
+    initialValue:{
+      type:Object,
+      required:false
     }
   },
   watch: {
@@ -68,8 +71,9 @@ export default {
     };
   },
   created() {
+    const initialValue = this.$props.initialValue
     this.form = this.fieldList.reduce((a, b) => {
-      this.$set(a, b.name, "");
+      this.$set(a, b.name, initialValue?initialValue[b.name]:"");
       return a;
     }, {});
   },
@@ -82,22 +86,31 @@ export default {
     toggle_show() {
       this.show = !this.show;
     },
-    async check_valid_all() {
-       if(await this.$validator.validateAll()){
-         return true;
-       }else{
-         return false;
-       }
+    async validateAll() {
+       return await this.$validator.validateAll()
     }
   }
 };
 </script>
 
 <style lang='stylus' scoped>
+
+$edge = #eeef
+
+.dark
+  color: #111
+.blue
+  color: blue
+
+.fa {
+  transform scale(1.5)
+  margin 5px 10px
+  margin-top -2px;
+}
 .wrap_ {
   overflow: hidden;
   background-color: #111a;
-  border: 0 solid white;
+  border: 0 solid $edge;
   border-width: 4px 0 0 4px;
   border-top-left-radius: 30px;
   border-bottom-right-radius: 30px;
@@ -107,7 +120,7 @@ export default {
     background: transparent;
 
     .group_btn {
-      background-color: white;
+      background-color: $edge;
       border-radius: 0 0 5px 5px;
       margin-top: -1px;
 
