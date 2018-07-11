@@ -11,7 +11,7 @@ div#body-wrapper
     div.column.is-half(v-for='o in itmlist')
       template(v-if='"img" in o')
         img(:src='o.img')
-      tempalte(v-else)
+      template(v-else)
         h1 {{o.h}}
         p  {{o.p}}
   div.section.has-text-centered

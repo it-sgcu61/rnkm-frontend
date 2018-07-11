@@ -8,7 +8,7 @@
     div(v-else)
       // head form
       div.container
-        FormTemplate(v-model='head_result' ref='head_refs' :fieldList='fieldList.head')
+        FormTemplate(v-model='head_result' ref='head_refs' :fieldList='fieldList.head' :initialValue="head_result")
           template(slot='info')
             transition(name='_slide-fade' mode='out-in' duration='85')
               div
@@ -54,7 +54,11 @@
     data: function () {
       return {
         dynm_result: [],
-        head_result: {},
+        head_result: {
+          "head/house1":localStorage.getItem('flavoriteHouse1.name'),
+          "head/house2":localStorage.getItem('flavoriteHouse2.name'),
+          "head/house3":localStorage.getItem('flavoriteHouse3.name'),
+        },
         hidd_result: {},
         fieldList: {
           'head': [],
