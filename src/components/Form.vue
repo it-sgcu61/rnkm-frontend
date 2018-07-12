@@ -167,7 +167,7 @@
 <style lang='stylus' scoped>
   .bg,
   .section
-    background-color #020202
+    background-color transparentify
     padding 2em 1em
   h1
     font-weight: 300;

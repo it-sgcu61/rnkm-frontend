@@ -77,7 +77,7 @@ export default {
     max-width 800px
     margin 0 auto auto
   .section
-    background-color #020202
+    background-color transparentify
     font-family Superspace
     padding 3rem 1rem
   a

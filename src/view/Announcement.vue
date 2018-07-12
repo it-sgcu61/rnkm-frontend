@@ -68,7 +68,7 @@ div
   .scale-x2
     transform: scale(2)
   .section
-    background-color: #020202
+    background-color: transparentify
 
   h1
     font-size: 3em

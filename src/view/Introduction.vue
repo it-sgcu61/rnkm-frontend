@@ -31,7 +31,7 @@ h2
 .section
   margin: 0 auto;
   font-family: Superspace;
-  background-color: #020202;
+  background-color: transparentify;
 
   &.info
     p

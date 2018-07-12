@@ -140,9 +140,9 @@ export default {
   h1, li
     color white
   ol
-    margin 3em 2em
+    margin 3em 0em
   li
-    font-size 15px
+    font-size 13px
     margin-bottom: 1rem
 
   .button

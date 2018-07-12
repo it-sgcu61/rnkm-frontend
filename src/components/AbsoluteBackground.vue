@@ -15,13 +15,8 @@
       top: Boolean,
       bot: Boolean,
       url: String,
-    },
-    data(){
-      return {
-      }
-    },
+    }
   }
-
 </script>
 
 <style lang='stylus' scoped>
@@ -30,7 +25,7 @@
     width: 100%;
     background-repeat: no-repeat;
     background-size: cover;
-    background-color: #020202;
+    background-color: transparentify;
     text-align: center;
     background-image: url('../theme/wallpaper/background.jpg');
     &.top::before
@@ -47,13 +42,12 @@
       background-image: linear-gradient(to bottom, #ac422544, #002f4b00);
       opacity: 0.6;
       z-index: 0;
-    &.top
       z-index: -10;
+    &.top
       height 95vh;
       background-position: bottom right;
       background-image: url('../theme/wallpaper/top_violet_1280x950.png')
     &.bot
-      z-index: -10;
       padding-bottom 5vmin
       background-position: top right;
       background-image: url('../theme/wallpaper/bottom_violet_1280x950.png');

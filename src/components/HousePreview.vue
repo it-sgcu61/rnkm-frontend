@@ -44,7 +44,7 @@ export default {
   .bold
     font-weight bold
   .section
-    background-color: #020202;
+    background-color: transparentify;
     padding: 7rem 1rem;
     @media screen and (min-width: 1000px)
       padding: 11rem 3rem;
@@ -109,7 +109,7 @@ export default {
     background-color white
     margin 2px
     border-radius 7px
-    filter: brightness(50%);
+    filter: brightness(70%);
     @media screen and (min-width: 600px)
       width: 22vw;
       height: 22vw;
@@ -122,7 +122,7 @@ export default {
       object-fit: fill
       position: relative;
       transition-duration: .2s;
-      opacity: .8;
+      opacity: .85;
 
     &:hover img
       content: "";
