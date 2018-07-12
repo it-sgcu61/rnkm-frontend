@@ -81,18 +81,15 @@ div
       },
       setFavoriteHouse(idx){
         console.log('click')
-        let ar = this.get_fav()
-        let it = _.map(ar, "url").indexOf(this.name)
-        if (it != -1){ // remove exit
-          ar = _.concat(ar.slice(0, it), ar.slice(it + 1))
+        let favHouseList = this.get_fav()
+        let indexOfcurrentBaan = _.map(favHouseList, "url").indexOf(this.name)
+        if (indexOfcurrentBaan != -1){ // remove exist
+          const oldHouseAtoldIndex = favHouseList[idx-1]
+          favHouseList[indexOfcurrentBaan] = oldHouseAtoldIndex
         }
-        let {nameTH, nameEN,} = this.data // insert to correct position
-        ar = _.concat(
-          ar.slice(0, idx-1),
-          [{"url": this.name, "nme": `${nameTH} - ${nameEN}`}],
-          ar.slice(idx-1, 3)
-        ).slice(0, 3)
-        this.set_fav(ar)
+        let {nameTH, nameEN} = this.data
+        favHouseList[idx-1] = {"url": this.name, "nme": `${nameTH} - ${nameEN}`}
+        this.set_fav(favHouseList)
       }
     }
   }

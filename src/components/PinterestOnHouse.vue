@@ -8,7 +8,7 @@
         div.text
           h1.is-size-1 {{i}}
     div.btn-wrap
-      img.btn(@click='$router.push("/registration")' src='../theme/material/Next.png' v-if="houses.length == 3")
+      img.btn(@click='$router.push("/registration")' src='../theme/material/Next.png' v-if="houses.filter((item)=>(item!=null)).length == 3")
 </template>
 
 <style lang="stylus" scoped>
