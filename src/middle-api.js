@@ -36,7 +36,8 @@ const nameTHtoURLdict = {
   "บ้านหวัง": "wang",
   "บ้านว้อนท์": "wanted",
   "บ้านเวิร์ค": "work",
-  "บ้านยิ้ม": "yim"
+  "บ้านยิ้ม": "yim",
+  "not found": "notFound",
 }
 // /api/registration/check/:id
 // /api/registration/add/:id
