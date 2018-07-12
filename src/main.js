@@ -75,8 +75,8 @@ let config = {
   storageBucket: "rnkm-cu102.appspot.com",
   messagingSenderId: "947832976689"
 };
-firebase.initializeApp(config);
-
+var firebaseDB = firebase.initializeApp(config);
+export {firebaseDB}
 new Vue({
   el: '#app',
   router: router,

@@ -5,6 +5,7 @@ import Instruction from '@/view/Instruction.vue'
 import Introduction from '@/view/Introduction.vue'
 import Registration from '@/view/Registration.vue'
 import Announcement from '@/view/Announcement.vue'
+import Transfer from '@/view/Transfer.vue'
 
 import Router from 'vue-router'
 Vue.use(Router)
@@ -51,6 +52,11 @@ export default new Router({
       name: 'House',
       component: House,
     },
+    {
+      path: '/transfer',
+      name: 'Transfer',
+      component: Transfer,
+    }
 
   ]
 })

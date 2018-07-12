@@ -1,6 +1,6 @@
 <template>
   <div class='_flex has-text-centered'>
-    <router-link class='__k_nav' to='/instruction'><div>Home</div></router-link>
+    <router-link class='__k_nav' to='/instruction'><div>About</div></router-link>
     <router-link class='__k_nav' to='/introduction'><div>Baan</div></router-link>
     <router-link class='__k_nav' to='/registration'><div>Register</div></router-link>
     <router-link class='__k_nav' to='/announcement'><div>Announce</div></router-link>

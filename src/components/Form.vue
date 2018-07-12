@@ -52,12 +52,13 @@
       Formstatus
     },
     data: function () {
+      let fav = _.map(JSON.parse(localStorage.getItem('fav_house')) || [], "nme")
       return {
         dynm_result: [],
         head_result: {
-          "head/house1":localStorage.getItem('flavoriteHouse1.name'),
-          "head/house2":localStorage.getItem('flavoriteHouse2.name'),
-          "head/house3":localStorage.getItem('flavoriteHouse3.name'),
+          "head/house1": fav[0] || '',
+          "head/house2": fav[1] || '',
+          "head/house3": fav[2] || '',
         },
         hidd_result: {},
         fieldList: {

@@ -64,8 +64,9 @@ div
     background-color: #020202
 
   h1
-    font-size: calc(7vmin + 2vw)
+    font-size: 3em
     font-family: ZingRust
+    margin 1.5em auto
 
   .big-logo
     position: relative;

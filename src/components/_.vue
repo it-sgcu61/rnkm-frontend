@@ -16,7 +16,7 @@ export default {
 
 <style scoped>
   div {
-    color: rgb(253, 211, 72);
+    color: rgb(215, 218, 49);
   }
 </style>
 

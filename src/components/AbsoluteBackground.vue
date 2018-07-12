@@ -3,9 +3,9 @@
     div.bg.top(v-if='top')
       rnkm-nav
       slot
-    div.bg.bot(v-if='bot' style='height: 40vh')
+    div.bg.bot(v-if='bot' style='height: 30vh; margin-top: -8vh')
       slot
-      div(style='padding-top: 30vh')
+      div(style='padding-top: 20vh')
       rnkm-nav
 </template>
 

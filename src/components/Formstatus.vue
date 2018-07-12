@@ -14,7 +14,7 @@ div
       a(href='https://fb.com/chulafreshmen/')
         img(src='@/theme/material/FB.png' style='width:40px; margin-left:20px;' align='middle')
 
-  div.container(v-else-if='coutdown')
+  div.container(v-else-if='countdown')
     vue-countdown(:time="timeLeft" @countdownend="$emit('ready')")
       template(slot-scope="props")
         h1.zingR(style='font-size:3em;') Registration will start in:
@@ -27,7 +27,7 @@ div
 import {RotateSquare5} from 'vue-loading-spinner'
 import VueCountdown from '@xkeshi/vue-countdown';
 export default {
-  props: ['timeLeft', 'formState', 'loading', 'success', 'expired'],
+  props: ['timeLeft', 'formState', 'loading', 'success', 'expired', 'countdown'],
   components: {RotateSquare5, VueCountdown},
   data() {
     return {

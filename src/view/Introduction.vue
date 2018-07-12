@@ -28,18 +28,18 @@ export default {
 
   &.info
     h2
-      font-size: calc(30px + 2vw)
+      font-size: calc(2em)
       margin-bottom .7em
     p
-      font-size: calc(22px + 1vw);
+      font-size: 1.5em;
 
     max-width: 900px;
 
     @media screen and (min-width: 600px)
-      padding: 100px 100px;
+      padding: 80px 100px;
 
     @media screen and (min-width: 1000px)
-      padding: 150px 70px;
+      padding: 130px 70px;
 
 
 

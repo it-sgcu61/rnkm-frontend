@@ -1,9 +1,9 @@
 <template lang='pug'>
 div
   div(v-sticky="stickyConfig")
-    nav(style="position:absolute;")
+    nav.abs
       div
-        house-pinterest(@click="setFavoriteHouse", :houses="houses")
+        house-pinterest(@click="setFavoriteHouse" :houses="houses")
   absolute-background(top, showCart)
     div.logo-wrap
       img.big-logo(:src='require(`@/theme/house/${data.nameURL}.png`)' :alt='data.nameTH')
@@ -36,6 +36,7 @@ div
   import AbsoluteBackground from '@/components/AbsoluteBackground.vue'
   import HousePinterest from '@/components/PinterestOnHouse.vue'
   import VueSticky from 'vue-sticky'
+  import lodash from 'lodash'
   export default {
     components: {AbsoluteBackground, HousePinterest},
     data() {
@@ -49,14 +50,13 @@ div
           postition:"absolute",
           disabled: false
         },
-        houses: [localStorage.getItem('flavoriteHouse1') || "unknown", localStorage.getItem('flavoriteHouse2') || "unknown", localStorage.getItem('flavoriteHouse3') || "unknown"]
+        houses: []
       }
     },
     directives: {
       'sticky': VueSticky,
     },
     created(){
-      console.log('house created')
       let raw_data = _.keyBy(require('@/others/house_data.json').data, "nameURL")[this.name]
       if (raw_data) {
         this.data = raw_data
@@ -64,21 +64,42 @@ div
       } else {
         this.$router.push('/house')
       }
+      this.set_fav(this.get_fav())
     },
     mounted(){
       window.scrollTo(0, 0);
     },
     methods:{
-      setFavoriteHouse(index){
-        localStorage.setItem(`flavoriteHouse${index}`, this.name)
-        localStorage.setItem(`flavoriteHouse${index}.name`, `${this.data.nameTH} - ${this.data.nameEN}`)
-        this.$set(this.houses, index-1, this.name)
+      get_fav(){
+        return JSON.parse(localStorage.getItem('fav_house')) || []
+      },
+      set_fav(ar){
+        localStorage.setItem('fav_house', JSON.stringify(ar))
+        this.houses = _.map(ar, "url")
+      },
+      setFavoriteHouse(idx){
+        console.log('click')
+        let ar = this.get_fav()
+        let it = _.map(ar, "url").indexOf(this.name)
+        if (it != -1){ // remove exit
+          ar = _.concat(ar.slice(0, it), ar.slice(it + 1))
+        }
+        let {nameTH, nameEN,} = this.data // insert to correct position
+        ar = _.concat(
+          ar.slice(0, idx-1),
+          [{"url": this.name, "nme": `${nameTH} - ${nameEN}`}],
+          ar.slice(idx-1, 3)
+        ).slice(0, 3)
+        this.set_fav(ar)
       }
     }
   }
 </script>
 
 <style lang='stylus' scoped>
+  .abs
+    position absolute
+
   .title,
   .subtitle
     color: white

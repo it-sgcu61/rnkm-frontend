@@ -2,6 +2,10 @@
 div#body-wrapper
   div.section.has-text-centered
     img(style='max-width: 80vmin' src='../theme/material/logo_1.png')
+  div.section.has-text-centered
+    h2 ก้าวออกมาจากขีดจำกัดแบบเดิมๆ แล้วมา beyond
+    h2 ในแบบที่ตัวเองเป็นพร้อมกันในงานรับน้องก้าวใหม่
+    h1.is-size-1 102 TO BE YOU TO BEYOND
   div.section
     h1 การรับน้องก้าวใหม่คืออะไร?
     p   การรับน้องก้าวใหม่ คือ กิจกรรมที่จุฬาลงกรมหาวิทยาลัย จัดขึ้นเพื่อต้อนรับ
@@ -12,7 +16,7 @@ div#body-wrapper
       template(v-if='"img" in o')
         img(:src='o.img')
       template(v-else)
-        h1 {{o.h}}
+        h2 {{o.h}}
         p  {{o.p}}
   div.section.has-text-centered
       img.next(src='../theme/material/Next.png' @click='$router.push("/house")')
@@ -61,18 +65,21 @@ export default {
   h1, h2, p, strong, .title, .subtitle
     color white
   h1
-    font-size 32px
+    font-size 2.5rem
     font-weight bold
   h2
-    font-size 29px
+    font-size 2rem
     font-weight bold
+  h3
+    font-size 1.5rem
+    font-weight bold
+
   p
-    font-size 25px
+    font-size 1.4rem
     font-weight regular
 
   .next
-    margin-top 8em
-    max-width 200px
+    max-width 180px
     cursor pointer
   img
     border-radius 15px

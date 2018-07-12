@@ -4,13 +4,13 @@
 
       div#head
         div.is-block
-          h1.title.is-inline Term and Condition
+          h1.title.is-inline {{ lang == "TH" ? "ข้อตกลงและเงื่อนไข" : "Term and Condition"}}
           div.flag-grp
             div.flag.th(@click='set_lang("TH")')
               img.chk(v-show='lang == "TH"' src="../theme/material/checked.png" alt='TH language')
             div.flag.en(@click='set_lang("EN")')
               img.chk(v-show='lang == "EN"' src="../theme/material/checked.png" alt='EN language')
-        span.warning.is-block ** ระบบภาษาอังกฤษ สำหรับนิสิตต่างชาติเท่านั้น **
+        span.warning.is-block ** For international student please select EN **
 
       div#body
         ol(v-show='lang == "TH"')
@@ -18,9 +18,9 @@
           li.subtitle อาหารที่จัดเตรียม จะถูกจัดเตรียมโดยอิสลาม
           li.subtitle ข้อมูลของนิสิตจะถูกเก็บเป็นความลับ
         ol(v-show='lang == "EN"')
-          li.subtitle judge .... . ... . .
-          li.subtitle food is provide by ....
-          li.subtitle this information will be secret
+          li.subtitle The system will " randomly " select Baan Rub Nong of your chioce for you and the orders of your choices will affect the random selection of the system.
+          li.subtitle All the meals in this activity will be Halal Food.
+          li.subtitle All your information will be kept confidential.
 
       div#foot
         button.button.accept.is-warning(@click='acceptedCondition')
@@ -65,6 +65,7 @@ export default {
     overflow hidden
     max-width 500px
     margin 2em auto
+    margin-bottom 9em
     padding 1em 2em
     background-color #222
     border-radius 25px 0 25px 0

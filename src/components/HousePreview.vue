@@ -15,6 +15,7 @@ div.section
 <script>
 export default {
   props: {
+
     shuffle: {
       default: false
   }},
@@ -47,7 +48,7 @@ export default {
       padding: 11rem 3rem;
 
   .header
-    font-size 4rem
+    font-size 3rem
     color white
     text-align center
     &.en
@@ -58,7 +59,7 @@ export default {
     white-space: pre-line
 
   h2
-    font-size calc(10px + 3.2vw)
+    font-size calc(17px + 1.2vw)
 
   ._flex
     display: flex;
@@ -67,10 +68,10 @@ export default {
     justify-content: center;
     margin calc(5vmin + 40px) auto 3vmin auto
 
-    // @media screen and (min-width: 600px)
-    //   ._flex[n-item="5"]
-    //     padding-left: 12vw;
-    //     padding-right: 12vw;
+    @media screen and (min-width: 600px)
+      &[n-item="5"]
+        padding-left: 12vw;
+        padding-right: 12vw;
 
     &._flex-center
       align-items: center
