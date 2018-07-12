@@ -9,6 +9,9 @@
       | ที่ต้องการจะถ่ายทอดความรู้สึกดีๆ และสร้างสรรค์กิจกรรมในการรับน้อง
       </p>
     house-preview
+    div.has-text-centered
+      img.spon(src='../theme/material/cunex.jpg')
+      img.spon(src='../theme/material/zero_waste.png')
     absolute-background(bot)
 </template>
 
@@ -57,4 +60,7 @@ export default {
   @media screen and (orientation: portrait)
     margin-top: calc(-120px + 37vh - 5vw);
 
+.spon
+  max-width 30vw
+  margin 0 auto
 </style>

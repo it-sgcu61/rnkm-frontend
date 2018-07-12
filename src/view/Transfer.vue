@@ -90,6 +90,21 @@ export default {
     },
     async try_login(){
       this.isProcess = true
+      // get permission token
+      let token = await login(this.form.usr, this.form.pwd)
+      let info  = await getPersonInfo(this.form.usr, token)
+      if (!info) {
+        console.log("[fail] unable to fetch data")
+        document.cookie = 'token=;username=;path=/;'
+        return
+      }
+      this.person = {
+        "token": token,
+        "house": info.house.split(' ')[0], // name TH
+        "username": this.form.usr
+      }
+      console.log('[success] login')
+
       // read firebase data
       let rf = firebaseDB.database().ref('/houses')
       this.house = (await rf.once('value')).val()
@@ -99,21 +114,7 @@ export default {
           console.log(`[update] ${nameTH} ${snapshot.val().count}/${snapshot.val().cap}`)
         })
       }
-      // get permission token
-      let token = await login(this.form.usr, this.form.pwd)
-      let info  = await getPersonInfo(this.form.usr, token)
-      if (!info) {
-        console.log("[fail] unable to fetch data")
-        document.cookie = 'token=;username=;path=/;'
-      }else{
-        this.person = {
-          "token": token,
-          "house": info.house.split(' ')[0], // name TH
-          "username": this.form.usr
-        }
-        this.isLogin = true
-        console.log('[success] login')
-      }
+      this.isLogin = true
       this.isProcess = false
     },
     stat(h) {
@@ -225,10 +226,13 @@ export default {
       background-color blue
       &[stat="full"]
         background-color $red
+        cursor not-allowed
       &[stat="curr"]
         background-color $yellow
+        cursor not-allowed
       &[stat="avail"]
         background-color $green
+        cursor pointer
 
     .layer-band
       opacity .9

@@ -107,7 +107,7 @@ $edge = #eeef
 .dark
   color: #111
 .blue
-  color: blue
+  color: #334444
 
 .fa {
   transform scale(1.5)
@@ -132,7 +132,7 @@ $edge = #eeef
       margin-top: -1px;
 
       button {
-        color: blue;
+        color: #334444;
         border: none;
         background-color: transparent;
       }

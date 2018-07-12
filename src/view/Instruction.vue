@@ -3,6 +3,8 @@ div
     absolute-background(top)
       img.big-logo(src='@/theme/material/Instruction.png')
     rnkm-info
+    img(src='../theme/material/cunex.jpg')
+    img(src='../theme/material/zero_waste.png')
     absolute-background(bot)
 </template>
 

@@ -116,6 +116,7 @@ export default {
       filter: brightness(100%)
 
     img
+      max-width 100%
       object-fit: fill
       position: relative;
       transition-duration: .2s;

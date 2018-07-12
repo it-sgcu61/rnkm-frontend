@@ -35,7 +35,7 @@ var proxy = 'https://cryptic-headland-94862.herokuapp.com/'; // for Cross Origin
 async function login(username, password) {
   let token = getCookie('token');
   let user = getCookie('username');
-  if (token && user){
+  if (token && user) {
     console.log('[success] already login')
     return token
   }
@@ -101,9 +101,9 @@ async function getPersonInfo(user, token) {
       username: user,
       token: token
     }).then((res) => {
-      console.log('[success] get personal data')
-      res = res.data
-      return res.data
+    console.log('[success] get personal data')
+    res = res.data
+    return res.data
     // res1 = {
     //   "success": false,
     //   "message": "wrong credentials"
@@ -143,3 +143,40 @@ export {
   confirmHouse,
   movePerson,
 }
+
+
+
+
+// HIDDEN
+function register() {
+  axios.post(".../register", {
+    key: '$2b$10$kuaHw4bVqFboBi4.OE7u.epYivqqR154fwr5OfWmn6Q8kV/oTOS',
+    lang: 'EN',
+    formData: {
+      "head/house1": "บ้านคุณหนู - Khunnoo",
+      "head/house2": "บ้านโคะ - KOH",
+      "head/house3": "บ้านดอก - Dork",
+      "dynamic/nameprefix": "นาย - Mr.",
+      "dynamic/fullname": "หกฟ ๆไพพๆ",
+      "dynamic/nickname": "ๆำๆ ำๆไำๆไ",
+      "dynamic/faculty": "วิทยาศาสตร์ - Faculty of Science",
+      "dynamic/nationalID_URL": "1200100123456",
+      "dynamic/religion": "-",
+      "dynamic/tel": "089-123-6789",
+      "dynamic/lineID": "rod",
+      "dynamic/facebook": "d412",
+      "dynamic/emergency_tel": "089-321-6457",
+      "dynamic/emergency_tel_relation": "บิดา",
+      "dynamic/RCU_required": "yes",
+      "dynamic/congenital_disease": "-",
+      "dynamic/regularDrug": "-",
+      "dynamic/drugAllergy": "-",
+      "dynamic/disorders": "-",
+      "dynamic/foodAllergies": "-",
+      "hidden/groupID": "1674887",
+      "hidden/imageURL": "www.google.com",
+      "final-house": "baanjo"
+    }
+  })
+}
+
