@@ -6,11 +6,13 @@ div
       div.container
         div.field
           h1 Check For House
-      div#result-wrapper.section(v-if='result.show')
+      div#result-wrapper.section(v-if='result.show=="ready"')
         div.logo-wrap
           img.logo(@click='result.url' :src='result.img')
         div.logo-wrap
-          img.back(@click='result.show = false' src='../theme/material/back_btn.png')
+          img.back(@click='result.show = "query"' src='../theme/material/back_btn.png')
+      div.scale-x2(v-else-if='result.show=="loading"' align="middle")
+        rotate-square5
       form.container(v-else)
         div.field
           input.input(v-model='login.usr' type="tel" v-mask="'###-###-####'" :masked="false" placeholder='phone number' pattern='[0-9]{10}' title="10 digit tel number")
@@ -24,9 +26,10 @@ div
 <script>
   import AbsoluteBackground from '@/components/AbsoluteBackground.vue'
   import {mask} from 'vue-the-mask'
-
+  import {RotateSquare5} from 'vue-loading-spinner'
+  import {announcement} from '../middle-api'
   export default {
-    components: {AbsoluteBackground},
+    components: {AbsoluteBackground, RotateSquare5},
     directives: {mask},
     data() {
       return {
@@ -35,24 +38,26 @@ div
           pwd: ''
         },
         result: {
-          show: false,
+          show: "query",
           img: '',
           url: ''
         }
       }
     },
     methods: {
-      submit () {
-        this.result.show = true
-        this.result.img = require('../theme/house/dork.png')
-        this.result.url = () => this.$router.push('/house/dork')
+      async submit () {
+        this.result.show = "loading"
+        var baanResult = await announcement(this.login.usr, this.login.pwd)
+        this.result.img = require(`../theme/house/${baanResult}.png`)
+        this.result.url = () => this.$router.push(`/house/${baanResult}`)
+        this.result.show = "ready"
       }
     },
     watch: {
       login: {
         deep: true,
         handler() {
-          this.result.show = false
+          this.result.show = "query"
         }
       }
     }
@@ -60,6 +65,8 @@ div
 </script>
 
 <style lang='stylus' scoped>
+  .scale-x2
+    transform: scale(2)
   .section
     background-color: #020202
 

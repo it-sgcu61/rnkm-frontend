@@ -10,17 +10,17 @@
               img.chk(v-show='lang == "TH"' src="../theme/material/checked.png" alt='TH language')
             div.flag.en(@click='set_lang("EN")')
               img.chk(v-show='lang == "EN"' src="../theme/material/checked.png" alt='EN language')
-        span.warning.is-block ** ระบบภาษาอังกฤษ สำหรับนิสิตต่างชาติเท่านั้น **
+        span.warning.is-block ** For international student please select EN **
 
       div#body
         ol(v-show='lang == "TH"')
-          li.subtitle การตัดสินของกรรมการ ถือเป็นที่สิ้นสุด
-          li.subtitle อาหารที่จัดเตรียม จะถูกจัดเตรียมโดยอิสลาม
-          li.subtitle ข้อมูลของนิสิตจะถูกเก็บเป็นความลับ
+          li.subtitle ระบบจะทำการ "สุ่ม" บ้านที่น้องๆ เลือกมา และลำดับในการเลือกจะมีผลต่อการสุ่ม
+          li.subtitle อาหารในกิจกรรมทั้งหมดจะเป็นฮาลาล
+          li.subtitle ข้อมูลของน้องๆ ทุกคนที่เข้าร่วมกิจกรรมจะถูกเก็บเป็นความลับ
         ol(v-show='lang == "EN"')
-          li.subtitle judge .... . ... . .
-          li.subtitle food is provide by ....
-          li.subtitle this information will be secret
+          li.subtitle The system will " randomly " select Baan Rub Nong of your chioce for you and the orders of your choices will affect the random selection of the system.
+          li.subtitle All the meals in this activity will be Halal Food.
+          li.subtitle All your information will be kept confidential.
 
       div#foot
         button.button.accept.is-warning(@click='acceptedCondition')

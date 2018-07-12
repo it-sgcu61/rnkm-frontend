@@ -43,6 +43,8 @@
   import CroppaImg from '../components/Croppa.vue'
   import Formstatus from '../components/Formstatus.vue'
   import {get_regist_form, post_regist_form} from '../dtnl_api.js'
+  import {check_if_user_exist, mark_that_user_already_registered, announcement} from '../middle-api.js'
+  window.check_if_user_exist = check_if_user_exist
 
   export default {
     props: ['lang'],
@@ -103,28 +105,38 @@
         }, 700)
       },
       async submit() {
-        this.submissionState = "pending"
-        if (await this.submitable()){
-          return new Promise(async (resolve, reject) => {
-            let ar = []
-            for (let [dym_form, img_crp] of _.zip(this.$refs.dynamic_refs, this.$refs.croppa_refs)) {
-              let o = _.assign(
-                {'hidden/imageURL': await img_crp.getURL()},
-                this.head_result,
-                this.hidd_result,
-                dym_form.form,
-              )
-              ar.push(o)
+        if(await this.submitable()){
+          this.submissionState="pending"
+          let ar = []
+          for (let x in this.dynm_result) {
+            if (!x) continue;
+            let a = this.head_result
+            let b = this.hidd_result
+            let c = this.$refs.dynamic_refs[x]
+            if (c.$children.length != 1 || c.$children[0].$children.length != 1) {
+              reject('invalid number of children component')
             }
-            console.log(ar)
-            console.log('[success] image have been uploaded')
-            console.log(await post_regist_form(ar))
+            try {
+              ar.push(_.assign({
+                'hidden/imageURL': await c.$children[0].$children[0].uploadImg()
+              }, a, b, c.form))
+            } catch (error) {
+              this.submissionState="none"
+              alert("no image selected.")
+              return
+            }
+          }
+          console.log('[success] image have been uploaded')
+          try {
+            var result = await post_regist_form(ar)
             console.log('[success] form have been uploaded to DTNL')
-            this.submissionState = "fullfilled"
-            resolve(ar)
-          })
+            this.submissionState="fullfilled"
+          } catch (error) {
+            alert(error.toString())
+            this.submissionState="none"
+            return
+          }
         }
-        this.submissionState = 'none'
       },
       async submitable(){
         if (!this.$refs) return false; // before mount

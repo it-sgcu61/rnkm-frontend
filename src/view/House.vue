@@ -70,9 +70,21 @@ div
     },
     methods:{
       setFavoriteHouse(index){
-        localStorage.setItem(`flavoriteHouse${index}`, this.name)
-        localStorage.setItem(`flavoriteHouse${index}.name`, `${this.data.nameTH} - ${this.data.nameEN}`)
+        var currentState = this.houses
+        if(currentState.includes(this.name)){
+          var oldIndex = this.houses.indexOf(this.name)
+          var substituteHouse = this.houses[index-1]
+          this.$set(this.houses, oldIndex, substituteHouse)
+        }
         this.$set(this.houses, index-1, this.name)
+        for(var id in this.houses){
+          const name = this.houses[id]
+          if(name != "unknown"){
+            localStorage.setItem(`flavoriteHouse${parseInt(id)+1}`, name)
+            const data = _.keyBy(require('@/others/house_data.json').data, "nameURL")[name]
+            localStorage.setItem(`flavoriteHouse${parseInt(id)+1}.name`, `${data.nameTH} - ${data.nameEN}`)
+          }
+        }
       }
     }
   }
