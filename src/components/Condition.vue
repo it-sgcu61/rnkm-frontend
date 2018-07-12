@@ -15,7 +15,9 @@
       div#body
         ol(v-show='lang == "TH"')
           li.subtitle ระบบจะทำการ "สุ่ม" บ้านที่น้องๆ เลือกมา และลำดับในการเลือกจะมีผลต่อการสุ่ม
-          li.subtitle อาหารในกิจกรรมทั้งหมดจะเป็นฮาลาล
+          // li.subtitle อาหารในกิจกรรมทั้งหมดจะเป็นฮาลาล
+          li.subtitle อาหารทั้งหมดถูกจัดเตรียมให้นิสิตทุกศาสนาสามารถรับประทานได้
+          li.subtitle กิจกรรมรับน้องก้าวใหม่ ไม่มีนโยบายให้ค้างคืนระหว่างทำกิจกรรม
           li.subtitle ข้อมูลของน้องๆ ทุกคนที่เข้าร่วมกิจกรรมจะถูกเก็บเป็นความลับ
         ol(v-show='lang == "EN"')
           li.subtitle The system will " randomly " select Baan Rub Nong of your chioce for you and the orders of your choices will affect the random selection of the system.
@@ -73,6 +75,33 @@ export default {
     border-top-width 50px
     &.clear
       padding 0
+
+  ol
+    counter-reset: myCounter;
+
+  li
+    display: flex;
+    list-style: none;
+    counter-increment: step-counter;
+
+
+  ol li:before
+    content: counter(step-counter);
+    color: white;
+    background: #ff5100;
+    display: inline-block;
+    text-align: center;
+    margin: 5px 10px 5px 0;
+    line-height: 30px;
+    min-width: 30px;
+    height: 30px;
+    border-radius: 50%;
+
+  li
+    display: flex;
+    div
+      margin-top: 0px;
+
 
   #head
     text-align center

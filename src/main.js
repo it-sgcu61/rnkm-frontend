@@ -64,6 +64,8 @@ Vue.use(Resource)
 
 import RnkmNavbar from './components/RnkmNavbar.vue'
 Vue.component('rnkm-nav', RnkmNavbar)
+import RnkmSponsor from './components/Sponsor.vue'
+Vue.component('rnkm-sponsor', RnkmSponsor)
 
 Vue.config.productionTip = false
 

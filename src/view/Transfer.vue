@@ -4,7 +4,7 @@ div.section
   div.header ระบบย้ายบ้าน
 
   // LOGIN
-  div(v-if='!isLogin')
+  div(v-if='!isLogin') 101 - 205
     form.container.has-text-centered
       div.input-wrapper
         div.field
@@ -23,9 +23,10 @@ div.section
     div.has-text-centered
       h2 user : {{person.username}}
       h2 baan : {{person.house}}
+      button.button.is-warning(@click='submit') submit
     div(v-for='grp in ["S", "M", "L", "XL"]' :key='grp.id')
       div.container._flex._flex-center
-        img.size_btn(:src='require(`@/theme/material/${grp}_btn.png`)')
+        img.size_btn(:src='require(`@/theme/material/size_${grp}.png`)')
         h2 {{siz_desc[grp]}}
       div._flex(:n-item='siz_list[grp].length')
         div._flex-item(v-for='obj in siz_list[grp]' :key='obj.id')
@@ -33,11 +34,13 @@ div.section
             div.layer(:stat='stat(obj)')
             img.baan_btn(:src="require(`@/theme/house/${obj.nameURL}.jpg`)" :alt='obj.nameTH')
             div.layer-band(:stat='stat(obj)')
+            div(v-show='isProcess')
+              formstatus(loading)
 </template>
 
 <script>
 import {mask} from 'vue-the-mask'
-import {login, getPersonInfo, movePerson} from '../firebase_api.js'
+import {login, getPersonInfo, movePerson, confirmHouse} from '../firebase_api.js'
 import {firebaseDB} from '../main.js'
 import Formstatus from '../components/Formstatus'
 export default {
@@ -50,8 +53,8 @@ export default {
   data() {
     return {
       form: {
-        usr: '091-919-1011',
-        pwd: '1273617233333'
+        usr: '089-123-4',
+        pwd: '1200100123'
       },
       person: {
         house: '',
@@ -82,20 +85,35 @@ export default {
   },
   methods: {
     async move_to(next) {
+      if (this.stat(next) != "avail") return
+      this.isProcess = true
       let {nameTH, nameEN,} = next
       let {username, token,} = this.person
-      let res = await movePerson(username, token, `${nameTH} - ${nameEN}`)
       console.log('[exec] move to ' + next.nameTH)
-      console.log(res)
+      let res = await movePerson(username, token, `${nameTH} - ${nameEN}`)
+      if (res.data.success) {
+        console.log('[success] move to ' + next.nameTH)
+        this.person.house = next.nameTH
+      }else{
+        console.log('[fail] move to ' + next.nameTH)
+      }
+      this.isProcess = false
     },
     async try_login(){
       this.isProcess = true
+      this.deleteAllCookies()
       // get permission token
       let token = await login(this.form.usr, this.form.pwd)
+      if (!token) {
+        console.log("[fail] unable get token")
+        this.isProcess = false
+        return
+      }
       let info  = await getPersonInfo(this.form.usr, token)
       if (!info) {
         console.log("[fail] unable to fetch data")
         document.cookie = 'token=;username=;path=/;'
+        this.isLogin = true
         return
       }
       this.person = {
@@ -110,7 +128,7 @@ export default {
       this.house = (await rf.once('value')).val()
       for (let nameTH in this.house) {
         rf.child(nameTH).on('value', (snapshot) => {
-          this.houses[nameTH] = snapshot.val()
+          this.$set(this.houses, nameTH, snapshot.val())
           console.log(`[update] ${nameTH} ${snapshot.val().count}/${snapshot.val().cap}`)
         })
       }
@@ -118,10 +136,28 @@ export default {
       this.isProcess = false
     },
     stat(h) {
+      if (!h || !h.nameTH || !this.houses[h.nameTH]) return ""
       if (h.nameTH == this.person.house) return "curr"
       let {cap, count} = this.houses[h.nameTH]
       if (cap >  count) return "avail"
       if (cap == count) return "full"
+    },
+    deleteAllCookies() {
+      console.log('[exec] remove old cookie')
+      var cookies = document.cookie.split(";");
+      for (var i = 0; i < cookies.length; i++) {
+          var cookie = cookies[i];
+          var eqPos = cookie.indexOf("=");
+          var name = eqPos > -1 ? cookie.substr(0, eqPos) : cookie;
+          document.cookie = name + "=;expires=Thu, 01 Jan 1970 00:00:00 GMT";
+      }
+    },
+    async submit(){
+      this.isProcess = true
+      await confirmHouse(this.person.username, this.person.token)
+      alert('submit is successfull')
+      this.isLogin = false
+      this.isProcess = false
     }
   }
 }
@@ -217,6 +253,7 @@ export default {
 
     .layer
     .layer-band
+    .baan-btn
       opacity .7
       position: absolute;
       top: 0;

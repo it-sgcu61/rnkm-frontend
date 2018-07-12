@@ -10,7 +10,7 @@ div#home-wrapper(@click='$router.push("/instruction")')
       div.column.field
         div.animated.rotateInUpRight(style='animation-delay: .4s')
           h1 rubnongkaomai
-          h2 4-5 August 2018
+          h2 4-6 August 2018
           h3 Chulalongkorn University
 </div>
 </template>

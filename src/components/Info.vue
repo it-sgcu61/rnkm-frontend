@@ -6,6 +6,10 @@ div#body-wrapper
     h2 ก้าวออกมาจากขีดจำกัดแบบเดิมๆ แล้วมา beyond
     h2 ในแบบที่ตัวเองเป็นพร้อมกันในงานรับน้องก้าวใหม่
     h1.is-size-1 102 TO BE YOU TO BEYOND
+  div.section.has-text-centered
+    h1.is-size-0 พบกัน 4-6 สิงหาคม 2018
+    h2 ณ ประตูใหญ่ จุฬาฯ
+  div.tab
   div.section
     h1 การรับน้องก้าวใหม่คืออะไร?
     p   การรับน้องก้าวใหม่ คือ กิจกรรมที่จุฬาลงกรมหาวิทยาลัย จัดขึ้นเพื่อต้อนรับ
@@ -18,30 +22,17 @@ div#body-wrapper
       template(v-else)
         h2 {{o.h}}
         p  {{o.p}}
-
+  div.tab
   div.section
     div.container
       h1 ปฏิทินกิจกรรม CU102
-      ul
-        li
-          div.level
-            div.level-left  ถวายสัต
-            div.level-right 2 สิงหาคม
-        li
-          div.level
-            div.level-left  รับน้องก้าวใหม่
-            div.level-right  3-5 สิงหาคม
-        li
-          div.level
-            div.level-left  เปิดภาคการศึกษา
-            div.level-right  14 สิงหาคม
-        li
-          div.level
-            div.level-left  รอ PR มาช่วยคิด
-            div.level-right  วันนี้
+      div.columns.is-mobile.is-table.is-pc(v-for='o in schedule')
+        div.column.is-half
+          div.is-pulled-right {{o.l}}
+        div.column.is-half
+          div.is-pulled-left {{o.r}}
   div.section.has-text-centered
       img.next(src='../theme/material/Next.png' @click='$router.push("/house")')
-
 </template>
 
 <script>
@@ -51,12 +42,18 @@ export default {
       content: [
         {h: "To be KNOWN\n(กิจกรรมหอประชุม)",  p: "รู้จักจุฬาให้มากยิ่งขึ้น ผ่านบทละครที่เรียบเรียงอยางปราณีต และการแสดงที่ตราตรึงใจ"},
         {h: "To be JOYFUL\n(freshy night)", p: "พบโชว์สุดพิเศษจากศิลปินชื่อดัง ที่จะมาทำให้น้องได้ปลดปล่อยความมันสุดขั้ว"},
-        {h: "To be KIND\n(กิจกรรมบำเพ็ญประโยชน์)",   p: "กิจกรรมเบาๆ ที่จะทำให้น้องๆได้ใช้เวลาอยู่กับเพื่อนใหม่ และสร้างความทรงจำที่มีคุณค่าร่วมกัน"},
+        {h: "To be KIND\n(กิจกรรมบำเพ็ญประโยชน์)", p: "กิจกรรมที่เปิดโอกาศให้น้องๆ ได้ทำประโยชน์เพื่อนส่วนรวมร่วมกัน"},
         {h: "To be PROUND\n(กิจกรรมรับขวัญน้องใหม่)", p: "ต้อนรับนิสิตใหม่ ภายใต้รั้วจามจุรี พร้อมแขกรับเชิญสุด exclusive ที่จะมาแชร์ประสบการแบบที่หาฟังที่ไหนไม่ได้"},
         {img: 'http://static.trueplookpanya.com/tppy/member/m_525000_527500/525016/cms/images/%E0%B8%A3%E0%B8%B1%E0%B8%9A%E0%B8%99%E0%B9%89%E0%B8%AD%E0%B8%87%E0%B8%81%E0%B9%89%E0%B8%B2%E0%B8%A7%E0%B9%83%E0%B8%AB%E0%B8%A1%E0%B9%88%20(8).png'},
         {img: 'http://static.trueplookpanya.com/tppy/member/m_525000_527500/525016/cms/images/%E0%B8%A3%E0%B8%B1%E0%B8%9A%E0%B8%99%E0%B9%89%E0%B8%AD%E0%B8%87%E0%B8%81%E0%B9%89%E0%B8%B2%E0%B8%A7%E0%B9%83%E0%B8%AB%E0%B8%A1%E0%B9%88%20(5).png'},
         {img: 'http://p3.isanook.com/ca/0/rp/rc/w620h0/ya0xa0m1/aHR0cDovL3AzLmlzYW5vb2suY29tL2NhLzAvdWkvMjczLzEzNjg2NzEvNDZhNmJhMWNlYTg4ZTdkYmJhMDA3ZDYwMTM4NDVjMGJfMTM2OTAzODEwMi5qcGc=.jpg'},
         {img: 'https://blog.eduzones.com/images/blog/rubnongkaomai2559/20160627-1467040587.7249-0.jpg'},
+      ],
+      schedule: [
+        {l: "ถวายสัตย์", r: "3 สิงหาคม"},
+        {l: "รับน้องก้าวใหม่", r: "4-5 สิงหาคม"},
+        {l: "เปิดภาคการศึกษา", r: "14 สิงหาคม"},
+        {l: "รอ PR มาช่วยคิด", r: "วันนี้"}
       ]
     }
   },
@@ -73,6 +70,8 @@ export default {
 </script>
 
 <style lang='stylus' scoped>
+  .is-size-0
+    font-size 3.5rem
   #body-wrapper
     padding 3rem 1rem
     max-width 800px
@@ -89,6 +88,7 @@ export default {
   h1
     font-size 2.5rem
     font-weight bold
+    margin-bottom 2rem
   h2
     font-size 2rem
     font-weight bold
@@ -107,4 +107,7 @@ export default {
     border-radius 15px
   .level
     font-size 1.7rem
+
+  .tab
+    height 3rem
 </style>

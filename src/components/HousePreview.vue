@@ -1,10 +1,10 @@
 <template lang='pug'>
 div.section
   div.header
-    h1 รายชื่อบ้าน
+    h1.bold รายชื่อบ้าน
   div(v-for='grp in ["S", "M", "L", "XL"]' :key='grp.id')
     div.container._flex._flex-center
-      img.size_btn(:src='require(`@/theme/material/${grp}_btn.png`)')
+      img.size_btn(:src='require(`@/theme/material/size_${grp}.png`)')
       h2 {{siz_desc[grp]}}
     div._flex(:n-item='siz_list[grp].length')
       div._flex-item(v-for='obj in siz_list[grp]' :key='obj.id')
@@ -41,6 +41,8 @@ export default {
 </script>
 
 <style lang='stylus' scoped>
+  .bold
+    font-weight bold
   .section
     background-color: #020202;
     padding: 7rem 1rem;

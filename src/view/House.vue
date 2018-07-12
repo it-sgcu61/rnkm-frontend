@@ -15,19 +15,21 @@ div
       div.subtitle {{data.description}}
 
     div.social-btn
-      a(href='https://line.me')
-        img(src='../theme/material/line.svg')
-      a(href='https://facebook.com')
-        img(src='../theme/material/facebook-square.svg')
-      a(href='https://www.instagram.com')
-        img(src='../theme/material/instagram.svg')
-      a(href='https://twitter.com')
-        img(src='../theme/material/twitter-square.svg')
+      template(v-for='atr in ["lineURL", "facebookURL", "instagramURL", "twitterURL"]')
+        a(v-if='data[atr]' :href='data[atr]' :alt='atr' target="_blank" rel="noopener noreferrer")
+          img(:src="require(`../theme/material/${atr}.svg`)")
+      // a(href='https://facebook.com')
+      //   img(src='../theme/material/facebook-square.svg')
+      // a(href='https://www.instagram.com')
+      //   img(src='../theme/material/instagram.svg')
+      // a(href='https://twitter.com')
+      //   img(src='../theme/material/twitter-square.svg')
 
-    div.social-btn
-      a.is-block(href='https://goo.gl/forms/7hJjvI418Vhe70YY2') ประสานบ้านกรอก link
-      a.is-block(href='https://docs.google.com/spreadsheets/d/1iC9097qVOkSIqARIhlvavPVB_erGyJ4sGf1kHL83Eik')  ตรวจสอบข้อมูล
-      h1 เดียวจะอัพเดต link ให้ภายในวันนี้
+    // div.social-btn
+    //   a.is-block(href='https://goo.gl/forms/7hJjvI418Vhe70YY2') ประสานบ้านกรอก link
+    //   a.is-block(href='https://docs.google.com/spreadsheets/d/1iC9097qVOkSIqARIhlvavPVB_erGyJ4sGf1kHL83Eik')  ตรวจสอบข้อมูล
+    //   h1 เดียวจะอัพเดต link ให้ภายในวันนี้
+
     img.back(@click='$router.push("/house")' src='../theme/material/back_btn.png')
   absolute-background(bot)
 </template>
@@ -122,7 +124,7 @@ div
     & img
       width 20%
       padding 1em
-      padding-top 6em
+      margin-top 6em
       min-width 50px
       max-width 100px
       filter: invert(100%)
@@ -175,7 +177,6 @@ div
     &.back
       margin-top 5em
       width: calc(100px + 7vmin)
-      height: @width
 
   .fa
     font-size 30px

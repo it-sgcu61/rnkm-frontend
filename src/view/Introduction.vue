@@ -4,14 +4,12 @@
       div
         img.big-logo(src='@/theme/material/Introduction.png')
     div.section.info
-      h2 บ้านรับน้องคืออะไร
+      h2.bold บ้านรับน้องคืออะไร
       <p> บ้านรับน้อง คือ กลุ่มนิสิตจากหลากหลายคณะและชั้นปี
       | ที่ต้องการจะถ่ายทอดความรู้สึกดีๆ และสร้างสรรค์กิจกรรมในการรับน้อง
       </p>
     house-preview
-    div.has-text-centered
-      img.spon(src='../theme/material/cunex.jpg')
-      img.spon(src='../theme/material/zero_waste.png')
+    rnkm-sponsor
     absolute-background(bot)
 </template>
 
@@ -24,15 +22,18 @@ export default {
 </script>
 
 <style lang='stylus' scoped>
+.bold
+  font-weight bold
+h2
+  font-size: calc(2em)
+  margin-bottom .7em
+
 .section
   margin: 0 auto;
   font-family: Superspace;
   background-color: #020202;
 
   &.info
-    h2
-      font-size: calc(2em)
-      margin-bottom .7em
     p
       font-size: 1.5em;
 

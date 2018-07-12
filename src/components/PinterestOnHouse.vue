@@ -10,6 +10,7 @@
     div.btn-wrap
       img.btn(@click='$router.push("/registration")' src='../theme/material/Next.png' v-if="houses.length == 3")
 </template>
+
 <style lang="stylus" scoped>
   h1.is-size-1 {
     font-style bold
@@ -69,11 +70,8 @@
 <script>
 export default {
   props:{
-    houses: Array
-  },
-  created(){
-    console.log('crea')
-    // console.log(this.houses)
+    houses: Array,
+    require: true
   }
 }
 </script>
