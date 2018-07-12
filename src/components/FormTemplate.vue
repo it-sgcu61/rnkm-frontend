@@ -88,6 +88,7 @@ export default {
     delete_elem() {
       if (confirm("confirm delete")) {
         this.$emit("delete");
+        // From intaniger
       }
     },
     toggle_show() {
