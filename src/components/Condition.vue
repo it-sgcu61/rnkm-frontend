@@ -14,9 +14,9 @@
 
       div#body
         ol(v-show='lang == "TH"')
-          li.subtitle การตัดสินของกรรมการ ถือเป็นที่สิ้นสุด
-          li.subtitle อาหารที่จัดเตรียม จะถูกจัดเตรียมโดยอิสลาม
-          li.subtitle ข้อมูลของนิสิตจะถูกเก็บเป็นความลับ
+          li.subtitle ระบบจะทำการ "สุ่ม" บ้านที่น้องๆ เลือกมา และลำดับในการเลือกจะมีผลต่อการสุ่ม
+          li.subtitle อาหารในกิจกรรมทั้งหมดจะเป็นฮาลาล
+          li.subtitle ข้อมูลของน้องๆ ทุกคนที่เข้าร่วมกิจกรรมจะถูกเก็บเป็นความลับ
         ol(v-show='lang == "EN"')
           li.subtitle The system will " randomly " select Baan Rub Nong of your chioce for you and the orders of your choices will affect the random selection of the system.
           li.subtitle All the meals in this activity will be Halal Food.

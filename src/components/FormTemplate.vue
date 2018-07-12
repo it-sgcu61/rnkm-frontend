@@ -21,6 +21,8 @@ div.wrap_
           input(  v-if = 'f.name.endsWith("tel")'   v-model.trim='form[f.name]' :name='f.name' v-validate="{required: f.required, regex: f.validate}" :placeholder='f.desc' v-mask="'###-###-####'")
           input(  v-else-if='f.type == "string"'    v-model.trim='form[f.name]' :name='f.name' v-validate="{required: f.required, regex: f.validate}" :placeholder='f.desc')
           txtarea(v-else-if='f.type == "lg_string"' v-model.trim='form[f.name]' :name='f.name' v-validate="{required: f.required, regex: f.validate}" :placeholder='f.desc')
+          select( v-else-if='f.type == "choice" && /^head/.test(f.name)'    v-model.trim='form[f.name]' :name='f.name' v-validate="{required: f.required}")
+            option(v-for='o in f.option.filter((opt)=>!Object.values(form).slice(0,parseInt(f.name.match(/\\d+/g)[0])-1).includes(opt.value))' :value='o.value' style='color: #353535') {{o.label}}
           select( v-else-if='f.type == "choice"'    v-model.trim='form[f.name]' :name='f.name' v-validate="{required: f.required}")
             option(v-for='o in f.option' :value='o.value' style='color: #353535') {{o.label}}
 
@@ -60,6 +62,10 @@ export default {
     form: {
       deep: true,
       handler() {
+        // if(/^head\//.test(this.$props.fieldList[0].name)){
+        //   // this.selectedBaan = Object.values(this.form)
+        //   console.log(this.selectedBaan)
+        // }
         this.$emit("input", this.form);
       }
     }
@@ -67,7 +73,8 @@ export default {
   data: function() {
     return {
       show: true,
-      form: {}
+      form: {},
+      selectedBaan:[]
     };
   },
   created() {
