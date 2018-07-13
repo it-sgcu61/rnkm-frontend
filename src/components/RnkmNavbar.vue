@@ -1,13 +1,9 @@
 <template lang='pug'>
   div.flex.has-text-centered
-    router-link.k_nav(to='/instruction')
-      div About
-    router-link.k_nav(to='/introduction')
-      div Baan
-    router-link.k_nav(to='/registration')
-      div Register
-    router-link.k_nav(to='/announcement')
-      div Announce
+    div.k_nav(@click="$router.push('/instruction')") About
+    div.k_nav(@click="$router.push('/introduction')") Baan
+    div.k_nav(@click="" disable) Register
+    div.k_nav(@click="" disable) Announce
 </template>
 
 <script>
@@ -31,8 +27,10 @@ export default {
     // @media scre.5n and (min-width: 1000px)
     //   padding: .9em 12em
 
-  .k_nav div
+  div.k_nav
+
     position: relative;
+    cursor pointer
     color: white;
     font-family: ZingRust;
     line-height: .5em;
@@ -40,6 +38,9 @@ export default {
     text-align: center;
     vertical-align: middle;
     text-shadow: 5px 5px 15px #2228;
+    &[disable]
+      color: gray
+      cursor not-allowed
 
     @media screen and (min-width: 0px)
       font-size: 1em;

@@ -59,7 +59,8 @@
     min-width: 280px;
     max-width: 90vw;
     max-height: 70vh;
-    filter: drop-shadow(20px 10px 12px #222f);
+    border-radius: 5vmin;
+    filter: drop-shadow(5px 10px 12px #050505cc);
     @media screen and (orientation: landscape)
       margin-top: calc(-70px + 20vh - 1vw);
     @media screen and (orientation: portrait)

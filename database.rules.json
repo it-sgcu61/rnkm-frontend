@@ -1,6 +1,10 @@
 {
   "rules": {
-    ".read": true,
-    ".write": true
+    "houses": {
+      ".read": true,
+      ".write": false
+    },
+    ".read": "auth != null",
+    ".write": "auth != null"
   }
 }

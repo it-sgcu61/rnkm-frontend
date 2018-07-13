@@ -81,6 +81,7 @@ export default {
     filter: brightness(70%);
     width:  27vw;
     height: 27vw;
+    cursor: pointer;
     @media screen and (min-width: 600px)
       width:  20vw;
       height: 20vw;

@@ -36,7 +36,7 @@ div.section
 
 <script>
 import {mask} from 'vue-the-mask'
-import {login, getPersonInfo, movePerson, confirmHouse} from '../firebase_api.js'
+import {login, getPersonInfo, movePerson, confirmHouse} from '../firebase_api.js' //'../../functions/index.js' (krist can not integral with it)
 import {firebaseDB} from '../main.js'
 import Formstatus from '../components/Formstatus'
 import HousePreview from '../components/HousePreview.vue'
