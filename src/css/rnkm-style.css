@@ -1,7 +1,8 @@
 
 /* BASIC */
 html {
-  font-size: 16px
+  font-size: 16px;
+  color: #e0e0e0;
 }
 body {
   min-height: 100vh;
@@ -82,25 +83,4 @@ h1, h2, h3, h4, h5, h6, p, div, span, label {
   src: url("../font/Superspace/SuperspaceRegularItalic.otf");
   font-weight: normal;
   font-style: italic;
-}
-
-/* ADVANCE */
-.big-logo {
-  position: relative;
-  padding: 10px;
-  min-width: 280px;
-  max-width: 90vw;
-  max-height: 70vh;
-  border-radius: 30px;
-  filter: drop-shadow(20px 10px 12px #222f);
-}
-@media screen and (orientation: landscape) {
-  .big-logo {
-    margin-top: calc(-70px + 20vh - 1vw);
-  }
-}
-@media screen and (orientation: portrait){
-  .big-logo {
-    margin-top: calc(-120px + 37vh - 5vw);
-  }
 }

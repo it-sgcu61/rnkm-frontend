@@ -1,7 +1,5 @@
 <template lang="pug">
   div.picker
-    // label.container
-    //   div Your most interested house.
     div.lineContainer
       div.PINcontainer(@click="$emit('click', i)" v-for='i in 3')
         img.icon(:src="require(`../theme/house/${houses[i-1] || 'unknown'}.jpg`)")
