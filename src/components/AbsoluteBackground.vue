@@ -2,6 +2,7 @@
   div
     div.bg.top(v-if='top')
       rnkm-nav
+      slot
       img.big-logo(v-if='src' :src='src')
     div.bg.bot(v-if='bot' style='height: 30vh; margin-top: -8vh')
       slot

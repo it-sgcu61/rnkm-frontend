@@ -1,5 +1,5 @@
 <template lang='pug'>
-div.has-text-centered
+div.section.has-text-centered
   img.spon(src='../theme/material/cunex.jpg')
   img.spon(src='../theme/material/zero_waste.png')
 </template>

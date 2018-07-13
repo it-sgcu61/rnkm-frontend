@@ -24,10 +24,13 @@ body {
   position: absolute;
 }
 .bold {
-  font-weight: bold
+  font-weight: bold;
 }
 .italic {
-  font-style: italic
+  font-style: italic;
+}
+.regular {
+  font-weight: normal;
 }
 .fzing {
   font-family: ZingRust;

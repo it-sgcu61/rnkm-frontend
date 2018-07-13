@@ -76,7 +76,7 @@ export default {
     overflow wrap
     max-width 500px
     margin 2em auto
-    margin-bottom 9em
+    margin-bottom 5em
     padding 1em 2em
     background-color #101020
     border-radius 25px 0 25px 0
