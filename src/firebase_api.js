@@ -160,7 +160,7 @@ function register() {
       "dynamic/fullname": "หกฟ ๆไพพๆ",
       "dynamic/nickname": "ๆำๆ ำๆไำๆไ",
       "dynamic/faculty": "วิทยาศาสตร์ - Faculty of Science",
-      "dynamic/nationalID_URL": "1200100123456",
+      "dynamic/nationalID": "1200100123456",
       "dynamic/religion": "-",
       "dynamic/tel": "089-123-6789",
       "dynamic/lineID": "rod",

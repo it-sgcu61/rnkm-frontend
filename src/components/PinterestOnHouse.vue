@@ -15,10 +15,8 @@
   h1.is-size-1 {
     font-style bold
     font-family ZingRust
-    font-size calc(10px + 3vw)
     filter: drop-shadow(0 0 20px black)
     text-align center
-    margin-left -15px
   }
   .container {
     text-align center

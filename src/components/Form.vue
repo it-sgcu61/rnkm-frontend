@@ -3,7 +3,7 @@
     formstatus(loading        v-if='!formState')
     formstatus(success   v-else-if='registration_state == "ok" && submissionState == "fullfilled"')
     formstatus(expired   v-else-if='registration_state == "expired"')
-    formstatus(countdown v-else-if='registration_state == "beforeTime"' :timeLeft='timeLeft')
+    formstatus(countdown v-else-if='registration_state == "beforeTime"' :timeLeft='timeLeft' :formState='formState' @ready="ready")
 
     div(v-else)
       // head form
@@ -106,32 +106,35 @@
       async submit() {
         this.submissionState = "pending"
         if (await this.submitable()){
-          return new Promise(async (resolve, reject) => {
-            let ar = []
-            for (let [dym_form, img_crp] of _.zip(this.$refs.dynamic_refs, this.$refs.croppa_refs)) {
-              let o = _.assign(
-                {'hidden/imageURL': await img_crp.getURL()},
-                this.head_result,
-                this.hidd_result,
-                dym_form.form,
-              )
-              ar.push(o)
-            }
-            console.log(ar)
-            console.log('[success] image have been uploaded')
-            console.log(await post_regist_form(ar))
-            console.log('[success] form have been uploaded to DTNL')
-            this.submissionState = "fullfilled"
-            resolve(ar)
-          })
+          let ar = []
+          for (let [dym_form, img_crp] of _.zip(this.$refs.dynamic_refs, this.$refs.croppa_refs)) {
+            let o = _.assign(
+              {'hidden/imageURL': await img_crp.getURL()},
+              this.head_result,
+              this.hidd_result,
+              dym_form.form,
+            )
+            ar.push(o)
+          }
+          console.log('[success] image have been uploaded')
+          try{
+            await post_regist_form(ar, this.lang)
+          }catch (error){
+            this.submissionState = 'none'
+            alert(error)
+            return
+          }
+          console.log('[success] form have been uploaded to DTNL')
+          this.submissionState = "fullfilled"
+        }else{
+          this.submissionState = "none"
         }
-        this.submissionState = 'none'
       },
       async submitable(){
         if (!this.$refs) return false; // before mount
         for (let o of this.$refs.croppa_refs){
           if (! await o.hasImage()){
-            console.log('[fail] please upload image')
+            alert('[fail] please upload image')
             return false
         }}
         for (let o of this.$refs.dynamic_refs.concat([this.$refs.head_refs])) {
@@ -139,11 +142,13 @@
             return false;
         }}
         return true
+      },
+      ready(){
+        this.formState = JSON.parse(JSON.stringify(this.formState))
       }
     },
     computed: {
-      registration_state(){
-        // console.log(this.formState)
+      registration_state(formState){
         if(this.formState.disabled){
           return "disabled"
         }else if(this.formState.closeOn.datetime != undefined) {

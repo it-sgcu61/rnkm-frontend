@@ -105,7 +105,7 @@ $.ajax({
                 "dynamic/fullname": "ก กด",
                 "dynamic/lineID": "091-919-1011",
                 "dynamic/nameprefix": "นาย - Mr.",
-                "dynamic/nationalID_URL": "1273617233333",
+                "dynamic/nationalID": "1273617233333",
                 "dynamic/nickname": "กด กด",
                 "dynamic/regularDrug": "-",
                 "dynamic/religion": "d",

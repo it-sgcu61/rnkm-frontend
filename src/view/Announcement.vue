@@ -122,7 +122,5 @@ div
         border-radius 15px
       .back
         margin-top 0
-        width: calc(140px + 7vmin)
-        height: @width
 
 </style>

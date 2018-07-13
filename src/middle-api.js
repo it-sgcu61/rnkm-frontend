@@ -1,5 +1,5 @@
 import Vue from 'vue'
-const middleAPI = "http://35.198.212.105:3000"
+const middleAPI = "https://5xhgfqhpgik599bg2d9v.tk"
 const nameTHtoURLdict = {
   "บ้านอะอึ๋ม": "a-aum",
   "บ้านแอ๊บ": "abnormal",
