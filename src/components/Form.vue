@@ -24,7 +24,7 @@
           // | {{dynm_result[x]}}
 
       // submit button
-      img.btn(@click='add_dynm_result' src='../theme/material/add_member.png')
+      img.btn(@click='add_dynm_result' v-if='dynm_result.length < 3' src='../theme/material/add_member.png')
       div.section.has-text-centered
 
         div.is-inline(v-if='dynm_result.length != 3')
@@ -137,6 +137,10 @@
             alert('[fail] please upload image')
             return false
         }}
+        if(!Object.values(this.head_result).reduce((acc, baan)=>(acc && baan != ''), true)){
+          alert('กรุณาเลือกบ้านทั้งสามลำดับ')
+          return false
+        }
         for (let o of this.$refs.dynamic_refs.concat([this.$refs.head_refs])) {
           if (! await o.validateAll()){
             return false;

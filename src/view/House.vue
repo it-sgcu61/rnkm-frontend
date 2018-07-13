@@ -47,6 +47,7 @@ div.tcenter
       'sticky': VueSticky,
     },
     created(){
+      this.name = this.$route.params.name
       let raw_data = _.keyBy(require('@/others/house_data.json').data, "nameURL")[this.name]
       if (raw_data) {
         this.data = raw_data
