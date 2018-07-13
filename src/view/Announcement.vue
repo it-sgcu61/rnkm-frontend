@@ -1,7 +1,6 @@
 <template lang='pug'>
 div
-    absolute-background(top)
-      img.big-logo(src='@/theme/material/Annoucment.png')
+    absolute-background(top :src='require("../theme/material/Annoucment.png")')
     section.section
       div.container
         div.field

@@ -1,12 +1,12 @@
 <template lang='pug'>
-  div._flex.has-text-centered
-    router-link.__k_nav(to='/instruction')
+  div.flex.has-text-centered
+    router-link.k_nav(to='/instruction')
       div About
-    router-link.__k_nav(to='/introduction')
+    router-link.k_nav(to='/introduction')
       div Baan
-    router-link.__k_nav(to='/registration')
+    router-link.k_nav(to='/registration')
       div Register
-    router-link.__k_nav(to='/announcement')
+    router-link.k_nav(to='/announcement')
       div Announce
 </template>
 
@@ -16,38 +16,40 @@ export default {
 </script>
 
 <style lang='stylus' scoped>
-  ._flex
+  .flex
     display: flex;
     flex-direction: row;
     flex-wrap: nowrap;
-    justify-content: space-between;
+    justify-content: center;
     align-items: center;
     background-color: rgba(20, 20, 20, .3);
-    padding: .7em 2em
-    @media screen and (min-width: 400px)
-      padding: .5em 4em
-    @media screen and (min-width: 600px)
-      padding: .7em 7em
-    @media screen and (min-width: 1000px)
-      padding: .9em 12em
+    padding: .7em 4em
+    // @media screen and (min-width: 400px)
+    //   padding: .0em 4em
+    // @media screen and (min-width: 600px)
+    //   padding: .7em 7em
+    // @media scre.5n and (min-width: 1000px)
+    //   padding: .9em 12em
 
-  .__k_nav div
+  .k_nav div
     position: relative;
     color: white;
     font-family: ZingRust;
     line-height: .5em;
-    margin: 1vmin 2vw;
     display: inline-block;
     text-align: center;
     vertical-align: middle;
     text-shadow: 5px 5px 15px #2228;
-    font-size: 5vw;
-    @media screen and (min-width: 400px)
-      font-size: 4vw;
+
+    @media screen and (min-width: 0px)
+      font-size: 1em;
+      margin: .0em 1em;
     @media screen and (min-width: 600px)
-      font-size: 3vw;
+      font-size: 1.25em;
+      margin: .2em 1.5em;
     @media screen and (min-width: 1000px)
-      font-size: 2.5vw;
+      font-size: 1.5em;
+      margin: .5em 2em;
 
 
 </style>

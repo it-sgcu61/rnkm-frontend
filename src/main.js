@@ -5,9 +5,10 @@ import firebase from 'firebase'
 import App from './App.vue'
 import router from './router'
 
-import './css/bulma.css'
+import './css/normalize.css'
 import './css/animate.css'
 import './css/vue2-animate.css'
+import './css/bulma.css'
 import './css/rnkm-style.css'
 
 import 'font-awesome/css/font-awesome.css'

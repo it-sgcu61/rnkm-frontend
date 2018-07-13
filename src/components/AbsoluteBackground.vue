@@ -2,7 +2,7 @@
   div
     div.bg.top(v-if='top')
       rnkm-nav
-      slot
+      img.big-logo(v-if='src' :src='src')
     div.bg.bot(v-if='bot' style='height: 30vh; margin-top: -8vh')
       slot
       div(style='padding-top: 20vh')
@@ -14,7 +14,7 @@
     props: {
       top: Boolean,
       bot: Boolean,
-      url: String,
+      src: String,
     }
   }
 </script>
@@ -36,7 +36,7 @@
       right: 0;
       bottom: 0;
       height: 0;
-      background-size: contain;
+      background-size: cover contain;
       background-position: bottom right;
       background-color: #020202;
       background-image: linear-gradient(to bottom, #ac422544, #002f4b00);
@@ -52,4 +52,15 @@
       background-position: top right;
       background-image: url('../theme/wallpaper/bottom_violet_1280x950.png');
 
+  .big-logo
+    position: relative;
+    padding: 10px;
+    min-width: 280px;
+    max-width: 90vw;
+    max-height: 70vh;
+    filter: drop-shadow(20px 10px 12px #222f);
+    @media screen and (orientation: landscape)
+      margin-top: calc(-70px + 20vh - 1vw);
+    @media screen and (orientation: portrait)
+      margin-top: calc(-120px + 37vh - 5vw);
 </style>
