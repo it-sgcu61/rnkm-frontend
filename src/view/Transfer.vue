@@ -24,18 +24,14 @@ div.section
       h2 user : {{person.username}}
       h2 baan : {{person.house}}
       button.button.is-warning(@click='submit') submit
-    div(v-for='grp in ["S", "M", "L", "XL"]' :key='grp.id')
-      div.container._flex._flex-center
-        img.size_btn(:src='require(`@/theme/material/size_${grp}.png`)')
-        h2 {{siz_desc[grp]}}
-      div._flex(:n-item='siz_list[grp].length')
-        div._flex-item(v-for='obj in siz_list[grp]' :key='obj.id')
-          div.img_square(@click='move_to(obj)')
-            div.layer(:stat='stat(obj)')
-            img.baan_btn(:src="require(`@/theme/house/${obj.nameURL}.jpg`)" :alt='obj.nameTH')
-            div.layer-band(:stat='stat(obj)')
-            div(v-show='isProcess')
-              formstatus(loading)
+    HousePreview
+      template(slot='before' slot-scope='baan')
+        div.baan-overlay
+          div.overlay(:stat='stat(baan)')
+          div.banner( :stat='stat(baan)')
+          div.inform
+            a(:href='`/#/house/${baan.nameURL}`' target="_blank")
+              i.fas.fa-info-circle
 </template>
 
 <script>
@@ -43,9 +39,10 @@ import {mask} from 'vue-the-mask'
 import {login, getPersonInfo, movePerson, confirmHouse} from '../firebase_api.js'
 import {firebaseDB} from '../main.js'
 import Formstatus from '../components/Formstatus'
+import HousePreview from '../components/HousePreview.vue'
 export default {
   directives: {mask},
-  components: {Formstatus},
+  components: {Formstatus, HousePreview},
   props: {
     shuffle: {
       default: false
@@ -101,27 +98,29 @@ export default {
     },
     async try_login(){
       this.isProcess = true
-      this.deleteAllCookies()
-      // get permission token
-      let token = await login(this.form.usr, this.form.pwd)
-      if (!token) {
-        console.log("[fail] unable get token")
-        this.isProcess = false
-        return
-      }
-      let info  = await getPersonInfo(this.form.usr, token)
-      if (!info) {
-        console.log("[fail] unable to fetch data")
-        document.cookie = 'token=;username=;path=/;'
-        this.isLogin = true
-        return
-      }
-      this.person = {
-        "token": token,
-        "house": info.house.split(' ')[0], // name TH
-        "username": this.form.usr
-      }
-      console.log('[success] login')
+      // testing without connection
+      //
+      // this.deleteAllCookies()
+      // // get permission token
+      // let token = await login(this.form.usr, this.form.pwd)
+      // if (!token) {
+      //   console.log("[fail] unable get token")
+      //   this.isProcess = false
+      //   return
+      // }
+      // let info  = await getPersonInfo(this.form.usr, token)
+      // if (!info) {
+      //   console.log("[fail] unable to fetch data")
+      //   document.cookie = 'token=;username=;path=/;'
+      //   this.isLogin = true
+      //   return
+      // }
+      // this.person = {
+      //   "token": token,
+      //   "house": info.house.split(' ')[0], // name TH
+      //   "username": this.form.usr
+      // }
+      // console.log('[success] login')
 
       // read firebase data
       let rf = firebaseDB.database().ref('/houses')
@@ -203,63 +202,18 @@ export default {
   h2
     font-size calc(13px + 2vw)
 
-  ._flex
-    display: flex;
-    flex-direction: row;
-    flex-wrap: wrap;
-    justify-content: center;
-    margin calc(5vmin + 40px) auto 3vmin auto
 
-    @media screen and (min-width: 600px)
-      &[n-item="5"]
-        padding-left: 12vw;
-        padding-right: 12vw;
-
-    &._flex-center
-      align-items: center
-      justify-content: center;
-      padding 190px auto 20px auto
-      margin-top 15vmin
-
-    ._flax-item
-      flex-basis: 26%;
-
-
-
-  .size_btn
-    display block
-    width calc(12vw + 70px)
-    height calc(12vw + 70px)
-    @media screen and (min-width: 1000px)
-      width 180px
-      height 180px
-      display block
-
-  .img_square
-    width: 29vw;
-    height: 29vw;
-    overflow: hidden;
-    background-color white
-    position: relative;
-    margin 2px
-    border-radius 7px
-    filter: brightness(70%);
-    @media screen and (min-width: 600px)
-      width: 22vw;
-      height: 22vw;
-    &:hover
-      transition-duration 700ms
-      filter: brightness(90%)
-
-    .layer
-    .layer-band
-    .baan-btn
-      opacity .7
-      position: absolute;
+  .baan-overlay
+    position absolute;
+    overflow hidden
+    width:  300px;
+    height: 300px;
+    z-index: 30
+    .overlay
+    .banner
       top: 0;
       left: 0;
-      width: 120%;
-      height: 120%;
+      position: absolute;
       background-color blue
       &[stat="full"]
         background-color $red
@@ -270,21 +224,22 @@ export default {
       &[stat="avail"]
         background-color $green
         cursor pointer
-
-    .layer-band
+    .overlay
+      opacity .6
+      width: 30vw;
+      height: 30vw;
+    .banner
       opacity .9
-      transform rotate(45deg) translate(-97%, 0%)
-
-    img
-      object-fit: fill
-      position: relative;
-      transition-duration: .2s;
-      opacity: .8;
-
-    &:hover img
-      content: "";
-      opacity: 1;
-      transform-origin: center center 0
-      transform: rotate(2deg) scale(1.2, 1.2);
-      transition-duration: .6s;
+      width: calc(80px + 3vw);
+      height: calc(80px + 3vw);
+      transform-origin center center
+      transform translate(calc(-40px - 1.5vw), calc(-40px - 1.5vw)) rotate(45deg)
+    .inform
+      opacity .5
+      max-width 100px
+      margin 7px 10px
+      font-size calc(.7em + 1vmax)
+      color white
+      text-align left
+      position relative
 </style>

@@ -1,7 +1,7 @@
 <template lang='pug'>
-div.wrap_
+div.wrapper
 
-  div.wrap_head
+  div.head
     div.is-pulled-right.group_btn
       button(@click='toggle_show')
         i.fa.fa-minus.blue
@@ -9,12 +9,12 @@ div.wrap_
         i.fa.fa-times.blue
 
   collapse-transition
-    div.wrap_body(ref='inner' class="" v-show='show')
+    div.body(ref='inner' v-show='show')
       slot(name='info' v-bind='$data')
       form
         slot(v-bind='$data')
+        div.field-group.animated.fadeIn(v-for='f in fieldList')
 
-        div.group.animated.fadeIn(v-for='f in fieldList')
           transition(name='_slide-fade' mode='out-in' duration='100')
             div.label-text(:key='f.label') {{f.label}}
 
@@ -89,6 +89,7 @@ export default {
       if (confirm("confirm delete")) {
         this.$emit("delete");
         // From intaniger
+        // krist
       }
     },
     toggle_show() {
@@ -105,17 +106,13 @@ export default {
 
 $edge = #eeef
 
-.dark
-  color: #111
-.blue
-  color: #334444
-
 .fa {
   transform scale(1.5)
   margin 5px 10px
   margin-top -2px;
+  color: #334444
 }
-.wrap_ {
+.wrapper {
   overflow: hidden;
   background-color: #111a;
   border: 0 solid $edge;
@@ -123,7 +120,7 @@ $edge = #eeef
   border-top-left-radius: 30px;
   border-bottom-right-radius: 30px;
 
-  &head {
+  .head {
     padding: 0 0 60px 30px;
     background: transparent;
 
@@ -139,74 +136,20 @@ $edge = #eeef
       }
     }
   }
-
-  &body {
+  .body {
     padding: 35px 30px 35px 30px;
     background: transparent;
   }
 }
 
-.group {
+.field-group
   display: block;
   float: none;
   position: relative;
   width: 100%;
   margin: 0;
-  -webkit-transition: all 0.25s;
   transition: all 0.25s;
-  font-weight: bold;
   font-family: Superspace;
-
-  input, textarea, select {
-    font-family: Superspace;
-    width: 100%;
-    line-height: 20px;
-    margin-left: 5px;
-    padding: 15px 15px 5px 15px;
-    border: 0 solid white;
-    border-width: 0 0 0 0;
-    border-radius: 0 10px 0 0;
-    background: #333e;
-    font-size: calc(14px + 0.5vw);
-    font-weight: bold;
-    outline: none;
-    outline-style: none;
-    -webkit-appearance: none;
-    -moz-appearance: none;
-    -webkit-box-shadow: none;
-    box-shadow: none;
-    color: #ff7999;
-
-    &:hover {
-      outline: none;
-      border-color: #ef4a6b;
-    }
-  }
-
-  textarea {
-    height: calc(85px + 1vh);
-  }
-
-  input {
-    height: calc(47px + 1vh);
-  }
-
-  select {
-    height: calc(47px + 1vh);
-    padding: 10px 15px 0 12px;
-  }
-
-  option {
-    background-color #eee
-  }
-
-  .error {
-    margin: 0 0 20px 0;
-    padding: 0 0 15px 10px;
-    color: yellow;
-    font-size: 13px;
-    line-height: 20px;
-  }
 
   .label-text {
     display: inline-block;
@@ -216,16 +159,49 @@ $edge = #eeef
     margin: 0 0 0 10px;
     padding: 0 6px;
     padding-left: 4px;
-    color: white;
-    font-size: calc(15px + 0.5vw);
+    font-size: 1.2em
     font-weight: normal;
-    text-transform: uppercase;
     -webkit-transition: all 0.25s;
     transition: all 0.25s;
   }
-
-  .placeholder, ::placeholder, :-ms-input-placeholder, ::-ms-input-placeholder {
-    color: blue;
+  input, textarea, select {
+    width: 100%;
+    line-height: 20px;
+    margin-left: 5px;
+    padding: 15px 15px 5px 15px;
+    border: 0 solid white;
+    border-width: 0 0 0 0;
+    border-radius: 0 10px 0 0;
+    background: #333e;
+    font-size: 1em
+    font-weight: bold
+    font-family SuperSpace
+    outline: none;
+    outline-style: none;
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    -webkit-box-shadow: none;
+    box-shadow: none;
+    color: #ff7999;
+    &:hover {
+      outline: none;
+      border-color: #ef4a6b;
+    }
   }
-}
+  textarea
+    height: calc(85px + 1vh);
+  input
+    height: calc(47px + 1vh);
+  select
+    height: calc(47px + 1vh);
+    padding: 10px 15px 0 12px;
+  option
+    background-color #eee
+  .error
+    margin: 0 0 20px 0;
+    padding: 0 0 15px 10px;
+    color: yellow;
+    font-size: 1em;
+    line-height: 20px;
+
 </style>

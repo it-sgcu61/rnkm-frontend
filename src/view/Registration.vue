@@ -1,7 +1,6 @@
 <template lang='pug'>
 div
-  absolute-background(top)
-    img.big-logo(src='@/theme/material/Registeration.png')
+  absolute-background(top :src='require("../theme/material/Registeration.png")')
   div.section
     condition(v-if='!accept' @accept-condition='acceptedCondition')
     rnkm-form(v-else :lang="lang")
@@ -23,17 +22,14 @@ div
     },
     methods: {
       acceptedCondition(lang) {
-        this.lang=lang
-        this.accept=true
+        this.lang = lang
+        this.accept = true
       }
     }
   }
 </script>
 
 <style lang='stylus' scoped>
-  .section
-    background-color transparentify
-    padding 2em 1em
   .big-logo
     position: relative;
     padding: 10px;

@@ -5,7 +5,11 @@ import firebase from 'firebase'
 import App from './App.vue'
 import router from './router'
 
-import './css/bulma.css'
+// import "bulma/sass/base/minireset.sass";
+// import "bulma/sass/base/generic.sass";
+// import "bulma/sass/base/helpers.sass";
+import 'bulma'
+// import './css/normalize.css'
 import './css/animate.css'
 import './css/vue2-animate.css'
 import './css/rnkm-style.css'

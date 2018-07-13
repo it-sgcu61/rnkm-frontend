@@ -1,26 +1,62 @@
 
 /* BASIC */
-body {
-  min-height: 100vh;
-  /* background-color: #212d6b; */
-  /* background-color: #3b0915; */
-  /* background-color: #5e0e31; */
-  background-color: #0a0929;
+html {
+  font-size: 16px;
   color: #e0e0e0;
 }
+body {
+  min-height: 100vh;
+  background-color: #0a0710;
+  color: #e0e0e0;
+}
+
+.container,
 .section {
   background-color: transparent;
   background-color: transparentify;
 }
+@media screen and (max-width: 500) {
+  .section {
+    padding: 3rem 1rem;
+  }
+}
+.abs {
+  position: absolute;
+}
+.bold {
+  font-weight: bold
+}
+.italic {
+  font-style: italic
+}
 .fzing {
-  font-family: ZingRust
+  font-family: ZingRust;
 }
 .fspace {
-  font-family: Superspace
+  font-family: Superspace;
 }
-.center {
+h1, h2, h3, h4, h5, h6, p, div, span, label {
+  white-space: pre-line;
+  font-family: Superspace;
+}
+.tcenter {
   text-align: center
 }
+.mcenter {
+  margin: 0 auto
+}
+.jcenter {
+  justify-content: center
+}
+.flex {
+  display: flex;
+}
+.fa, .far, .fas {
+  font-family: FontAwesome;
+  font-style: normal;
+}
+
+
 /* FONTS */
 
 @font-face {
@@ -48,5 +84,3 @@ body {
   font-weight: normal;
   font-style: italic;
 }
-
-
