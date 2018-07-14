@@ -202,4 +202,19 @@ $edge = #eeef
     font-size: 1em;
     line-height: 20px;
 
+
+  ::placeholder {
+    -webkit-text-security: none;
+    color: darkGray;
+    pointer-events: none !important;
+  }
+  input::placeholder,
+  txtarea::placeholder,
+  textarea::placeholder {
+    white-space: pre;
+    word-wrap: normal;
+    overflow: hidden;
+  }
+
+
 </style>

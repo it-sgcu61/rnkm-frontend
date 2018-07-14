@@ -7,7 +7,7 @@ div.section
       span.desc {{siz_desc[grp]}}
     div#body.flex(:n-item='siz_list[grp].length')
       div.flex-item(v-for='baan in siz_list[grp]' :key='baan.id')
-        router-link(:to='`baan/${baan.nameURL}`')
+        router-link(:to='`/baan/${baan.nameURL}`')
           div.img-square(:style="{ backgroundImage: `url(${baan.img})` }")
             slot(name='before' v-bind='baan')
             // img.img-baan(:src="baan.img" :alt='baan.nameTH')

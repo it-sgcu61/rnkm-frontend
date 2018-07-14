@@ -6,6 +6,8 @@ html {
 }
 body {
   min-height: 100vh;
+  width: 100vw;
+  overflow: hidden;
   background-color: #0a0710;
   color: #e0e0e0;
 }
@@ -46,7 +48,7 @@ h1, h2, h3, h4, h5, h6, p, div, span, label {
   text-align: center
 }
 .mcenter {
-  margin: 0 auto
+  margin: 0 auto !important
 }
 .jcenter {
   justify-content: center

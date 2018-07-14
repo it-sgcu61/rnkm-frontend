@@ -4,8 +4,9 @@
       rnkm-nav
       slot
       div.flex.jcenter
-        img.big-logo.abs.mcenter(v-if='src2' :src='src2')
-        img.big-logo.abs.mcenter(v-if='src' :src='src')
+        div.mcenter.is-inline-block
+          img.big-logo.abs.mcenter(v-if='src2' :src='src2')
+          img.big-logo.abs.mcenter(v-if='src' :src='src')
     div.bg.bot(v-if='bot' style='height: 30vh; margin-top: -8vh')
       slot
       div(style='padding-top: 20vh')
@@ -59,12 +60,16 @@
       background-image: url('../theme/wallpaper/bottom_violet_1280x950.png');
 
   .big-logo
-    position: relative;
+    position: absolute;
     padding: 10px;
+    top 50%
+    left 50%
+    transform translate(-50%, -50%)
     min-width: 280px;
     max-width: 90vw;
     max-height: 70vh;
     border-radius: 5vmin;
+    margin 0 auto
     filter: drop-shadow(5px 10px 12px #050505cc);
     @media screen and (orientation: landscape)
       margin-top: calc(-70px + 20vh - 1vw);

@@ -13,46 +13,44 @@ export default new Router({
   routes: [
     {
       path: '/',
-      redirect: 'about'
-      // name: 'Home',
-      // component: Home
+      redirect: '/about'
     },
     {
       path: '/about',
-      name: 'about',
+      name: 'About',
       component: About
     },
     {
       path: '/register',
-      name: 'register',
+      name: 'Register',
       component: Register
     },
     {
       path: '/announce',
-      name: 'announce',
+      name: 'Announce',
       component: Announce
     },
     {
       path: '/baan',
-      name: 'baan',
+      name: 'Baan',
       component: Baan
     },
     {
       path: '/baan/:name',
-      name: 'house',
+      name: 'House',
       component: House
     },
     {
       path: '/transfer',
-      name: 'transfer',
+      name: 'Transfer',
       component: Transfer,
     }
   ],
-  mode: 'history',
   scrollBehavior (to, from, savedPosition) {
-    console.log(from, to, savedPosition)
-    if (to.name == 'house') return {x: 0, y:0}
-    if (to.name == 'baan') return savedPosition || { x: 0, y: 0 }
-    return {x: 0, y: 0}
+    return new Promise((resolve, reject) => {
+      setTimeout(() => {
+        resolve({ x: 0, y: 0 });
+      }, 600);
+    });
   }
 })

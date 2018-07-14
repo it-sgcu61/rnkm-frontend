@@ -18,9 +18,9 @@ div.tcenter
         a(v-if='data[atr]' :href='data[atr]' :alt='atr' target="_blank" rel="noopener noreferrer")
           img.social-btn(:src="require(`../theme/material/${atr}.svg`)")
 
-    // router-link(to='/baan')
-    a(@click="$router.go(-1)")
+    router-link(to='/baan')
       img.back(src='../theme/material/back_btn.png')
+    // a(@click="$router.go(-1)")
     // router-link(:to="{ path: $route.from.fullPath }")
 
   absolute-background(bot)
