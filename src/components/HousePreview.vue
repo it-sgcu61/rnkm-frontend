@@ -7,12 +7,11 @@ div.section
       span.desc {{siz_desc[grp]}}
     div#body.flex(:n-item='siz_list[grp].length')
       div.flex-item(v-for='baan in siz_list[grp]' :key='baan.id')
-        span(@click="")
-          router-link(:to='`baan/${baan.nameURL}`')
-            div.img-square
-              slot(name='before' v-bind='baan')
-              img.img-baan(:src="require(`@/theme/house/${baan.nameURL}.jpg`)" :alt='baan.nameTH')
-              slot(name='after' v-bind='baan')
+        router-link(:to='`baan/${baan.nameURL}`')
+          div.img-square(:style="{ backgroundImage: `url(${baan.img})` }")
+            slot(name='before' v-bind='baan')
+            // img.img-baan(:src="baan.img" :alt='baan.nameTH')
+            slot(name='after' v-bind='baan')
 </template>
 
 <script>
@@ -40,18 +39,10 @@ export default {
     if (this.shuffle) {
       raw_data = _.shuffle(raw_data)
     }
+    raw_data = raw_data.map((baan) => {
+      return _.assign({img: require(`@/theme/house/${baan.nameURL}.jpg`)}, baan)
+    })
     this.siz_list = _.groupBy(raw_data, "size")
-  },
-  methods: {
-    clicked(baan, e) {
-      console.log('>>>')
-      console.log(baan)
-      console.log(e)
-      e.preventDefault()
-      if (this.isButton){
-        // this.$emit('click', baan)
-      }
-    }
   }
 }
 </script>
@@ -89,7 +80,8 @@ export default {
 
   .img-square
     overflow: hidden;
-    background-color white
+    background-size cover
+    // background-color white
     margin 2px
     padding 0
     border-radius 10px

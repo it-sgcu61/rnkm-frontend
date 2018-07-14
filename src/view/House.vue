@@ -18,7 +18,10 @@ div.tcenter
         a(v-if='data[atr]' :href='data[atr]' :alt='atr' target="_blank" rel="noopener noreferrer")
           img.social-btn(:src="require(`../theme/material/${atr}.svg`)")
 
-    img.back(@click='$router.push("/baan")' src='../theme/material/back_btn.png')
+    // router-link(to='/baan')
+    a(@click="$router.go(-1)")
+      img.back(src='../theme/material/back_btn.png')
+    // router-link(:to="{ path: $route.from.fullPath }")
 
   absolute-background(bot)
 </template>
@@ -50,6 +53,8 @@ div.tcenter
     },
     created(){
       this.name = this.$route.params.name
+      console.log(this.$route)
+      console.log(this.$router)
       let raw_data = _.keyBy(require('@/others/house_data.json').data, "nameURL")[this.name]
       if (raw_data) {
         this.data = raw_data

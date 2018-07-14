@@ -24,12 +24,12 @@ export default new Router({
     },
     {
       path: '/register',
-      name: 'Register',
+      name: 'register',
       component: Register
     },
     {
       path: '/announce',
-      name: 'Announce',
+      name: 'announce',
       component: Announce
     },
     {
@@ -39,16 +39,20 @@ export default new Router({
     },
     {
       path: '/baan/:name',
-      name: 'House',
+      name: 'house',
       component: House
     },
     {
       path: '/transfer',
-      name: 'Transfer',
+      name: 'transfer',
       component: Transfer,
     }
   ],
+  mode: 'history',
   scrollBehavior (to, from, savedPosition) {
-    return { x: 0, y: 0 }
+    console.log(from, to, savedPosition)
+    if (to.name == 'house') return {x: 0, y:0}
+    if (to.name == 'baan') return savedPosition || { x: 0, y: 0 }
+    return {x: 0, y: 0}
   }
 })

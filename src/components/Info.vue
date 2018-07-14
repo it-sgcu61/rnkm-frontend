@@ -10,7 +10,7 @@ div#body-wrapper
     h1.is-size-1 102 TO BE YOU TO BEYOND
   div.section.has-text-centered
     h1.is-size-1 พบกัน 4-6 สิงหาคม 2018
-    h2 ณ ประตูใหญ่ จุฬาฯ
+    h3 ณ ประตูใหญ่ สระน้ำ จุฬาลงกรณ์มหาวิทยาลัย
   div.tab
   div.section
     h2 การรับน้องก้าวใหม่คืออะไร?
