@@ -6,10 +6,15 @@ div
         div.field
           h1 Check For House
       div#result-wrapper.section(v-if='result.show=="ready"')
-        div.logo-wrap
-          img.logo(@click='result.url' :src='result.img')
-        div.logo-wrap
-          img.back(@click='result.show = "query"' src='../theme/material/back_btn.png')
+        div.section
+          div.logo-wrap(v-if='result.baan != "notFound"')
+            img.logo(@click='result.url' :src='result.img')
+          div.logo-wrap(v-else)
+            h1.is-size-1.fzing Not Found User Information
+            h2.is-size-2.fzing please contact to facebook page
+        div.section
+          div.logo-wrap
+            img.back(@click='result.show = "query"' src='../theme/material/back_btn.png')
       div.scale-x2(v-else-if='result.show=="loading"' align="middle")
         rotate-square5
       form.container(v-else)
@@ -39,7 +44,8 @@ div
         result: {
           show: "query",
           img: '',
-          url: ''
+          url: '',
+          baan: ''
         }
       }
     },
@@ -47,6 +53,7 @@ div
       async submit () {
         this.result.show = "loading"
         var baanResult = await announcement(this.login.usr, this.login.pwd)
+        this.result.baan = baanResult
         this.result.img = require(`../theme/house/${baanResult}.png`)
         this.result.url = () => this.$router.push(`/house/${baanResult}`)
         this.result.show = "ready"
@@ -72,7 +79,7 @@ div
   h1
     font-size: 3em
     font-family: ZingRust
-    margin 1.5em auto
+    margin .5em auto
 
   .big-logo
     position: relative;

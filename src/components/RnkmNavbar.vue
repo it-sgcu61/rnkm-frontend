@@ -3,7 +3,8 @@
     div.k_nav(@click="$router.push('/about')") About
     div.k_nav(@click="$router.push('/baan')") Baan
     div.k_nav(@click="$router.push('/register')") Register
-    div.k_nav(@click="$router.push('/announce')" disable) Announce
+    div.k_nav(disable) Announce
+    // div.k_nav(@click="$router.push('/announce')" disable) Announce
 </template>
 
 <script>
