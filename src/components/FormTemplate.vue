@@ -26,7 +26,8 @@ div.wrapper
           select( v-else-if='f.type == "choice"' v-model.trim='form[f.name]' :name='f.name')
             option(v-for='o in f.option' :value='o.value' style='color: #353535' ) {{o.label}}
 
-          div.error {{ errors.has(f.name) ? 'information is incorrect' : '' }}
+          div.error(v-if='errors.has(f.name)')
+            | information is {{ f.required && ! form[f.name] : "require" : "incorrect"}}
 
 </template>
 
