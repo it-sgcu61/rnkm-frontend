@@ -7,7 +7,7 @@ div.section
       span.desc {{siz_desc[grp]}}
     div#body.flex(:n-item='siz_list[grp].length')
       div.flex-item(v-for='baan in siz_list[grp]' :key='baan.id')
-        router-link(:to='`/baan/${baan.nameURL}`')
+        router-link(:to='`baan/${baan.nameURL}`')
           div.img-square(:style="{ backgroundImage: `url(${baan.img})` }")
             slot(name='before' v-bind='baan')
             // img.img-baan(:src="baan.img" :alt='baan.nameTH')
@@ -28,10 +28,10 @@ export default {
       rnd_list: [],
       siz_list: {},
       siz_desc: {
-        "S": "บ้านขนาดเล็ก\nมีจำนวนคน ~160 คน",
-        "M": "บ้านขนาดกลาง\nมีจำนวนคน ~220 คน",
-        "L": "บ้านขนาดใหญ่\nมีจำนวนคน ~350 คน",
-        "XL": "บ้านขนาดใหญ่มาก\nมีจำนวนคน ~400 คน",
+        "S": "บ้านขนาดเล็ก\nมีจำนวนคน ~110 คน",
+        "M": "บ้านขนาดกลาง\nมีจำนวนคน ~160 คน",
+        "L": "บ้านขนาดใหญ่\nมีจำนวนคน ~210 คน",
+        "XL": "บ้านขนาดใหญ่มาก\nมีจำนวนคน ~260 คน",
     }}
   },
   created(){
