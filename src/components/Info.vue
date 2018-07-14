@@ -19,8 +19,9 @@ div#body-wrapper
   div.tab
   div.section.columns.is-multiline
     div.column.is-half.is-mobile(v-for='o in itmlist')
-      div(v-if='o.img')
-        img(:src='require(`@/theme/photography/${o.img}.jpg`)')
+      div.mcenter(v-if='o.img')
+        div
+          img(:src='require(`@/theme/photography/${o.img}.jpg`)')
       div(v-else)
         h3 {{o.h}}
         h4.regular {{o.s}}
@@ -57,7 +58,7 @@ export default {
         {img: 'MEM5846'},
       ],
       schedule: [
-        {l: "ลงทะเบียนบ้าน", r: "15-19 กรกฎาคม"},
+        {l: "ลงทะเบียนบ้าน", r: "15-20 กรกฎาคม"},
         {l: "ประกาศผลบ้าน", r: "25 กรกฎาคม"},
         {l: "ถวายสัตย์", r: "3 สิงหาคม"},
         {l: "รับน้องก้าวใหม่", r: "4-6 สิงหาคม"},
