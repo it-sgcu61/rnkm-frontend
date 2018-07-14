@@ -27,7 +27,7 @@ div.wrapper
             option(v-for='o in f.option' :value='o.value' style='color: #353535' ) {{o.label}}
 
           div.error(v-if='errors.has(f.name)')
-            | information is {{ f.required && ! form[f.name] : "require" : "incorrect"}}
+            | information {{ f.required && !form[f.name] ? "require" : "incorrect"}}
 
 </template>
 
