@@ -5,6 +5,8 @@ npm-debug.log*
 yarn-debug.log*
 yarn-error.log*
 /function/config.js
+/function.rod/config.js
+/function.rod/.*
 /function/.*
 # Editor directories and files
 .idea

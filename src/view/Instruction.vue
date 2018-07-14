@@ -1,6 +1,7 @@
 <template lang='pug'>
 div
-    absolute-background(top :src='require("../theme/material/Instruction.png")')
+    // absolute-background(top :src='require("@/theme/material/Instruction.png")')
+    absolute-background(top :src="require('@/theme/material/logo_1.png')")
     rnkm-info
     rnkm-sponsor
     absolute-background(bot)

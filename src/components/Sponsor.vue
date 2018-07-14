@@ -1,14 +1,17 @@
 <template lang='pug'>
 div.section.has-text-centered
-  img.spon(src='../theme/material/cunex.jpg')
-  img.spon(src='../theme/material/zero_waste.png')
+  img.spon.cunex(src='@/theme/material/cunex.png')
+  img.spon.zero_waste(src='@/theme/material/zero_waste.png')
 </template>
 
 <style lang='stylus' scoped>
   .spon
-    max-height 10vmin
-    max-width  30vw
-    margin 0 auto
-    margin 20px
+    margin 20px 20px
+    vertical-align center
+    &.cunex
+      width 200px
+      padding-bottom: 25px;
+    &.zero_waste
+      width 90px
 
 </style>

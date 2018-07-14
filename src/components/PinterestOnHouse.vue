@@ -5,7 +5,8 @@
         img.icon(:src="require(`../theme/house/${houses[i-1] || 'unknown'}.jpg`)")
         div.text
           h1.is-size-1 {{i}}
-    div(v-if="houses.filter((item)=>(item!=null)).length == 3")
+    // div(v-if="houses.filter((item)=>(item!=null)).length == 3")
+    div(v-if="false")
       img.next(@click='$router.push("/registration")' src='../theme/material/Next.png')
 </template>
 

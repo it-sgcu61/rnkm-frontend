@@ -1,7 +1,8 @@
 <template lang='pug'>
 div#body-wrapper
-  div.section.has-text-centered
-    img(style='max-width: 80vmin' src='../theme/material/logo_1.png')
+  // <<<<
+  // div.section.has-text-centered
+  //   img(style='max-width: 80vmin' src='../theme/material/logo_1.png')
   div.section.has-text-centered
     h2 ก้าวออกมาจากขีดจำกัดแบบเดิมๆ แล้วมา beyond
     h2 ในแบบที่ตัวเองเป็นพร้อมกันในงานรับน้องก้าวใหม่
@@ -18,9 +19,9 @@ div#body-wrapper
   div.tab
   div.section.columns.is-multiline
     div.column.is-half.is-mobile(v-for='o in itmlist')
-      template(v-if='"img" in o')
-        img(:src='o.img')
-      template(v-else)
+      div(v-if='o.img')
+        img(:src='require(`@/theme/photography/${o.img}.jpg`)')
+      div(v-else)
         h3 {{o.h}}
         h4.regular {{o.s}}
         br
@@ -37,7 +38,7 @@ div#body-wrapper
           p.is-pulled-left {{o.r}}
   div.tab
   div.section.tcenter
-      img.next(src='../theme/material/Next.png' @click='$router.push("/house")')
+      img.next(src='@/theme/material/Next.png' @click='$router.push("/house")')
 </template>
 
 <script>
@@ -49,10 +50,10 @@ export default {
         {h: "To be JOYFUL", s: "Freshy Night", p: "พบโชว์สุดพิเศษจากศิลปินชื่อดัง ที่จะมาทำให้น้องได้ปลดปล่อยความมันสุดขั้ว"},
         {h: "To be KIND", s: "กิจกรรมบำเพ็ญประโยชน์", p: "กิจกรรมที่เปิดโอกาสให้น้องๆ ได้ทำประโยชน์เพื่อส่วนรวมร่วมกัน"},
         {h: "To be PROUD", s: "กิจกรรมรับขวัญน้องใหม่", p: "ต้อนรับนิสิตใหม่ ภายใต้รั้วจามจุรี พร้อมแขกรับเชิญสุด exclusive ที่จะมาแชร์ประสบการณ์แบบที่หาฟังที่ไหนไม่ได้"},
-        {img: 'http://static.trueplookpanya.com/tppy/member/m_525000_527500/525016/cms/images/%E0%B8%A3%E0%B8%B1%E0%B8%9A%E0%B8%99%E0%B9%89%E0%B8%AD%E0%B8%87%E0%B8%81%E0%B9%89%E0%B8%B2%E0%B8%A7%E0%B9%83%E0%B8%AB%E0%B8%A1%E0%B9%88%20(8).png'},
-        {img: 'http://static.trueplookpanya.com/tppy/member/m_525000_527500/525016/cms/images/%E0%B8%A3%E0%B8%B1%E0%B8%9A%E0%B8%99%E0%B9%89%E0%B8%AD%E0%B8%87%E0%B8%81%E0%B9%89%E0%B8%B2%E0%B8%A7%E0%B9%83%E0%B8%AB%E0%B8%A1%E0%B9%88%20(5).png'},
-        {img: 'http://p3.isanook.com/ca/0/rp/rc/w620h0/ya0xa0m1/aHR0cDovL3AzLmlzYW5vb2suY29tL2NhLzAvdWkvMjczLzEzNjg2NzEvNDZhNmJhMWNlYTg4ZTdkYmJhMDA3ZDYwMTM4NDVjMGJfMTM2OTAzODEwMi5qcGc=.jpg'},
-        {img: 'https://blog.eduzones.com/images/blog/rubnongkaomai2559/20160627-1467040587.7249-0.jpg'},
+        {img: 'DSC0293'},
+        {img: 'NIN9738'},
+        {img: 'Rubnong6005'},
+        {img: 'MEM5846'},
       ],
       schedule: [
         {l: "ลงทะเบียนบ้าน", r: "15-19 กรกฎาคม"},
