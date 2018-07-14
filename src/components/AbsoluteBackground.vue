@@ -3,7 +3,9 @@
     div.bg.top(v-if='top')
       rnkm-nav
       slot
-      img.big-logo(v-if='src' :src='src')
+      div.flex.jcenter
+        img.big-logo.abs.mcenter(v-if='src2' :src='src2')
+        img.big-logo.abs.mcenter(v-if='src' :src='src')
     div.bg.bot(v-if='bot' style='height: 30vh; margin-top: -8vh')
       slot
       div(style='padding-top: 20vh')
@@ -16,11 +18,14 @@
       top: Boolean,
       bot: Boolean,
       src: String,
+      src2: String
     }
   }
 </script>
 
 <style lang='stylus' scoped>
+  .abs
+    position absolute !important
   .bg
     color: red;
     width: 100%;

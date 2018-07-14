@@ -7,16 +7,20 @@ div.section
       span.desc {{siz_desc[grp]}}
     div#body.flex(:n-item='siz_list[grp].length')
       div.flex-item(v-for='baan in siz_list[grp]' :key='baan.id')
-        div.img-square(@click='$emit("click", baan)')
-          slot(name='before' v-bind='baan')
-          img.img-baan(:src="require(`@/theme/house/${baan.nameURL}.jpg`)" :alt='baan.nameTH')
-          slot(name='after' v-bind='baan')
-        // div.img-square(@click='$router.push(`/house/${baan.nameURL}`)')
+        span(@click="")
+          router-link(:to='`baan/${baan.nameURL}`')
+            div.img-square
+              slot(name='before' v-bind='baan')
+              img.img-baan(:src="require(`@/theme/house/${baan.nameURL}.jpg`)" :alt='baan.nameTH')
+              slot(name='after' v-bind='baan')
 </template>
 
 <script>
 export default {
   props: {
+    isButton: {
+      default: false
+    },
     shuffle: {
       default: false
   }},
@@ -37,6 +41,17 @@ export default {
       raw_data = _.shuffle(raw_data)
     }
     this.siz_list = _.groupBy(raw_data, "size")
+  },
+  methods: {
+    clicked(baan, e) {
+      console.log('>>>')
+      console.log(baan)
+      console.log(e)
+      e.preventDefault()
+      if (this.isButton){
+        // this.$emit('click', baan)
+      }
+    }
   }
 }
 </script>
@@ -55,8 +70,8 @@ export default {
 
     @media screen and (min-width: 600px)
       &[n-item="5"]
-        padding-left: 12vw;
-        padding-right: 12vw;
+        padding-left: 10vw;
+        padding-right: 10vw;
 
   .size
     width  calc(8vw + 70px)

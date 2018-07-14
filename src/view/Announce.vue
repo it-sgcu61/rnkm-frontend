@@ -1,6 +1,6 @@
 <template lang='pug'>
 div
-    absolute-background(top :src='require("../theme/material/Annoucment.png")')
+    absolute-background(top :src='require("../theme/heading/Annoucment_text.png")' :src2='require("../theme/heading/Annoucment_frame.png")')
     section.section
       div.container
         div.field

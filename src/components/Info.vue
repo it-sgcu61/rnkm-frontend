@@ -38,7 +38,8 @@ div#body-wrapper
           p.is-pulled-left {{o.r}}
   div.tab
   div.section.tcenter
-      img.next(src='@/theme/material/Next.png' @click='$router.push("/house")')
+    router-link(to='baan')
+      img.next(src='@/theme/material/Next.png')
 </template>
 
 <script>

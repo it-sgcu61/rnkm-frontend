@@ -1,6 +1,6 @@
 <template lang='pug'>
   div.tcenter
-    absolute-background(top :src='require("../theme/material/Introduction.png")')
+    absolute-background(top :src='require("../theme/heading/Baan_text.png")' :src2='require("../theme/heading/Baan_Frame.png")')
     div.section.content
       p.is-size-3.bold บ้านรับน้องคืออะไร
       p.is-size-5

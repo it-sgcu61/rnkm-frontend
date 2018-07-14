@@ -23,6 +23,7 @@ div.section
       h2 user : {{person.username}}
       h2 baan : {{person.house}}
       button.button.is-warning(@click='submit') submit
+    // bug always direct to detail
     HousePreview
       template(slot='before' slot-scope='baan')
         div.baan-overlay
@@ -60,6 +61,9 @@ export default {
   },
   methods: {
     async move_to(next) {
+      console.log('move to')
+      console.log(next)
+      return
       if (this.stat(next) != "avail") return
       this.isProcess = true
       let {nameTH, nameEN,} = next
