@@ -5,9 +5,8 @@
         img.icon(:src="require(`../theme/house/${houses[i-1] || 'unknown'}.jpg`)")
         div.text
           h1.is-size-1 {{i}}
-    div(v-if="houses.filter(Boolean).length == 3")
-      router-link(to='/register')
-        img.next(src='../theme/material/Next.png')
+    div(v-if="houses.filter((item)=>(item!=null)).length == 3")
+      img.next(@click='$router.push("/registration")' src='../theme/material/Next.png')
 </template>
 
 <style lang="stylus" scoped>
