@@ -18,14 +18,7 @@ div.tcenter
         a(v-if='data[atr]' :href='data[atr]' :alt='atr' target="_blank" rel="noopener noreferrer")
           img.social-btn(:src="require(`../theme/material/${atr}.svg`)")
 
-    img.back(@click='$router.push("/house")' src='../theme/material/back_btn.png')
-
-    // div(v-if='data.instagramURL')
-    //   vue-instagram(:token="ig_token" :count="5" mediaType="image")
-    //     template(slot="feeds" slot-scope="props")
-    //       li.fancy-list {{ props.feed.link }}
-    //     template(slot="error" slot-scope="props")
-    //       div.fancy-alert {{ props.error.error_message }}
+    img.back(@click='$router.push("/baan")' src='../theme/material/back_btn.png')
 
   absolute-background(bot)
 </template>
@@ -33,12 +26,11 @@ div.tcenter
 <script>
   import AbsoluteBackground from '@/components/AbsoluteBackground.vue'
   import HousePinterest from '@/components/PinterestOnHouse.vue'
-  import VueInstagram from 'vue-instagram'
   import VueSticky from 'vue-sticky'
   import lodash from 'lodash'
   import axios from 'axios'
   export default {
-    components: {AbsoluteBackground, HousePinterest, VueInstagram},
+    components: {AbsoluteBackground, HousePinterest},
     data() {
       return {
         name: this.$route.params.name,
@@ -51,7 +43,6 @@ div.tcenter
           disabled: false
         },
         houses: [],
-        ig_img: []
       }
     },
     directives: {
@@ -66,12 +57,6 @@ div.tcenter
         this.$router.push('/house')
       }
       this.set_fav(this.get_fav())
-
-      // let cook = document.cookie
-      // console.log(cook)
-      // let url = this.data.instagramURL + "?__a=1"
-      axios.get("https://www.instagram.com/baan_sod/")
-        .then(res => {console.log(res)})
     },
     methods:{
       get_fav(){

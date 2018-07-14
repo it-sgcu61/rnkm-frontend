@@ -1,10 +1,9 @@
 import Vue from 'vue'
-import Home from '@/view/Home.vue'
 import House from '@/view/House.vue'
-import Instruction from '@/view/Instruction.vue'
-import Introduction from '@/view/Introduction.vue'
-import Registration from '@/view/Registration.vue'
-import Announcement from '@/view/Announcement.vue'
+import About from '@/view/About.vue'
+import Baan from '@/view/Baan.vue'
+import Register from '@/view/Register.vue'
+import Announce from '@/view/Announce.vue'
 import Transfer from '@/view/Transfer.vue'
 
 import Router from 'vue-router'
@@ -14,50 +13,47 @@ export default new Router({
   routes: [
     {
       path: '/',
-      redirect: '/instruction'
+      redirect: 'about'
       // name: 'Home',
       // component: Home
     },
     {
-      path: '/instruction',
-      name: 'Instruction',
-      component: Instruction
+      path: '/about',
+      name: 'about',
+      component: About
     },
     {
-      path: '/registration',
-      name: 'Registration',
-      component: Registration
+      path: '/register',
+      name: 'Register',
+      component: Register
     },
     {
-      path: '/announcement',
-      name: 'Announcement',
-      component: Announcement
+      path: '/announce',
+      name: 'Announce',
+      component: Announce
     },
     {
-      path: '/introduction',
-      name: 'Introduction',
-      component: Introduction,
+      path: '/baan',
+      name: 'baan',
+      component: Baan
     },
     {
-      path: '/house',
-      name: 'House',
-      component: Introduction,
-    },
-    {
-      path: '/house/:name',
+      path: '/baan/:name',
       name: 'House',
       component: House
-    },
-    {
-      path: '/house/:name',
-      name: 'House',
-      component: House,
     },
     {
       path: '/transfer',
       name: 'Transfer',
       component: Transfer,
     }
-
-  ]
+  ],
+  scrollBehavior (to, from, savedPosition) {
+    if (to.name == 'baan') return savedPosition
+    if (savedPosition) {
+      return savedPosition
+    } else {
+      return { x: 0, y: 0 }
+    }
+  }
 })

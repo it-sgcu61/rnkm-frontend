@@ -5,22 +5,13 @@ import firebase from 'firebase'
 import App from './App.vue'
 import router from './router'
 
-// import "bulma/sass/base/minireset.sass";
-// import "bulma/sass/base/generic.sass";
-// import "bulma/sass/base/helpers.sass";
 import 'bulma'
-// import './css/normalize.css'
 import './css/animate.css'
 import './css/vue2-animate.css'
 import './css/rnkm-style.css'
 
 import 'font-awesome/css/font-awesome.css'
 import '@fortawesome/fontawesome'
-
-import { FontAwesomeIcon } from '@fortawesome/vue-fontawesome'
-
-Vue.component('fa', FontAwesomeIcon)
-Vue.component('font-awesome-icon', FontAwesomeIcon)
 
 import Transitions from 'vue2-transitions'
 Vue.use(Transitions)

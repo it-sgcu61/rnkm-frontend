@@ -5,21 +5,27 @@ div
       rotate-square5
 
   div#expired.container(v-else-if='expired')
-    h1.is-size-1.zingR Registration expired.
+    div.flex
+      div.mcenter
+        h1.is-size-1.zingR Registration expired.
 
   div.container(v-else-if='success')
-    h1.is-size-1.zingR Registration success.
-    h2.is-size-2.space Announce the result on Sat Jul 21 2018
-    p.space.is-size-4 please like our facebook page to receive news and information.
-      a(href='https://fb.com/chulafreshmen/' target="_blank" rel="noopener noreferrer")
-        img(src='@/theme/material/FB.png' style='width:40px; margin-left:20px;' align='middle')
+    div.flex
+      div.mcenter
+        h1.is-size-1.zingR Registration success.
+        h2.is-size-2.space Announce the result on Sat Jul 21 2018
+        p.space.is-size-4 please like our facebook page to receive news and information.
+          a(href='https://fb.com/chulafreshmen/' target="_blank" rel="noopener noreferrer")
+            img(src='@/theme/material/FB.png' style='width:40px; margin-left:20px;' align='middle')
 
   div.container(v-else-if='countdown')
     vue-countdown(:time="timeLeft" @countdownend="$emit('ready')")
       template(slot-scope="props")
-        h1.zingR(style='font-size:3em;') Registration will start in:
-        h1.zingR(style='font-size:5em;') {{ props.days }}:{{ props.hours }}:{{ props.minutes }}:{{ props.seconds }}
-        h1.zingR(style='font-size:1.5em; color: #3a225c') ({{ (new Date(formState.closeOn.datetime[0])).toString() }})
+        div.flex
+          div.mcenter
+            h1.zingR(style='font-size:3em;') Registration will start in:
+            h1.zingR(style='font-size:5em;') {{ props.days }}:{{ props.hours }}:{{ props.minutes }}:{{ props.seconds }}
+            h1.zingR(style='font-size:1.5em; color: #3a225c') ({{ (new Date(formState.closeOn.datetime[0])).toString() }})
 
 </template>
 

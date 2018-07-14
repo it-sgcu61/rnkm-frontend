@@ -1,9 +1,9 @@
 <template lang='pug'>
   div.flex.has-text-centered
-    div.k_nav(@click="$router.push('/instruction')") About
-    div.k_nav(@click="$router.push('/introduction')") Baan
-    div.k_nav(@click="" disable) Register
-    div.k_nav(@click="" disable) Announce
+    div.k_nav(@click="$router.push('/about')") About
+    div.k_nav(@click="$router.push('/baan')") Baan
+    div.k_nav(@click="$router.push('/register')") Register
+    div.k_nav(@click="$router.push('/announce')") Announce
 </template>
 
 <script>
@@ -20,15 +20,8 @@ export default {
     align-items: center;
     background-color: rgba(20, 20, 20, .3);
     padding: .7em 4em
-    // @media screen and (min-width: 400px)
-    //   padding: .0em 4em
-    // @media screen and (min-width: 600px)
-    //   padding: .7em 7em
-    // @media scre.5n and (min-width: 1000px)
-    //   padding: .9em 12em
 
   div.k_nav
-
     position: relative;
     cursor pointer
     color: white;

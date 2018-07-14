@@ -1,10 +1,9 @@
 <template lang='pug'>
 div.section
-
   div.header ระบบย้ายบ้าน
 
   // LOGIN
-  div(v-if='!isLogin') 101 - 205
+  div(v-if='!isLogin')
     form.container.has-text-centered
       div.input-wrapper
         div.field
@@ -36,22 +35,18 @@ div.section
 
 <script>
 import {mask} from 'vue-the-mask'
-import {login, getPersonInfo, movePerson, confirmHouse} from '../firebase_api.js' //'../../functions/index.js' (krist can not integral with it)
+import {login, getPersonInfo, movePerson, confirmHouse} from '../firebase_api.js'
 import {firebaseDB} from '../main.js'
 import Formstatus from '../components/Formstatus'
 import HousePreview from '../components/HousePreview.vue'
 export default {
   directives: {mask},
   components: {Formstatus, HousePreview},
-  props: {
-    shuffle: {
-      default: false
-  }},
   data() {
     return {
       form: {
-        usr: '089-123-4',
-        pwd: '1200100123'
+        usr: '',
+        pwd: ''
       },
       person: {
         house: '',
@@ -60,25 +55,8 @@ export default {
       },
       isLogin: false,
       isProcess: false,
-      rnd_list: [],
-      siz_list: {},
-      url_desc: {},
-      siz_desc: {
-        "S": "บ้านขนาดเล็ก\nมีจำนวนคนประมาณ 160 คน",
-        "M": "บ้านขนาดกลาง\nมีจำนวนคนประมาณ 220 คน",
-        "L": "บ้านขนาดใหญ่\nมีจำนวนคนประมาณ 350 คน",
-        "XL": "บ้านขนาดใหญ่มาก\nมีจำนวนคนประมาณ 400 คน"
-      },
       houses: {}
     }
-  },
-  created(){
-    let raw_data = require('@/others/house_data.json').data
-    if (this.shuffle) {
-      raw_data = _.shuffle(raw_data)
-    }
-    this.url_desc = _.keyBy(raw_data, o => `${o.nameTH} - ${o.nameEN}`)
-    this.siz_list = _.groupBy(raw_data, "size")
   },
   methods: {
     async move_to(next) {
@@ -122,7 +100,7 @@ export default {
       // }
       // console.log('[success] login')
 
-      // read firebase data
+      // firebase listener
       let rf = firebaseDB.database().ref('/houses')
       this.house = (await rf.once('value')).val()
       for (let nameTH in this.house) {
