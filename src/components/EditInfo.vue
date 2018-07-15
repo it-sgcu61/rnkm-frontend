@@ -24,16 +24,23 @@
   import {get_regist_form, post_regist_form} from '../dtnl_api.js'
 
   export default {
-    props: ['value', 'fieldList'],
+    props: ['value'],
     components: {
       FormTemplate,
       CroppaImg,
       Formstatus
     },
-    data () {
+    async data () {
       return {
-        copyFieldList: this.fieldList
+        submissionState: false,
+        fieldList: [],
+        copyFieldList: []
       }
+    },
+    async created(){
+       let form = await require('@/others/static_TH_form.json')
+       this.fieldList = form.result.fieldList
+       console.log(form)
     },
     methods: {
       async submit() {

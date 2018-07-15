@@ -5,6 +5,7 @@ import Baan from '@/view/Baan.vue'
 import Register from '@/view/Register.vue'
 import Announce from '@/view/Announce.vue'
 import Transfer from '@/view/Transfer.vue'
+import EditInfo from '@/components/EditInfo.vue'
 
 import Router from 'vue-router'
 Vue.use(Router)
@@ -47,6 +48,11 @@ export default new Router({
       path: '/transfer',
       name: 'Transfer',
       component: Transfer,
+    },
+    {
+      path: '/edit',
+      name: 'Edit',
+      component: EditInfo,
     }
   ],
   scrollBehavior (to, from, savedPosition) {
