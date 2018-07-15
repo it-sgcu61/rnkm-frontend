@@ -2,38 +2,44 @@
 div
     absolute-background(top :src='require("../theme/heading/Annoucment_text.png")' :src2='require("../theme/heading/Annoucment_frame.png")')
     section.section
-      div.container
-        div.field
-          h1 Check For House
-      div#result-wrapper.section(v-if='result.show=="ready"')
+      div.container: div.field: h1 Check For House
+
+      // ANNOUNCE RESULT
+      div#result-wrapper.section(v-if='result.show == "ready"')
         div.section
-          div.logo-wrap(v-if='result.baan != "notFound"')
-            img.logo(@click='result.url' :src='result.img')
+          div.logo-wrap(v-if='result.baan != "notFound"'): img.logo(@click='result.url' :src='result.img')
           div.logo-wrap(v-else)
             h1.is-size-1.fzing Not Found User Information
             h2.is-size-2.fzing please contact to facebook page
-        div.section
-          div.logo-wrap
+        div.section: div.logo-wrap
             img.back(@click='result.show = "query"' src='../theme/material/back_btn.png')
-      div.scale-x2(v-else-if='result.show=="loading"' align="middle")
+
+      // LOADING
+      div.scale-x2(v-else-if='result.show == "loading"' align="middle")
         rotate-square5
+
+      // EDITING
+      div.section(v-if='result.show == "edit"')
+        edit-info(:form='editable_form')
+
+      // LOGIN
       form.container(v-else)
-        div.field
-          input.input(v-model='login.usr' type="tel" v-mask="'###-###-####'" :masked="false" placeholder='phone number' pattern='[0-9]{10}' title="10 digit tel number")
-        div.field
-          input.input(v-model='login.pwd' type='password' placeholder='personal ID')
-        div.field
-          img#submit(@click='submit' src='../theme/material/submit_btn.png')
+        div.field: input.input(v-model='login.usr' type="tel" v-mask="'###-###-####'" :masked="false" placeholder='phone number' pattern='[0-9]{10}' title="10 digit tel number")
+        div.field: input.input(v-model='login.pwd' type='password' placeholder='personal ID')
+        div.field: img#submit(@click='submit' src='../theme/material/submit_btn.png')
     absolute-background(bot)
 </template>
 
 <script>
   import AbsoluteBackground from '@/components/AbsoluteBackground.vue'
+  import EditInfo from '@/components/EditInfo.vue'
+
+
   import {mask} from 'vue-the-mask'
   import {RotateSquare5} from 'vue-loading-spinner'
   import {announcement} from '../middle-api'
   export default {
-    components: {AbsoluteBackground, RotateSquare5},
+    components: {AbsoluteBackground, RotateSquare5, EditInfo},
     directives: {mask},
     data() {
       return {
@@ -46,17 +52,25 @@ div
           img: '',
           url: '',
           baan: ''
-        }
+        },
+        editable_form: {}
       }
     },
     methods: {
       async submit () {
         this.result.show = "loading"
-        var baanResult = await announcement(this.login.usr, this.login.pwd)
-        this.result.baan = baanResult
-        this.result.img = require(`../theme/house/${baanResult}.png`)
-        this.result.url = () => this.$router.push(`/house/${baanResult}`)
-        this.result.show = "ready"
+        // EDIT DATA
+        this.editable_form = await getAllowEditPersonalForm(this.login.usr, this.login.pwd)
+        this.result.show = "edit"
+        return
+
+        // NORMAL ANNOUNCE !!! (remove by krist 16 jul 2018)
+        // var baanResult = await announcement(this.login.usr, this.login.pwd)
+        // this.result.baan = baanResult
+        // this.result.img = require(`../theme/house/${baanResult}.png`)
+        // this.result.url = () => this.$router.push(`/house/${baanResult}`)
+        // this.result.show = "ready"
+
       }
     },
     watch: {

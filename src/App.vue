@@ -1,7 +1,7 @@
 <template lang='pug'>
   div#app
     transition(name="fade" mode='out-in' duration='400')
-      router-view
+      router-view(:key="$route.fullPath")
 </template>
 
 <script>

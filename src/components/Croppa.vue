@@ -3,8 +3,11 @@
     <croppa ref='croppa' v-model='userimg' :width='225' :height='300' :quality='2' :prevent-white-space='true' :placeholder='desc' placeholderColor='#333'
       placeholder-color="#fff" :placeholder-font-size='13' :show-remove-button='true' remove-button-color="#be5877" canvasColor='transparent'
       :show-loading='true' :loading-size='50' :zoom-speed="4" :reverse-scroll-to-zoom='true' initial-size='cover' accept=".jpg,.jpeg,.png"
+      :initial-image="url()"
     >
     </croppa>
+    <br>
+    <span>คลิกเพืออัพโหลด ภาพหน้าตรงเห็นใบหน้าชัดเจน ไม่จำเป็นต้องเป็นภาพนิสิต</span>
     <span class='error is-block' v-if='first_check && !$refs.croppa.imageSet'>please select image</span>
     <div v-if='tools'>
       <hr/>ch
@@ -31,7 +34,7 @@
       },
       desc: {
         type: String,
-        default: "คลิกเพืออัพโหลด ภาพหน้าตรงเห็นชัด"
+        default: ""
       },
       tools: {
         type: Boolean,

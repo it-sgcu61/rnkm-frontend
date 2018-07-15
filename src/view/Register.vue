@@ -1,6 +1,6 @@
 <template lang='pug'>
 div
-  absolute-background(top :src='require("../theme/heading/Registeration_text.png")' :src2='require("../theme/heading/Registeration_frame.png")')
+  absolute-background(top :src='require("../theme/heading/Register_text.png")' :src2='require("../theme/heading/Register_frame.png")')
   div.section
     term-and-condition(v-if='!accept' @accept-condition='acceptedCondition')
     rnkm-form(v-else :lang="lang")

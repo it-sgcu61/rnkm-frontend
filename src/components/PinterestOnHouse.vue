@@ -6,7 +6,7 @@
         div.text
           h1.is-size-1 {{i}}
     div(v-if="houses.filter((item)=>(item!=null)).length == 3")
-      img.next(@click='$router.push("/register")' src='../theme/material/Next.png')
+      img.next(@click='$router.push("/register")' src='../theme/material/next_btn.png')
 </template>
 
 <style lang="stylus" scoped>

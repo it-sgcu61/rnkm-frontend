@@ -20,7 +20,7 @@
         div.container(v-for='(vl, x) in dynm_result' :key='x' v-show='dynm_result[x]')
           FormTemplate(v-model='dynm_result[x]' ref='dynamic_refs' :fieldList='fieldList.dynamic' @delete='del_user(x)', :deletable='dynm_result.length > 1')
             div.croppa-wrap.has-text-centered(slot-scope="o")
-              croppa-img(ref='croppa_refs' :desc='o.lang == "TH" ? "เพิ่มรูปภาพ หน้าตรงเห็นชัด" : "add clear face picture"')
+              croppa-img(ref='croppa_refs')
           // | {{dynm_result[x]}}
 
       // submit button

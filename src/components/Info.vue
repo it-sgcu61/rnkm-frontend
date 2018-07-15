@@ -1,8 +1,5 @@
 <template lang='pug'>
 div#body-wrapper
-  // <<<<
-  // div.section.has-text-centered
-  //   img(style='max-width: 80vmin' src='../theme/material/logo_1.png')
   div.section.has-text-centered
     h2 ก้าวออกมาจากขีดจำกัดแบบเดิมๆ แล้วมา beyond
     h2 ในแบบที่ตัวเองเป็นพร้อมกันในงานรับน้องก้าวใหม่
@@ -17,11 +14,10 @@ div#body-wrapper
     br
     p การรับน้องก้าวใหม่ คือ กิจกรรมที่จุฬาลงกรณ์มหาวิทยาลัย จัดขึ้นเพื่อต้อนรับ และเสริมสร้างความสัมพันธ์ของนิสิตจากหลากหลายคณะและชั้นปีให้ลึกซึ้งมากยิ่งขึ้น โดยแต่ละบ้านจะมีรูปแบบกิจกรรมซึ่งแตกต่างกันออกไปซึ่งเป็นเอกลักษณ์ของแต่ละบ้าน
   div.tab
-  div.section.columns.is-multiline
-    div.column.is-half.is-mobile(v-for='o in itmlist')
-      div.mcenter(v-if='o.img')
-        div
-          img(:src='require(`@/theme/photography/${o.img}.jpg`)')
+  div.section.columns.is-multiline.is-tablet(:class='force_mobile')
+    div.column.is-half(v-for='o in itmlist')
+      div.tcenter(v-if='o.img')
+        img(style='min-width: 60%' :src='require(`@/theme/photography/${o.img}.jpg`)')
       div(v-else)
         h3 {{o.h}}
         h4.regular {{o.s}}
@@ -40,7 +36,7 @@ div#body-wrapper
   div.tab
   div.section.tcenter
     router-link(to='baan')
-      img.next(src='@/theme/material/Next.png')
+      img.next(src='@/theme/material/next_btn.png')
 </template>
 
 <script>
@@ -64,15 +60,17 @@ export default {
         {l: "รับน้องก้าวใหม่", r: "4-6 สิงหาคม"},
         {l: "เปิดภาคการศึกษา", r: "14 สิงหาคม"}
       ],
-      itmlist: []
+      itmlist: [],
+      force_mobile: {}
     }
   },
-  created() {
+  mounted() {
     let ordlist =
-      screen.width > 768
+      screen.width > 550
         ? [0, 4, 5, 1, 2, 6, 7, 3]
         : [0, 4, 1, 5, 2, 6, 3, 7];
     this.itmlist = ordlist.map(x => this.content[x]);
+    this.force_mobile = {"is-mobile": screen.width > 550}
   }
 }
 </script>

@@ -146,7 +146,7 @@ $edge = #eeef
   float: none;
   position: relative;
   width: 100%;
-  margin: 0;
+  margin: 3em 0;
   transition: all 0.25s;
   font-family: Superspace;
 

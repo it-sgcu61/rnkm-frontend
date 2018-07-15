@@ -22,6 +22,9 @@ Vue.use(Validate)
 import Resource from 'vue-resource'
 Vue.use(Resource)
 
+import Vue2TouchEvents from 'vue2-touch-events'
+Vue.use(Vue2TouchEvents)
+
 import RnkmNavbar from './components/RnkmNavbar.vue'
 Vue.component('rnkm-nav', RnkmNavbar)
 import RnkmSponsor from './components/Sponsor.vue'
