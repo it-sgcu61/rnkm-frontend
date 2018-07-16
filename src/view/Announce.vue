@@ -2,7 +2,7 @@
 div
     absolute-background(top :src='require("../theme/heading/Annoucment_text.png")' :src2='require("../theme/heading/Annoucment_frame.png")')
     section.section
-      div.container: div.field: h1 Check For House
+      div.container: div.field: h1 Check For House and Data
 
       // ANNOUNCE RESULT
       div#result-wrapper.section(v-if='result.show == "ready"')
@@ -21,7 +21,6 @@ div
       // EDITING
       div.section(v-if='result.show == "edit"')
         edit-info(:userData='editableData')
-
       // LOGIN
       form.container(v-else)
         div.field: input.input(v-model='login.usr' type="tel" v-mask="'###-###-####'" :masked="false" placeholder='phone number' pattern='[0-9]{10}' title="10 digit tel number")
@@ -54,7 +53,8 @@ div
           url: '',
           baan: ''
         },
-        editableData: {}
+        editableData: {},
+        currentForm: {}
       }
     },
     methods: {

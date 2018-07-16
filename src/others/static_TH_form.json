@@ -1,14 +1,10 @@
 {
   "result": {
-    "closeOn": {
-      "datetime": ["2018-07-15T06:02:00.478Z", "2018-07-20T06:02:00.422Z"]
-    },
-    "desc": "กรุณากรอกข้อมูลด้านหลังนี้ให้ตรงตามความเป็นจริง และครบถ้วน เพื่อประโยชน์ของท่านเอง",
-    "disabled": false,
     "fieldList": [{
       "desc": "",
       "label": "บ้านที่ต้องการอันดับ 1",
       "name": "head/house1",
+      "lock": true,
       "option": [{
         "label": "บ้านคิดส์ - Kids",
         "value": "บ้านคิดส์ - Kids"
@@ -124,6 +120,7 @@
       "desc": "",
       "label": "บ้านที่ต้องการอันดับ 2",
       "name": "head/house2",
+      "lock": true,
       "option": [{
         "label": "บ้านคิดส์ - Kids",
         "value": "บ้านคิดส์ - Kids"
@@ -239,6 +236,7 @@
       "desc": "",
       "label": "บ้านที่ต้องกาารอันดับ 3",
       "name": "head/house3",
+      "lock": true,
       "option": [{
         "label": "บ้านคิดส์ - Kids",
         "value": "บ้านคิดส์ - Kids"
@@ -354,6 +352,7 @@
       "desc": "",
       "label": "คำนำหน้าชื่อ",
       "name": "dynamic/nameprefix",
+      "lock": false,
       "option": [{
         "label": "นาย - Mr.",
         "value": "นาย - Mr."
@@ -367,6 +366,7 @@
       "desc": "เช่น รับน้อง ก้าวใหม่",
       "label": "ชื่อ-นามสกุล (ไทย)",
       "name": "dynamic/fullname",
+      "lock": false,
       "required": true,
       "type": "string",
       "validate": "\\s+"
@@ -374,6 +374,7 @@
       "desc": "เช่น ต้อม, ปู",
       "label": "ชื่อเล่น",
       "name": "dynamic/nickname",
+      "lock": false,
       "required": true,
       "type": "string",
       "validate": ""
@@ -381,6 +382,7 @@
       "desc": "",
       "label": "คณะ",
       "name": "dynamic/faculty",
+      "lock": false,
       "option": [{
         "label": "ครุศาสตร์ - Faculty of Education",
         "value": "ครุศาสตร์ - Faculty of Education"
@@ -448,6 +450,7 @@
       "desc": "เลขบัตรประชาชนทั้ง 13 หลัก",
       "label": "เลขบัตรประจำตัวประชาชน",
       "name": "dynamic/nationalID",
+      "lock": false,
       "required": true,
       "type": "string",
       "validate": "^[0-9]{13}$"
@@ -455,6 +458,7 @@
       "desc": "เช่น พุทธ/คริสต์/อิสลาม หรือ -",
       "label": "ศาสนา",
       "name": "dynamic/religion",
+      "lock": false,
       "required": true,
       "type": "string",
       "validate": ""
@@ -462,6 +466,7 @@
       "desc": "0xx-xxx-xxxx (หากไม่มี ให้ใส่ 080-000-0000)",
       "label": "หมายเลขโทรศัพท์",
       "name": "dynamic/tel",
+      "lock": false,
       "required": true,
       "type": "string",
       "validate": "0[689][0-9]-[0-9]{3}-[0-9]{4}"
@@ -469,6 +474,7 @@
       "desc": "",
       "label": "LineID",
       "name": "dynamic/lineID",
+      "lock": false,
       "required": false,
       "type": "string",
       "validate": ""
@@ -477,12 +483,14 @@
       "label": "Facebook",
       "name": "dynamic/facebook",
       "required": false,
+      "lock": false,
       "type": "string",
       "validate": ""
     }, {
       "desc": "เราจะติดต่อไปยังหมายเลขนี้ในกรณีเกิดเหตุการณ์ฉุกเฉินขึ้น",
       "label": "หมายเลขโทรศัพท์ฉุกเฉิน",
       "name": "dynamic/emergency_tel",
+      "lock": false,
       "required": true,
       "type": "string",
       "validate": "0[689][0-9]-[0-9]{3}-[0-9]{4}"
@@ -491,12 +499,14 @@
       "label": "ความเกี่ยวข้องของเจ้าของหมายเลขโทรศัพท์ฉุกเฉิน",
       "name": "dynamic/emergency_tel_relation",
       "required": true,
+      "lock": false,
       "type": "string",
       "validate": ""
     }, {
       "desc": "ประสงค์จะอยู่หอพักนิสิตจุฬาลงกรณ์มหาวิทยาลัยในช่วงวันงานหรือไม่",
       "label": "ต้องการพักหอในช่วงกิจกรรมหรือไม่",
       "name": "dynamic/RCU_required",
+      "lock": false,
       "option": [{
         "label": "no",
         "value": "no"
@@ -510,12 +520,14 @@
       "desc": "สามารถไม่ตอบคำถามนี้ได้ แต่จะมีผลต่อคำร้องขอพักหอของคุณ",
       "label": "เหตุผลของการขอพักหอ (ถ้ามีความประสงค์จะเข้าพัก)",
       "name": "dynamic/RCU_reason",
+      "lock": false,
       "required": false,
       "type": "lg_string",
       "validate": ""
     }, {
       "desc": "ถ้าไม่มีใส่ \"-\"",
       "label": "โรคประจำตัว",
+      "lock": false,
       "name": "dynamic/congenital_disease",
       "required": true,
       "type": "string",
@@ -524,6 +536,7 @@
       "desc": "ถ้าไม่มีใส่ \"-\"",
       "label": "ยาที่ใช้อยู่เป็นประจำ",
       "name": "dynamic/regularDrug",
+      "lock": false,
       "required": true,
       "type": "string",
       "validate": ""
@@ -531,6 +544,7 @@
       "desc": "ถ้าไม่มีใส่ \"-\"",
       "label": "ยาที่แพ้",
       "name": "dynamic/drugAllergy",
+      "lock": false,
       "required": true,
       "type": "string",
       "validate": ""
@@ -538,6 +552,7 @@
       "desc": "เช่น ผู้พิการทางสายตา, ภาวะซึมเศร้า, hyperventilation, เบาหวาน (ถ้าไม่มีใส่ \"-\")",
       "label": "ความผิดปกติทางร่างกาย",
       "name": "dynamic/disorders",
+      "lock": false,
       "required": true,
       "type": "string",
       "validate": ""
@@ -545,6 +560,7 @@
       "desc": "อาหารที่ไม่สามารถรับประทานได้ เนื่องจากแพ้ หรือเกี่ยวข้องกับศาสนา (เช่น เป็นอิสลาม ฯลฯ)",
       "label": "อาหารที่แพ้",
       "name": "dynamic/foodAllergies",
+      "lock": false,
       "required": true,
       "type": "string",
       "validate": ""
@@ -552,6 +568,7 @@
       "desc": "",
       "label": "grpID",
       "name": "hidden/groupID",
+      "lock": true,
       "required": true,
       "type": "string",
       "validate": ""
@@ -559,13 +576,10 @@
       "desc": "",
       "label": "imageURL",
       "name": "hidden/imageURL",
+      "lock": true,
       "required": true,
       "type": "string",
       "validate": ""
-    }],
-    "formID": "9ac55c2b380fa428ffb3313338f50962042fe33a27a7e4a3f845a9fbfe0ee54d",
-    "registExceed": false,
-    "targetCollection": "RNKM_REGISTRATION_2018",
-    "title": "rnkm_regist_form_TH_lang"
+    }]
   }
 }

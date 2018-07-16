@@ -2,16 +2,16 @@
   div
     // individual dynamic form
     div.container
-      FormTemplate(v-model='value' ref='form_refs' :fieldList='fieldList' :initialValue='userData')
+      FormTemplate(v-model='value' ref='form_refs' :fieldList='fieldList' :initialValue='userData' :lock='true')
         div.croppa-wrap.has-text-centered(slot-scope="o")
-          croppa-img(ref='croppa_refs')
+          croppa-img(ref='croppa_refs' :initImg='userData["hidden/imageURL"]')
 
     // submit button
-    div.section.has-text-centered
-
-      div(v-if='submissionState == "none"')
+    div.section.has-text-centered {{value}}
+      // div(v-if='submissionState == "none"')
+      div
         div.is-inline: img.btn(@click='submit' src='../theme/material/submit_btn.png')
-      formstatus(loading v-else-if='submissionState=="pending"')
+      // formstatus(loading v-else-if='submissionState=="pending"')
 
 
 </template>
@@ -24,18 +24,19 @@
   import {get_regist_form, post_regist_form} from '../dtnl_api.js'
 
   export default {
-    props: ['value', 'userData'],
+    props: ['userData'],
     components: {
       FormTemplate,
       CroppaImg,
       Formstatus
     },
-    async data () {
+    data () {
       return {
         submissionState: false,
         oldData: [],
         currData: [],
-        fieldList: []
+        fieldList: [],
+        value: {}
       }
     },
     async created(){
@@ -47,18 +48,13 @@
       async submit() {
         this.submissionState = "pending"
         if (await this.submitable()){
+          console.log('submitable')
           let form = this.$refs.form_refs
           let crpp = this.$refs.croppa_refs
-          ar = _.assign({
-            'hidden/imageURL': this.copyFieldList['hidden/imageURL'] == this.fieldList['hidden/imageURL']
-              ? this.fieldList['hidden/imageURL']
-              : await img_crp.getURL(),
-          },  form.form)
-
+          // re-upload image
+          let newform = _.assign({'hidden/imageURL': await img_crp.getURL()},  form.form)
           try{
-            await postEditForm(ar)
-            // REMOVE ALL firebase connect
-            // firebase.storage.ref(`image/${....}`).set(0)
+            await postEditForm(newform)
           }catch (error){
             this.submissionState = 'none'
             alert(error)

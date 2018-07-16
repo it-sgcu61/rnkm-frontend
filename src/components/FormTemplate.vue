@@ -13,17 +13,17 @@ div.wrapper
       slot(name='info' v-bind='$data')
       form
         slot(v-bind='$data')
-        div.field-group.animated.fadeIn(v-for='f in fieldList')
+        div.field-group.animated.fadeIn(v-for='f in fieldList' v-if='f.name.indexOf("hidden") == -1')
 
           transition(name='_slide-fade' mode='out-in' duration='100')
             div.label-text(:key='f.label') {{f.label}}
 
-          input(  v-if = 'f.name.endsWith("tel")'   v-model.trim='form[f.name]' :name='f.name' v-validate="{required: f.required, regex: f.validate}" :placeholder='f.desc' v-mask="'###-###-####'")
-          input(  v-else-if='f.type == "string"'    v-model.trim='form[f.name]' :name='f.name' v-validate="{required: f.required, regex: f.validate}" :placeholder='f.desc')
-          txtarea(v-else-if='f.type == "lg_string"' v-model.trim='form[f.name]' :name='f.name' v-validate="{required: f.required, regex: f.validate}" :placeholder='f.desc')
-          select( v-else-if='f.type == "choice" && /^head/.test(f.name)' v-model.trim='form[f.name]' :name='f.name')
+          input(:disabled='lock && f.lock'  v-if = 'f.name.endsWith("tel")'   v-model.trim='form[f.name]' :name='f.name' v-validate="{required: f.required, regex: f.validate}" :placeholder='f.desc' v-mask="'###-###-####'")
+          input(:disabled='lock && f.lock'  v-else-if='f.type == "string"'    v-model.trim='form[f.name]' :name='f.name' v-validate="{required: f.required, regex: f.validate}" :placeholder='f.desc')
+          txtarea(:disabled='lock && f.lock' v-else-if='f.type == "lg_string"' v-model.trim='form[f.name]' :name='f.name' v-validate="{required: f.required, regex: f.validate}" :placeholder='f.desc')
+          select(:disabled='lock && f.lock' v-else-if='f.type == "choice" && /^head/.test(f.name)' v-model.trim='form[f.name]' :name='f.name')
             option(v-for='o in f.option.filter((opt)=>!Object.values(form).slice(0,parseInt(f.name.match(/\\d+/g)[0])-1).includes(opt.value))' :value='o.value' style='color: #353535') {{o.label}}
-          select( v-else-if='f.type == "choice"' v-model.trim='form[f.name]' :name='f.name')
+          select(:disabled='lock && f.lock' v-else-if='f.type == "choice"' v-model.trim='form[f.name]' :name='f.name')
             option(v-for='o in f.option' :value='o.value' style='color: #353535' ) {{o.label}}
 
           div.error(v-if='errors.has(f.name)')
@@ -57,13 +57,16 @@ export default {
     initialValue:{
       type:Object,
       required:false
+    },
+    lock: {
+      type: Boolean,
+      default: false
     }
   },
   watch: {
     form: {
       deep: true,
       handler() {
-        console.log(this.form)
         this.$emit("input", this.form);
       }
     }
@@ -79,7 +82,7 @@ export default {
     const initialValue = this.$props.initialValue
     this.form = this.fieldList.reduce((a, b) => {
       // console.log(b.option)
-      this.$set(a, b.name, initialValue?initialValue[b.name]:(b.type=="choice" ? b.option[0].value:""));
+      this.$set(a, b.name, initialValue?initialValue[b.name] : (b.type=="choice" ? b.option[0].value:""));
       return a;
     }, {});
   },
@@ -187,7 +190,9 @@ $edge = #eeef
       border-color: #ef4a6b;
     }
   }
-  textarea
+
+  textarea,
+  txtarea
     height: calc(85px + 1vh);
   input
     height: calc(47px + 1vh);
@@ -196,6 +201,12 @@ $edge = #eeef
     padding: 10px 15px 0 12px;
   option
     background-color #eee
+
+  input, select, option, textarea, txtarea
+    &[disabled]
+      background-color transparent
+
+
   .error
     margin: 0 0 20px 0;
     padding: 0 0 15px 10px;

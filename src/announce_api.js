@@ -19,7 +19,7 @@ function getAllowEditPersonalForm(username, password) {
     "dynamic/disorders": "ก",
     "dynamic/foodAllergies": "ก",
     "hidden/groupID": "ก",
-    "hidden/imageURL": "ก"
+    "hidden/imageURL": "https://pbs.twimg.com/profile_images/972154872261853184/RnOg6UyU_400x400.jpg"
   }
 }
 export {getAllowEditPersonalForm}

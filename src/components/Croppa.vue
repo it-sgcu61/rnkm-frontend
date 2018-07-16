@@ -3,7 +3,7 @@
     <croppa ref='croppa' v-model='userimg' :width='225' :height='300' :quality='2' :prevent-white-space='true' :placeholder='desc' placeholderColor='#333'
       placeholder-color="#fff" :placeholder-font-size='13' :show-remove-button='true' remove-button-color="#be5877" canvasColor='transparent'
       :show-loading='true' :loading-size='50' :zoom-speed="4" :reverse-scroll-to-zoom='true' initial-size='cover' accept=".jpg,.jpeg,.png"
-      :initial-image="init_img || ''"
+      :initial-image="initImg"
     >
     </croppa>
     <br>
@@ -40,8 +40,9 @@
         type: Boolean,
         default: false
       },
-      init_img: {
-        type: String
+      initImg: {
+        type: String,
+        default: ''
       }
     },
     data() {

@@ -1,6 +1,6 @@
 {
   "projects": {
-    "rnkm": "rnkm-cu102",
-    "default": "rnkm-cu102"
+    "rnkm": "rnkm-emergency",
+    "default": "rnkm-emergency"
   }
 }
