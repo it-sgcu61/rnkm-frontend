@@ -32,13 +32,13 @@ Vue.component('rnkm-sponsor', RnkmSponsor)
 
 Vue.config.productionTip = false
 
-let config = {
-  apiKey: "AIzaSyDQLSoNkP8FbxlbbkgCBafxCpR567XFCko",
-  authDomain: "rnkm-cu102.firebaseapp.com",
-  databaseURL: "https://rnkm-cu102.firebaseio.com",
-  projectId: "rnkm-cu102",
-  storageBucket: "rnkm-cu102.appspot.com",
-  messagingSenderId: "947832976689"
+var config = {
+  apiKey: "AIzaSyADubit6TDkobUMTiPogL-K1GXzYbNparg",
+  authDomain: "rnkm-emergency.firebaseapp.com",
+  databaseURL: "https://rnkm-emergency.firebaseio.com",
+  projectId: "rnkm-emergency",
+  storageBucket: "",
+  messagingSenderId: "780097023443"
 };
 var firebaseDB = firebase.initializeApp(config);
 export {firebaseDB}

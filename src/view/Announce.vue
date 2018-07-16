@@ -20,7 +20,7 @@ div
 
       // EDITING
       div.section(v-if='result.show == "edit"')
-        edit-info(:form='editable_form')
+        edit-info(:userData='editableData')
 
       // LOGIN
       form.container(v-else)
@@ -38,6 +38,7 @@ div
   import {mask} from 'vue-the-mask'
   import {RotateSquare5} from 'vue-loading-spinner'
   import {announcement} from '../middle-api'
+  import {getAllowEditPersonalForm} from '../announce_api.js'
   export default {
     components: {AbsoluteBackground, RotateSquare5, EditInfo},
     directives: {mask},
@@ -53,14 +54,14 @@ div
           url: '',
           baan: ''
         },
-        editable_form: {}
+        editableData: {}
       }
     },
     methods: {
-      async submit () {
+      submit () {
         this.result.show = "loading"
         // EDIT DATA
-        this.editable_form = await getAllowEditPersonalForm(this.login.usr, this.login.pwd)
+        this.editableData = getAllowEditPersonalForm(this.login.usr, this.login.pwd)
         this.result.show = "edit"
         return
 

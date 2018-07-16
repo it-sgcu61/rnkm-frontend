@@ -2,7 +2,7 @@
   div
     // individual dynamic form
     div.container
-      FormTemplate(v-model='value' ref='form_refs' :fieldList='fieldList')
+      FormTemplate(v-model='value' ref='form_refs' :fieldList='fieldList' :initialValue='userData')
         div.croppa-wrap.has-text-centered(slot-scope="o")
           croppa-img(ref='croppa_refs')
 
@@ -24,7 +24,7 @@
   import {get_regist_form, post_regist_form} from '../dtnl_api.js'
 
   export default {
-    props: ['value'],
+    props: ['value', 'userData'],
     components: {
       FormTemplate,
       CroppaImg,
@@ -33,14 +33,15 @@
     async data () {
       return {
         submissionState: false,
-        fieldList: [],
-        copyFieldList: []
+        oldData: [],
+        currData: [],
+        fieldList: []
       }
     },
     async created(){
-       let form = await require('@/others/static_TH_form.json')
-       this.fieldList = form.result.fieldList
-       console.log(form)
+      this.fieldList = require('@/others/static_TH_form.json').result.fieldList
+      this.oldData  = this.userData
+      this.currData = this.userData
     },
     methods: {
       async submit() {
