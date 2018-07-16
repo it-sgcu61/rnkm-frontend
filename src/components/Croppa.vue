@@ -7,7 +7,7 @@
     >
     </croppa>
     <br>
-    <span>คลิกเพืออัพโหลด ภาพหน้าตรงเห็นใบหน้าชัดเจน ไม่จำเป็นต้องเป็นภาพนิสิต</span>
+    <span>คลิกเพืออัพโหลด ภาพหน้าตรงเห็นใบหน้าชัดเจน<br>ไม่จำเป็นต้องเป็นภาพนิสิต</span>
     <span class='error is-block' v-if='first_check && !$refs.croppa.imageSet'>please select image</span>
     <div v-if='tools'>
       <hr/>ch

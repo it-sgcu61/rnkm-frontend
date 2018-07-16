@@ -1,18 +1,15 @@
 <template lang='pug'>
   div
-    // individual dynamic form
+    // FORM
     div.container
       FormTemplate(v-model='value' ref='form_refs' :fieldList='fieldList' :initialValue='userData' :lock='true')
         div.croppa-wrap.has-text-centered(slot-scope="o")
           croppa-img(ref='croppa_refs' :initImg='userData["hidden/imageURL"]')
 
-    // submit button
-    div.section.has-text-centered {{value}}
-      // div(v-if='submissionState == "none"')
-      div
-        div.is-inline: img.btn(@click='submit' src='../theme/material/submit_btn.png')
-      // formstatus(loading v-else-if='submissionState=="pending"')
-
+    // NAVIGATE
+    div.section.mcentere
+      div.is-inline: img.btn(@click='$router.push("/")' src='../theme/material/back_btn.png')
+      div.is-inline: img.btn(@click='submit' src='../theme/material/submit_btn.png')
 
 </template>
 

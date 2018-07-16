@@ -1,16 +1,16 @@
 <template lang='pug'>
   div#wrapper
 
+    // HEADER
     div#head
       div.is-block
         h1.is-size-3.bold.is-inline {{ lang == "TH" ? "ข้อตกลงและเงื่อนไข" : "Term and Condition"}}
         div.flag-grp
-          div.flag.th(@click='set_lang("TH")')
-            img.chk(v-show='lang == "TH"' src="../theme/material/checked.png" alt='TH language')
-          div.flag.en(@click='set_lang("EN")')
-            img.chk(v-show='lang == "EN"' src="../theme/material/checked.png" alt='EN language')
+          div.flag.th(@click='set_lang("TH")'): img.chk(v-show='lang == "TH"' src="../theme/material/checked.png" alt='TH language')
+          div.flag.en(@click='set_lang("EN")'): img.chk(v-show='lang == "EN"' src="../theme/material/checked.png" alt='EN language')
       span.warning.is-block ** For international student please select EN **
 
+    // BODY
     div.section
       ol(v-show='lang == "TH"')
         li ระบบจะทำการ "สุ่ม" บ้านที่น้องๆ เลือกมา และลำดับในการเลือกจะมีผลต่อการสุ่ม
@@ -21,6 +21,7 @@
         li All the meals in this activity will be Halal Food.
         li All your information will be kept confidential.
 
+    // NAVIGATE
     div#foot
       button.button.accept.is-warning(@click='acceptedCondition')
         strong accept

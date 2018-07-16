@@ -1,10 +1,14 @@
 <template lang="pug">
   div.picker
+
+    // IMAGE
     div.lineContainer
       div.PINcontainer(@click="$emit('click', i)" v-for='i in 3')
         img.icon(:src="require(`../theme/house/${houses[i-1] || 'unknown'}.jpg`)")
         div.text
           h1.is-size-1 {{i}}
+
+    // NEXT
     div(v-if="houses.filter((item)=>(item!=null)).length == 3")
       img.next(@click='$router.push("/register")' src='../theme/material/next_btn.png')
 </template>

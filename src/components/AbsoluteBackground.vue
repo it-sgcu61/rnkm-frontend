@@ -1,5 +1,7 @@
 <template lang='pug'>
   div
+
+    // HEADER
     div.bg.top(v-if='top')
       rnkm-nav
       slot
@@ -7,10 +9,13 @@
         div.mcenter.is-inline-block
           img.big-logo.abs.mcenter(v-if='src2' :src='src2')
           img.big-logo.abs.mcenter(v-if='src' :src='src')
+
+    // FOOTER
     div.bg.bot(v-if='bot' style='height: 30vh; margin-top: -8vh')
       slot
       div(style='padding-top: 20vh')
       rnkm-nav
+
 </template>
 
 <script>

@@ -1,5 +1,7 @@
 <template lang='pug'>
 div#body-wrapper
+
+  // PROLOGUE
   div.section.has-text-centered
     h2 ก้าวออกมาจากขีดจำกัดแบบเดิมๆ แล้วมา beyond
     h2 ในแบบที่ตัวเองเป็นพร้อมกันในงานรับน้องก้าวใหม่
@@ -9,11 +11,15 @@ div#body-wrapper
     h1.is-size-1 พบกัน 4-6 สิงหาคม 2018
     h3 ณ ประตูใหญ่ สระน้ำ จุฬาลงกรณ์มหาวิทยาลัย
   div.tab
+
+  // INTRO
   div.section
     h2 การรับน้องก้าวใหม่คืออะไร?
     br
     p การรับน้องก้าวใหม่ คือ กิจกรรมที่จุฬาลงกรณ์มหาวิทยาลัย จัดขึ้นเพื่อต้อนรับ และเสริมสร้างความสัมพันธ์ของนิสิตจากหลากหลายคณะและชั้นปีให้ลึกซึ้งมากยิ่งขึ้น โดยแต่ละบ้านจะมีรูปแบบกิจกรรมซึ่งแตกต่างกันออกไปซึ่งเป็นเอกลักษณ์ของแต่ละบ้าน
   div.tab
+
+  // EVENT
   div.section.columns.is-multiline.is-tablet(:class='force_mobile')
     div.column.is-half(v-for='o in itmlist')
       div.tcenter(v-if='o.img')
@@ -24,6 +30,8 @@ div#body-wrapper
         br
         p {{o.p}}
   div.tab
+
+  // SCHEDUAL
   div.section.tcenter
       div
         h1 ปฏิทินกิจกรรม CU102
@@ -34,9 +42,12 @@ div#body-wrapper
         div.column.is-half
           p.is-pulled-left {{o.r}}
   div.tab
+
+  // NAVIGATE
   div.section.tcenter
     router-link(to='baan')
       img.next(src='@/theme/material/next_btn.png')
+
 </template>
 
 <script>

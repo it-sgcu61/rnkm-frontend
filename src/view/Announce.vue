@@ -2,9 +2,9 @@
 div
     absolute-background(top :src='require("../theme/heading/Annoucment_text.png")' :src2='require("../theme/heading/Annoucment_frame.png")')
     section.section
-      div.container: div.field: h1 Check For House and Data
+      div.container: div.field: h1 Announce
 
-      // ANNOUNCE RESULT
+      // NOT FOUND
       div#result-wrapper.section(v-if='result.show == "ready"')
         div.section
           div.logo-wrap(v-if='result.baan != "notFound"'): img.logo(@click='result.url' :src='result.img')
@@ -13,14 +13,20 @@ div
             h2.is-size-2.fzing please contact to facebook page
         div.section: div.logo-wrap
             img.back(@click='result.show = "query"' src='../theme/material/back_btn.png')
+            img.back(@click='')
+
+      // FOUND
+      div.section(v-if='result.show == "found"')
+          div.logo-wrap: img.logo(@click='result.url' :src='result.img')
 
       // LOADING
       div.scale-x2(v-else-if='result.show == "loading"' align="middle")
         rotate-square5
 
       // EDITING
-      div.section(v-if='result.show == "edit"')
+      div#edit.mcenter(v-if='result.show == "edit"')
         edit-info(:userData='editableData')
+
       // LOGIN
       form.container(v-else)
         div.field: input.input(v-model='login.usr' type="tel" v-mask="'###-###-####'" :masked="false" placeholder='phone number' pattern='[0-9]{10}' title="10 digit tel number")
@@ -90,6 +96,8 @@ div
     transform: scale(2)
   .section
     background-color: transparentify
+    @media screen and (max-width: 500px)
+      padding 0
 
   h1
     font-size: 3em
@@ -113,6 +121,7 @@ div
 
   .input
     background-color #eee
+    color white
     text-align center
     font-size calc(9px + 1vmin + 1vw)
     font-family ZingRust
@@ -120,12 +129,16 @@ div
     font-style normal
     letter-spacing: .07em
     padding 0
-    width 450px
-    background-color #eee
+    width 300px
+    background-color #333e
+    border none
     @media screen and (min-width: 600px)
-      width 550px
+      width 500px
     @media screen and (min-width: 1025px)
-      width 1000px
+      width 600px
+
+  ::placeholder
+    color: #ffaaff
 
   #submit
     margin-top 10vmin

@@ -1,10 +1,16 @@
 <template lang='pug'>
 div.section
   slot(name='head')
+
+  // CLUSTER
   div.container(v-for='grp in ["S", "M", "L", "XL"]' :key='grp.id')
+
+    // PROLOGUE
     div#head.flex
       img.size(:src='require(`@/theme/material/size_${grp}.png`)')
       span.desc {{siz_desc[grp]}}
+
+    // TABLE
     div#body.flex(:n-item='siz_list[grp].length')
       div.flex-item(v-for='baan in siz_list[grp]' :key='baan.id')
         router-link(:to='`baan/${baan.nameURL}`')
@@ -12,6 +18,7 @@ div.section
             slot(name='before' v-bind='baan')
             // img.img-baan(:src="baan.img" :alt='baan.nameTH')
             slot(name='after' v-bind='baan')
+
 </template>
 
 <script>

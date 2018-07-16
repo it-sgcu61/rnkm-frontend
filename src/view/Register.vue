@@ -2,7 +2,11 @@
 div
   absolute-background(top :src='require("../theme/heading/Register_text.png")' :src2='require("../theme/heading/Register_frame.png")')
   div.section
+
+    // CONDITION
     term-and-condition(v-if='!accept' @accept-condition='acceptedCondition')
+
+    // FORM
     rnkm-form(v-else :lang="lang")
 
   absolute-background(bot)

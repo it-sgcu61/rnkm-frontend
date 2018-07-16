@@ -1,12 +1,15 @@
 <template lang='pug'>
   div
+    // STAUS
     formstatus(loading        v-if='!formState')
     formstatus(success   v-else-if='registration_state == "ok" && submissionState == "fullfilled"')
     formstatus(expired   v-else-if='registration_state == "expired"')
     formstatus(countdown v-else-if='registration_state == "beforeTime"' :timeLeft='timeLeft' :formState='formState' @ready="ready")
 
+    // FORM
     div(v-else)
-      // head form
+
+      // HOUSE
       div.container
         FormTemplate(v-model='head_result' ref='head_refs' :fieldList='fieldList.head' :initialValue="head_result")
           template(slot='info')
@@ -15,24 +18,21 @@
                 h1(v-html='lang == "TH" ? "กรอกข้อมูลสำหรับ รับน้องก้าวใหม่" : "registration for rub nong kaow mai"')
                 h2(v-html='lang == "TH" ? "สามารถลงทะเบียนได้ไม่เกิน 3 คน" : "maximum team member is 3"')
 
-      // individual dynamic form
+      // PERSONAL
       transition-group(name='fade', duration='300')
         div.container(v-for='(vl, x) in dynm_result' :key='x' v-show='dynm_result[x]')
           FormTemplate(v-model='dynm_result[x]' ref='dynamic_refs' :fieldList='fieldList.dynamic' @delete='del_user(x)', :deletable='dynm_result.length > 1')
+            // IMAGE
             div.croppa-wrap.has-text-centered(slot-scope="o")
               croppa-img(ref='croppa_refs')
-          // | {{dynm_result[x]}}
 
-      // submit button
+      // NAVIAGTE
       img.btn(@click='add_dynm_result' v-if='dynm_result.length < 3' src='../theme/material/add_member.png')
-      div.section.has-text-centered
-
-        div.is-inline(v-if='dynm_result.length != 3')
-
-        div(v-if='submissionState == "none"')
+      div.section.mcenter
+        formstatus(loading v-if='submissionState=="pending"')
+        div(v-else-if='submissionState == "none"')
           div.is-inline(v-if='dynm_result.length != 0')
             img.btn(@click='submit' src='../theme/material/submit_btn.png')
-        formstatus(loading v-else-if='submissionState=="pending"')
 
 
 </template>

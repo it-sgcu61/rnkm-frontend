@@ -1,14 +1,18 @@
 <template lang='pug'>
 div
+
+  // LOADING
   div.container(v-if='loading' align='middle')
     div.scale-x2
       rotate-square5
 
+  // EXPIRE
   div#expired.container(v-else-if='expired')
     div.flex
       div.mcenter
         h1.is-size-1.zingR Registration expired.
 
+  // SUCCESS
   div.container(v-else-if='success')
     div.flex
       div.mcenter
@@ -18,6 +22,7 @@ div
           a(href='https://fb.com/chulafreshmen/' target="_blank" rel="noopener noreferrer")
             img(src='@/theme/material/FB.png' style='width:40px; margin-left:20px;' align='middle')
 
+  // COUNTDOWN
   div.container(v-else-if='countdown')
     vue-countdown(:time="timeLeft" @countdownend="$emit('ready')")
       template(slot-scope="props")

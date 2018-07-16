@@ -1,32 +1,25 @@
 <template lang='pug'>
 div.tcenter
+
+  // PINTEREST
   div(v-sticky="stickyConfig")
     house-pinterest.abs(@click="setFavoriteHouse" :houses="houses")
 
   absolute-background(top :src='require(`@/theme/house/${data.nameURL}.png`)' :alt='data.nameTH')
-
   div.section.tcenter.mcenter
-    // (v-touch:swipe.left='goNext' v-touch:swipe.right='goPrev')
+
+    // HOUSE INFO
     h1.is-size-1.bold {{data.nameTH}} - {{data.nameEN}}
-    br
-    h1.is-size-3.italic "{{data.slogan}}"
-    br
-    br
-    p.is-size-4 {{data.description}}
-    br
-    br
-    div
+    div.tab: h1.is-size-3.italic "{{data.slogan}}"
+    div.tab: p.is-size-4 {{data.description}}
+    div.tab: div
       template(v-for='atr in ["lineURL", "facebookURL", "instagramURL", "twitterURL"]')
         a(v-if='data[atr]' :href='data[atr]' :alt='atr' target="_blank" rel="noopener noreferrer")
           img.social-btn(:src="require(`../theme/material/${atr}.svg`)")
 
-    // router-link(to='-1')
-    span(@click='goPrev')
-      img.back(src='../theme/material/back_btn.png')
-    router-link(:to='`/baan/${nextHouseUrl}`')
-      img.back(src='../theme/material/next_btn.png')
-    // a(@click="$router.go(-1)")
-    // router-link(:to="{ path: $route.from.fullPath }")
+    // NAVIGATE
+    span(@click='goPrev'): img.back(src='../theme/material/back_btn.png')
+    router-link(:to='`/baan/${nextHouseUrl}`'): img.back(src='../theme/material/next_btn.png')
 
   absolute-background(bot)
 </template>
@@ -101,6 +94,8 @@ div.tcenter
 <style lang='stylus' scoped>
   .section
     max-width 770px
+  .tab
+    margin-top: 2em
 
   .social-btn
     padding 1em
