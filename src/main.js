@@ -37,7 +37,7 @@ var config = {
   authDomain: "rnkm-emergency.firebaseapp.com",
   databaseURL: "https://rnkm-emergency.firebaseio.com",
   projectId: "rnkm-emergency",
-  storageBucket: "",
+  storageBucket: "rnkm-emergency.appspot.com",
   messagingSenderId: "780097023443"
 };
 var firebaseDB = firebase.initializeApp(config);
