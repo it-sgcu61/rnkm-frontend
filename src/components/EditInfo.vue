@@ -52,8 +52,12 @@
           let form = this.$refs.form_refs
           let crpp = this.$refs.croppa_refs
           // re-upload image
-          let newform = _.assign({'hidden/imageURL': await crpp.getURL()},  form.form)
-          alert(newform)
+
+          let oldForm = this.userData
+          alert(JSON.stringify(oldForm))
+          let newform = _.assign({},  form.form, {'hidden/imageURL': await crpp.getURL()})
+          alert(JSON.stringify(newform))
+
           try{
             await postEditForm(newform)
           }catch (error){

@@ -3,9 +3,9 @@
     <croppa ref='croppa' v-model='userimg' :width='225' :height='300' :quality='2' :prevent-white-space='true' :placeholder='desc' placeholderColor='#333'
       placeholder-color="#fff" :placeholder-font-size='13' :show-remove-button='true' remove-button-color="#be5877" canvasColor='transparent'
       :show-loading='true' :loading-size='50' :zoom-speed="4" :reverse-scroll-to-zoom='true' initial-size='cover' accept=".jpg,.jpeg,.png"
-      :initial-image="initImg"
+      :initial-image="initImg" @file-choose='userurl = ""'
     >
-    </croppa>
+    </croppa> {{userurl}}
     <br>
     <span>คลิกเพืออัพโหลด ภาพหน้าตรงเห็นใบหน้าชัดเจน<br>ไม่จำเป็นต้องเป็นภาพนิสิต</span>
     <span class='error is-block' v-if='first_check && !$refs.croppa.imageSet'>please select image</span>
@@ -48,7 +48,7 @@
     data() {
       return {
         userimg: null,
-        userurl: '',
+        userurl: this.initImg,
         first_check: false
       }
     },
@@ -88,7 +88,7 @@
                 fbref.getDownloadURL().then(url => {
                   console.log(`[success] upload img complete : ${url}`);
                   self.$emit('input', url);
-                  this.userurl = url
+                  self.userurl = url
                   resolve(url);
                 });
               }
@@ -101,7 +101,9 @@
       },
       async getURL(){
         this.first_check = true
-        return this.userurl ? this.userurl : await this.uploadImg()
+        let val = this.userurl ? this.userurl : await this.uploadImg()
+        console.log('getURL', val)
+        return val
       },
       async hasImage(){
         this.first_check = true
