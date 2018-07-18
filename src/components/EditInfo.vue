@@ -58,6 +58,9 @@
           let oldForm = this.userData
           let newform = _.assign({},  form.form, {'hidden/imageURL': await crpp.getURL()})
 
+          console.log(oldForm)
+          alert(JSON.stringify(newform))
+
           try{
             var result = await postEditForm(oldForm["dynamic/nationalID"], oldForm["dynamic/tel"], newform)
             if(result.result == "OK"){
@@ -79,9 +82,9 @@
         }
       },
       async submitable(){
-        console.log(await this.$refs.croppa_refs.hasImage())
+        // console.log(await this.$refs.croppa_refs.hasImage())
         console.log(await this.$refs.form_refs.validateAll())
-        return (await this.$refs.croppa_refs.hasImage() && (await this.$refs.form_refs.validateAll()))
+        return (await this.$refs.form_refs.validateAll())
       },
       ready(){
         this.formState = JSON.parse(JSON.stringify(this.formState))
