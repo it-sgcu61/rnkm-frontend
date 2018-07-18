@@ -5,13 +5,13 @@
       FormTemplate(v-model='form' ref='form_refs' :fieldList='fieldList' :initialValue='userData' :lock='true')
         div.croppa-wrap.has-text-centered(slot-scope="o")
           croppa-img(ref='croppa_refs' :initImg='userData["hidden/imageURL"]')
-      | {{form}}
-      | {{userData}}
 
     // NAVIGATE
     div.section.mcentere
       div.is-inline: img.btn(@click='$router.push("/")' src='../theme/material/back_btn.png')
-      div.is-inline: img.btn(@click='submit' src='../theme/material/submit_btn.png')
+      div.is-inline(v-if='submissionState != "pending"'): img.btn(@click='submit' src='../theme/material/submit_btn.png')
+      div.scale-x2(v-else align="middle")
+        rotate-square5
       div.tab
       div.flex.jcenter(style='color: yellow') ** submit may lost previous
 
@@ -22,14 +22,16 @@
   import FormTemplate from '../components/FormTemplate'
   import CroppaImg from '../components/Croppa.vue'
   import Formstatus from '../components/Formstatus.vue'
+  import {RotateSquare5} from 'vue-loading-spinner'
   import {get_regist_form, post_regist_form} from '../dtnl_api.js'
-
+  import {getAllowEditPersonalForm, postEditForm} from '../announce_api.js'
   export default {
     props: ['userData'],
     components: {
       FormTemplate,
       CroppaImg,
-      Formstatus
+      Formstatus,
+      RotateSquare5
     },
     data () {
       return {
@@ -54,12 +56,17 @@
           // re-upload image
 
           let oldForm = this.userData
-          alert(JSON.stringify(oldForm))
           let newform = _.assign({},  form.form, {'hidden/imageURL': await crpp.getURL()})
-          alert(JSON.stringify(newform))
 
           try{
-            await postEditForm(newform)
+            var result = await postEditForm(oldForm["dynamic/nationalID"], oldForm["dynamic/tel"], newform)
+            if(result.result == "OK"){
+              alert("Update success!")
+              window.location.reload()
+
+            }else{
+              alert("Update failed, please reload this page and try again.")
+            }
           }catch (error){
             this.submissionState = 'none'
             alert(error)
@@ -103,6 +110,8 @@
 </script>
 
 <style lang='stylus' scoped>
+  .scale-x2
+    transform: scale(2)
   .bg,
   .section
     background-color transparentify

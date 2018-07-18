@@ -64,11 +64,20 @@ div
       }
     },
     methods: {
-      submit () {
+      async submit () {
         this.result.show = "loading"
         // EDIT DATA
-        this.editableData = getAllowEditPersonalForm(this.login.usr, this.login.pwd)
-        this.result.show = "edit"
+        var userdata = await getAllowEditPersonalForm(this.login.usr, this.login.pwd)
+        if(userdata.result == "notFound"){
+          alert("ไม่พบข้อมูล กรุณาตรวจสอบข้อมูลที่คุณกรอกอีกครั้ง หากแน่ใจว่าได้ทำการลงทะเบียนไปแล้ว กรุณาติดต่อเพจ CU for Freshmen")
+          this.result.show = "query"
+        }else if(userdata.result == "IncorrectTel"){
+          alert("พบข้อมูลการลงทะเบียน แต่ไม่สามารถเข้าสู่ระบบได้ กรุณาตรวจสอบหมายเลขโทรศัพท์ของคุณ หากมีข้อสงสัยเพิ่มเติม กรุณาติดต่อเพจ CU for Freshmen")
+          this.result.show = "query"
+        }else{
+          this.editableData = userdata
+          this.result.show = "edit"
+        }
         return
 
         // NORMAL ANNOUNCE !!! (remove by krist 16 jul 2018)
