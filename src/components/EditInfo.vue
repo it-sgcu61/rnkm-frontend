@@ -2,14 +2,18 @@
   div
     // FORM
     div.container
-      FormTemplate(v-model='value' ref='form_refs' :fieldList='fieldList' :initialValue='userData' :lock='true')
+      FormTemplate(v-model='form' ref='form_refs' :fieldList='fieldList' :initialValue='userData' :lock='true')
         div.croppa-wrap.has-text-centered(slot-scope="o")
           croppa-img(ref='croppa_refs' :initImg='userData["hidden/imageURL"]')
+      | {{form}}
+      | {{userData}}
 
     // NAVIGATE
     div.section.mcentere
       div.is-inline: img.btn(@click='$router.push("/")' src='../theme/material/back_btn.png')
       div.is-inline: img.btn(@click='submit' src='../theme/material/submit_btn.png')
+      div.tab
+      div.flex.jcenter(style='color: yellow') ** submit may lost previous
 
 </template>
 
@@ -33,23 +37,23 @@
         oldData: [],
         currData: [],
         fieldList: [],
-        value: {}
+        form: {}
       }
     },
     async created(){
       this.fieldList = require('@/others/static_TH_form.json').result.fieldList
-      this.oldData  = this.userData
-      this.currData = this.userData
     },
     methods: {
       async submit() {
         this.submissionState = "pending"
+        console.log('submi')
         if (await this.submitable()){
           console.log('submitable')
           let form = this.$refs.form_refs
           let crpp = this.$refs.croppa_refs
           // re-upload image
-          let newform = _.assign({'hidden/imageURL': await img_crp.getURL()},  form.form)
+          let newform = _.assign({'hidden/imageURL': await crpp.getURL()},  form.form)
+          alert(newform)
           try{
             await postEditForm(newform)
           }catch (error){
@@ -64,7 +68,9 @@
         }
       },
       async submitable(){
-        return (! (await this.$refs.croppa_refs.hasImage()) && ! (await this.$refs.form_refs.validateAll()))
+        console.log(await this.$refs.croppa_refs.hasImage())
+        console.log(await this.$refs.form_refs.validateAll())
+        return (await this.$refs.croppa_refs.hasImage() && (await this.$refs.form_refs.validateAll()))
       },
       ready(){
         this.formState = JSON.parse(JSON.stringify(this.formState))
@@ -127,5 +133,8 @@
 
   .croppa-wrap
     margin-bottom: 50px
+
+  .tab
+    height 2em
 
 </style>

@@ -29,8 +29,8 @@ div
 
       // LOGIN
       form.container(v-else)
-        div.field: input.input(v-model='login.usr' type="tel" v-mask="'###-###-####'" :masked="false" placeholder='phone number' pattern='[0-9]{10}' title="10 digit tel number")
-        div.field: input.input(v-model='login.pwd' type='password' placeholder='personal ID')
+        div.field: input.input(v-model='login.usr' type='tel' placeholder='personal ID')
+        div.field: input.input(v-model='login.pwd' type="password" v-mask="'###-###-####'" :masked="false" placeholder='phone number' pattern='[0-9]{10}' title="10 digit tel number")
         div.field: img#submit(@click='submit' src='../theme/material/submit_btn.png')
     absolute-background(bot)
 </template>
