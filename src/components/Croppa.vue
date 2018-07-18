@@ -1,13 +1,20 @@
 <template>
-  <div>
-    <croppa ref='croppa' v-model='userimg' :width='225' :height='300' :quality='2' :prevent-white-space='true' :placeholder='desc' placeholderColor='#333'
-      placeholder-color="#fff" :placeholder-font-size='13' :show-remove-button='true' remove-button-color="#be5877" canvasColor='transparent'
-      :show-loading='true' :loading-size='50' :zoom-speed="4" :reverse-scroll-to-zoom='true' initial-size='cover' accept=".jpg,.jpeg,.png"
-      :initial-image="initImg" @file-choose='userurl = ""'
-    >
-    </croppa> {{userurl}}
-    <br>
-    <span>คลิกเพืออัพโหลด ภาพหน้าตรงเห็นใบหน้าชัดเจน<br>ไม่จำเป็นต้องเป็นภาพนิสิต</span>
+  <div class='columns'>
+    <div class='column'>
+      <img :src='userurl' style='width: 245px'>
+      ภาพเดิม
+    </div>
+    <div class='column'>
+      <croppa ref='croppa' v-model='userimg' :width='225' :height='300' :quality='2' :prevent-white-space='true' :placeholder='desc' placeholderColor='#333'
+        placeholder-color="#fff" :placeholder-font-size='13' :show-remove-button='true' remove-button-color="#be5877" canvasColor='transparent'
+        :show-loading='true' :loading-size='50' :zoom-speed="4" :reverse-scroll-to-zoom='true' initial-size='cover' accept=".jpg,.jpeg,.png"
+        @file-choose='userurl = ""'
+      >
+        <!-- :initial-image=""  -->
+      </croppa>
+      <span>คลิกเพืออัพโหลด ภาพหน้าตรงเห็นใบหน้าชัดเจน<br>ไม่จำเป็นต้องเป็นภาพนิสิต</span>
+    </div>
+    <!-- <br>
     <span class='error is-block' v-if='first_check && !$refs.croppa.imageSet'>please select image</span>
     <div v-if='tools'>
       <hr/>ch
@@ -16,7 +23,7 @@
       <button type='button' @click="userimg.rotate()">rotate</button>
       <button type='button' @click="downloadImg('image/jpeg', 1.0)">download as JPEG</button>
       <button type='button' @click='uploadImg()'>upload</button>
-    </div>
+    </div> -->
   </div>
 </template>
 
@@ -24,6 +31,7 @@
   import 'vue-croppa/dist/vue-croppa.css'
   import Vue from 'vue'
   import firebase from 'firebase'
+  import axios from 'axios'
   Vue.use(require('vue-croppa'));
 
   export default {
@@ -48,8 +56,22 @@
     data() {
       return {
         userimg: null,
-        userurl: this.initImg,
+        userurl: '',
         first_check: false
+      }
+    },
+    async created(){
+      if (this.initImg){
+        this.userurl = this.initImg
+        // this.userurl = firebase.storage().refFromURL(this.initImg)
+        console.log('<<')
+        firebase.storage().ref('image/n91voawzyb78m.jpeg').getDownloadURL().then(url => {
+          console.log(url)
+        })
+        console.log('>>')
+        // this.userurl = firebase.storage().ref().getDownloadURL()
+        // this.userurl = url(JSON.stringify(this.initImg)) //firebase.storage().ref().getDownloadURL()
+        this.userurl = 'https://firebasestorage.googleapis.com/v0/b/rnkm-cu102.appspot.com/o/image%2Fn91voawzyb78m.jpeg?alt=media&token=9bea9caf-5053-441e-ba59-0a12c400b10f'
       }
     },
     methods: {
