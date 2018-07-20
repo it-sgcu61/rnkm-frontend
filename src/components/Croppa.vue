@@ -1,18 +1,21 @@
 <template>
   <div class='columns'>
-    <div class='column'>
+    <div class='column' v-if='preview_only'>
       <img :src='userurl' style='width: 245px'>
-      ภาพเดิม
     </div>
     <div class='column'>
-      <croppa ref='croppa' v-model='userimg' :width='225' :height='300' :quality='2' :prevent-white-space='true' :placeholder='desc' placeholderColor='#333'
-        placeholder-color="#fff" :placeholder-font-size='13' :show-remove-button='true' remove-button-color="#be5877" canvasColor='transparent'
-        :show-loading='true' :loading-size='50' :zoom-speed="4" :reverse-scroll-to-zoom='true' initial-size='cover' accept=".jpg,.jpeg,.png"
-        @file-choose='userurl = ""'
-      >
-        <!-- :initial-image="" -->
-      </croppa>
-      <span>คลิกเพืออัพโหลด ภาพหน้าตรงเห็นใบหน้าชัดเจน<br>ไม่จำเป็นต้องเป็นภาพนิสิต</span>
+      <div>
+        <croppa ref='croppa' v-model='userimg' :width='225' :height='300' :quality='2' :prevent-white-space='true' :placeholder='desc' placeholderColor='#333'
+          placeholder-color="#fff" :placeholder-font-size='13' :show-remove-button='true' remove-button-color="#be5877" canvasColor='transparent'
+          :show-loading='true' :loading-size='50' :zoom-speed="4" :reverse-scroll-to-zoom='true' initial-size='cover' accept=".jpg,.jpeg,.png"
+          @file-choose='userurl = ""'
+        >
+          <!-- :initial-image="" -->
+        </croppa>
+      </div>
+      <div>
+        <span>คลิกเพืออัพโหลด ภาพหน้าตรงเห็นใบหน้าชัดเจน<br>ไม่จำเป็นต้องเป็นภาพนิสิต</span>
+      </div>
     </div>
     <!-- <br>
     <span class='error is-block' v-if='first_check && !$refs.croppa.imageSet'>please select image</span>
@@ -51,6 +54,10 @@
       initImg: {
         type: String,
         default: ''
+      },
+      preview_only: {
+        type: Boolean,
+        default: false
       }
     },
     data() {

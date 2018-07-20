@@ -4,7 +4,7 @@
     div.container
       FormTemplate(v-model='form' ref='form_refs' :fieldList='fieldList' :initialValue='userData' :lock='true')
         div.croppa-wrap.has-text-centered(slot-scope="o")
-          croppa-img(ref='croppa_refs' :initImg='userData["hidden/imageURL"]')
+          croppa-img(preview_only ref='croppa_refs' :initImg='userData["hidden/imageURL"]')
 
     // NAVIGATE
     div.section.mcentere
@@ -48,9 +48,9 @@
     methods: {
       async submit() {
         this.submissionState = "pending"
-        console.log('submi')
+        // console.log('submi')
         if (await this.submitable()){
-          console.log('submitable')
+          // console.log('submitable')
           let form = this.$refs.form_refs
           let crpp = this.$refs.croppa_refs
           // re-upload image
@@ -59,7 +59,8 @@
           let newform = _.assign({},  form.form, {'hidden/imageURL': await crpp.getURL()})
 
           console.log(oldForm)
-          alert(JSON.stringify(newform))
+          console.log(JSON.stringify(newform))
+          console.log(JSON.stringify(newform["hidden/imageURL"]))
 
           try{
             var result = await postEditForm(oldForm["dynamic/nationalID"], oldForm["dynamic/tel"], newform)
@@ -83,7 +84,7 @@
       },
       async submitable(){
         // console.log(await this.$refs.croppa_refs.hasImage())
-        console.log(await this.$refs.form_refs.validateAll())
+        // console.log(await this.$refs.form_refs.validateAll())
         return (await this.$refs.form_refs.validateAll())
       },
       ready(){

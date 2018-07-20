@@ -29,8 +29,12 @@ div
 
       // LOGIN
       form.container(v-else)
-        div.field: input.input(v-model='login.usr' type='tel' placeholder='personal ID')
-        div.field: input.input(v-model='login.pwd' type="password" v-mask="'###-###-####'" :masked="false" placeholder='phone number' pattern='[0-9]{10}' title="10 digit tel number")
+        div.field
+          div: span(style='color: white') personal ID
+          div: input.input(v-model='login.usr' type='tel')
+        div.field
+          div: span(style='color: white') phone number
+          div: input.input(v-model='login.pwd' type="password" v-mask="'###-###-####'" :masked="false" pattern='[0-9]{10}' title="10 digit tel number")
         div.field: img#submit(@click='submit' src='../theme/material/submit_btn.png')
     absolute-background(bot)
 </template>
@@ -148,6 +152,18 @@ div
 
   ::placeholder
     color: #ffaaff
+  ::-webkit-input-placeholder { /* Chrome/Opera/Safari */
+    color: #ffaaff
+  }
+  ::-moz-placeholder { /* Firefox 19+ */
+    color: #ffaaff
+  }
+  :-ms-input-placeholder { /* IE 10+ */
+    color: #ffaaff
+  }
+  :-moz-placeholder { /* Firefox 18- */
+    color: #ffaaff
+  }
 
   #submit
     margin-top 10vmin

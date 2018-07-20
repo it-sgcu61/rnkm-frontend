@@ -17,7 +17,7 @@ div
     div.flex
       div.mcenter
         h1.is-size-1.zingR Registration success.
-        h2.is-size-2.space Announce the result on Sat Jul 21 2018
+        h2.is-size-2.space Announce the result on Sat Jul 25 2018
         p.space.is-size-4 please like our facebook page to receive news and information.
           a(href='https://fb.com/chulafreshmen/' target="_blank" rel="noopener noreferrer")
             img(src='@/theme/material/FB.png' style='width:40px; margin-left:20px;' align='middle')
