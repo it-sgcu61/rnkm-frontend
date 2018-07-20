@@ -8,7 +8,14 @@
 
     // FORM
     div(v-else)
-
+      div.container
+        vue-countdown(:time="(new Date(formState.closeOn.datetime[1]) - new Date())" @countdownend="ready")
+          template(slot-scope="props")
+            div.flex
+              div.mcenter(style="margin-bottom:10px")
+                h1.zingR(style='font-size:3em;') Registration will be ended in:
+                h1.zingR(style='font-size:3em;') {{ props.days }}:{{ props.hours }}:{{ props.minutes }}:{{ props.seconds }}
+                h1.zingR(style='font-size:1.5em; color: #e0e0e0') ({{ (new Date(formState.closeOn.datetime[1])).toString() }})
       // HOUSE
       div.container
         FormTemplate(v-model='head_result' ref='head_refs' :fieldList='fieldList.head' :initialValue="head_result")
@@ -42,6 +49,7 @@
   import FormTemplate from '../components/FormTemplate'
   import CroppaImg from '../components/Croppa.vue'
   import Formstatus from '../components/Formstatus.vue'
+  import VueCountdown from '@xkeshi/vue-countdown';
   import {get_regist_form, post_regist_form} from '../dtnl_api.js'
 
   export default {
@@ -49,7 +57,8 @@
     components: {
       FormTemplate,
       CroppaImg,
-      Formstatus
+      Formstatus,
+      VueCountdown
     },
     data: function () {
       let fav = _.map(JSON.parse(localStorage.getItem('fav_house')) || [], "nme")
@@ -208,5 +217,6 @@
 
   .croppa-wrap
     margin-bottom: 50px
-
+  .zingR
+    font-family: ZingRust
 </style>
