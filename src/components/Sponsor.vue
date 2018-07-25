@@ -2,7 +2,7 @@
 div.section.has-text-centered
   div.is-inline: img.spon.cunex(src='@/theme/material/cunex.png')
   div.is-inline: img.spon.zero_waste(src='@/theme/material/zero_waste.png')
-  div.is-inline: img.spon.central(src='../theme/material/central_embassyt.png')
+  div.is-inline: img.spon.central(src='../theme/material/central_embassy_dicut.png')
 </template>
 
 <style lang='stylus' scoped>
@@ -17,8 +17,11 @@ div.section.has-text-centered
     &.central
       position relative
       width 250px
-      top 10px
+      top -20px
       border-radius 10px
-      filter: invert(100%);
+      @media screen and (max-width: 407px) {
+        top 20px
+      }
+      // filter: invert(100%);
 
 </style>
