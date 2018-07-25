@@ -9,7 +9,7 @@
       h2 และบ้านที่คุณได้นั้นก็คือออออออ
       h2 And your house is...
     div.container(style="width:300px;")
-      img(:src='require(`../theme/house/${userData["head/realHouseURL"]}.png`)' style="margin:0 auto;")
+      img(:src='require(`../theme/house/${userData["head/realHouseURL"]}.png`)' style="margin:0 auto;width:100%")
       h1 {{userData["head/realHouse"]}}
     // NAVIGATE
     div.section.mcentere

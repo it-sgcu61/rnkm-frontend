@@ -2,7 +2,7 @@
   "result": {
     "fieldList": [{
       "desc": "",
-      "label": "คำนำหน้าชื่อ",
+      "label": "คำนำหน้าชื่อ | Name Title",
       "name": "dynamic/nameprefix",
       "lock": true,
       "option": [{
@@ -16,7 +16,7 @@
       "type": "choice"
     }, {
       "desc": "เช่น รับน้อง ก้าวใหม่",
-      "label": "ชื่อ-นามสกุล (ไทย)",
+      "label": "ชื่อ-นามสกุล (ไทย) | Full Name",
       "name": "dynamic/fullname",
       "lock": true,
       "required": true,
@@ -24,7 +24,7 @@
       "validate": "\\s+"
     }, {
       "desc": "เช่น ต้อม, ปู",
-      "label": "ชื่อเล่น",
+      "label": "ชื่อเล่น | Nickname",
       "name": "dynamic/nickname",
       "lock": true,
       "required": true,
@@ -32,7 +32,7 @@
       "validate": ""
     }, {
       "desc": "",
-      "label": "คณะ",
+      "label": "คณะ | Faculty",
       "name": "dynamic/faculty",
       "lock": true,
       "option": [{
@@ -100,7 +100,7 @@
       "type": "choice"
     }, {
       "desc": "เลขบัตรประชาชนทั้ง 13 หลัก",
-      "label": "เลขบัตรประจำตัวประชาชน",
+      "label": "เลขบัตรประจำตัวประชาชน | National ID Number / Passport Number",
       "name": "dynamic/nationalID",
       "lock": true,
       "required": true,
@@ -108,7 +108,7 @@
       "validate": "^[0-9]{13}$"
     }, {
       "desc": "เช่น พุทธ/คริสต์/อิสลาม หรือ -",
-      "label": "ศาสนา",
+      "label": "ศาสนา | Religion",
       "name": "dynamic/religion",
       "lock": true,
       "required": true,
@@ -116,7 +116,7 @@
       "validate": ""
     }, {
       "desc": "0xx-xxx-xxxx (หากไม่มี ให้ใส่ 080-000-0000)",
-      "label": "หมายเลขโทรศัพท์",
+      "label": "หมายเลขโทรศัพท์ | Phone Number",
       "name": "dynamic/tel",
       "lock": true,
       "required": true,
@@ -140,7 +140,7 @@
       "validate": ""
     }, {
       "desc": "เราจะติดต่อไปยังหมายเลขนี้ในกรณีเกิดเหตุการณ์ฉุกเฉินขึ้น",
-      "label": "หมายเลขโทรศัพท์ฉุกเฉิน",
+      "label": "หมายเลขโทรศัพท์ฉุกเฉิน | Emergency phone number",
       "name": "dynamic/emergency_tel",
       "lock": true,
       "required": true,
@@ -148,7 +148,7 @@
       "validate": "0[689][0-9]-[0-9]{3}-[0-9]{4}"
     }, {
       "desc": "เช่น มารดา/บิดา ฯลฯ",
-      "label": "ความเกี่ยวข้องของเจ้าของหมายเลขโทรศัพท์ฉุกเฉิน",
+      "label": "ความเกี่ยวข้องของเจ้าของหมายเลขโทรศัพท์ฉุกเฉิน | Releationship of the emergency phone owner to you",
       "name": "dynamic/emergency_tel_relation",
       "required": true,
       "lock": true,
@@ -156,7 +156,7 @@
       "validate": ""
     },{
       "desc": "ถ้าไม่มีใส่ \"-\"",
-      "label": "โรคประจำตัว",
+      "label": "โรคประจำตัว | Congenital diseases",
       "lock": true,
       "name": "dynamic/congenital_disease",
       "required": true,
@@ -164,7 +164,7 @@
       "validate": ""
     }, {
       "desc": "ถ้าไม่มีใส่ \"-\"",
-      "label": "ยาที่ใช้อยู่เป็นประจำ",
+      "label": "ยาที่ใช้อยู่เป็นประจำ | Regular used drugs (For treating specific symptoms)",
       "name": "dynamic/regularDrug",
       "lock": true,
       "required": true,
@@ -172,7 +172,7 @@
       "validate": ""
     }, {
       "desc": "ถ้าไม่มีใส่ \"-\"",
-      "label": "ยาที่แพ้",
+      "label": "ยาที่แพ้ | Drugs that you are allergic to",
       "name": "dynamic/drugAllergy",
       "lock": true,
       "required": true,
@@ -180,7 +180,7 @@
       "validate": ""
     }, {
       "desc": "เช่น ผู้พิการทางสายตา, ภาวะซึมเศร้า, hyperventilation, เบาหวาน (ถ้าไม่มีใส่ \"-\")",
-      "label": "ความผิดปกติทางร่างกาย",
+      "label": "ความผิดปกติทางร่างกาย | Other things that need medical attention",
       "name": "dynamic/disorders",
       "lock": true,
       "required": true,
@@ -188,7 +188,7 @@
       "validate": ""
     }, {
       "desc": "อาหารที่ไม่สามารถรับประทานได้ เนื่องจากแพ้ หรือเกี่ยวข้องกับศาสนา (เช่น เป็นอิสลาม ฯลฯ)",
-      "label": "อาหารที่แพ้",
+      "label": "อาหารที่แพ้ | Foods that you are allergic to",
       "name": "dynamic/foodAllergies",
       "lock": true,
       "required": true,

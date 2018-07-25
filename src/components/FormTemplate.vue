@@ -20,7 +20,6 @@ div.wrapper
           // LABEL
           transition(name='_slide-fade' mode='out-in' duration='100')
             div.label-text(:key='f.label') {{f.label}}
-
           // INPUT
           input(  :disabled='lock && f.lock' v-if = 'f.name.endsWith("tel")'   v-model.trim='form[f.name]' :name='f.name' v-validate="{required: f.required, regex: f.validate}" :placeholder='lock && f.lock?"":f.desc' v-mask="'###-###-####'")
           input(  :disabled='lock && f.lock' v-else-if='f.type == "string"'    v-model.trim='form[f.name]' :name='f.name' v-validate="{required: f.required, regex: f.validate}" :placeholder='lock && f.lock?"":f.desc')
@@ -29,6 +28,7 @@ div.wrapper
             option(v-for='o in f.option.filter((opt)=>!Object.values(form).slice(0,parseInt(f.name.match(/\\d+/g)[0])-1).includes(opt.value))' :value='o.value' style='color: #353535') {{o.label}}
           select( :disabled='lock && f.lock' v-else-if='f.type == "choice"' v-model.trim='form[f.name]' :name='f.name')
             option(v-for='o in f.option' :value='o.value' style='color: #353535' ) {{o.label}}
+
 
           // ERROR
           div.error(v-if='errors.has(f.name)')
@@ -160,7 +160,6 @@ $edge = #eeef
 
   .label-text {
     display: inline-block;
-    position: absolute;
     top: -8px;
     line-height: 16px;
     margin: 0 0 0 10px;
