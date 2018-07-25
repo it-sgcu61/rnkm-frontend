@@ -23,11 +23,13 @@ export default new Router({
     },
     {
       path: '/register',
-      name: 'Register',
-      component: Register
+      redirect: '/about'
+      // name: 'Register',
+      // component: Register
     },
     {
       path: '/announce',
+      // redirect: '/about'
       name: 'Announce',
       component: Announce
     },
