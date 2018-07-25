@@ -2,6 +2,7 @@ import Vue from 'vue'
 import House from '@/view/House.vue'
 import About from '@/view/About.vue'
 import Baan from '@/view/Baan.vue'
+import Dorm from '@/view/Dorm.vue'
 import Register from '@/view/Register.vue'
 import Announce from '@/view/Announce.vue'
 import Transfer from '@/view/Transfer.vue'
@@ -55,6 +56,11 @@ export default new Router({
       path: '/edit',
       name: 'Edit',
       component: EditInfo,
+    },
+    {
+      path: '/dorm',
+      name: 'Dorm',
+      component: Dorm
     }
   ],
   scrollBehavior (to, from, savedPosition) {

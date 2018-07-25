@@ -29,13 +29,19 @@ div
 
       // LOGIN
       form.container(v-else)
+        div.field.cu
+          button.button.is-info.is-size.is-size-4(
+            style='margin: 0px auto 30px auto;'
+            @click='$router.push("/dorm")'
+          ) dorm detail
         div.field
           div: span(style='color: white') personal ID
           div: input.input(v-model='login.usr' type='tel')
         div.field
           div: span(style='color: white') phone number
           div: input.input(v-model='login.pwd' type="password" v-mask="'###-###-####'" :masked="false" pattern='[0-9]{10}' title="10 digit tel number")
-        div.field: img#submit(@click='submit' src='../theme/material/submit_btn.png')
+        div.field
+          img#submit(@click='submit' src='../theme/material/submit_btn.png')
     absolute-background(bot)
 </template>
 
