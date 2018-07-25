@@ -29,19 +29,19 @@ div
 
       // LOGIN
       form.container(v-else)
-        div.field.cu
-          button.button.is-info.is-size.is-size-4(
-            style='margin: 0px auto 30px auto;'
-            @click='$router.push("/dorm")'
-          ) dorm detail
         div.field
           div: span(style='color: white') personal ID
           div: input.input(v-model='login.usr' type='tel')
         div.field
           div: span(style='color: white') phone number
           div: input.input(v-model='login.pwd' type="password" v-mask="'###-###-####'" :masked="false" pattern='[0-9]{10}' title="10 digit tel number")
-        div.field
-          img#submit(@click='submit' src='../theme/material/submit_btn.png')
+        // div(class="g-recaptcha" v-model='login.captchaToken' data-sitekey="6LdTQ2YUAAAAAEx2IaRDB9TYcR52jry0Zgr52h5O" style="width:300px; margin: 0 auto;")
+        div.field: img#submit(@click='submit' src='../theme/material/submit_btn.png')
+        div.field.cu
+          button.button.is-info.is-size.is-size-4(
+            style='margin: 0px auto 30px auto;font-family: Superspace;'
+            @click='$router.push("/dorm")'
+          ) รายละเอียดหอพักนิสิต ช่วงงานกิจกรรม
     absolute-background(bot)
 </template>
 
@@ -61,7 +61,8 @@ div
       return {
         login: {
           usr: '',
-          pwd: ''
+          pwd: '',
+          captchaToken: '',
         },
         result: {
           show: "query",
@@ -75,6 +76,7 @@ div
     },
     methods: {
       async submit () {
+        console.log(this.captchaToken)
         this.result.show = "loading"
         // EDIT DATA
         var userdata = await getAllowEditPersonalForm(this.login.usr, this.login.pwd)

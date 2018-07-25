@@ -4,16 +4,17 @@
     div.container
       FormTemplate(v-model='form' ref='form_refs' :fieldList='fieldList' :initialValue='userData' :lock='true')
         div.croppa-wrap.has-text-centered(slot-scope="o")
-          croppa-img(preview_only ref='croppa_refs' :initImg='userData["hidden/imageURL"]')
-
+          img(:src='userData["hidden/imageURL"]')
+    div.container
+      h2 และบ้านที่คุณได้นั้นก็คือออออออ
+      h2 And your house is...
+    div.container(style="width:300px;")
+      img(:src='require(`../theme/house/${userData["head/realHouseURL"]}.png`)' style="margin:0 auto;")
+      h1 {{userData["head/realHouse"]}}
     // NAVIGATE
     div.section.mcentere
       div.is-inline: img.btn(@click='$router.push("/")' src='../theme/material/back_btn.png')
-      div.is-inline(v-if='submissionState != "pending"'): img.btn(@click='submit' src='../theme/material/submit_btn.png')
-      div.scale-x2(v-else align="middle")
-        rotate-square5
       div.tab
-      div.flex.jcenter(style='color: yellow') ** submit may lost previous
 
 </template>
 

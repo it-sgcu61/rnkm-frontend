@@ -1,5 +1,5 @@
 import Vue from 'vue'
-const middleAPI = "https://5xhgfqhpgik599bg2d9v.tk"
+const middleAPI = "https://localhost:3000"
 async function getAllowEditPersonalForm(username, password) {
   var resp = await Vue.http.post(`${middleAPI}/api/chkInfo/getInfo`,{tel:password, nationalID: username})
   return resp.body
