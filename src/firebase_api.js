@@ -28,8 +28,8 @@ function getCookie(w) {
 // $(document).ready(function () {
 
 import axios from 'axios'
-var proxy = 'https://cryptic-headland-94862.herokuapp.com/'; // for Cross Origin Request
-
+var proxy = ''; // for Cross Origin Request
+var host = 'http://localhost:5000/rnkm-cu102/us-central1'
 
 // LOGIN - required to do user's personal things
 async function login(username, password) {
@@ -40,7 +40,7 @@ async function login(username, password) {
     return token
   }
   return await axios.post(
-    proxy + 'https://us-central1-rnkm2018-house-ad25ge.cloudfunctions.net/login', {
+    proxy + host + '/login', {
       username: username,
       password: password
     }).then((res) => {
@@ -54,7 +54,7 @@ async function login(username, password) {
 // movePerson between house
 function movePerson(user, token, house) {
   return axios.post(
-    proxy + 'https://us-central1-rnkm2018-house-ad25ge.cloudfunctions.net/movePerson', {
+    proxy + host + '/movePerson', {
       house: house, // house name to move to
       username: user, // username (tel number)
       token: token, // token (from login, expires after 5 mins, I can remove the timeout)
@@ -84,7 +84,7 @@ function movePerson(user, token, house) {
 // confirm house and sent to DTNl
 function confirmHouse(user, token) {
   return axios.post(
-    proxy + 'https://us-central1-rnkm2018-house-ad25ge.cloudfunctions.net/confirmHouse', {
+    proxy + host + '/confirmHouse', {
       username: user,
       token: token
     }).then((res) => {
@@ -97,7 +97,7 @@ function confirmHouse(user, token) {
 // get user's info from DTNL & firebase
 async function getPersonInfo(user, token) {
   return await axios.post(
-    proxy + 'https://us-central1-rnkm2018-house-ad25ge.cloudfunctions.net/getPersonInfo', {
+    proxy + host + '/getPersonInfo', {
       username: user,
       token: token
     }).then((res) => {
@@ -129,7 +129,7 @@ async function getPersonInfo(user, token) {
 // LOGOUT - just invalidate token
 function logout(user, token) {
   return axios.post(
-    proxy + 'https://us-central1-rnkm2018-house-ad25ge.cloudfunctions.net/logout', {
+    proxy + host + '/logout', {
       username: user,
       token: token
     }).then(res => res.message)
