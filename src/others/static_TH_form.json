@@ -2,357 +2,9 @@
   "result": {
     "fieldList": [{
       "desc": "",
-      "label": "บ้านที่ต้องการอันดับ 1",
-      "name": "head/house1",
-      "lock": true,
-      "option": [{
-        "label": "บ้านคิดส์ - Kids",
-        "value": "บ้านคิดส์ - Kids"
-      }, {
-        "label": "บ้านคุณหนู - Khunnoo",
-        "value": "บ้านคุณหนู - Khunnoo"
-      }, {
-        "label": "บ้านคุ้ม - KOOM",
-        "value": "บ้านคุ้ม - KOOM"
-      }, {
-        "label": "บ้านโคะ - KOH",
-        "value": "บ้านโคะ - KOH"
-      }, {
-        "label": "บ้านจัดสัน - Jadson",
-        "value": "บ้านจัดสัน - Jadson"
-      }, {
-        "label": "บ้านโจ๋ - Jo+",
-        "value": "บ้านโจ๋ - Jo+"
-      }, {
-        "label": "บ้านโจ๊ะเด๊ะ - Jodeh Huesa",
-        "value": "บ้านโจ๊ะเด๊ะ - Jodeh Huesa"
-      }, {
-        "label": "บ้านโซ้ยตี๋หลีหมวย - SoeiteeLheemouy",
-        "value": "บ้านโซ้ยตี๋หลีหมวย - SoeiteeLheemouy"
-      }, {
-        "label": "บ้านดอก - Dork",
-        "value": "บ้านดอก - Dork"
-      }, {
-        "label": "บ้านดัง - Dung",
-        "value": "บ้านดัง - Dung"
-      }, {
-        "label": "บ้านดุ๊ยดุ่ย - Duidui",
-        "value": "บ้านดุ๊ยดุ่ย - Duidui"
-      }, {
-        "label": "บ้านเต็ม - TEM",
-        "value": "บ้านเต็ม - TEM"
-      }, {
-        "label": "บ้านบึ้ม - Buem",
-        "value": "บ้านบึ้ม - Buem"
-      }, {
-        "label": "บ้านบูชายัญ - Buchayun",
-        "value": "บ้านบูชายัญ - Buchayun"
-      }, {
-        "label": "บ้านเปรี้ยว - Preaw",
-        "value": "บ้านเปรี้ยว - Preaw"
-      }, {
-        "label": "บ้านผี - Phee",
-        "value": "บ้านผี - Phee"
-      }, {
-        "label": "บ้านพ่อ - Por",
-        "value": "บ้านพ่อ - Por"
-      }, {
-        "label": "บ้านพักตากอากาศ - Pak Tak Agard",
-        "value": "บ้านพักตากอากาศ - Pak Tak Agard"
-      }, {
-        "label": "บ้านเฟี้ยว - Fyo",
-        "value": "บ้านเฟี้ยว - Fyo"
-      }, {
-        "label": "บ้านยิ้ม - Yim",
-        "value": "บ้านยิ้ม - Yim"
-      }, {
-        "label": "บ้านแรง - Rang",
-        "value": "บ้านแรง - Rang"
-      }, {
-        "label": "บ้านว้อนท์ - Wanted",
-        "value": "บ้านว้อนท์ - Wanted"
-      }, {
-        "label": "บ้านเวิร์ค - Work",
-        "value": "บ้านเวิร์ค - Work"
-      }, {
-        "label": "บ้านสด - Sod",
-        "value": "บ้านสด - Sod"
-      }, {
-        "label": "บ้านเสี่ยว - Seiyw",
-        "value": "บ้านเสี่ยว - Seiyw"
-      }, {
-        "label": "บ้านหมีน้อย - Mheenoi",
-        "value": "บ้านหมีน้อย - Mheenoi"
-      }, {
-        "label": "บ้านหรอย - Rhoy",
-        "value": "บ้านหรอย - Rhoy"
-      }, {
-        "label": "บ้านหลายใจ - LaiJai",
-        "value": "บ้านหลายใจ - LaiJai"
-      }, {
-        "label": "บ้านหวัง - Wang",
-        "value": "บ้านหวัง - Wang"
-      }, {
-        "label": "บ้านไหน - Nhai",
-        "value": "บ้านไหน - Nhai"
-      }, {
-        "label": "บ้านอะอึ๋ม - A-AUM",
-        "value": "บ้านอะอึ๋ม - A-AUM"
-      }, {
-        "label": "บ้านอากาเป้ - AGAPE",
-        "value": "บ้านอากาเป้ - AGAPE"
-      }, {
-        "label": "บ้านอินดี้ - Indy",
-        "value": "บ้านอินดี้ - Indy"
-      }, {
-        "label": "บ้านอินเดียน่า - INDIANA",
-        "value": "บ้านอินเดียน่า - INDIANA"
-      }, {
-        "label": "บ้านเอช้วน - Achuan",
-        "value": "บ้านเอช้วน - Achuan"
-      }, {
-        "label": "บ้านแอ๊บ - ABnormal",
-        "value": "บ้านแอ๊บ - ABnormal"
-      }],
-      "required": true,
-      "type": "choice"
-    }, {
-      "desc": "",
-      "label": "บ้านที่ต้องการอันดับ 2",
-      "name": "head/house2",
-      "lock": true,
-      "option": [{
-        "label": "บ้านคิดส์ - Kids",
-        "value": "บ้านคิดส์ - Kids"
-      }, {
-        "label": "บ้านคุณหนู - Khunnoo",
-        "value": "บ้านคุณหนู - Khunnoo"
-      }, {
-        "label": "บ้านคุ้ม - KOOM",
-        "value": "บ้านคุ้ม - KOOM"
-      }, {
-        "label": "บ้านโคะ - KOH",
-        "value": "บ้านโคะ - KOH"
-      }, {
-        "label": "บ้านจัดสัน - Jadson",
-        "value": "บ้านจัดสัน - Jadson"
-      }, {
-        "label": "บ้านโจ๋ - Jo+",
-        "value": "บ้านโจ๋ - Jo+"
-      }, {
-        "label": "บ้านโจ๊ะเด๊ะ - Jodeh Huesa",
-        "value": "บ้านโจ๊ะเด๊ะ - Jodeh Huesa"
-      }, {
-        "label": "บ้านโซ้ยตี๋หลีหมวย - SoeiteeLheemouy",
-        "value": "บ้านโซ้ยตี๋หลีหมวย - SoeiteeLheemouy"
-      }, {
-        "label": "บ้านดอก - Dork",
-        "value": "บ้านดอก - Dork"
-      }, {
-        "label": "บ้านดัง - Dung",
-        "value": "บ้านดัง - Dung"
-      }, {
-        "label": "บ้านดุ๊ยดุ่ย - Duidui",
-        "value": "บ้านดุ๊ยดุ่ย - Duidui"
-      }, {
-        "label": "บ้านเต็ม - TEM",
-        "value": "บ้านเต็ม - TEM"
-      }, {
-        "label": "บ้านบึ้ม - Buem",
-        "value": "บ้านบึ้ม - Buem"
-      }, {
-        "label": "บ้านบูชายัญ - Buchayun",
-        "value": "บ้านบูชายัญ - Buchayun"
-      }, {
-        "label": "บ้านเปรี้ยว - Preaw",
-        "value": "บ้านเปรี้ยว - Preaw"
-      }, {
-        "label": "บ้านผี - Phee",
-        "value": "บ้านผี - Phee"
-      }, {
-        "label": "บ้านพ่อ - Por",
-        "value": "บ้านพ่อ - Por"
-      }, {
-        "label": "บ้านพักตากอากาศ - Pak Tak Agard",
-        "value": "บ้านพักตากอากาศ - Pak Tak Agard"
-      }, {
-        "label": "บ้านเฟี้ยว - Fyo",
-        "value": "บ้านเฟี้ยว - Fyo"
-      }, {
-        "label": "บ้านยิ้ม - Yim",
-        "value": "บ้านยิ้ม - Yim"
-      }, {
-        "label": "บ้านแรง - Rang",
-        "value": "บ้านแรง - Rang"
-      }, {
-        "label": "บ้านว้อนท์ - Wanted",
-        "value": "บ้านว้อนท์ - Wanted"
-      }, {
-        "label": "บ้านเวิร์ค - Work",
-        "value": "บ้านเวิร์ค - Work"
-      }, {
-        "label": "บ้านสด - Sod",
-        "value": "บ้านสด - Sod"
-      }, {
-        "label": "บ้านเสี่ยว - Seiyw",
-        "value": "บ้านเสี่ยว - Seiyw"
-      }, {
-        "label": "บ้านหมีน้อย - Mheenoi",
-        "value": "บ้านหมีน้อย - Mheenoi"
-      }, {
-        "label": "บ้านหรอย - Rhoy",
-        "value": "บ้านหรอย - Rhoy"
-      }, {
-        "label": "บ้านหลายใจ - LaiJai",
-        "value": "บ้านหลายใจ - LaiJai"
-      }, {
-        "label": "บ้านหวัง - Wang",
-        "value": "บ้านหวัง - Wang"
-      }, {
-        "label": "บ้านไหน - Nhai",
-        "value": "บ้านไหน - Nhai"
-      }, {
-        "label": "บ้านอะอึ๋ม - A-AUM",
-        "value": "บ้านอะอึ๋ม - A-AUM"
-      }, {
-        "label": "บ้านอากาเป้ - AGAPE",
-        "value": "บ้านอากาเป้ - AGAPE"
-      }, {
-        "label": "บ้านอินดี้ - Indy",
-        "value": "บ้านอินดี้ - Indy"
-      }, {
-        "label": "บ้านอินเดียน่า - INDIANA",
-        "value": "บ้านอินเดียน่า - INDIANA"
-      }, {
-        "label": "บ้านเอช้วน - Achuan",
-        "value": "บ้านเอช้วน - Achuan"
-      }, {
-        "label": "บ้านแอ๊บ - ABnormal",
-        "value": "บ้านแอ๊บ - ABnormal"
-      }],
-      "required": true,
-      "type": "choice"
-    }, {
-      "desc": "",
-      "label": "บ้านที่ต้องกาารอันดับ 3",
-      "name": "head/house3",
-      "lock": true,
-      "option": [{
-        "label": "บ้านคิดส์ - Kids",
-        "value": "บ้านคิดส์ - Kids"
-      }, {
-        "label": "บ้านคุณหนู - Khunnoo",
-        "value": "บ้านคุณหนู - Khunnoo"
-      }, {
-        "label": "บ้านคุ้ม - KOOM",
-        "value": "บ้านคุ้ม - KOOM"
-      }, {
-        "label": "บ้านโคะ - KOH",
-        "value": "บ้านโคะ - KOH"
-      }, {
-        "label": "บ้านจัดสัน - Jadson",
-        "value": "บ้านจัดสัน - Jadson"
-      }, {
-        "label": "บ้านโจ๋ - Jo+",
-        "value": "บ้านโจ๋ - Jo+"
-      }, {
-        "label": "บ้านโจ๊ะเด๊ะ - Jodeh Huesa",
-        "value": "บ้านโจ๊ะเด๊ะ - Jodeh Huesa"
-      }, {
-        "label": "บ้านโซ้ยตี๋หลีหมวย - SoeiteeLheemouy",
-        "value": "บ้านโซ้ยตี๋หลีหมวย - SoeiteeLheemouy"
-      }, {
-        "label": "บ้านดอก - Dork",
-        "value": "บ้านดอก - Dork"
-      }, {
-        "label": "บ้านดัง - Dung",
-        "value": "บ้านดัง - Dung"
-      }, {
-        "label": "บ้านดุ๊ยดุ่ย - Duidui",
-        "value": "บ้านดุ๊ยดุ่ย - Duidui"
-      }, {
-        "label": "บ้านเต็ม - TEM",
-        "value": "บ้านเต็ม - TEM"
-      }, {
-        "label": "บ้านบึ้ม - Buem",
-        "value": "บ้านบึ้ม - Buem"
-      }, {
-        "label": "บ้านบูชายัญ - Buchayun",
-        "value": "บ้านบูชายัญ - Buchayun"
-      }, {
-        "label": "บ้านเปรี้ยว - Preaw",
-        "value": "บ้านเปรี้ยว - Preaw"
-      }, {
-        "label": "บ้านผี - Phee",
-        "value": "บ้านผี - Phee"
-      }, {
-        "label": "บ้านพ่อ - Por",
-        "value": "บ้านพ่อ - Por"
-      }, {
-        "label": "บ้านพักตากอากาศ - Pak Tak Agard",
-        "value": "บ้านพักตากอากาศ - Pak Tak Agard"
-      }, {
-        "label": "บ้านเฟี้ยว - Fyo",
-        "value": "บ้านเฟี้ยว - Fyo"
-      }, {
-        "label": "บ้านยิ้ม - Yim",
-        "value": "บ้านยิ้ม - Yim"
-      }, {
-        "label": "บ้านแรง - Rang",
-        "value": "บ้านแรง - Rang"
-      }, {
-        "label": "บ้านว้อนท์ - Wanted",
-        "value": "บ้านว้อนท์ - Wanted"
-      }, {
-        "label": "บ้านเวิร์ค - Work",
-        "value": "บ้านเวิร์ค - Work"
-      }, {
-        "label": "บ้านสด - Sod",
-        "value": "บ้านสด - Sod"
-      }, {
-        "label": "บ้านเสี่ยว - Seiyw",
-        "value": "บ้านเสี่ยว - Seiyw"
-      }, {
-        "label": "บ้านหมีน้อย - Mheenoi",
-        "value": "บ้านหมีน้อย - Mheenoi"
-      }, {
-        "label": "บ้านหรอย - Rhoy",
-        "value": "บ้านหรอย - Rhoy"
-      }, {
-        "label": "บ้านหลายใจ - LaiJai",
-        "value": "บ้านหลายใจ - LaiJai"
-      }, {
-        "label": "บ้านหวัง - Wang",
-        "value": "บ้านหวัง - Wang"
-      }, {
-        "label": "บ้านไหน - Nhai",
-        "value": "บ้านไหน - Nhai"
-      }, {
-        "label": "บ้านอะอึ๋ม - A-AUM",
-        "value": "บ้านอะอึ๋ม - A-AUM"
-      }, {
-        "label": "บ้านอากาเป้ - AGAPE",
-        "value": "บ้านอากาเป้ - AGAPE"
-      }, {
-        "label": "บ้านอินดี้ - Indy",
-        "value": "บ้านอินดี้ - Indy"
-      }, {
-        "label": "บ้านอินเดียน่า - INDIANA",
-        "value": "บ้านอินเดียน่า - INDIANA"
-      }, {
-        "label": "บ้านเอช้วน - Achuan",
-        "value": "บ้านเอช้วน - Achuan"
-      }, {
-        "label": "บ้านแอ๊บ - ABnormal",
-        "value": "บ้านแอ๊บ - ABnormal"
-      }],
-      "required": true,
-      "type": "choice"
-    }, {
-      "desc": "",
-      "label": "คำนำหน้าชื่อ",
+      "label": "คำนำหน้าชื่อ | Name Title",
       "name": "dynamic/nameprefix",
-      "lock": false,
+      "lock": true,
       "option": [{
         "label": "นาย - Mr.",
         "value": "นาย - Mr."
@@ -364,25 +16,25 @@
       "type": "choice"
     }, {
       "desc": "เช่น รับน้อง ก้าวใหม่",
-      "label": "ชื่อ-นามสกุล (ไทย)",
+      "label": "ชื่อ-นามสกุล (ไทย) | Full Name",
       "name": "dynamic/fullname",
-      "lock": false,
+      "lock": true,
       "required": true,
       "type": "string",
       "validate": "\\s+"
     }, {
       "desc": "เช่น ต้อม, ปู",
-      "label": "ชื่อเล่น",
+      "label": "ชื่อเล่น | Nickname",
       "name": "dynamic/nickname",
-      "lock": false,
+      "lock": true,
       "required": true,
       "type": "string",
       "validate": ""
     }, {
       "desc": "",
-      "label": "คณะ",
+      "label": "คณะ | Faculty",
       "name": "dynamic/faculty",
-      "lock": false,
+      "lock": true,
       "option": [{
         "label": "ครุศาสตร์ - Faculty of Education",
         "value": "ครุศาสตร์ - Faculty of Education"
@@ -448,7 +100,7 @@
       "type": "choice"
     }, {
       "desc": "เลขบัตรประชาชนทั้ง 13 หลัก",
-      "label": "เลขบัตรประจำตัวประชาชน",
+      "label": "เลขบัตรประจำตัวประชาชน | National ID Number / Passport Number",
       "name": "dynamic/nationalID",
       "lock": true,
       "required": true,
@@ -456,15 +108,15 @@
       "validate": "^[0-9]{13}$"
     }, {
       "desc": "เช่น พุทธ/คริสต์/อิสลาม หรือ -",
-      "label": "ศาสนา",
+      "label": "ศาสนา | Religion",
       "name": "dynamic/religion",
-      "lock": false,
+      "lock": true,
       "required": true,
       "type": "string",
       "validate": ""
     }, {
       "desc": "0xx-xxx-xxxx (หากไม่มี ให้ใส่ 080-000-0000)",
-      "label": "หมายเลขโทรศัพท์",
+      "label": "หมายเลขโทรศัพท์ | Phone Number",
       "name": "dynamic/tel",
       "lock": true,
       "required": true,
@@ -474,7 +126,7 @@
       "desc": "",
       "label": "LineID",
       "name": "dynamic/lineID",
-      "lock": false,
+      "lock": true,
       "required": false,
       "type": "string",
       "validate": ""
@@ -483,100 +135,70 @@
       "label": "Facebook",
       "name": "dynamic/facebook",
       "required": false,
-      "lock": false,
+      "lock": true,
       "type": "string",
       "validate": ""
     }, {
       "desc": "เราจะติดต่อไปยังหมายเลขนี้ในกรณีเกิดเหตุการณ์ฉุกเฉินขึ้น",
-      "label": "หมายเลขโทรศัพท์ฉุกเฉิน",
+      "label": "หมายเลขโทรศัพท์ฉุกเฉิน | Emergency phone number",
       "name": "dynamic/emergency_tel",
-      "lock": false,
+      "lock": true,
       "required": true,
       "type": "string",
       "validate": "0[689][0-9]-[0-9]{3}-[0-9]{4}"
     }, {
       "desc": "เช่น มารดา/บิดา ฯลฯ",
-      "label": "ความเกี่ยวข้องของเจ้าของหมายเลขโทรศัพท์ฉุกเฉิน",
+      "label": "ความเกี่ยวข้องของเจ้าของหมายเลขโทรศัพท์ฉุกเฉิน | Releationship of the emergency phone owner to you",
       "name": "dynamic/emergency_tel_relation",
       "required": true,
-      "lock": false,
+      "lock": true,
       "type": "string",
       "validate": ""
-    }, {
-      "desc": "ประสงค์จะอยู่หอพักนิสิตจุฬาลงกรณ์มหาวิทยาลัยในช่วงวันงานหรือไม่",
-      "label": "ต้องการพักหอในช่วงกิจกรรมหรือไม่",
-      "name": "dynamic/RCU_required",
-      "lock": false,
-      "option": [{
-        "label": "no",
-        "value": "no"
-      }, {
-        "label": "yes",
-        "value": "yes"
-      }],
-      "required": true,
-      "type": "choice"
-    }, {
-      "desc": "สามารถไม่ตอบคำถามนี้ได้ แต่จะมีผลต่อคำร้องขอพักหอของคุณ (หากไม่ต้องการหอ ให้ใส่ -)",
-      "label": "คำตอบมีผลต่อการพิจารณาคำร้อง (หากไม่ต้องการหอให้ใส่ -)",
-      "name": "dynamic/RCU_reason",
-      "lock": false,
-      "required": true,
-      "type": "lg_string",
-      "validate": ""
-    }, {
+    },{
       "desc": "ถ้าไม่มีใส่ \"-\"",
-      "label": "โรคประจำตัว",
-      "lock": false,
+      "label": "โรคประจำตัว | Congenital diseases",
+      "lock": true,
       "name": "dynamic/congenital_disease",
       "required": true,
       "type": "string",
       "validate": ""
     }, {
       "desc": "ถ้าไม่มีใส่ \"-\"",
-      "label": "ยาที่ใช้อยู่เป็นประจำ",
+      "label": "ยาที่ใช้อยู่เป็นประจำ | Regular used drugs (For treating specific symptoms)",
       "name": "dynamic/regularDrug",
-      "lock": false,
-      "required": true,
-      "type": "string",
-      "validate": ""
-    }, {
-      "desc": "ถ้าไม่มีใส่ \"-\"",
-      "label": "ยาที่แพ้",
-      "name": "dynamic/drugAllergy",
-      "lock": false,
-      "required": true,
-      "type": "string",
-      "validate": ""
-    }, {
-      "desc": "เช่น ผู้พิการทางสายตา, ภาวะซึมเศร้า, hyperventilation, เบาหวาน (ถ้าไม่มีใส่ \"-\")",
-      "label": "ความผิดปกติทางร่างกาย",
-      "name": "dynamic/disorders",
-      "lock": false,
-      "required": true,
-      "type": "string",
-      "validate": ""
-    }, {
-      "desc": "อาหารที่ไม่สามารถรับประทานได้ เนื่องจากแพ้ หรือเกี่ยวข้องกับศาสนา (เช่น เป็นอิสลาม ฯลฯ)",
-      "label": "อาหารที่แพ้",
-      "name": "dynamic/foodAllergies",
-      "lock": false,
-      "required": true,
-      "type": "string",
-      "validate": ""
-    }, {
-      "desc": "",
-      "label": "grpID",
-      "name": "hidden/groupID",
       "lock": true,
       "required": true,
       "type": "string",
       "validate": ""
     }, {
+      "desc": "ถ้าไม่มีใส่ \"-\"",
+      "label": "ยาที่แพ้ | Drugs that you are allergic to",
+      "name": "dynamic/drugAllergy",
+      "lock": true,
+      "required": true,
+      "type": "string",
+      "validate": ""
+    }, {
+      "desc": "เช่น ผู้พิการทางสายตา, ภาวะซึมเศร้า, hyperventilation, เบาหวาน (ถ้าไม่มีใส่ \"-\")",
+      "label": "ความผิดปกติทางร่างกาย | Other things that need medical attention",
+      "name": "dynamic/disorders",
+      "lock": true,
+      "required": true,
+      "type": "string",
+      "validate": ""
+    }, {
+      "desc": "อาหารที่ไม่สามารถรับประทานได้ เนื่องจากแพ้ หรือเกี่ยวข้องกับศาสนา (เช่น เป็นอิสลาม ฯลฯ)",
+      "label": "อาหารที่แพ้ | Foods that you are allergic to",
+      "name": "dynamic/foodAllergies",
+      "lock": true,
+      "required": true,
+      "type": "string",
+      "validate": ""
+    },{
       "desc": "",
       "label": "imageURL",
       "name": "hidden/imageURL",
-      "lock": false,
+      "lock": true,
       "required": true,
       "type": "string",
       "validate": ""
