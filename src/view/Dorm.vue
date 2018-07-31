@@ -1,5 +1,5 @@
 <template lang='pug'>
-div.cu
+div.cu(style='margin-top: 50px')
   // absolute-background(top)
   div.container
     h1.is-size-2(style='font-weight: bold') รายละเอียดการนอนหอพักจุฬา
@@ -44,15 +44,17 @@ export default {
 }
 </script>
 
-<style lang='stylus'>
+<style lang='stylus' scoped>
 .container {
   max-width: 650px;
   font-size: 1.5em;
   margin-top: 30px;
 }
-img
+img {
+
   width: 40%
   max-width 200px
   margin 5px
   border-radius 6px
+}
 </style>
