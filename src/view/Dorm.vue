@@ -1,5 +1,5 @@
 <template lang='pug'>
-div.cu
+div.cu(style='margin-top: 50px')
   // absolute-background(top)
   div.container.dorm
     h1.is-size-2(style='font-weight: bold') รายละเอียดการนอนหอพักจุฬา

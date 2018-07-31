@@ -24,9 +24,9 @@ export default new Router({
     },
     {
       path: '/register',
-      redirect: '/about'
-      // name: 'Register',
-      // component: Register
+      // redirect: '/about'
+      name: 'Register',
+      component: Register
     },
     {
       path: '/announce',

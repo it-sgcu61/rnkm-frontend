@@ -1,0 +1,331 @@
+{
+  "result": {
+    "fieldList": [{
+      "desc": "",
+      "label": "บ้านที่ต้องการอันดับ 1",
+      "name": "head/house1",
+      "lock": true,
+      "option": [{
+        "label": "บ้านคิดส์ - Kids",
+        "value": "บ้านคิดส์ - Kids"
+      }, {
+        "label": "บ้านคุณหนู - Khunnoo",
+        "value": "บ้านคุณหนู - Khunnoo"
+      }, {
+        "label": "บ้านคุ้ม - KOOM",
+        "value": "บ้านคุ้ม - KOOM"
+      }, {
+        "label": "บ้านโคะ - KOH",
+        "value": "บ้านโคะ - KOH"
+      }, {
+        "label": "บ้านจัดสัน - Jadson",
+        "value": "บ้านจัดสัน - Jadson"
+      }, {
+        "label": "บ้านโจ๋ - Jo+",
+        "value": "บ้านโจ๋ - Jo+"
+      }, {
+        "label": "บ้านโจ๊ะเด๊ะ - Jodeh Huesa",
+        "value": "บ้านโจ๊ะเด๊ะ - Jodeh Huesa"
+      }, {
+        "label": "บ้านโซ้ยตี๋หลีหมวย - SoeiteeLheemouy",
+        "value": "บ้านโซ้ยตี๋หลีหมวย - SoeiteeLheemouy"
+      }, {
+        "label": "บ้านดอก - Dork",
+        "value": "บ้านดอก - Dork"
+      }, {
+        "label": "บ้านดัง - Dung",
+        "value": "บ้านดัง - Dung"
+      }, {
+        "label": "บ้านดุ๊ยดุ่ย - Duidui",
+        "value": "บ้านดุ๊ยดุ่ย - Duidui"
+      }, {
+        "label": "บ้านเต็ม - TEM",
+        "value": "บ้านเต็ม - TEM"
+      }, {
+        "label": "บ้านบึ้ม - Buem",
+        "value": "บ้านบึ้ม - Buem"
+      }, {
+        "label": "บ้านบูชายัญ - Buchayun",
+        "value": "บ้านบูชายัญ - Buchayun"
+      }, {
+        "label": "บ้านเปรี้ยว - Preaw",
+        "value": "บ้านเปรี้ยว - Preaw"
+      }, {
+        "label": "บ้านผี - Phee",
+        "value": "บ้านผี - Phee"
+      }, {
+        "label": "บ้านพ่อ - Por",
+        "value": "บ้านพ่อ - Por"
+      }, {
+        "label": "บ้านพักตากอากาศ - Pak Tak Agard",
+        "value": "บ้านพักตากอากาศ - Pak Tak Agard"
+      }, {
+        "label": "บ้านเฟี้ยว - Fyo",
+        "value": "บ้านเฟี้ยว - Fyo"
+      }, {
+        "label": "บ้านยิ้ม - Yim",
+        "value": "บ้านยิ้ม - Yim"
+      }, {
+        "label": "บ้านแรง - Rang",
+        "value": "บ้านแรง - Rang"
+      }, {
+        "label": "บ้านว้อนท์ - Wanted",
+        "value": "บ้านว้อนท์ - Wanted"
+      }, {
+        "label": "บ้านเวิร์ค - Work",
+        "value": "บ้านเวิร์ค - Work"
+      }, {
+        "label": "บ้านสด - Sod",
+        "value": "บ้านสด - Sod"
+      }, {
+        "label": "บ้านเสี่ยว - Seiyw",
+        "value": "บ้านเสี่ยว - Seiyw"
+      }, {
+        "label": "บ้านหมีน้อย - Mheenoi",
+        "value": "บ้านหมีน้อย - Mheenoi"
+      }, {
+        "label": "บ้านหรอย - Rhoy",
+        "value": "บ้านหรอย - Rhoy"
+      }, {
+        "label": "บ้านหลายใจ - LaiJai",
+        "value": "บ้านหลายใจ - LaiJai"
+      }, {
+        "label": "บ้านหวัง - Wang",
+        "value": "บ้านหวัง - Wang"
+      }, {
+        "label": "บ้านไหน - Nhai",
+        "value": "บ้านไหน - Nhai"
+      }, {
+        "label": "บ้านอะอึ๋ม - A-AUM",
+        "value": "บ้านอะอึ๋ม - A-AUM"
+      }, {
+        "label": "บ้านอากาเป้ - AGAPE",
+        "value": "บ้านอากาเป้ - AGAPE"
+      }, {
+        "label": "บ้านอินดี้ - Indy",
+        "value": "บ้านอินดี้ - Indy"
+      }, {
+        "label": "บ้านอินเดียน่า - INDIANA",
+        "value": "บ้านอินเดียน่า - INDIANA"
+      }, {
+        "label": "บ้านเอช้วน - Achuan",
+        "value": "บ้านเอช้วน - Achuan"
+      }, {
+        "label": "บ้านแอ๊บ - ABnormal",
+        "value": "บ้านแอ๊บ - ABnormal"
+      }],
+      "required": true,
+      "type": "choice"
+    }, {
+      "desc": "",
+      "label": "คำนำหน้าชื่อ",
+      "name": "dynamic/nameprefix",
+      "lock": false,
+      "option": [{
+        "label": "นาย - Mr.",
+        "value": "นาย - Mr."
+      }, {
+        "label": "นางสาว - Miss.",
+        "value": "นางสาว - Miss."
+      }],
+      "required": true,
+      "type": "choice"
+    }, {
+      "desc": "เช่น รับน้อง ก้าวใหม่",
+      "label": "ชื่อ-นามสกุล (ไทย)",
+      "name": "dynamic/fullname",
+      "lock": false,
+      "required": true,
+      "type": "string",
+      "validate": "\\s+"
+    }, {
+      "desc": "เช่น ต้อม, ปู",
+      "label": "ชื่อเล่น",
+      "name": "dynamic/nickname",
+      "lock": false,
+      "required": true,
+      "type": "string",
+      "validate": ""
+    }, {
+      "desc": "",
+      "label": "คณะ",
+      "name": "dynamic/faculty",
+      "lock": false,
+      "option": [{
+        "label": "ครุศาสตร์ - Faculty of Education",
+        "value": "ครุศาสตร์ - Faculty of Education"
+      }, {
+        "label": "จิตวิทยา - Faculty of Psychology",
+        "value": "จิตวิทยา - Faculty of Psychology"
+      }, {
+        "label": "ทันตแพทยศาสตร์ - Faculty of Dentistry",
+        "value": "ทันตแพทยศาสตร์ - Faculty of Dentistry"
+      }, {
+        "label": "นิติศาสตร์ - Faculty of Law",
+        "value": "นิติศาสตร์ - Faculty of Law"
+      }, {
+        "label": "นิเทศศาสตร์ - Faculty of Communication Arts",
+        "value": "นิเทศศาสตร์ - Faculty of Communication Arts"
+      }, {
+        "label": "พยาบาลศาสตร์ - Faculty of Nursing",
+        "value": "พยาบาลศาสตร์ - Faculty of Nursing"
+      }, {
+        "label": "พาณิชยศาสตร์และการบัญชี - Faculty of Commerce and Accountancy",
+        "value": "พาณิชยศาสตร์และการบัญชี - Faculty of Commerce and Accountancy"
+      }, {
+        "label": "แพทยศาสตร์ - Faculty of Medicine",
+        "value": "แพทยศาสตร์ - Faculty of Medicine"
+      }, {
+        "label": "เภสัชศาสตร์ - Faculty of Pharmaceutical Sciences",
+        "value": "เภสัชศาสตร์ - Faculty of Pharmaceutical Sciences"
+      }, {
+        "label": "รัฐศาสตร์ - Faculty of Political Science",
+        "value": "รัฐศาสตร์ - Faculty of Political Science"
+      }, {
+        "label": "วิทยาศาสตร์ - Faculty of Science",
+        "value": "วิทยาศาสตร์ - Faculty of Science"
+      }, {
+        "label": "วิทยาศาสตร์การกีฬา - Faculty of Sports Science",
+        "value": "วิทยาศาสตร์การกีฬา - Faculty of Sports Science"
+      }, {
+        "label": "วิศวกรรมศาสตร์ - Faculty of Engineering",
+        "value": "วิศวกรรมศาสตร์ - Faculty of Engineering"
+      }, {
+        "label": "ศิลปกรรมศาสตร์ - Faculty of Fine and Applied Arts",
+        "value": "ศิลปกรรมศาสตร์ - Faculty of Fine and Applied Arts"
+      }, {
+        "label": "เศรษฐศาสตร์ - Faculty of Economics",
+        "value": "เศรษฐศาสตร์ - Faculty of Economics"
+      }, {
+        "label": "สถาปัตยกรรมศาสตร์ - Faculty of Architecture",
+        "value": "สถาปัตยกรรมศาสตร์ - Faculty of Architecture"
+      }, {
+        "label": "สหเวชศาสตร์ - Faculty of Allied Health Sciences",
+        "value": "สหเวชศาสตร์ - Faculty of Allied Health Sciences"
+      }, {
+        "label": "สัตวแพทยศาสตร์ - Faculty of Veterinary Science",
+        "value": "สัตวแพทยศาสตร์ - Faculty of Veterinary Science"
+      }, {
+        "label": "อักษรศาสตร์ - Faculty of Arts",
+        "value": "อักษรศาสตร์ - Faculty of Arts"
+      }, {
+        "label": "สำนักวิชาทรัพยากรการเกษตร - School of Agricultural Resources",
+        "value": "สำนักวิชาทรัพยากรการเกษตร - School of Agricultural Resources"
+      }],
+      "required": true,
+      "type": "choice"
+    }, {
+      "desc": "เลขบัตรประชาชนทั้ง 13 หลัก",
+      "label": "เลขบัตรประจำตัวประชาชน",
+      "name": "dynamic/nationalID",
+      "lock": true,
+      "required": true,
+      "type": "string",
+      "validate": "^[0-9]{13}$"
+    }, {
+      "desc": "เช่น พุทธ/คริสต์/อิสลาม หรือ -",
+      "label": "ศาสนา",
+      "name": "dynamic/religion",
+      "lock": false,
+      "required": true,
+      "type": "string",
+      "validate": ""
+    }, {
+      "desc": "0xx-xxx-xxxx (หากไม่มี ให้ใส่ 080-000-0000)",
+      "label": "หมายเลขโทรศัพท์",
+      "name": "dynamic/tel",
+      "lock": true,
+      "required": true,
+      "type": "string",
+      "validate": "0[689][0-9]-[0-9]{3}-[0-9]{4}"
+    }, {
+      "desc": "",
+      "label": "LineID",
+      "name": "dynamic/lineID",
+      "lock": false,
+      "required": false,
+      "type": "string",
+      "validate": ""
+    }, {
+      "desc": "",
+      "label": "Facebook",
+      "name": "dynamic/facebook",
+      "required": false,
+      "lock": false,
+      "type": "string",
+      "validate": ""
+    }, {
+      "desc": "เราจะติดต่อไปยังหมายเลขนี้ในกรณีเกิดเหตุการณ์ฉุกเฉินขึ้น",
+      "label": "หมายเลขโทรศัพท์ฉุกเฉิน",
+      "name": "dynamic/emergency_tel",
+      "lock": false,
+      "required": true,
+      "type": "string",
+      "validate": "0[689][0-9]-[0-9]{3}-[0-9]{4}"
+    }, {
+      "desc": "เช่น มารดา/บิดา ฯลฯ",
+      "label": "ความเกี่ยวข้องของเจ้าของหมายเลขโทรศัพท์ฉุกเฉิน",
+      "name": "dynamic/emergency_tel_relation",
+      "required": true,
+      "lock": false,
+      "type": "string",
+      "validate": ""
+    }, {
+      "desc": "ถ้าไม่มีใส่ \"-\"",
+      "label": "โรคประจำตัว",
+      "lock": false,
+      "name": "dynamic/congenital_disease",
+      "required": true,
+      "type": "string",
+      "validate": ""
+    }, {
+      "desc": "ถ้าไม่มีใส่ \"-\"",
+      "label": "ยาที่ใช้อยู่เป็นประจำ",
+      "name": "dynamic/regularDrug",
+      "lock": false,
+      "required": true,
+      "type": "string",
+      "validate": ""
+    }, {
+      "desc": "ถ้าไม่มีใส่ \"-\"",
+      "label": "ยาที่แพ้",
+      "name": "dynamic/drugAllergy",
+      "lock": false,
+      "required": true,
+      "type": "string",
+      "validate": ""
+    }, {
+      "desc": "เช่น ผู้พิการทางสายตา, ภาวะซึมเศร้า, hyperventilation, เบาหวาน (ถ้าไม่มีใส่ \"-\")",
+      "label": "ความผิดปกติทางร่างกาย",
+      "name": "dynamic/disorders",
+      "lock": false,
+      "required": true,
+      "type": "string",
+      "validate": ""
+    }, {
+      "desc": "อาหารที่ไม่สามารถรับประทานได้ เนื่องจากแพ้ หรือเกี่ยวข้องกับศาสนา (เช่น เป็นอิสลาม ฯลฯ)",
+      "label": "อาหารที่แพ้",
+      "name": "dynamic/foodAllergies",
+      "lock": false,
+      "required": true,
+      "type": "string",
+      "validate": ""
+    }, {
+      "desc": "",
+      "label": "grpID",
+      "name": "hidden/groupID",
+      "lock": true,
+      "required": true,
+      "type": "string",
+      "validate": ""
+    }, {
+      "desc": "",
+      "label": "imageURL",
+      "name": "hidden/imageURL",
+      "lock": false,
+      "required": true,
+      "type": "string",
+      "validate": ""
+    }]
+  }
+}

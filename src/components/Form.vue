@@ -1,40 +1,41 @@
 <template lang='pug'>
   div
     // STAUS
-    formstatus(loading        v-if='!formState')
-    formstatus(success   v-else-if='registration_state == "ok" && submissionState == "fullfilled"')
-    formstatus(expired   v-else-if='registration_state == "expired"')
-    formstatus(countdown v-else-if='registration_state == "beforeTime"' :timeLeft='timeLeft' :formState='formState' @ready="ready")
+    // formstatus(loading        v-if='!formState')
+    // formstatus(success   v-else-if='registration_state == "ok" && submissionState == "fullfilled"')
+    formstatus(success   v-if='submissionState == "fullfilled"')
+    // formstatus(expired   v-else-if='registration_state == "expired"')
+    // formstatus(countdown v-else-if='registration_state == "beforeTime"' :timeLeft='timeLeft' :formState='formState' @ready="ready")
 
     // FORM
     div(v-else)
       div.container
-        vue-countdown(:time="(new Date(formState.closeOn.datetime[1]) - new Date())" @countdownend="ready")
-          template(slot-scope="props")
-            div.flex
-              div.mcenter(style="margin-bottom:10px")
-                h1.zingR(style='font-size:3em;') Registration will be ended in:
-                h1.zingR(style='font-size:3em;') {{ props.days }}:{{ props.hours }}:{{ props.minutes }}:{{ props.seconds }}
-                h1.zingR(style='font-size:1.5em; color: #e0e0e0') ({{ (new Date(formState.closeOn.datetime[1])).toString() }})
+        // vue-countdown(:time="(new Date(formState.closeOn.datetime[1]) - new Date())" @countdownend="ready")
+        //   template(slot-scope="props")
+        //     div.flex
+        //       div.mcenter(style="margin-bottom:10px")
+        //         h1.zingR(style='font-size:3em;') Registration will be ended in:
+        //         h1.zingR(style='font-size:3em;') {{ props.days }}:{{ props.hours }}:{{ props.minutes }}:{{ props.seconds }}
+        //         h1.zingR(style='font-size:1.5em; color: #e0e0e0') ({{ (new Date(formState.closeOn.datetime[1])).toString() }})
       // HOUSE
       div.container
-        FormTemplate(v-model='head_result' ref='head_refs' :fieldList='fieldList.head' :initialValue="head_result")
+        FormTemplate(v-model='head_result' ref='head_refs' :fieldList='fieldListHouses' :initialValue="head_result")
           template(slot='info')
             transition(name='_slide-fade' mode='out-in' duration='85')
               div
                 h1(v-html='lang == "TH" ? "กรอกข้อมูลสำหรับ รับน้องก้าวใหม่" : "registration for rub nong kaow mai"')
-                h2(v-html='lang == "TH" ? "สามารถลงทะเบียนได้ไม่เกิน 3 คน" : "maximum team member is 3"')
+                h2(v-html='lang == "TH" ? "สามารถลงทะเบียนได้เพียง 1 คน" : "maximum team member is 3"')
 
       // PERSONAL
       transition-group(name='fade', duration='300')
         div.container(v-for='(vl, x) in dynm_result' :key='x' v-show='dynm_result[x]')
           FormTemplate(v-model='dynm_result[x]' ref='dynamic_refs' :fieldList='fieldList.dynamic' @delete='del_user(x)', :deletable='dynm_result.length > 1')
-            // IMAGE
-            div.croppa-wrap.has-text-centered(slot-scope="o")
-              croppa-img(ref='croppa_refs')
+            // // IMAGE
+            // div.croppa-wrap.has-text-centered(slot-scope="o")
+            //   croppa-img(ref='croppa_refs')
 
       // NAVIAGTE
-      img.btn(@click='add_dynm_result' v-if='dynm_result.length < 3' src='../theme/material/add_member.png')
+      // img.btn(@click='add_dynm_result' v-if='dynm_result.length < 3' src='../theme/material/add_member.png')
       div.section.mcenter
         formstatus(loading v-if='submissionState=="pending"')
         div(v-else-if='submissionState == "none"')
@@ -50,7 +51,9 @@
   import CroppaImg from '../components/Croppa.vue'
   import Formstatus from '../components/Formstatus.vue'
   import VueCountdown from '@xkeshi/vue-countdown';
-  import {get_regist_form, post_regist_form} from '../dtnl_api.js'
+  import {firebaseDB} from '../main.js'
+  // import {get_regist_form, post_regist_form} from '../dtnl_api.js'
+  import {get_regist_form, post_regist_form, register, getHouses} from '../rnkm-wan-jeeng.js'
 
   export default {
     props: ['lang'],
@@ -75,17 +78,22 @@
           'hidden': [],
           'dynamic': []
         },
-        formState: null,
+        fieldListHouses: {},
+        houseSnapshot: {},
+        formState: {},
         timeLeft: 0,
         submissionState: "none"
       }
     },
     async created() {
-      const {fieldList, ...formState} = await get_regist_form(this.lang)
+      const fieldList = get_regist_form().fieldList
+      // console.log(fieldList)
+      // const {fieldList, ...formState} = require('../others/static_TH_form.json') //await get_regist_form(this.lang)
       for (let i of fieldList) {
         let f = i.name.split('/')[0]
         this.fieldList[f].push(i)
       }
+      this.fieldListHouses = this.fieldList.head
       for (let h of this.fieldList['hidden']) {
         if (h.name == 'hidden/groupID') {
           this.hidd_result[h.name] = this.random_str()
@@ -94,7 +102,18 @@
         }
       }
       this.add_dynm_result()
-      this.formState = formState
+      // this.houseSnapshot = aswait getHouses()
+      // console.log(firebaseDB.database()cs
+      firebaseDB.database().ref('houses').on("value", (snapshot) => {
+        this.houseSnapshot = snapshot.val();
+        const toURL = require('../others/convertHouseNameToURL.json')
+        this.fieldListHouses[0].option = _.filter(this.fieldList.head[0].option, (field) => {
+          let obj = this.houseSnapshot[toURL[field.label]]
+
+          return obj.count < obj.cap
+        })
+      });
+      // this.formState = formState
     },
     methods: {
       random_str(){
@@ -118,16 +137,18 @@
           let ar = []
           for (let [dym_form, img_crp] of _.zip(this.$refs.dynamic_refs, this.$refs.croppa_refs)) {
             let o = _.assign(
-              {'hidden/imageURL': await img_crp.getURL()},
+              // {'hidden/imageURL': await img_crp.getURL()},
               this.head_result,
               this.hidd_result,
               dym_form.form,
             )
             ar.push(o)
           }
+          console.log(ar)
           console.log('[success] image have been uploaded')
           try{
-            await post_regist_form(ar, this.lang)
+            await post_regist_form(ar)
+            console.log('regist succ')
           }catch (error){
             this.submissionState = 'none'
             alert(error)
@@ -141,13 +162,13 @@
       },
       async submitable(){
         if (!this.$refs) return false; // before mount
-        for (let o of this.$refs.croppa_refs){
-          if (! await o.hasImage()){
-            alert('[fail] please upload image')
-            return false
-        }}
+        // for (let o of this.$refs.croppa_refs){
+        //   if (! await o.hasImage()){
+        //     alert('[fail] please upload image')
+        //     return false
+        // }}
         if(!Object.values(this.head_result).reduce((acc, baan)=>(acc && baan != ''), true)){
-          alert('กรุณาเลือกบ้านทั้งสามลำดับ')
+          alert('กรุณาเลือกบ้าน')
           return false
         }
         for (let o of this.$refs.dynamic_refs.concat([this.$refs.head_refs])) {
@@ -160,24 +181,24 @@
         this.formState = JSON.parse(JSON.stringify(this.formState))
       }
     },
-    computed: {
-      registration_state(formState){
-        if(this.formState.disabled){
-          return "disabled"
-        }else if(this.formState.closeOn.datetime != undefined) {
-          let curr = new Date()
-          let close = this.formState.closeOn.datetime;
-          if(curr <= new Date(close[0])){
-            this.timeLeft = new Date(close[0]) - curr
-            return "beforeTime"
-          }
-          if(curr >= new Date(close[1])){
-            return "expired"
-          }
-        }
-        return "ok"
-      },
-    }
+    // computed: {
+    //   registration_state(formState){
+    //     if(this.formState.disabled){
+    //       return "disabled"
+    //     }else if(this.formState.closeOn.datetime != undefined) {
+    //       let curr = new Date()
+    //       let close = this.formState.closeOn.datetime;
+    //       if(curr <= new Date(close[0])){
+    //         this.timeLeft = new Date(close[0]) - curr
+    //         return "beforeTime"
+    //       }
+    //       if(curr >= new Date(close[1])){
+    //         return "expired"
+    //       }
+    //     }
+    //     return "ok"
+    //   },
+    // }
   }
 
 </script>
