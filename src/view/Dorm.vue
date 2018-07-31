@@ -45,28 +45,15 @@ export default {
 </script>
 
 <style lang='stylus' scoped>
-<<<<<<< HEAD
-.container {
-=======
 .container.dorm {
->>>>>>> aad05b203464af02a80a8da7c25496121209bb23
   max-width: 650px;
   font-size: 1.5em;
   margin-top: 30px;
 }
-<<<<<<< HEAD
-img {
-
-  width: 40%
-  max-width 200px
-  margin 5px
-  border-radius 6px
-=======
 img.dorm{
   width: 40%;
   max-width: 200px;
   margin: 5px;
   border-radius: 6px;
->>>>>>> aad05b203464af02a80a8da7c25496121209bb23
 }
 </style>

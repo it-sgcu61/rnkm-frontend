@@ -8,7 +8,7 @@ const API = 'https://35.198.212.105:8080'
 function get_regist_form() {
   return require('./others/static_TH_form.wan-jeeng.json').result
 }
-async function post_regist_form(form) {
+async function post_regist_form(form) { // form is an array
   return await axios.post(`${API}/register`, {
     lang: "TH",
     formData: form

@@ -102,13 +102,14 @@
         }
       }
       this.add_dynm_result()
-      this.houseSnapshot = await getHouses()
-      firebaseDB.ref('houses').on("value", (snapshot) => {
+      // this.houseSnapshot = aswait getHouses()
+      // console.log(firebaseDB.database()cs
+      firebaseDB.database().ref('houses').on("value", (snapshot) => {
         this.houseSnapshot = snapshot.val();
-        console.log(this.houseSnapshot)
         const toURL = require('../others/convertHouseNameToURL.json')
-        this.fieldListHouses = _.filter(this.fieldList.head, (nameTH) => {
-          let obj = this.houseSnapshot[toURL[nameTH]]
+        this.fieldListHouses[0].option = _.filter(this.fieldList.head[0].option, (field) => {
+          let obj = this.houseSnapshot[toURL[field.label]]
+
           return obj.count < obj.cap
         })
       });
@@ -143,10 +144,11 @@
             )
             ar.push(o)
           }
+          console.log(ar)
           console.log('[success] image have been uploaded')
           try{
-            await post_regist_form(ar[0])
-            console.log(ar[0])
+            await post_regist_form(ar)
+            console.log('regist succ')
           }catch (error){
             this.submissionState = 'none'
             alert(error)
