@@ -3,20 +3,30 @@ div(v-if='state==2')
   div(v-sticky="stickyConfig")
     div.flex.container()
       div
-        h2 {{"11xxxxxxxxxx"}}
-        h3 Old : Baan buchayan
-        h3 Current : Baan por meung si
+        h2 {{this.person.username}}
+        h3 Old : {{this.person.house}}
+        h3 Current : {{this.person.currHouse}}
       h2 Time left : {{"20:00:00"}}
       button.button.is-warning(@click='submit') Confirm
   TransferHousePreview(style="margin-top:0px;" :forTransfer='"true"')
     template(slot='before' slot-scope='baan')
-      div.baan-overlay
+      <div class="baan-overlay" @click="moveMan" :id="baan.nameURL">
         div.overlay(:stat='stat(baan)')
         div.banner( :stat='stat(baan)')
         div.inform
-          <b-progress class="mb-3" :max="100" show-progress animated style="max-width:100%;">
-            <b-progress-bar :value="baanStatus(baan)" :variant="dummyLimit[baan] < 50?'success':dummyLimit[baan] < 75?'warning':'danger'"></b-progress-bar>
+          <b-progress v-if='houses[baan.nameURL]&&houses[baan.nameURL].avail>0' class="mb-3" :max="houses[baan.nameURL]?houses[baan.nameURL].avail:100" animated style="max-width:100%;">
+            <b-progress-bar :value="baanStatus(baan)" variant="primary">
+              p {{ baanStatus(baan) }} / {{ houses[baan.nameURL]?houses[baan.nameURL].avail:100 }}
+            </b-progress-bar>
           </b-progress>
+          <b-progress v-if='houses[baan.nameURL]&&houses[baan.nameURL].avail==0' class="mb-3" :max="1" animated style="max-width:100%;">
+            <b-progress-bar :value="1" variant="danger">
+              p FULL
+            </b-progress-bar>
+          </b-progress>
+        div(v-if='person.currHouse==baan.nameURL')
+          h2 &#9989;
+      </div>
 div.section(v-else)
   div(v-if='state==0')
     div.header ระบบย้ายบ้าน
@@ -50,6 +60,7 @@ import bProgress from 'bootstrap-vue/es/components/progress/progress';
 import bProgressBar from 'bootstrap-vue/es/components/progress/progress-bar';
 import 'bootstrap/dist/css/bootstrap.css'
 import 'bootstrap-vue/dist/bootstrap-vue.css'
+var localStorage = require('localStorage')
 export default {
   directives: {mask},
   components: {Formstatus, TransferHousePreview, TransferCondition, bProgress, bProgressBar},
@@ -58,7 +69,7 @@ export default {
       dummyLimit:{},
       counter: 45,
       max: 100,
-      state:2,
+      state:0,
       form: {
         usr: '',
         pwd: ''
@@ -66,7 +77,8 @@ export default {
       person: {
         house: '',
         username: '',
-        token: ''
+        token: '',
+		currHouse:''
       },
       isLoggingIn: false,
       houses: {},
@@ -77,56 +89,48 @@ export default {
       },
     }
   },
+  created(){
+    let token = localStorage.getItem("token")
+    let user = localStorage.getItem("username")
+    if (token && user) {
+      this.form.usr = user
+      this.try_login()
+    }
+  },
   directives: {
     'sticky': VueSticky,
   },
   methods: {
-    async move_to(next) {
-      console.log('move to')
-      console.log(next)
-      return
-      if (this.stat(next) != "avail") return
-      this.isLoggingIn = true
-      let {nameTH, nameEN,} = next
-      let {username, token,} = this.person
-      console.log('[exec] move to ' + next.nameTH)
-      let res = await movePerson(username, token, `${nameTH} - ${nameEN}`)
-      if (res.data.success) {
-        console.log('[success] move to ' + next.nameTH)
-        this.person.house = next.nameTH
-      }else{
-        console.log('[fail] move to ' + next.nameTH)
-      }
-      this.isLoggingIn = false
-    },
     increase_state(){
       this.state += 1
     },
     async try_login(){
       this.isLoggingIn = true
-      // testing without connection
-      //
-      // this.deleteAllCookies()
       // // get permission token
-      // let token = await login(this.form.usr, this.form.pwd)
-      // if (!token) {
-      //   console.log("[fail] unable get token")
-      //   this.isLoggingIn = false
-      //   return
-      // }
-      // let info  = await getPersonInfo(this.form.usr, token)
-      // if (!info) {
-      //   console.log("[fail] unable to fetch data")
-      //   document.cookie = 'token=;username=;path=/;'
-      //   this.isLogin = true
-      //   return
-      // }
-      // this.person = {
-      //   "token": token,
-      //   "house": info.house.split(' ')[0], // name TH
-      //   "username": this.form.usr
-      // }
-      // console.log('[success] login')
+      let token = await login(this.form.usr, this.form.pwd)
+      if (!token) {
+		alert("ไม่พบข้อมูลในระบบ")
+        console.log("[fail] unable get token")
+        this.isLoggingIn = false
+		this.state = 1
+        return
+      }
+      let info  = await getPersonInfo(this.form.usr, token)
+      if (!info) {
+        console.log("[fail] unable to fetch data")
+        this.deleteAllCookies()
+        this.isLogin = false
+		this.isLoggingIn = false
+		this.state = 0
+        return
+      }
+      this.person = {
+        "token": token,
+        "house": info["head/realHouse"].split(' ')[0], // name TH,
+		"currHouse": info["currentHouse"],
+        "username": this.form.usr
+      }
+      console.log('[success] login')
 
       // firebase listener
       let rf = firebaseDB.database().ref('/houses')
@@ -139,6 +143,7 @@ export default {
       }
       this.isLogin = true
       this.isLoggingIn = false
+	  this.state = 2
     },
     stat(h) {
       if (!h || !h.nameTH || !this.houses[h.nameTH]) return ""
@@ -148,25 +153,31 @@ export default {
       if (cap == count) return "full"
     },
     deleteAllCookies() {
-      console.log('[exec] remove old cookie')
-      var cookies = document.cookie.split(";");
-      for (var i = 0; i < cookies.length; i++) {
-          var cookie = cookies[i];
-          var eqPos = cookie.indexOf("=");
-          var name = eqPos > -1 ? cookie.substr(0, eqPos) : cookie;
-          document.cookie = name + "=;expires=Thu, 01 Jan 1970 00:00:00 GMT";
-      }
+      localStorage.clear();
     },
     async submit(){
-      this.isLoggingIn = true
       await confirmHouse(this.person.username, this.person.token)
-      alert('submit is successfull')
-      this.isLogin = false
-      this.isLoggingIn = false
+      alert("Submission Successful!")
+      this.deleteAllCookies()
+      this.state = 1
     },
     baanStatus(baan){
-      this.dummyLimit[baan] = Math.random()*100
+      this.dummyLimit[baan] = this.houses[baan.nameURL]?this.houses[baan.nameURL].used:100
       return this.dummyLimit[baan]
+    },
+    async moveMan(event){
+      let newHouse = event.currentTarget.id
+      if(newHouse === this.person.currHouse)
+        return
+      let result = await movePerson(this.person.username, this.person.token, newHouse)
+      if(result.success)
+	    this.person.currHouse=newHouse
+      else if(result.message === "Full House")
+        alert("บ้านที่เลือกเต็มแล้ว โปรดลองใหม่ภายหลัง")
+      else{
+        alert("Session หมดอายุ หรือคุณได้ทำการยืนยันการย้ายบ้านไปแล้ว")
+        this.state = 1
+	  }
     }
   }
 }
@@ -315,7 +326,7 @@ export default {
       transform-origin center center
       transform translate(calc(-40px - 1.5vw), calc(-40px - 1.5vw)) rotate(45deg)
     .inform
-      opacity .5
+      opacity 1.0
       max-width 100px
       margin 7px 0px
       font-size calc(.7em + 1vmax)

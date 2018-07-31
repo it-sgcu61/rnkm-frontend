@@ -28,26 +28,27 @@ function getCookie(w) {
 // $(document).ready(function () {
 
 import axios from 'axios'
+var localStorage = require('localStorage')
 var proxy = ''; // for Cross Origin Request
-var host = 'http://localhost:5000/rnkm-cu102/us-central1'
+var host = 'https://5xhgfqhpgik599bg2d9v.tk:8080'
 
 // LOGIN - required to do user's personal things
 async function login(username, password) {
-  let token = getCookie('token');
-  let user = getCookie('username');
+  let token = localStorage.getItem("token")
+  let user = localStorage.getItem("username")
   if (token && user) {
     console.log('[success] already login')
     return token
   }
   return await axios.post(
     proxy + host + '/login', {
-      username: username,
-      password: password
+      id: username,
+      tel: password
     }).then((res) => {
-    res = res.data
+    res = res.data.data
     console.log('[info] token is ' + res.token)
-    document.cookie = `token=${escape(res.token)}; expires:${res.expire} ;path=/`;
-    document.cookie = `username=${username}; expires:${res.expire}; path=/`;
+    localStorage.setItem('token', res.token);
+    localStorage.setItem('username', username);
     return res.token
   })
 }
@@ -56,9 +57,10 @@ function movePerson(user, token, house) {
   return axios.post(
     proxy + host + '/movePerson', {
       house: house, // house name to move to
-      username: user, // username (tel number)
+      id: user, // username (tel number)
       token: token, // token (from login, expires after 5 mins, I can remove the timeout)
     }).then((res) => {
+	res=res.data
     return res
     // manage response here
     // some examples
@@ -85,7 +87,7 @@ function movePerson(user, token, house) {
 function confirmHouse(user, token) {
   return axios.post(
     proxy + host + '/confirmHouse', {
-      username: user,
+      id: user,
       token: token
     }).then((res) => {
     return res
@@ -95,14 +97,16 @@ function confirmHouse(user, token) {
 }
 
 // get user's info from DTNL & firebase
-async function getPersonInfo(user, token) {
+async function getPersonInfo(user, token) { 
   return await axios.post(
-    proxy + host + '/getPersonInfo', {
-      username: user,
+    proxy + host + '/getInfo', {
+      id: user,
       token: token
     }).then((res) => {
     console.log('[success] get personal data')
     res = res.data
+	if(!res.success)
+		return false
     return res.data
     // res1 = {
     //   "success": false,

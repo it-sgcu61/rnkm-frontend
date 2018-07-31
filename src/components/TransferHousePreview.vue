@@ -12,11 +12,10 @@ div
     // TABLE
     div#body.flex-left.grp-border(:n-item='siz_list[grp].length' style="margin-left:10%;margin-right:2%")
       div.flex-item(v-for='baan in siz_list[grp]' :key='baan.id')
-        router-link(:to='`baan/${baan.nameURL}`')
-          div.img-square(:style="{ backgroundImage: `url(${baan.img})` }")
-            slot(name='before' v-bind='baan')
-            // img.img-baan(:src="baan.img" :alt='baan.nameTH')
-            slot(name='after' v-bind='baan')
+        div.img-square(:style="{ backgroundImage: `url(${baan.img})` }")
+          slot(name='before' v-bind='baan')
+          // img.img-baan(:src="baan.img" :alt='baan.nameTH')
+          slot(name='after' v-bind='baan')
 
 </template>
 
