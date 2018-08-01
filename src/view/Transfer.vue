@@ -14,14 +14,16 @@ div(v-if='state==2')
         div.overlay(:stat='stat(baan)')
         div.banner( :stat='stat(baan)')
         div.inform
+          div(class="houseCard")
+            p {{baan.nameTH}}
           <b-progress v-if='houses[baan.nameURL]&&houses[baan.nameURL].avail>0' class="mb-3" :max="houses[baan.nameURL]?houses[baan.nameURL].avail:100" animated style="max-width:100%;">
-            <b-progress-bar :value="baanStatus(baan)" variant="primary">
-              p {{ baanStatus(baan) }} / {{ houses[baan.nameURL]?houses[baan.nameURL].avail:100 }}
+            <b-progress-bar :value="baanStatus(baan)" variant="warning">
+              p(class="numDispBlack") {{ baanStatus(baan) }} / {{ houses[baan.nameURL]?houses[baan.nameURL].avail:100 }}
             </b-progress-bar>
           </b-progress>
           <b-progress v-if='houses[baan.nameURL]&&houses[baan.nameURL].avail==0' class="mb-3" :max="1" animated style="max-width:100%;">
             <b-progress-bar :value="1" variant="danger">
-              p FULL
+              p(class="numDisp") FULL
             </b-progress-bar>
           </b-progress>
         div(v-if='person.currHouse==baan.nameURL')
@@ -46,6 +48,19 @@ div.section(v-else)
         div(v-else)
           br
           formstatus(loading)
+  div(v-else-if='state==3')
+    div.header ระบบย้ายบ้าน
+    div#wrapper
+      // HEADER
+      div#head
+        div.is-block
+          h1.is-size-3.bold การย้ายบ้านสำเร็จ!
+          h1.is-size-4.bold.orange <br />{{this.person.fullname}}
+          h1.is-size-4.bold.grey <br />"{{this.person.house}}"
+          h1.is-size-5 <br />ไปยัง
+          h2.is-size-4.bold.green <br />"{{this.person.currHouse}}"<br />
+          p <br /><br />โปรด Save รูปหน้าจอขณะนี้ไว้เพื่อเป็นหลักฐานในการย้ายบ้าน<br /><br />
+
 </template>
 
 <script>
@@ -78,7 +93,7 @@ export default {
         house: '',
         username: '',
         token: '',
-		    currHouse:''
+        currHouse:''
       },
       isLoggingIn: false,
       houses: {},
@@ -87,6 +102,7 @@ export default {
         postition:"absolute",
         disabled: false
       },
+      isTransfer: false
     }
   },
   created(){
@@ -154,10 +170,14 @@ export default {
       localStorage.clear();
     },
     async submit(){
-      await confirmHouse(this.person.username, this.person.token)
-      alert("Submission Successful!")
-      this.deleteAllCookies()
-      this.state += 1
+      let res = await confirmHouse(this.person.username, this.person.token)
+      if(!res){
+        alert("การ Confirm ไม่สำเร็จ กรุณาลองใหม่หลัง Login ใหม่")
+        this.deleteAllCookies()
+        this.state = 1
+        return
+      }
+      this.state = 3
     },
     baanStatus(baan){
       return this.houses[baan.nameURL]?this.houses[baan.nameURL].used:100
@@ -167,6 +187,9 @@ export default {
       localStorage.setItem('currentHouse', newHouse);
       if(newHouse === this.person.currHouse)
         return
+      if(this.isTransfer)
+        return
+      this.isTransfer=true
       let result = await movePerson(this.person.username, this.person.token, newHouse)
       if(result.success)
 	    this.person.currHouse=newHouse
@@ -175,13 +198,20 @@ export default {
       else{
         alert("Session หมดอายุ หรือคุณได้ทำการยืนยันการย้ายบ้านไปแล้ว")
         this.state = 1
-	    }
+      }
+      this.isTransfer=false
     }
   }
 }
 </script>
 
 <style lang='stylus' scoped>
+  .orange
+    color: orange
+  .grey
+    color: grey
+  .green
+    color: lime
   .flex
     display: flex;
     flex-direction: row;
@@ -325,10 +355,63 @@ export default {
       transform translate(calc(-40px - 1.5vw), calc(-40px - 1.5vw)) rotate(45deg)
     .inform
       opacity 1.0
-      max-width 100px
+      width calc(100% - 1vw)
       margin 7px 0px
       font-size calc(.7em + 1vmax)
       color white
       text-align left
       position relative
+    .numDisp
+      font-weight 700
+    .numDispBlack
+      font-weight 700
+      color black
+      text-align:center
+    .houseCard
+      font-weight 700
+      font-size 0.7em
+      background-color black
+      text-align center
+      margin-bottom 10px
+  #wrapper
+    color: white
+    overflow wrap
+    max-width 500px
+    margin 2em auto
+    margin-bottom 5em
+    padding 1em 2em
+    background-color #101020
+    border-radius 25px 0 25px 0
+    border-color #f00
+    border-top-width 50px
+
+
+  #head
+    text-align center
+    margin-top 10px
+
+    .title
+      font-size: calc(1.3rem + 50%);
+    .flag-grp
+      display inline-block
+      margin 5px
+      .flag
+        height 30px
+        width  55px
+        margin 0 0 0 4px
+        background-size 100% 100%
+        background-repeat no-repeat;
+        border-radius 5px
+        text-align center
+        display inline-block
+        &.th
+          background-image: url("../theme/material/TH-LANG.png")
+        &.en
+          background-image: url("../theme/material/EN-LANG.png")
+
+        img.chk
+          height 30px
+          width  30px
+          margin 0
+          padding 0
 </style>

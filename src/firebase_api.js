@@ -74,7 +74,7 @@ function confirmHouse(user, token) {
       id: user,
       token: token
     }).then((res) => {
-    return res
+    return res.data.success
     // res.success === true --> OK
     // else  not locked you house
   })

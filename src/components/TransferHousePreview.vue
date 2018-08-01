@@ -10,12 +10,13 @@ div
       img.size(:src='require(`@/theme/material/size_${grp}.png`)')
 
     // TABLE
-    div#body.flex-left.grp-border(:n-item='siz_list[grp].length' style="margin-left:10%;margin-right:2%")
-      div.flex-item(v-for='baan in siz_list[grp]' :key='baan.id')
-        div.img-square(:style="{ backgroundImage: `url(${baan.img})` }")
-          slot(name='before' v-bind='baan')
-          // img.img-baan(:src="baan.img" :alt='baan.nameTH')
-          slot(name='after' v-bind='baan')
+    div
+      div#body.flex-left.grp-border(:n-item='siz_list[grp].length' style="margin-left:10%;margin-right:2%")
+        div.flex-item(v-for='baan in siz_list[grp]' :key='baan.id')
+          div.img-square(:style="{ backgroundImage: `url(${baan.img})` }")
+            slot(name='before' v-bind='baan')
+            // img.img-baan(:src="baan.img" :alt='baan.nameTH')
+            slot(name='after' v-bind='baan')
 
 </template>
 
@@ -79,7 +80,7 @@ export default {
     display flex
     flex-direction: row;
     flex-wrap: wrap;
-    justify-content: left;
+    justify-content: center;
     align-items:center;
 
     @media screen and (min-width: 600px)
