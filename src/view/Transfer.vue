@@ -3,7 +3,7 @@ div(v-if='state==2')
   div(v-sticky="stickyConfig")
     div.flex.container()
       div
-        h2 {{this.person.username}}
+        h2 {{this.person.fullname}}
         h3 Old : {{this.person.house}}
         h3 Current : {{this.person.currHouse}}
       h2 Time left : {{"20:00:00"}}
@@ -49,26 +49,26 @@ div.section(v-else)
 </template>
 
 <script>
+import Vue from 'vue'
+import VueSticky from 'vue-sticky'
 import {mask} from 'vue-the-mask'
+import bProgress from 'bootstrap-vue/es/components/progress/progress';
+import bProgressBar from 'bootstrap-vue/es/components/progress/progress-bar';
+import 'bootstrap/dist/css/bootstrap.css'
+import 'bootstrap-vue/dist/bootstrap-vue.css'
+
 import {login, getPersonInfo, movePerson, confirmHouse} from '../firebase_api.js'
 import {firebaseDB} from '../main.js'
 import Formstatus from '../components/Formstatus'
 import TransferHousePreview from '../components/TransferHousePreview.vue'
 import TransferCondition from '../components/TransferCondition.vue'
-import VueSticky from 'vue-sticky'
-import bProgress from 'bootstrap-vue/es/components/progress/progress';
-import bProgressBar from 'bootstrap-vue/es/components/progress/progress-bar';
-import 'bootstrap/dist/css/bootstrap.css'
-import 'bootstrap-vue/dist/bootstrap-vue.css'
 var localStorage = require('localStorage')
 export default {
-  directives: {mask},
   components: {Formstatus, TransferHousePreview, TransferCondition, bProgress, bProgressBar},
+  directives: {mask, 'sticky': VueSticky},
   data() {
     return {
       dummyLimit:{},
-      counter: 45,
-      max: 100,
       state:0,
       form: {
         usr: '',
@@ -78,7 +78,7 @@ export default {
         house: '',
         username: '',
         token: '',
-		currHouse:''
+		    currHouse:''
       },
       isLoggingIn: false,
       houses: {},
@@ -97,9 +97,6 @@ export default {
       this.try_login()
     }
   },
-  directives: {
-    'sticky': VueSticky,
-  },
   methods: {
     increase_state(){
       this.state += 1
@@ -107,27 +104,28 @@ export default {
     async try_login(){
       this.isLoggingIn = true
       // // get permission token
-      let token = await login(this.form.usr, this.form.pwd)
-      if (!token) {
-		alert("ไม่พบข้อมูลในระบบ")
+      let info = await login(this.form.usr, this.form.pwd)
+      if (!info.token) {
+		    alert("Login failed, try again.")
         console.log("[fail] unable get token")
         this.isLoggingIn = false
-		this.state = 1
+		    this.state = 1
         return
       }
-      let info  = await getPersonInfo(this.form.usr, token)
-      if (!info) {
-        console.log("[fail] unable to fetch data")
-        this.deleteAllCookies()
-        this.isLogin = false
-		this.isLoggingIn = false
-		this.state = 0
-        return
-      }
+      // let info  = await getPersonInfo(this.form.usr, token)
+      // if (!info) {
+      //   console.log("[fail] unable to fetch data")
+      //   this.deleteAllCookies()
+      //   this.isLogin = false
+		  //   this.isLoggingIn = false
+		  //   this.state = 0
+      //   return
+      // }
       this.person = {
-        "token": token,
-        "house": info["head/realHouse"].split(' ')[0], // name TH,
-		"currHouse": info["currentHouse"],
+        "token": info.token,
+        "house": info["oldHouse"], // name TH,
+        "currHouse": info["currentHouse"],
+        "fullname": info["fullname"],
         "username": this.form.usr
       }
       console.log('[success] login')
@@ -143,7 +141,7 @@ export default {
       }
       this.isLogin = true
       this.isLoggingIn = false
-	  this.state = 2
+	    this.state = 2
     },
     stat(h) {
       if (!h || !h.nameTH || !this.houses[h.nameTH]) return ""
@@ -159,14 +157,14 @@ export default {
       await confirmHouse(this.person.username, this.person.token)
       alert("Submission Successful!")
       this.deleteAllCookies()
-      this.state = 1
+      this.state += 1
     },
     baanStatus(baan){
-      this.dummyLimit[baan] = this.houses[baan.nameURL]?this.houses[baan.nameURL].used:100
-      return this.dummyLimit[baan]
+      return this.houses[baan.nameURL]?this.houses[baan.nameURL].used:100
     },
     async moveMan(event){
       let newHouse = event.currentTarget.id
+      localStorage.setItem('currentHouse', newHouse);
       if(newHouse === this.person.currHouse)
         return
       let result = await movePerson(this.person.username, this.person.token, newHouse)
@@ -177,7 +175,7 @@ export default {
       else{
         alert("Session หมดอายุ หรือคุณได้ทำการยืนยันการย้ายบ้านไปแล้ว")
         this.state = 1
-	  }
+	    }
     }
   }
 }

@@ -1,32 +1,3 @@
-function getCookie(w) {
-  let cName = "";
-  let pCOOKIES = document.cookie.split('; ') || new Array();
-  for (let bb = 0; bb < pCOOKIES.length; bb++) {
-    let NmeVal = pCOOKIES[bb].split('=');
-    if (NmeVal[0] == w) {
-      cName = unescape(NmeVal[1]);
-    }
-  }
-  return cName;
-}
-
-// function setCookie(name, value, expires, path) {
-//   let cookieStr = name + "=" + value + "; ";
-//   if (expires) {
-//     expires = setExpiration(expires);
-//     cookieStr += "expires=" + expires + "; ";
-//   }
-//   if (path) {
-//     cookieStr += "path=" + path + "; ";
-//   }
-//   if (secure) {
-//     cookieStr += "secure; ";
-//   }
-//   document.cookie = cookieStr;
-// }
-
-// $(document).ready(function () {
-
 import axios from 'axios'
 var localStorage = require('localStorage')
 var proxy = ''; // for Cross Origin Request
@@ -38,18 +9,31 @@ async function login(username, password) {
   let user = localStorage.getItem("username")
   if (token && user) {
     console.log('[success] already login')
-    return token
+    return {
+      token,
+      "oldHouse": localStorage.getItem("oldHouse"),
+      "currentHouse": localStorage.getItem("currentHouse"),
+      "fullname": localStorage.getItem("fullname"),
+    }
   }
   return await axios.post(
     proxy + host + '/login', {
       id: username,
       tel: password
     }).then((res) => {
-    res = res.data.data
-    console.log('[info] token is ' + res.token)
-    localStorage.setItem('token', res.token);
-    localStorage.setItem('username', username);
-    return res.token
+      console.log('[info] token is ', res)
+      if(res.data.success){
+        res = res.data.data
+        localStorage.setItem('token', res.token);
+        localStorage.setItem('oldHouse', res.oldHouse);
+        localStorage.setItem('currentHouse', res.currentHouse);
+        localStorage.setItem('fullname', res.fullname);
+        localStorage.setItem('username', username);
+        return res
+      }else{
+        alert(res.data.message)
+        return {}
+      }
   })
 }
 // movePerson between house
@@ -60,8 +44,8 @@ function movePerson(user, token, house) {
       id: user, // username (tel number)
       token: token, // token (from login, expires after 5 mins, I can remove the timeout)
     }).then((res) => {
-	res=res.data
-    return res
+      res=res.data
+      return res
     // manage response here
     // some examples
     // res1 = {
@@ -94,40 +78,6 @@ function confirmHouse(user, token) {
     // res.success === true --> OK
     // else  not locked you house
   })
-}
-
-// get user's info from DTNL & firebase
-async function getPersonInfo(user, token) { 
-  return await axios.post(
-    proxy + host + '/getInfo', {
-      id: user,
-      token: token
-    }).then((res) => {
-    console.log('[success] get personal data')
-    res = res.data
-	if(!res.success)
-		return false
-    return res.data
-    // res1 = {
-    //   "success": false,
-    //   "message": "wrong credentials"
-    // }
-    // res2 = {
-    //   "success": true,
-    //   "message": "OK",
-    //   "data": {
-    //     "_id": "5b45d9ad22607ae04bdf2459",
-    //     "dynamic/RCU_required": "no",
-    //     "dynamic/congenital_disease": "091-919-1011",
-    //     "dynamic/disorders": "-",
-    //     "hidden/groupID": "JJGZ1DG8GEEYXBB1CD",
-    //     "hidden/imageURL": "https://firebasestorage.googleapis.com/v0/b/rnkm-cu102.appspot.com/o/image%2Ff9u2e3qm343ed.jpeg?alt=media&token=a908c30d-36e8-4d4f-a887-14e64d07e935",
-    //     "house": "baanjo",
-    //     "is_confirmed": 0
-    //   } // last two field (house, is_confirmed is data from firebase, house = realtime house (the latest data))
-    //   // final house = house in DTNL; not updated until firebase submits to DTNL
-  })
-
 }
 
 // LOGOUT - just invalidate token
