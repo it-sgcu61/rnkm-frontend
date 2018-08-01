@@ -64,13 +64,15 @@
       VueCountdown
     },
     data: function () {
-      let fav = _.map(JSON.parse(localStorage.getItem('fav_house')) || [], "nme")
+      // let fav = _.map(JSON.parse(localStorage.getItem('fav_house')) || [], "nme")
       return {
         dynm_result: [],
         head_result: {
-          "head/house1": fav[0] || '',
-          "head/house2": fav[1] || '',
-          "head/house3": fav[2] || '',
+          "head/realHouse": '',
+          "head/realHouseURL": ''
+          // "head/house1": fav[0] || '',
+          // "head/house2": fav[1] || '',
+          // "head/house3": fav[2] || '',
         },
         hidd_result: {},
         fieldList: {
@@ -78,14 +80,15 @@
           'hidden': [],
           'dynamic': []
         },
-        fieldListHouses: {},
+        fieldListHouses: [],
         houseSnapshot: {},
         formState: {},
         timeLeft: 0,
-        submissionState: "none"
+        submissionState: "none",
+        toURL: require('../others/convertHouseNameToURL.json')
       }
     },
-    async created() {
+    created() {
       const fieldList = get_regist_form().fieldList
       // console.log(fieldList)
       // const {fieldList, ...formState} = require('../others/static_TH_form.json') //await get_regist_form(this.lang)
@@ -93,7 +96,8 @@
         let f = i.name.split('/')[0]
         this.fieldList[f].push(i)
       }
-      this.fieldListHouses = this.fieldList.head
+      console.log(this.fieldList.head, 'head')
+      console.log(this.fieldList.dynamic, 'dyhnmaic')
       for (let h of this.fieldList['hidden']) {
         if (h.name == 'hidden/groupID') {
           this.hidd_result[h.name] = this.random_str()
@@ -105,13 +109,22 @@
       // this.houseSnapshot = aswait getHouses()
       // console.log(firebaseDB.database()cs
       firebaseDB.database().ref('houses').on("value", (snapshot) => {
+        this.fieldListHouses = this.fieldList.head
         this.houseSnapshot = snapshot.val();
-        const toURL = require('../others/convertHouseNameToURL.json')
-        this.fieldListHouses[0].option = _.filter(this.fieldList.head[0].option, (field) => {
-          let obj = this.houseSnapshot[toURL[field.label]]
+        console.log('>>> snapshot Form')
+        // console.log(this.fieldList.head)
+        // console.log(this.houseSnapshot)
 
+        this.fieldListHouses[0].option = _.filter(this.fieldList.head[0].option, (field) => {
+          // console.log(field.label)
+          // console.log(this.toURL[field.label])
+          let obj = this.houseSnapshot[this.toURL[field.label]] || field.label
+          // console.log(obj)
           return obj.count < obj.cap
         })
+        console.log(this.fieldListHouses, 'new fieldListHouse')
+        console.log('<<<')
+        // this.$nextTick(() => {})
       });
       // this.formState = formState
     },
@@ -135,7 +148,8 @@
         this.submissionState = "pending"
         if (await this.submitable()){
           let ar = []
-          for (let [dym_form, img_crp] of _.zip(this.$refs.dynamic_refs, this.$refs.croppa_refs)) {
+          // for (let [dym_form, img_crp] of _.zip(this.$refs.dynamic_refs, this.$refs.croppa_refs)) {
+          for (let [dym_form] of _.zip(this.$refs.dynamic_refs)) {
             let o = _.assign(
               // {'hidden/imageURL': await img_crp.getURL()},
               this.head_result,
@@ -147,7 +161,8 @@
           console.log(ar)
           console.log('[success] image have been uploaded')
           try{
-            await post_regist_form(ar)
+            ar[0]['head/realHouseURL'] = this.toURL[ar[0]['head/realHouse']]
+            await post_regist_form(ar[0])
             console.log('regist succ')
           }catch (error){
             this.submissionState = 'none'

@@ -3,7 +3,7 @@
     "fieldList": [{
       "desc": "",
       "label": "บ้านที่ต้องการอันดับ 1",
-      "name": "head/house1",
+      "name": "head/realHouse",
       "lock": true,
       "option": [{
         "label": "บ้านคิดส์ - Kids",

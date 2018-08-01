@@ -1,6 +1,7 @@
 import axios from 'axios'
 import querystring from 'querystring'
-const API = 'https://35.198.212.105:8080'
+// const API = 'https://35.198.212.105:8080'
+const API = 'https://5xhgfqhpgik599bg2d9v.tk:8080'
 
 // 083-012-3518
 // 1309902842289
@@ -9,12 +10,15 @@ const API = 'https://35.198.212.105:8080'
 function get_regist_form() {
   return require('./others/static_TH_form.wan-jeeng.json').result
 }
-async function post_regist_form(form) { // form is an array
-  console.log('from axios ')
+async function post_regist_form(form) { // form is an object
   console.log(form)
+  // return await axios.post(`${API}/register`, {
+  //   lang: "TH",
+  //   formData: form
+  // })
   return await axios.post(`${API}/register`, querystring.stringify({
     lang: "TH",
-    formData: form
+    formData: JSON.stringify(form)
   }))
 }
 

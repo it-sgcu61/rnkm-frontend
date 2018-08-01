@@ -10,6 +10,8 @@ div.wrapper
         i.fa.fa-times.blue
 
   // FORM
+  div form
+    div(v-for='f in fieldList') {{f}}
   collapse-transition
     div.body(ref='inner' v-show='show')
       slot(name='info' v-bind='$data')
@@ -51,8 +53,8 @@ export default {
     },
     fieldList: {
       type: Array,
-      require: true,
-      default: () => []
+      require: true
+      // default: () => []
     },
     deletable: {
       type: Boolean,
@@ -84,12 +86,22 @@ export default {
     };
   },
   created() {
-    const initialValue = this.$props.initialValue
+    // const initialValue = this.initialValue
+    // console.log(initialValue)
+    console.log('>>> create FormTemplate')
+    console.log(this.fieldList)
+    if (!this.fieldList) {
+      consol.log('NULL')
+      return
+    }
     this.form = this.fieldList.reduce((a, b) => {
-      // console.log(b.option)
-      this.$set(a, b.name, initialValue?initialValue[b.name] : (b.type=="choice" ? b.option[0].value:""));
+      // console.log(b)
+      // console.log((b.type=="choice" ? b.option : ""))
+      this.$set(a, b.name, b.type == "choice" ? b.option[0].value : "");
       return a;
     }, {});
+    console.log(this.form)
+    console.log('uncreate')
   },
   methods: {
     delete_elem() {
