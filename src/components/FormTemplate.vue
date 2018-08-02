@@ -10,8 +10,9 @@ div.wrapper
         i.fa.fa-times.blue
 
   // FORM
-  div form
-    div(v-for='f in fieldList') {{f}}
+  div
+    //form {{lock}} {{fieldList}}
+    // div(v-for='f in fieldList') {{f}}
   collapse-transition
     div.body(ref='inner' v-show='show')
       slot(name='info' v-bind='$data')
@@ -26,8 +27,8 @@ div.wrapper
           input(  :disabled='lock && f.lock' v-if = 'f.name.endsWith("tel")'   v-model.trim='form[f.name]' :name='f.name' v-validate="{required: f.required, regex: f.validate}" :placeholder='lock && f.lock?"":f.desc' v-mask="'###-###-####'")
           input(  :disabled='lock && f.lock' v-else-if='f.type == "string"'    v-model.trim='form[f.name]' :name='f.name' v-validate="{required: f.required, regex: f.validate}" :placeholder='lock && f.lock?"":f.desc')
           txtarea(:disabled='lock && f.lock' v-else-if='f.type == "lg_string"' v-model.trim='form[f.name]' :name='f.name' v-validate="{required: f.required, regex: f.validate}" :placeholder='lock && f.lock?"":f.desc')
-          select( :disabled='lock && f.lock' v-else-if='f.type == "choice" && /^head/.test(f.name)' v-model.trim='form[f.name]' :name='f.name')
-            option(v-for='o in f.option.filter((opt)=>!Object.values(form).slice(0,parseInt(f.name.match(/\\d+/g)[0])-1).includes(opt.value))' :value='o.value' style='color: #353535') {{o.label}}
+          // select( :disabled='lock && f.lock' v-else-if='f.type == "choice" && /^head/.test(f.name)' v-model.trim='form[f.name]' :name='f.name')
+          //   option(v-for='o in f.option.filter((opt)=>!Object.values(form).slice(0,parseInt(f.name.match(/\\d+/g)[0])-1).includes(opt.value))' :value='o.value' style='color: #353535') {{o.label}}
           select( :disabled='lock && f.lock' v-else-if='f.type == "choice"' v-model.trim='form[f.name]' :name='f.name')
             option(v-for='o in f.option' :value='o.value' style='color: #353535' ) {{o.label}}
 
@@ -54,7 +55,7 @@ export default {
     fieldList: {
       type: Array,
       require: true
-      // default: () => []
+      // default: () => ['error not pass']
     },
     deletable: {
       type: Boolean,
@@ -88,20 +89,20 @@ export default {
   created() {
     // const initialValue = this.initialValue
     // console.log(initialValue)
-    console.log('>>> create FormTemplate')
-    console.log(this.fieldList)
-    if (!this.fieldList) {
-      consol.log('NULL')
-      return
-    }
-    this.form = this.fieldList.reduce((a, b) => {
-      // console.log(b)
-      // console.log((b.type=="choice" ? b.option : ""))
-      this.$set(a, b.name, b.type == "choice" ? b.option[0].value : "");
-      return a;
-    }, {});
-    console.log(this.form)
-    console.log('uncreate')
+    // console.log('>>> create FormTemplate')
+    // console.log(this.fieldList)
+    // if (!this.fieldList) {
+    //   consol.log('NULL')
+    //   return
+    // }
+    // debugger
+    // this.form = this.fieldList.reduce((a, b) => {
+    //   // console.log((b.type=="choice" ? b.option : ""))
+    //   a[b.name] = b.type == "choice" ? b.option[0].value : ""
+    //   return a;
+    // }, {});
+    // console.log('tempalte form', this.form)
+    // console.log('uncreate')
   },
   methods: {
     delete_elem() {

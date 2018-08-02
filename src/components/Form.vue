@@ -19,7 +19,8 @@
         //         h1.zingR(style='font-size:1.5em; color: #e0e0e0') ({{ (new Date(formState.closeOn.datetime[1])).toString() }})
       // HOUSE
       div.container
-        FormTemplate(v-model='head_result' ref='head_refs' :fieldList='fieldListHouses' :initialValue="head_result")
+        //{{fieldListHouses}}
+        FormTemplate(v-model='head_result' ref='head_refs' :fieldList='fieldListHouses' :initialValue="head_result" :lock='false')
           template(slot='info')
             transition(name='_slide-fade' mode='out-in' duration='85')
               div
@@ -68,8 +69,6 @@
       return {
         dynm_result: [],
         head_result: {
-          "head/realHouse": '',
-          "head/realHouseURL": ''
           // "head/house1": fav[0] || '',
           // "head/house2": fav[1] || '',
           // "head/house3": fav[2] || '',
@@ -88,7 +87,7 @@
         toURL: require('../others/convertHouseNameToURL.json')
       }
     },
-    created() {
+    async created() {
       const fieldList = get_regist_form().fieldList
       // console.log(fieldList)
       // const {fieldList, ...formState} = require('../others/static_TH_form.json') //await get_regist_form(this.lang)
@@ -96,9 +95,11 @@
         let f = i.name.split('/')[0]
         this.fieldList[f].push(i)
       }
-      console.log(this.fieldList.head, 'head')
-      console.log(this.fieldList.dynamic, 'dyhnmaic')
-      for (let h of this.fieldList['hidden']) {
+      console.log('full form', this.fieldList)
+      console.log('head', this.fieldList.head)
+      console.log('dyhnamic', this.fieldList.dynamic)
+      console.assert('hidden' in this.fieldList)
+      for (let h of this.fieldList.hidden) {
         if (h.name == 'hidden/groupID') {
           this.hidd_result[h.name] = this.random_str()
         } else if (h.name != "hidden/imageURL") {
@@ -108,25 +109,36 @@
       this.add_dynm_result()
       // this.houseSnapshot = aswait getHouses()
       // console.log(firebaseDB.database()cs
-      firebaseDB.database().ref('houses').on("value", (snapshot) => {
-        this.fieldListHouses = this.fieldList.head
-        this.houseSnapshot = snapshot.val();
-        console.log('>>> snapshot Form')
-        // console.log(this.fieldList.head)
-        // console.log(this.houseSnapshot)
 
+      this.fieldListHouses = _.clone(this.fieldList.head, true)
+      // this.$forceUpdate()
+      // this.refs.head_refs.$forceUpdate()
+      const updatingfirebaseHouseList = (snapshot) => {
+        this.houseSnapshot = snapshot.val();
+      //   console.log('fieldList', this.fieldList.head)
+        console.log('snapshote', this.houseSnapshot)
+      //   console.log(this.fieldListHouses, this.fieldList.head)
         this.fieldListHouses[0].option = _.filter(this.fieldList.head[0].option, (field) => {
-          // console.log(field.label)
-          // console.log(this.toURL[field.label])
-          let obj = this.houseSnapshot[this.toURL[field.label]] || field.label
-          // console.log(obj)
-          return obj.count < obj.cap
+          let obj = this.houseSnapshot[field.label]
+          return obj && obj.count < obj.cap
         })
-        console.log(this.fieldListHouses, 'new fieldListHouse')
-        console.log('<<<')
-        // this.$nextTick(() => {})
-      });
-      // this.formState = formState
+      //   this.fieldListHouses = this.fieldListHouses.filter(() => true)
+      //   console.log('fieldListHouses', this.fieldListHouses)
+      //   // this.$forceUpdate()
+      //   // this.refs.head_refs.$forceUpdate()
+      //   // console.log('>>> snapshot')
+      //   // console.log(this.fieldListHouses, 'new fieldListHouse')
+      //   // debugger
+      //   // console.log('<<<')
+      //   // this.$nextTick(() => {})
+      }
+      const fbref = firebaseDB.database().ref('houses')
+      // // debugger
+      updatingfirebaseHouseList(await fbref.once('value'))
+      // // debugger
+      // fbref.on("value", updatingfirebaseHouseList)
+      // // debugger
+      // // this.formState = formState
     },
     methods: {
       random_str(){
@@ -150,7 +162,7 @@
           let ar = []
           // for (let [dym_form, img_crp] of _.zip(this.$refs.dynamic_refs, this.$refs.croppa_refs)) {
           for (let [dym_form] of _.zip(this.$refs.dynamic_refs)) {
-            let o = _.assign(
+            let o = _.assign({},
               // {'hidden/imageURL': await img_crp.getURL()},
               this.head_result,
               this.hidd_result,
@@ -161,8 +173,9 @@
           console.log(ar)
           console.log('[success] image have been uploaded')
           try{
-            ar[0]['head/realHouseURL'] = this.toURL[ar[0]['head/realHouse']]
-            await post_regist_form(ar[0])
+            let oneform = _.clone(ar[0])
+            oneform['head/realHouseURL'] = this.toURL[oneform['head/realHouse']]
+            await post_regist_form(oneform)
             console.log('regist succ')
           }catch (error){
             this.submissionState = 'none'

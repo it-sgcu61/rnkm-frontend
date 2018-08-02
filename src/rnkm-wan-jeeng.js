@@ -16,10 +16,15 @@ async function post_regist_form(form) { // form is an object
   //   lang: "TH",
   //   formData: form
   // })
-  return await axios.post(`${API}/register`, querystring.stringify({
-    lang: "TH",
-    formData: JSON.stringify(form)
-  }))
+  try {
+    return await axios.post(`${API}/register`, querystring.stringify({
+      lang: "TH",
+      formData: JSON.stringify(form)
+    }))
+    alert('[success] ', JSON.stringify(form))
+  } catch(err) {
+    alert(err)
+  }
 }
 
 async function register(lang, formData) {

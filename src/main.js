@@ -31,6 +31,7 @@ import RnkmSponsor from './components/Sponsor.vue'
 Vue.component('rnkm-sponsor', RnkmSponsor)
 
 Vue.config.productionTip = false
+Vue.config.devtools = true
 
 var config = {
   apiKey: "AIzaSyDQLSoNkP8FbxlbbkgCBafxCpR567XFCko",
