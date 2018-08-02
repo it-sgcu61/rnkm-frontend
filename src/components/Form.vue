@@ -174,7 +174,6 @@
           console.log('[success] image have been uploaded')
           try{
             let oneform = _.clone(ar[0])
-            oneform['head/realHouseURL'] = this.toURL[oneform['head/realHouse']]
             await post_regist_form(oneform)
             console.log('regist succ')
           }catch (error){

@@ -339,23 +339,6 @@
 "validate": ""
 },
 {
-"desc": "ประสงค์จะอยู่หอพักนิสิตจุฬาลงกรณ์มหาวิทยาลัยในช่วงวันงานหรือไม่",
-"label": "ต้องการพักหอในช่วงกิจกรรมหรือไม่",
-"name": "dynamic/RCU_required",
-"option": [
-{
-"label": "yes",
-"value": "yes"
-},
-{
-"label": "no",
-"value": "no"
-}
-],
-"required": true,
-"type": "choice"
-},
-{
 "desc": "ถ้าไม่มีใส่ \"-\"",
 "label": "โรคประจำตัว",
 "name": "dynamic/congenital_disease",
