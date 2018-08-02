@@ -29,7 +29,7 @@ export default {
   },
   methods: {
     acceptedCondition(){
-      this.$emit("accept-condition",this.lang)
+      this.$emit("accept-condition", this.lang)
     }
   }
 }

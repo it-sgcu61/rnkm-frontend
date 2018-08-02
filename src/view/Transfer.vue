@@ -1,65 +1,79 @@
 <template lang='pug'>
-div(v-if='state==2')
-  div(v-sticky="stickyConfig")
-    div.flex.container()
-      div
-        h2 {{this.person.fullname}}
-        h3 Old : {{this.person.house}}
-        h3 Current : {{this.person.currHouse}}
-      h2 Time left : {{"20:00:00"}}
-      button.button.is-warning(@click='submit') Confirm
-  TransferHousePreview(style="margin-top:0px;" :forTransfer='"true"')
-    template(slot='before' slot-scope='baan')
-      <div class="baan-overlay" @click="moveMan" :id="baan.nameURL">
-        div.overlay(:stat='stat(baan)')
-        div.banner( :stat='stat(baan)')
-        div.inform
-          div(class="houseCard")
-            p {{baan.nameTH}}
-          <b-progress v-if='houses[baan.nameURL]&&houses[baan.nameURL].avail>0' class="mb-3" :max="houses[baan.nameURL]?houses[baan.nameURL].avail:100" animated style="max-width:100%;">
-            <b-progress-bar :value="baanStatus(baan)" variant="warning">
-              p(class="numDispBlack") {{ baanStatus(baan) }} / {{ houses[baan.nameURL]?houses[baan.nameURL].avail:100 }}
-            </b-progress-bar>
-          </b-progress>
-          <b-progress v-if='houses[baan.nameURL]&&houses[baan.nameURL].avail==0' class="mb-3" :max="1" animated style="max-width:100%;">
-            <b-progress-bar :value="1" variant="danger">
-              p(class="numDisp") FULL
-            </b-progress-bar>
-          </b-progress>
-        div(v-if='person.currHouse==baan.nameURL')
-          h2 &#9989;
-      </div>
-div.section(v-else)
-  div(v-if='state==0')
-    div.header ระบบย้ายบ้าน
-    transfer-condition(@accept-condition='increase_state')
-  // LOGIN
-  div(v-else-if='state==1')
-    div.header ระบบย้ายบ้าน
-    form.container.has-text-centered
-      div.input-wrapper
-        div.field
-          input.input(v-model='form.usr' type='tel' placeholder='NATIONAL ID')
-        div.field
-          input.input(v-model='form.pwd' type="password" v-mask="'###-###-####'" :masked="false" placeholder='PHONE NUMBER' pattern='[0-9]{10}' title="10 digit tel number")
-      div.btn-wrapper.field
-        div(v-if='!isLoggingIn')
-          img.login-btn(@click='try_login' src='../theme/material/submit_btn.png')
-        div(v-else)
-          br
-          formstatus(loading)
-  div(v-else-if='state==3')
-    div.header ระบบย้ายบ้าน
-    div#wrapper
-      // HEADER
-      div#head
-        div.is-block
-          h1.is-size-3.bold การย้ายบ้านสำเร็จ!
-          h1.is-size-4.bold.orange <br />{{this.person.fullname}}
-          h1.is-size-4.bold.grey <br />"{{this.person.house}}"
-          h1.is-size-5 <br />ไปยัง
-          h2.is-size-4.bold.green <br />"{{this.person.currHouse}}"<br />
-          p <br /><br />โปรด Save รูปหน้าจอขณะนี้ไว้เพื่อเป็นหลักฐานในการย้ายบ้าน<br /><br />
+div
+
+  // TRANSFER TABLE
+  div(v-if='state == 2')
+
+    // NAVIGATE
+    div(v-sticky="stickyConfig" style='position: sticky; position: -webkit-sticky; top: 0;')
+      div.flex.container()
+        div
+          h2 {{this.person.fullname}}
+          h3 Old : {{this.person.house}}
+          h3 Current : {{this.person.currHouse}}
+        h2 Time left : {{"20:00:00"}}
+        button.button.is-warning(@click='submit') Confirm
+
+    // TABLE
+    TransferHousePreview(style="margin-top: 0;" :forTransfer='"true"')
+      template(slot='before' slot-scope='baan')
+        div.baan-overlay(@click="moveMan" :id="baan.nameURL")
+          div.overlay(:stat='stat(baan)')
+          // div.banner( :stat='stat(baan)')
+          div.inform
+            div.houseCard
+              p {{baan.nameTH}}
+            div(style='padding: 5px')
+              b-progress.mb-3(v-if='houses[baan.nameURL] && houses[baan.nameURL].avail > 0' :max="houses[baan.nameURL]?houses[baan.nameURL].avail:100" animated style="max-width: 100%")
+                b-progress-bar(:value="baanStatus(baan)" variant="warning")
+                  // p {{baan}}
+                  p.numDispBlack(align='center' style='margin-left: 5px')
+                    | {{houses[baan.nameURL].used}}/{{houses[baan.nameURL].avail}}
+                  //  {{ baanStatus(baan) }} / {{ houses }}
+              b-progress.mb-3(v-if='houses[baan.nameURL] && houses[baan.nameURL].avail == 0' :max="1" animated style="max-width:100%")
+                b-progress-bar(:value="1" variant="danger")
+                  p.numDisp FULL
+          div(v-if='person.currHouse == baan.nameURL')
+            h2 &#9989;
+
+
+  div.section(v-else)
+
+    // TERM & CONDITION
+    div(v-if='state == 0')
+      div.header ระบบย้ายบ้าน
+      transfer-condition(@accept-condition='increase_state')
+
+    // LOGIN
+    div(v-else-if='state == 1')
+      div.header ระบบย้ายบ้าน
+      form.container.has-text-centered
+        div.input-wrapper
+          div.field
+            div NATIONAL ID
+            div: input.input(v-model='form.usr' type='tel' placeholder='')
+          div.field
+            div PHONE NUMBER
+            div: input.input(v-model='form.pwd' type="password" v-mask="'###-###-####'" :masked="false" placeholder='' title="")
+        div.btn-wrapper.field
+          div(v-if='!isLoggingIn')
+            img.login-btn(@click='try_login' src='../theme/material/submit_btn.png')
+          div(v-else)
+            br
+            formstatus(loading)
+
+    // COMPLETE
+    div(v-else-if='state == 3')
+      div.header ระบบย้ายบ้าน
+      div#wrapper
+        div#head
+          div.is-block
+            h1.is-size-3.bold การย้ายบ้านสำเร็จ!
+            h1.is-size-4.bold.orange <br />{{this.person.fullname}}
+            h1.is-size-4.bold.grey <br />"{{this.person.house}}"
+            h1.is-size-5 <br />ไปยัง
+            h2.is-size-4.bold.green <br />"{{this.person.currHouse}}"<br />
+            p <br /><br />โปรด Save รูปหน้าจอขณะนี้ไว้เพื่อเป็นหลักฐานในการย้ายบ้าน<br /><br />
 
 </template>
 
@@ -84,7 +98,7 @@ export default {
   data() {
     return {
       dummyLimit:{},
-      state:0,
+      state: 0,
       form: {
         usr: '',
         pwd: ''
@@ -118,6 +132,10 @@ export default {
       this.state += 1
     },
     async try_login(){
+      if (!this.form.usr || !this.form.pwd) {
+        alert('please fill input')
+        return
+      }
       this.isLoggingIn = true
       // // get permission token
       let info = await login(this.form.usr, this.form.pwd)
@@ -148,11 +166,12 @@ export default {
 
       // firebase listener
       let rf = firebaseDB.database().ref('/houses')
-      this.house = (await rf.once('value')).val()
-      for (let nameTH in this.house) {
-        rf.child(nameTH).on('value', (snapshot) => {
-          this.$set(this.houses, nameTH, snapshot.val())
-          console.log(`[update] ${nameTH} ${snapshot.val().count}/${snapshot.val().cap}`)
+      this.houses = (await rf.once('value')).val()
+      console.log(this.house)
+      for (let nameURL in this.houses) {
+        rf.child(nameURL).on('value', (snapshot) => {
+          this.$set(this.houses, nameURL, snapshot.val())
+          console.log(`[update] ${nameURL} ${snapshot.val().count}/${snapshot.val().cap}`)
         })
       }
       this.isLogin = true
@@ -314,8 +333,8 @@ export default {
   .baan-overlay
     position absolute;
     overflow hidden
-    width:  19vw;
-    height: 19vw;
+    width:  22vw;
+    height: 22vw;
     @media screen and (min-width: 600px)
       width:  17vw;
       height: 17vw;
@@ -339,8 +358,8 @@ export default {
         cursor pointer
     .overlay
       opacity .6
-      width:  19vw;
-      height: 19vw;
+      width:  20vw;
+      height: 20vw;
       @media screen and (min-width: 600px)
         width:  17vw;
         height: 17vw;

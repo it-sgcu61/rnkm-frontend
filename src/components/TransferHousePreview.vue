@@ -11,7 +11,7 @@ div
 
     // TABLE
     div
-      div#body.flex-left.grp-border(:n-item='siz_list[grp].length' style="margin-left:10%;margin-right:2%")
+      div#body.flex-left.grp-border(:n-item='siz_list[grp].length' style="margin: 10px auto; padding: 20px")
         div.flex-item(v-for='baan in siz_list[grp]' :key='baan.id')
           div.img-square(:style="{ backgroundImage: `url(${baan.img})` }")
             slot(name='before' v-bind='baan')
@@ -111,8 +111,8 @@ export default {
     border-radius 10px
     filter: brightness(70%);
     cursor: pointer;
-    width:  18vw;
-    height: 18vw;
+    width:  20vw;
+    height: 20vw;
     @media screen and (min-width: 600px)
       width:  16vw;
       height: 16vw;

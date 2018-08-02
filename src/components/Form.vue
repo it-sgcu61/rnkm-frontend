@@ -89,16 +89,10 @@
     },
     async created() {
       const fieldList = get_regist_form().fieldList
-      // console.log(fieldList)
-      // const {fieldList, ...formState} = require('../others/static_TH_form.json') //await get_regist_form(this.lang)
       for (let i of fieldList) {
         let f = i.name.split('/')[0]
         this.fieldList[f].push(i)
       }
-      console.log('full form', this.fieldList)
-      console.log('head', this.fieldList.head)
-      console.log('dyhnamic', this.fieldList.dynamic)
-      console.assert('hidden' in this.fieldList)
       for (let h of this.fieldList.hidden) {
         if (h.name == 'hidden/groupID') {
           this.hidd_result[h.name] = this.random_str()
@@ -107,38 +101,18 @@
         }
       }
       this.add_dynm_result()
-      // this.houseSnapshot = aswait getHouses()
-      // console.log(firebaseDB.database()cs
-
       this.fieldListHouses = _.clone(this.fieldList.head, true)
-      // this.$forceUpdate()
-      // this.refs.head_refs.$forceUpdate()
       const updatingfirebaseHouseList = (snapshot) => {
         this.houseSnapshot = snapshot.val();
-      //   console.log('fieldList', this.fieldList.head)
         console.log('snapshote', this.houseSnapshot)
-      //   console.log(this.fieldListHouses, this.fieldList.head)
         this.fieldListHouses[0].option = _.filter(this.fieldList.head[0].option, (field) => {
           let obj = this.houseSnapshot[field.label]
           return obj && obj.count < obj.cap
         })
-      //   this.fieldListHouses = this.fieldListHouses.filter(() => true)
-      //   console.log('fieldListHouses', this.fieldListHouses)
-      //   // this.$forceUpdate()
-      //   // this.refs.head_refs.$forceUpdate()
-      //   // console.log('>>> snapshot')
-      //   // console.log(this.fieldListHouses, 'new fieldListHouse')
-      //   // debugger
-      //   // console.log('<<<')
-      //   // this.$nextTick(() => {})
       }
       const fbref = firebaseDB.database().ref('houses')
-      // // debugger
       updatingfirebaseHouseList(await fbref.once('value'))
-      // // debugger
-      // fbref.on("value", updatingfirebaseHouseList)
-      // // debugger
-      // // this.formState = formState
+      fbref.on("value", updatingfirebaseHouseList)
     },
     methods: {
       random_str(){
