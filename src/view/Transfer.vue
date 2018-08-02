@@ -1,4 +1,5 @@
 <template lang='pug'>
+<<<<<<< HEAD
 div
 
   // TRANSFER TABLE
@@ -74,6 +75,71 @@ div
             h1.is-size-5 <br />ไปยัง
             h2.is-size-4.bold.green <br />"{{this.person.currHouse}}"<br />
             p <br /><br />โปรด Save รูปหน้าจอขณะนี้ไว้เพื่อเป็นหลักฐานในการย้ายบ้าน<br /><br />
+=======
+div(v-if='state==2')
+  div(v-sticky="stickyConfig")
+    div.flex.container()
+      div
+        h2 {{this.person.fullname}}
+        h3 Old : {{this.person.house}}
+        h3 Current : {{this.person.currHouse}}
+      vue-countdown(:time="(new Date(person.expireTime) - new Date())" @countdownend="timeup")
+        template(slot-scope="props")
+          h2 {{ props.minutes }}:{{ props.seconds }}
+      button.button.is-warning(@click='submit') Confirm
+  TransferHousePreview(style="margin-top:0px;" :forTransfer='"true"')
+    template(slot='before' slot-scope='baan')
+      <div class="baan-overlay" @click="moveMan" :id="baan.nameURL">
+        div.overlay(:stat='stat(baan)')
+        div.banner( :stat='stat(baan)')
+        div.inform
+          div(class="houseCard")
+            p {{baan.nameTH}}
+          <b-progress v-if='houses[baan.nameURL]&&houses[baan.nameURL].avail>0' class="mb-3" :max="houses[baan.nameURL]?houses[baan.nameURL].avail:100" animated style="max-width:100%;">
+            <b-progress-bar :value="baanStatus(baan)" variant="warning">
+              p(class="numDispBlack") {{ baanStatus(baan) }} / {{ houses[baan.nameURL]?houses[baan.nameURL].avail:100 }}
+            </b-progress-bar>
+          </b-progress>
+          <b-progress v-if='houses[baan.nameURL]&&houses[baan.nameURL].avail==0' class="mb-3" :max="1" animated style="max-width:100%;">
+            <b-progress-bar :value="1" variant="danger">
+              p(class="numDisp") FULL
+            </b-progress-bar>
+          </b-progress>
+        div(v-if='person.currHouse==baan.nameURL')
+          h2 &#9989;
+      </div>
+div.section(v-else)
+  div(v-if='state==0')
+    div.header ระบบย้ายบ้าน
+    transfer-condition(@accept-condition='increase_state')
+  // LOGIN
+  div(v-else-if='state==1')
+    div.header ระบบย้ายบ้าน
+    form.container.has-text-centered
+      div.input-wrapper
+        div.field
+          input.input(v-model='form.usr' type='tel' placeholder='NATIONAL ID')
+        div.field
+          input.input(v-model='form.pwd' type="password" v-mask="'###-###-####'" :masked="false" placeholder='PHONE NUMBER' pattern='[0-9]{10}' title="10 digit tel number")
+      div.btn-wrapper.field
+        div(v-if='!isLoggingIn')
+          img.login-btn(@click='try_login' src='../theme/material/submit_btn.png')
+        div(v-else)
+          br
+          formstatus(loading)
+  div(v-else-if='state==3')
+    div.header ระบบย้ายบ้าน
+    div#wrapper
+      // HEADER
+      div#head
+        div.is-block
+          h1.is-size-3.bold การย้ายบ้านสำเร็จ!
+          h1.is-size-4.bold.orange <br />{{this.person.fullname}}
+          h1.is-size-4.bold.grey <br />"{{this.person.house}}"
+          h1.is-size-5 <br />ไปยัง
+          h2.is-size-4.bold.green <br />"{{this.person.currHouse}}"<br />
+          p <br /><br />โปรด Save รูปหน้าจอขณะนี้ไว้เพื่อเป็นหลักฐานในการย้ายบ้าน<br /><br />
+>>>>>>> 02290cad172c426b6baa38dae0394ab72768b6f1
 
 </template>
 
@@ -83,6 +149,7 @@ import VueSticky from 'vue-sticky'
 import {mask} from 'vue-the-mask'
 import bProgress from 'bootstrap-vue/es/components/progress/progress';
 import bProgressBar from 'bootstrap-vue/es/components/progress/progress-bar';
+import VueCountdown from '@xkeshi/vue-countdown';
 import 'bootstrap/dist/css/bootstrap.css'
 import 'bootstrap-vue/dist/bootstrap-vue.css'
 
@@ -93,7 +160,7 @@ import TransferHousePreview from '../components/TransferHousePreview.vue'
 import TransferCondition from '../components/TransferCondition.vue'
 var localStorage = require('localStorage')
 export default {
-  components: {Formstatus, TransferHousePreview, TransferCondition, bProgress, bProgressBar},
+  components: {Formstatus, TransferHousePreview, TransferCondition, bProgress, bProgressBar, VueCountdown},
   directives: {mask, 'sticky': VueSticky},
   data() {
     return {
@@ -128,6 +195,10 @@ export default {
     }
   },
   methods: {
+    timeup(){
+      this.deleteAllCookies()
+      this.state=3
+    },
     increase_state(){
       this.state += 1
     },
@@ -160,6 +231,7 @@ export default {
         "house": info["oldHouse"], // name TH,
         "currHouse": info["currentHouse"],
         "fullname": info["fullname"],
+        "expireTime": info["expireTime"],
         "username": this.form.usr
       }
       console.log('[success] login')
@@ -190,13 +262,16 @@ export default {
     },
     async submit(){
       let res = await confirmHouse(this.person.username, this.person.token)
-      if(!res){
+      if(res.success){
+        this.state = 3
+      }else if(/wait until last operation/.test(res.message)){
+        alert("อย่ากดรัวสิจ๊ะน้อง ใจเย็นๆนะ เยิฟๆ")
+      }else{
         alert("การ Confirm ไม่สำเร็จ กรุณาลองใหม่หลัง Login ใหม่")
         this.deleteAllCookies()
         this.state = 1
         return
       }
-      this.state = 3
     },
     baanStatus(baan){
       return this.houses[baan.nameURL]?this.houses[baan.nameURL].used:100
@@ -214,8 +289,11 @@ export default {
 	    this.person.currHouse=newHouse
       else if(result.message === "Full House")
         alert("บ้านที่เลือกเต็มแล้ว โปรดลองใหม่ภายหลัง")
+      else if(/wait until last operation/.test(result.message))
+        alert("อย่ากดรัวสิจ๊ะน้อง ใจเย็นๆนะ เยิฟๆ")
       else{
         alert("Session หมดอายุ หรือคุณได้ทำการยืนยันการย้ายบ้านไปแล้ว")
+        this.deleteAllCookies()
         this.state = 1
       }
       this.isTransfer=false
