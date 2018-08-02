@@ -6,7 +6,9 @@ div(v-if='state==2')
         h2 {{this.person.fullname}}
         h3 Old : {{this.person.house}}
         h3 Current : {{this.person.currHouse}}
-      h2 Time left : {{"20:00:00"}}
+      vue-countdown(:time="(new Date(person.expireTime) - new Date())" @countdownend="timeup")
+        template(slot-scope="props")
+          h2 {{ props.minutes }}:{{ props.seconds }}
       button.button.is-warning(@click='submit') Confirm
   TransferHousePreview(style="margin-top:0px;" :forTransfer='"true"')
     template(slot='before' slot-scope='baan')
@@ -69,6 +71,7 @@ import VueSticky from 'vue-sticky'
 import {mask} from 'vue-the-mask'
 import bProgress from 'bootstrap-vue/es/components/progress/progress';
 import bProgressBar from 'bootstrap-vue/es/components/progress/progress-bar';
+import VueCountdown from '@xkeshi/vue-countdown';
 import 'bootstrap/dist/css/bootstrap.css'
 import 'bootstrap-vue/dist/bootstrap-vue.css'
 
@@ -79,7 +82,7 @@ import TransferHousePreview from '../components/TransferHousePreview.vue'
 import TransferCondition from '../components/TransferCondition.vue'
 var localStorage = require('localStorage')
 export default {
-  components: {Formstatus, TransferHousePreview, TransferCondition, bProgress, bProgressBar},
+  components: {Formstatus, TransferHousePreview, TransferCondition, bProgress, bProgressBar, VueCountdown},
   directives: {mask, 'sticky': VueSticky},
   data() {
     return {
@@ -114,6 +117,10 @@ export default {
     }
   },
   methods: {
+    timeup(){
+      this.deleteAllCookies()
+      this.state=3
+    },
     increase_state(){
       this.state += 1
     },
@@ -142,6 +149,7 @@ export default {
         "house": info["oldHouse"], // name TH,
         "currHouse": info["currentHouse"],
         "fullname": info["fullname"],
+        "expireTime": info["expireTime"],
         "username": this.form.usr
       }
       console.log('[success] login')
@@ -171,13 +179,16 @@ export default {
     },
     async submit(){
       let res = await confirmHouse(this.person.username, this.person.token)
-      if(!res){
+      if(res.success){
+        this.state = 3
+      }else if(/wait until last operation/.test(res.message)){
+        alert("อย่ากดรัวสิจ๊ะน้อง ใจเย็นๆนะ เยิฟๆ")
+      }else{
         alert("การ Confirm ไม่สำเร็จ กรุณาลองใหม่หลัง Login ใหม่")
         this.deleteAllCookies()
         this.state = 1
         return
       }
-      this.state = 3
     },
     baanStatus(baan){
       return this.houses[baan.nameURL]?this.houses[baan.nameURL].used:100
@@ -195,8 +206,11 @@ export default {
 	    this.person.currHouse=newHouse
       else if(result.message === "Full House")
         alert("บ้านที่เลือกเต็มแล้ว โปรดลองใหม่ภายหลัง")
+      else if(/wait until last operation/.test(result.message))
+        alert("อย่ากดรัวสิจ๊ะน้อง ใจเย็นๆนะ เยิฟๆ")
       else{
         alert("Session หมดอายุ หรือคุณได้ทำการยืนยันการย้ายบ้านไปแล้ว")
+        this.deleteAllCookies()
         this.state = 1
       }
       this.isTransfer=false

@@ -1,7 +1,7 @@
 import axios from 'axios'
 var localStorage = require('localStorage')
 var proxy = ''; // for Cross Origin Request
-var host = 'https://5xhgfqhpgik599bg2d9v.tk:8080'
+var host = 'https://5xhgfqhpgik599bg2d9v.tk'
 
 // LOGIN - required to do user's personal things
 async function login(username, password) {
@@ -14,6 +14,7 @@ async function login(username, password) {
       "oldHouse": localStorage.getItem("oldHouse"),
       "currentHouse": localStorage.getItem("currentHouse"),
       "fullname": localStorage.getItem("fullname"),
+      "expireTime":localStorage.getItem('expireTime'),
     }
   }
   return await axios.post(
@@ -27,6 +28,7 @@ async function login(username, password) {
         localStorage.setItem('token', res.token);
         localStorage.setItem('oldHouse', res.oldHouse);
         localStorage.setItem('currentHouse', res.currentHouse);
+        localStorage.setItem('expireTime', res.expireTime);
         localStorage.setItem('fullname', res.fullname);
         localStorage.setItem('username', username);
         return res
@@ -34,7 +36,7 @@ async function login(username, password) {
         alert(res.data.message)
         return {}
       }
-  })
+  }).catch(()=>({}))
 }
 // movePerson between house
 function movePerson(user, token, house) {
@@ -64,7 +66,7 @@ function movePerson(user, token, house) {
     //   "success": true,
     //   "message": "OK"
     // } // OK
-  })
+  }).catch(()=>({}))
 }
 
 // confirm house and sent to DTNl
@@ -74,7 +76,7 @@ function confirmHouse(user, token) {
       id: user,
       token: token
     }).then((res) => {
-    return res.data.success
+    return res.data//.success
     // res.success === true --> OK
     // else  not locked you house
   })
