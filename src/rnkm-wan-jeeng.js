@@ -12,16 +12,11 @@ function get_regist_form() {
 }
 async function post_regist_form(form) { // form is an object
   console.log(form)
-  // return await axios.post(`${API}/register`, {
-  //   lang: "TH",
-  //   formData: form
-  // })
   try {
     return await axios.post(`${API}/register`, querystring.stringify({
       lang: "TH",
       formData: JSON.stringify(form)
     }))
-    alert('[success] ', JSON.stringify(form))
   } catch(err) {
     alert(err)
   }

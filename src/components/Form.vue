@@ -158,18 +158,16 @@
             )
             ar.push(o)
           }
-          console.log(ar)
           this.submitForm = ar[0]
-          // console.log('[success] only image have been uploaded')
           try{
-            let oneform = _.clone(ar[0])
+            let oneform = _.clone(ar[0], true)
             let result = await post_regist_form(oneform)
-            if (result.success) {
-              alert('regist succ', JSON.stringify(ar[0]))
-              console.log('[success] form have been uploaded to DTNL')
+            if (result.data.success) {
+              alert('regist success', JSON.stringify(ar[0]))
               this.submissionState = "fullfilled"
             } else {
               alert('submission fail')
+              this.submissionState = 'none'
             }
           }catch (error){
             this.submissionState = 'none'
