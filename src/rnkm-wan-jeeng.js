@@ -45,14 +45,6 @@ async function logout(id, tok) {
 }
 
 async function getInfo(id, tel) {
-  // return {
-  //   oldHouse: 'a',
-  //   newHouse: 'b',
-  //   fullname: 'c',
-  //   id: 'd',
-  //   tel: 'xxx-xxx-xxxx',
-  //   isTransferred: 'tranfer'
-  // }
   return await axios.post(`${API}/getInfo`, {
     id: id,
     tel: tel

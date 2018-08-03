@@ -5,7 +5,7 @@
     "disabled": false,
     "fieldList": [{
       "desc": "",
-      "label": "บ้านที่ต้องกาารอันดับ",
+      "label": "บ้านที่ต้องการ",
       "name": "head/realHouseURL",
       "option": [{
         "label": "a-aum",

@@ -5,10 +5,9 @@
     // formstatus(loading        v-if='!formState')
     // formstatus(success   v-else-if='registration_state == "ok" && submissionState == "fullfilled"')
     div(v-else-if='submissionState == "fullfilled"')
-      div.hero.is-size-1(align='center' style='font-weight: bold')
-        div >> {{submitForm['head/realHouseURL']}} <<
-        div >> {{submitForm['dynamic/fullname']}} <<
-
+      // div.hero.is-size-1(align='center' style='font-weight: bold')
+      //   div >> {{submitForm['head/realHouseURL']}} <<
+      //   div >> {{submitForm['dynamic/fullname']}} <<
       formstatus(success)
     // formstatus(expired   v-else-if='registration_state == "expired"')
     // formstatus(countdown v-else-if='registration_state == "beforeTime"' :timeLeft='timeLeft' :formState='formState' @ready="ready")
