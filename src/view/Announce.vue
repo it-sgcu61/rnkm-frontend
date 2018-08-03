@@ -105,7 +105,7 @@ div
         // EDIT DATA
         // var userdata = await getAllowEditPersonalForm(this.login.usr, this.login.pwd)
         try {
-          var userdata = await getInfo(this.login.usr, this.login.pwd)
+          var userdata = (await getInfo(this.login.usr, this.login.pwd)).data
         } catch(err) {
           alert('something is wrong')
           this.result.show = "query"

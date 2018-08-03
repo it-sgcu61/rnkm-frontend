@@ -8,7 +8,7 @@ const API = 'https://5xhgfqhpgik599bg2d9v.tk'
 // กนกนพ ตุลยพงศ์รักษ์
 
 async function get_regist_form() {
-  return require('./others/static_TH_form.wan-jeeng.json').result
+  return require('./others/static_TH_form.wan-jeeng.json')
 }
 async function post_regist_form(form) { // form is an object
   console.log(form)
