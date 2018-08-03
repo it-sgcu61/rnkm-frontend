@@ -2,10 +2,14 @@
   div
     // STAUS
     // formstatus(loading        v-if='!formState')
+    formstatus(loading        v-if='isLoading')
     // formstatus(success   v-else-if='registration_state == "ok" && submissionState == "fullfilled"')
     div(v-if='submissionState == "fullfilled"')
+      div.hero.is-size-1(align='center' style='font-weight: bold')
+        div >> {{submitForm['head/realHouseURL']}} <<
+        div >> {{submitForm['dynamic/fullname']}} <<
+
       formstatus(success)
-      div.hero {{fieldList.head['head/realHouseURL']}}
     // formstatus(expired   v-else-if='registration_state == "expired"')
     // formstatus(countdown v-else-if='registration_state == "beforeTime"' :timeLeft='timeLeft' :formState='formState' @ready="ready")
 
@@ -86,7 +90,9 @@
         formState: {},
         timeLeft: 0,
         submissionState: "none",
-        toURL: require('../others/convertHouseNameToURL.json')
+        toURL: require('../others/convertHouseNameToURL.json'),
+        isLoading: true,
+        submitForm: {}
       }
     },
     async created() {
@@ -104,6 +110,7 @@
       }
       this.add_dynm_result()
       this.fieldListHouses = _.clone(this.fieldList.head, true)
+      this.fieldListHouses.option = [{label: 'loading..', value: 'loading..'}]
       const updatingfirebaseHouseList = (snapshot) => {
         this.houseSnapshot = snapshot.val();
         console.log('snapshote', this.houseSnapshot)
@@ -115,6 +122,7 @@
       const fbref = firebaseDB.database().ref('houses')
       updatingfirebaseHouseList(await fbref.once('value'))
       fbref.on("value", updatingfirebaseHouseList)
+      this.isLoading = false
     },
     methods: {
       random_str(){
@@ -147,11 +155,12 @@
             ar.push(o)
           }
           console.log(ar)
-          console.log('[success] image have been uploaded')
+          this.submitForm = ar[0]
+          // console.log('[success] only image have been uploaded')
           try{
             let oneform = _.clone(ar[0])
             await post_regist_form(oneform)
-            console.log('regist succ')
+            alert('regist succ', JSON.stringify(ar[0]))
           }catch (error){
             this.submissionState = 'none'
             alert(error)

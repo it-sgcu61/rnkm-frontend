@@ -11,61 +11,64 @@ div
           h2 {{this.person.fullname}}
           h3 Old : {{this.person.house}}
           h3 Current : {{this.person.currHouse}}
-        h2 Time left : {{"20:00:00"}}
+        vue-countdown(:time="(new Date(person.expireTime) - new Date())" @countdownend="timeup")
+          template(slot-scope="props")
+            h2 {{ props.hours }}:{{ props.minutes }}:{{ props.seconds }}
         button.button.is-warning(@click='submit') Confirm
 
-    // TABLE
+    // TABLE BLOCK
     TransferHousePreview(style="margin-top: 0" :forTransfer='"true"')
       template(slot='before' slot-scope='baan')
         div.baan-overlay(@click="moveMan" :id="baan.nameURL")
           div.overlay(:stat='stat(baan)')
-          // div.banner( :stat='stat(baan)')
+          div.banner( :stat='stat(baan)')
           div.inform
-            div.houseCard
-              p {{baan.nameTH}}
-            div(style='padding: 5px')
-              b-progress.mb-3(v-if='houses[baan.nameURL] && houses[baan.nameURL].avail > 0' :max="houses[baan.nameURL]?houses[baan.nameURL].avail:100" animated style="max-width: 100%")
-                b-progress-bar(:value="baanStatus(baan)" variant="warning")
-                  // p {{baan}}
-                  p.numDispBlack(align='center' style='margin-left: 5px')
-                    | {{houses[baan.nameURL].used}}/{{houses[baan.nameURL].avail}}
-                  //  {{ baanStatus(baan) }} / {{ houses }}
-              b-progress.mb-3(v-if='houses[baan.nameURL] && houses[baan.nameURL].avail == 0' :max="1" animated style="max-width:100%")
-                b-progress-bar(:value="1" variant="danger")
-                  p.numDisp FULL
-          div(v-if='person.currHouse == baan.nameURL')
+              div.houseCard(:class="{currentHouse:person.currHouse==baan.nameURL}")
+                p {{baan.nameTH}}
+              div(style='padding: 5px')
+                b-progress.mb-3(v-if='houses[baan.nameURL] && houses[baan.nameURL].avail > 0' :max="houses[baan.nameURL]?houses[baan.nameURL].avail:100" animated style="max-width: 100%")
+                  b-progress-bar(:value="baanStatus(baan)" variant="warning")
+                    // p {{baan}}
+                    p.numDispBlack(align='center' style='margin-left: 5px')
+                      | {{houses[baan.nameURL].used}}/{{houses[baan.nameURL].avail}}
+                    //  {{ baanStatus(baan) }} / {{ houses }}
+                b-progress.mb-3(v-if='houses[baan.nameURL] && houses[baan.nameURL].avail == 0' :max="1" animated style="max-width:100%")
+                  b-progress-bar(:value="1" variant="danger")
+                    p.numDisp FULL
+          div(v-if='person.currHouse==baan.nameURL')
             h2 &#9989;
 
+    div.page-footer
+      label ฝ่าย IT องค์การบริหารสโมสรนิสิตจุฬาลงกรณ์มหาวิทยาลัย
+      br
+      label Powered by 44<sup>th</sup> Computer Engineering Student, Chulalongkorn University
 
   div.section(v-else)
-
     // TERM & CONDITION
-    div(v-if='state == 0')
+    div(v-if='state==0')
       div.header ระบบย้ายบ้าน
       transfer-condition(@accept-condition='increase_state')
-
     // LOGIN
-    div(v-else-if='state == 1')
+    div(v-else-if='state==1')
       div.header ระบบย้ายบ้าน
       form.container.has-text-centered
         div.input-wrapper
           div.field
-            div NATIONAL ID
-            div: input.input(v-model='form.usr' type='tel' placeholder='')
+            p NATIONAL ID
+            input.input(v-model='form.usr')
           div.field
-            div PHONE NUMBER
-            div: input.input(v-model='form.pwd' type="password" v-mask="'###-###-####'" :masked="false" placeholder='' title="")
+            p REGISTERED PHONE NUMBER
+            input.input(v-model='form.pwd' type="password" v-mask="'###-###-####'" :masked="false" pattern='[0-9]{10}' title="10 digit tel number")
         div.btn-wrapper.field
           div(v-if='!isLoggingIn')
             img.login-btn(@click='try_login' src='../theme/material/submit_btn.png')
           div(v-else)
             br
             formstatus(loading)
-
-    // COMPLETE
-    div(v-else-if='state == 3 || true')
+    div(v-else-if='state==3')
       div.header ระบบย้ายบ้าน
       div#wrapper
+        // HEADER
         div#head
           div.is-block
             h1.is-size-3.bold การย้ายบ้านสำเร็จ!
@@ -74,7 +77,10 @@ div
             h1.is-size-5 <br />ไปยัง
             h2.is-size-4.bold.green <br />"{{this.person.currHouse}}"<br />
             p <br /><br />โปรด Save รูปหน้าจอขณะนี้ไว้เพื่อเป็นหลักฐานในการย้ายบ้าน<br /><br />
-
+    div.page-footer
+      label ฝ่าย IT องค์การบริหารสโมสรนิสิตจุฬาลงกรณ์มหาวิทยาลัย
+      br
+      label Powered by 44<sup>th</sup> Computer Engineering Student, Chulalongkorn University
 </template>
 
 <script>
@@ -92,6 +98,7 @@ import {firebaseDB} from '../main.js'
 import Formstatus from '../components/Formstatus'
 import TransferHousePreview from '../components/TransferHousePreview.vue'
 import TransferCondition from '../components/TransferCondition.vue'
+
 var localStorage = require('localStorage')
 export default {
   components: {Formstatus, TransferHousePreview, TransferCondition, bProgress, bProgressBar, VueCountdown},
@@ -114,7 +121,7 @@ export default {
       houses: {},
       stickyConfig: {
         zIndex: 80,
-        postition:"absolute",
+        stickyTop: 10,
         disabled: false
       },
       isTransfer: false
@@ -137,10 +144,6 @@ export default {
       this.state += 1
     },
     async try_login(){
-      if (!this.form.usr || !this.form.pwd) {
-        alert('please fill input')
-        return
-      }
       this.isLoggingIn = true
       // // get permission token
       let info = await login(this.form.usr, this.form.pwd)
@@ -198,6 +201,7 @@ export default {
       let res = await confirmHouse(this.person.username, this.person.token)
       if(res.success){
         this.state = 3
+        this.deleteAllCookies()
       }else if(/wait until last operation/.test(res.message)){
         alert("อย่ากดรัวสิจ๊ะน้อง ใจเย็นๆนะ เยิฟๆ")
       }else{
@@ -445,4 +449,15 @@ export default {
           width  30px
           margin 0
           padding 0
+  .currentHouse
+    text-shadow: 1px 1px 4px #53f800;
+    color: #44c404;
+  .page-footer
+    position: relative;
+    left: 0;
+    bottom: 0;
+    width: 100%;
+    margin-top:50px;
+    margin-left:5px;
+    text-align: left;
 </style>

@@ -17,6 +17,10 @@ async function login(username, password) {
       "expireTime":localStorage.getItem('expireTime'),
     }
   }
+  if (!username || !password) {
+    alert('please fill input')
+    return
+  }
   return await axios.post(
     proxy + host + '/login', {
       id: username,

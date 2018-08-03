@@ -1,7 +1,7 @@
 import axios from 'axios'
 import querystring from 'querystring'
 // const API = 'https://35.198.212.105:8080'
-const API = 'https://5xhgfqhpgik599bg2d9v.tk:8080'
+const API = 'https://5xhgfqhpgik599bg2d9v.tk'
 
 // 083-012-3518
 // 1309902842289
