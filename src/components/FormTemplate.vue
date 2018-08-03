@@ -21,7 +21,6 @@ div.wrapper
         div.field-group.animated.fadeIn(v-for='f in fieldList' v-if='f.name.indexOf("hidden") == -1')
           // | {{f}}
 
-
           // LABEL
           transition(name='_slide-fade' mode='out-in' duration='100')
             div.label-text(:key='f.label') {{f.label}}
@@ -33,9 +32,8 @@ div.wrapper
           // select( :disabled='lock && f.lock' v-else-if='f.type == "choice" && /^head/.test(f.name)' v-model.trim='form[f.name]' :name='f.name')
           //   option(v-for='o in f.option.filter((opt)=>!Object.values(form).slice(0,parseInt(f.name.match(/\\d+/g)[0])-1).includes(opt.value))' :value='o.value' style='color: #353535') {{o.label}}
           select( :disabled='lock && f.lock' v-else-if='f.type == "choice"' v-model.trim='form[f.name]' :name='f.name')
-            // option(v-for='o in f.option' :value='o.value' style='color: #353535' ) {{o.label}}
-            option(v-for='o in f.option' :value='o' style='color: #353535' ) {{o}}
-
+            option(v-for='o in f.option' :value='o.value' style='color: #353535' ) {{o.label}}
+            // option(v-for='o in f.option' :value='o' style='color: #353535' ) {{o}}
 
           // ERROR
           div.error(v-if='errors.has(f.name)')

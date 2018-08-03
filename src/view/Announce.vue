@@ -44,7 +44,7 @@ div
             @click='$router.push("/dorm")'
           ) รายละเอียดหอพักนิสิต ช่วงงานกิจกรรม
         div.field
-          div: span(style='color: white') personal ID
+          div: span(style='color: white') national ID
           div: input.input(v-model='login.usr' type='tel')
         div.field
           div: span(style='color: white') phone number
@@ -105,7 +105,8 @@ div
         // EDIT DATA
         // var userdata = await getAllowEditPersonalForm(this.login.usr, this.login.pwd)
         try {
-          var userdata = (await getInfo(this.login.usr, this.login.pwd)).data
+          let res = await getInfo(this.login.usr, this.login.pwd)
+          var userdata = res.data.data || res.data
         } catch(err) {
           alert('something is wrong')
           this.result.show = "query"

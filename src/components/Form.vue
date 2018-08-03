@@ -96,7 +96,7 @@
       }
     },
     async created() {
-      const fieldList = (await get_regist_form()).fieldList
+      const fieldList = (await get_regist_form()).result.fieldList
       for (let i of fieldList) {
         let f = i.name.split('/')[0]
         this.fieldList[f].push(i)
@@ -116,6 +116,11 @@
         console.log('snapshote', this.fieldList.head[0].option.length, this.houseSnapshot)
         this.fieldListHouses[0].option = _.filter(_.keys(snp), key => {
           return snp[key].count < snp[key].cap
+        }).map(key => {
+          return {
+            'value': key,
+            'label': key
+          }
         })
       }
       const fbref = firebaseDB.database().ref('houses')
