@@ -13,7 +13,6 @@ div
             h2.is-size-2.fzing please contact to facebook page
         div.section: div.logo-wrap
             img.back(@click='result.show = "query"' src='../theme/material/back_btn.png')
-            img.back(@click='')
 
       // FOUND
       div.section(v-if='result.show == "found"')
@@ -26,6 +25,16 @@ div
       // EDITING
       div#edit.mcenter(v-if='result.show == "edit"')
         edit-info(:userData='editableData')
+
+      // SHOWING INFO
+      div#edit.mcenter(v-if='result.show == "show"')
+        div(align='center')
+          tr(v-for='(itm, key) in editableData')
+            td.is-size-5: div(align='left') {{translate[key] || key}}
+            td.is-size-5: div(align='left') {{itm}}
+          br
+        div(align='center')
+          img.back(@click='result.show = "query"' src='../theme/material/back_btn.png')
 
       // LOGIN
       form.container(v-else)
@@ -53,7 +62,10 @@ div
   import {mask} from 'vue-the-mask'
   import {RotateSquare5} from 'vue-loading-spinner'
   import {announcement} from '../middle-api'
-  import {getAllowEditPersonalForm} from '../announce_api.js'
+  import {getInfo} from '../rnkm-wan-jeeng.js'
+  // import {getAllowEditPersonalForm} from '../announce_api.js'
+
+
   export default {
     components: {AbsoluteBackground, RotateSquare5, EditInfo},
     directives: {mask},
@@ -71,15 +83,34 @@ div
           baan: ''
         },
         editableData: {},
-        currentForm: {}
+        currentForm: {},
+        translate: {
+          oldHouse: 'บ้านเดิม',
+          newHouse: 'บ้านใหม่',
+          fullname: 'ชื่อ-สกุล',
+          id: 'เลขปชช',
+          tel: 'เบอร์โทร',
+          isTransferred: 'ย้ายบ้าน'
+        }
       }
     },
     methods: {
       async submit () {
-        console.log(this.captchaToken)
+        if (!this.login.usr || !this.login.pwd){
+          alert('please fill input')
+          return
+        }
+        // console.log(this.captchaToken)
         this.result.show = "loading"
         // EDIT DATA
-        var userdata = await getAllowEditPersonalForm(this.login.usr, this.login.pwd)
+        // var userdata = await getAllowEditPersonalForm(this.login.usr, this.login.pwd)
+        try {
+          var userdata = await getInfo(this.login.usr, this.login.pwd)
+        } catch(err) {
+          alert('something is wrong')
+          this.result.show = "query"
+          return
+        }
         if(userdata.result == "notFound"){
           alert("ไม่พบข้อมูล กรุณาตรวจสอบข้อมูลที่คุณกรอกอีกครั้ง หากแน่ใจว่าได้ทำการลงทะเบียนไปแล้ว กรุณาติดต่อเพจ CU for Freshmen")
           this.result.show = "query"
@@ -88,7 +119,8 @@ div
           this.result.show = "query"
         }else{
           this.editableData = userdata
-          this.result.show = "edit"
+          // this.result.show = "edit"
+          this.result.show = "show"
         }
         return
 
@@ -187,7 +219,9 @@ div
         width calc(300px + 7vmin)
         background-color white
         border-radius 15px
-      .back
-        margin-top 0
-
+  .back
+    margin-top 0
+    cursor pointer
+  td
+    padding 10px
 </style>

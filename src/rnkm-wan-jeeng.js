@@ -7,7 +7,7 @@ const API = 'https://5xhgfqhpgik599bg2d9v.tk'
 // 1309902842289
 // กนกนพ ตุลยพงศ์รักษ์
 
-function get_regist_form() {
+async function get_regist_form() {
   return require('./others/static_TH_form.wan-jeeng.json').result
 }
 async function post_regist_form(form) { // form is an object
@@ -19,6 +19,7 @@ async function post_regist_form(form) { // form is an object
     }))
   } catch(err) {
     alert(err)
+    throw err
   }
 }
 
@@ -43,10 +44,18 @@ async function logout(id, tok) {
   })
 }
 
-async function getInfo(id, tok) {
+async function getInfo(id, tel) {
+  // return {
+  //   oldHouse: 'a',
+  //   newHouse: 'b',
+  //   fullname: 'c',
+  //   id: 'd',
+  //   tel: 'xxx-xxx-xxxx',
+  //   isTransferred: 'tranfer'
+  // }
   return await axios.post(`${API}/getInfo`, {
     id: id,
-    token: tok,
+    tel: tel
   })
 }
 
