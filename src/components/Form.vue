@@ -1,10 +1,10 @@
 <template lang='pug'>
   div
+    formstatus(loading        v-if='isLoading')
     // STAUS
     // formstatus(loading        v-if='!formState')
-    formstatus(loading        v-if='isLoading')
     // formstatus(success   v-else-if='registration_state == "ok" && submissionState == "fullfilled"')
-    div(v-if='submissionState == "fullfilled"')
+    div(v-else-if='submissionState == "fullfilled"')
       div.hero.is-size-1(align='center' style='font-weight: bold')
         div >> {{submitForm['head/realHouseURL']}} <<
         div >> {{submitForm['dynamic/fullname']}} <<
@@ -112,11 +112,15 @@
       this.fieldListHouses = _.clone(this.fieldList.head, true)
       this.fieldListHouses.option = [{label: 'loading..', value: 'loading..'}]
       const updatingfirebaseHouseList = (snapshot) => {
-        this.houseSnapshot = snapshot.val();
-        console.log('snapshote', this.houseSnapshot)
-        this.fieldListHouses[0].option = _.filter(this.fieldList.head[0].option, (field) => {
-          let obj = this.houseSnapshot[field.label]
-          return obj && obj.count < obj.cap
+        let snp = this.houseSnapshot = snapshot.val();
+        console.log('snapshote', this.fieldList.head[0].option.length, this.houseSnapshot)
+        this.fieldListHouses[0].option = _.filter(_.keys(snp), key => {
+          return snp[key].count < snp[key].cap
+        }).map(key => {
+          return {
+            label: key,
+            value: key
+          }
         })
       }
       const fbref = firebaseDB.database().ref('houses')
