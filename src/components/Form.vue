@@ -3,7 +3,9 @@
     // STAUS
     // formstatus(loading        v-if='!formState')
     // formstatus(success   v-else-if='registration_state == "ok" && submissionState == "fullfilled"')
-    formstatus(success   v-if='submissionState == "fullfilled"')
+    div(v-if='submissionState == "fullfilled"')
+      formstatus(success)
+      div.hero {{fieldList.head['head/realHouseURL']}}
     // formstatus(expired   v-else-if='registration_state == "expired"')
     // formstatus(countdown v-else-if='registration_state == "beforeTime"' :timeLeft='timeLeft' :formState='formState' @ready="ready")
 
