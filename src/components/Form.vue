@@ -159,15 +159,19 @@
           // console.log('[success] only image have been uploaded')
           try{
             let oneform = _.clone(ar[0])
-            await post_regist_form(oneform)
-            alert('regist succ', JSON.stringify(ar[0]))
+            let result = await post_regist_form(oneform)
+            if (result.success) {
+              alert('regist succ', JSON.stringify(ar[0]))
+              console.log('[success] form have been uploaded to DTNL')
+              this.submissionState = "fullfilled"
+            } else {
+              alert('submission fail')
+            }
           }catch (error){
             this.submissionState = 'none'
             alert(error)
             return
           }
-          console.log('[success] form have been uploaded to DTNL')
-          this.submissionState = "fullfilled"
         }else{
           this.submissionState = "none"
         }
