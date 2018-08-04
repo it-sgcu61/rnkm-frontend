@@ -23,7 +23,7 @@ export default new Router({
       component: About
     },
     {
-      path: '/register',
+      path: '/aa5c16cc271a6d97765bf3d9d8c269b5',
       // redirect: '/about'
       name: 'Register',
       component: Register
