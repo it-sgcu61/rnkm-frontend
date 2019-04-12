@@ -1,5 +1,5 @@
 <template lang='pug'>
-div.cu(style='margin-top: 50px')
+div(style='padding-top: 50px')
   // absolute-background(top)
   div.container.dorm
     h1.is-size-2(style='font-weight: bold') รายละเอียดการนอนหอพักจุฬา
@@ -38,19 +38,19 @@ div.cu(style='margin-top: 50px')
 </template>
 
 <script>
-import AbsoluteBackground from '@/components/AbsoluteBackground.vue'
+import AbsoluteBackground from "@/components/AbsoluteBackground.vue";
 export default {
-  components: {AbsoluteBackground},
-}
+  components: { AbsoluteBackground }
+};
 </script>
 
 <style lang='stylus' scoped>
 .container.dorm {
   max-width: 650px;
   font-size: 1.5em;
-  margin-top: 30px;
 }
-img.dorm{
+
+img.dorm {
   width: 40%;
   max-width: 200px;
   margin: 5px;

@@ -10,9 +10,6 @@ div.wrapper
         i.fa.fa-times.blue
 
   // FORM
-  div
-    //form {{lock}} {{fieldList}}
-    // div(v-for='f in fieldList') {{f}}
   collapse-transition
     div.body(ref='inner' v-show='show')
       slot(name='info' v-bind='$data')
@@ -64,9 +61,9 @@ export default {
       require: false,
       default: false
     },
-    initialValue:{
-      type:Object,
-      required:false
+    initialValue: {
+      type: Object,
+      required: false
     },
     lock: {
       type: Boolean,
@@ -85,7 +82,7 @@ export default {
     return {
       show: true,
       form: {},
-      selectedBaan:[],
+      selectedBaan: []
     };
   },
   created() {
@@ -118,22 +115,22 @@ export default {
       this.show = !this.show;
     },
     async validateAll() {
-       return await this.$validator.validateAll()
+      return await this.$validator.validateAll();
     }
   }
 };
 </script>
 
 <style lang='stylus' scoped>
-
-$edge = #eeef
+$edge = #eeef;
 
 .fa {
-  transform scale(1.5)
-  margin 5px 10px
-  margin-top -2px;
-  color: #334444
+  transform: scale(1.5);
+  margin: 5px 10px;
+  margin-top: -2px;
+  color: #334444;
 }
+
 .wrapper {
   overflow: hidden;
   background-color: #111a;
@@ -158,13 +155,14 @@ $edge = #eeef
       }
     }
   }
+
   .body {
     padding: 35px 30px 35px 30px;
     background: transparent;
   }
 }
 
-.field-group
+.field-group {
   display: block;
   float: none;
   position: relative;
@@ -180,11 +178,12 @@ $edge = #eeef
     margin: 0 0 0 10px;
     padding: 0 6px;
     padding-left: 4px;
-    font-size: 1.2em
+    font-size: 1.2em;
     font-weight: normal;
     -webkit-transition: all 0.25s;
     transition: all 0.25s;
   }
+
   input, textarea, select {
     width: 100%;
     line-height: 20px;
@@ -194,9 +193,9 @@ $edge = #eeef
     border-width: 0 0 0 0;
     border-radius: 0 10px 0 0;
     background: #333e;
-    font-size: 1em
-    font-weight: bold
-    font-family SuperSpace
+    font-size: 1em;
+    font-weight: bold;
+    font-family: SuperSpace;
     outline: none;
     outline-style: none;
     -webkit-appearance: none;
@@ -204,48 +203,54 @@ $edge = #eeef
     -webkit-box-shadow: none;
     box-shadow: none;
     color: #ff7999;
+
     &:hover {
       outline: none;
       border-color: #ef4a6b;
     }
   }
 
-  textarea,
-  txtarea
+  textarea, txtarea {
     height: calc(85px + 1vh);
-  input
+  }
+
+  input {
     height: calc(47px + 1vh);
-  select
+  }
+
+  select {
     height: calc(47px + 1vh);
     padding: 10px 15px 0 12px;
-  option
-    background-color #eee
+  }
 
-  input, select, option, textarea, txtarea
-    &[disabled]
-      background-color transparent
+  option {
+    background-color: #eee;
+  }
 
+  input, select, option, textarea, txtarea {
+    &[disabled] {
+      background-color: transparent;
+    }
+  }
 
-  .error
+  .error {
     margin: 0 0 20px 0;
     padding: 0 0 15px 10px;
     color: yellow;
     font-size: 1em;
     line-height: 20px;
-
+  }
 
   ::placeholder {
     -webkit-text-security: none;
     color: darkGray;
     pointer-events: none !important;
   }
-  input::placeholder,
-  txtarea::placeholder,
-  textarea::placeholder {
+
+  input::placeholder, txtarea::placeholder, textarea::placeholder {
     white-space: pre;
     word-wrap: normal;
     overflow: hidden;
   }
-
-
+}
 </style>

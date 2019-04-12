@@ -93,8 +93,6 @@ import VueCountdown from '@xkeshi/vue-countdown';
 import 'bootstrap/dist/css/bootstrap.css'
 import 'bootstrap-vue/dist/bootstrap-vue.css'
 
-import {login, getPersonInfo, movePerson, confirmHouse} from '../firebase_api.js'
-import {firebaseDB} from '../main.js'
 import Formstatus from '../components/Formstatus'
 import TransferHousePreview from '../components/TransferHousePreview.vue'
 import TransferCondition from '../components/TransferCondition.vue'

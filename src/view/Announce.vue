@@ -39,7 +39,7 @@ div
       // LOGIN
       form.container(v-else)
         div.field.cu
-          button.button.is-info.is-size.is-size-4(
+          button.button.is-info.is-size.is-size-4.is-rounded(
             style='margin: 0px auto 30px auto;font-family: Superspace;'
             @click='$router.push("/dorm")'
           ) รายละเอียดหอพักนิสิต ช่วงงานกิจกรรม
@@ -55,174 +55,197 @@ div
 </template>
 
 <script>
-  import AbsoluteBackground from '@/components/AbsoluteBackground.vue'
-  import EditInfo from '@/components/EditInfo.vue'
+import AbsoluteBackground from "@/components/AbsoluteBackground.vue";
+import EditInfo from "@/components/EditInfo.vue";
 
+import { mask } from "vue-the-mask";
+import { RotateSquare5 } from "vue-loading-spinner";
 
-  import {mask} from 'vue-the-mask'
-  import {RotateSquare5} from 'vue-loading-spinner'
-  import {announcement} from '../middle-api'
-  import {getInfo} from '../rnkm-wan-jeeng.js'
-  // import {getAllowEditPersonalForm} from '../announce_api.js'
-
-
-  export default {
-    components: {AbsoluteBackground, RotateSquare5, EditInfo},
-    directives: {mask},
-    data() {
-      return {
-        login: {
-          usr: '',
-          pwd: '',
-          captchaToken: '',
-        },
-        result: {
-          show: "query",
-          img: '',
-          url: '',
-          baan: ''
-        },
-        editableData: {},
-        currentForm: {},
-        translate: {
-          oldHouse: 'บ้านเดิม',
-          newHouse: 'บ้านใหม่',
-          fullname: 'ชื่อ-สกุล',
-          id: 'เลขปชช',
-          tel: 'เบอร์โทร',
-          isTransferred: 'ย้ายบ้าน'
-        }
-      }
-    },
-    methods: {
-      async submit () {
-        if (!this.login.usr || !this.login.pwd){
-          alert('please fill input')
-          return
-        }
-        // console.log(this.captchaToken)
-        this.result.show = "loading"
-        // EDIT DATA
-        // var userdata = await getAllowEditPersonalForm(this.login.usr, this.login.pwd)
-        try {
-          let res = await getInfo(this.login.usr, this.login.pwd)
-          var userdata = res.data.data || res.data
-        } catch(err) {
-          alert('something is wrong')
-          this.result.show = "query"
-          return
-        }
-        if(userdata.result == "notFound"){
-          alert("ไม่พบข้อมูล กรุณาตรวจสอบข้อมูลที่คุณกรอกอีกครั้ง หากแน่ใจว่าได้ทำการลงทะเบียนไปแล้ว กรุณาติดต่อเพจ CU for Freshmen")
-          this.result.show = "query"
-        }else if(userdata.result == "IncorrectTel"){
-          alert("พบข้อมูลการลงทะเบียน แต่ไม่สามารถเข้าสู่ระบบได้ กรุณาตรวจสอบหมายเลขโทรศัพท์ของคุณ หากมีข้อสงสัยเพิ่มเติม กรุณาติดต่อเพจ CU for Freshmen")
-          this.result.show = "query"
-        }else{
-          this.editableData = userdata
-          // this.result.show = "edit"
-          this.result.show = "show"
-        }
-        return
-
-        // NORMAL ANNOUNCE !!! (remove by krist 16 jul 2018)
-        // var baanResult = await announcement(this.login.usr, this.login.pwd)
-        // this.result.baan = baanResult
-        // this.result.img = require(`../theme/house/${baanResult}.png`)
-        // this.result.url = () => this.$router.push(`/house/${baanResult}`)
-        // this.result.show = "ready"
-
-      }
-    },
-    watch: {
+export default {
+  components: { AbsoluteBackground, RotateSquare5, EditInfo },
+  directives: { mask },
+  data() {
+    return {
       login: {
-        deep: true,
-        handler() {
-          this.result.show = "query"
-        }
+        usr: "",
+        pwd: "",
+        captchaToken: ""
+      },
+      result: {
+        show: "query",
+        img: "",
+        url: "",
+        baan: ""
+      },
+      editableData: {},
+      currentForm: {},
+      translate: {
+        oldHouse: "บ้านเดิม",
+        newHouse: "บ้านใหม่",
+        fullname: "ชื่อ-สกุล",
+        id: "เลขปชช",
+        tel: "เบอร์โทร",
+        isTransferred: "ย้ายบ้าน"
+      }
+    };
+  },
+  methods: {
+    async submit() {
+      if (!this.login.usr || !this.login.pwd) {
+        alert("please fill input");
+        return;
+      }
+      // console.log(this.captchaToken)
+      this.result.show = "loading";
+      // EDIT DATA
+      // var userdata = await getAllowEditPersonalForm(this.login.usr, this.login.pwd)
+      try {
+        let res = await getInfo(this.login.usr, this.login.pwd);
+        var userdata = res.data.data || res.data;
+      } catch (err) {
+        alert("something is wrong");
+        this.result.show = "query";
+        return;
+      }
+      if (userdata.result == "notFound") {
+        alert(
+          "ไม่พบข้อมูล กรุณาตรวจสอบข้อมูลที่คุณกรอกอีกครั้ง หากแน่ใจว่าได้ทำการลงทะเบียนไปแล้ว กรุณาติดต่อเพจ CU for Freshmen"
+        );
+        this.result.show = "query";
+      } else if (userdata.result == "IncorrectTel") {
+        alert(
+          "พบข้อมูลการลงทะเบียน แต่ไม่สามารถเข้าสู่ระบบได้ กรุณาตรวจสอบหมายเลขโทรศัพท์ของคุณ หากมีข้อสงสัยเพิ่มเติม กรุณาติดต่อเพจ CU for Freshmen"
+        );
+        this.result.show = "query";
+      } else {
+        this.editableData = userdata;
+        // this.result.show = "edit"
+        this.result.show = "show";
+      }
+      return;
+    }
+  },
+  watch: {
+    login: {
+      deep: true,
+      handler() {
+        this.result.show = "query";
       }
     }
   }
+};
 </script>
 
 <style lang='stylus' scoped>
-  .scale-x2
-    transform: scale(2)
-  .section
-    background-color: transparentify
-    @media screen and (max-width: 500px)
-      padding 0
+.scale-x2 {
+  transform: scale(2);
+}
 
-  h1
-    font-size: 3em
-    font-family: ZingRust
-    margin .5em auto
+.section {
+  background-color: transparentify;
 
-  .big-logo
-    position: relative;
-    padding: 10px;
-    min-width: 280px;
-    max-width: 90vw;
-    max-height: 70vh;
-    filter: drop-shadow(20px 10px 12px #222f)
-    @media screen and (orientation: landscape)
-      margin-top: calc(-70px + 20vh - 1vw)
-    @media screen and (orientation: portrait)
-      margin-top: calc(-120px + 37vh - 5vw)
-
-  .field
-    text-align center
-
-  .input
-    background-color #eee
-    color white
-    text-align center
-    font-size calc(9px + 1vmin + 1vw)
-    font-family ZingRust
-    font-weight regular
-    font-style normal
-    letter-spacing: .07em
-    padding 0
-    width 300px
-    background-color #333e
-    border none
-    @media screen and (min-width: 600px)
-      width 500px
-    @media screen and (min-width: 1025px)
-      width 600px
-
-  ::placeholder
-    color: #ffaaff
-  ::-webkit-input-placeholder { /* Chrome/Opera/Safari */
-    color: #ffaaff
+  @media screen and (max-width: 500px) {
+    padding: 0;
   }
-  ::-moz-placeholder { /* Firefox 19+ */
-    color: #ffaaff
-  }
-  :-ms-input-placeholder { /* IE 10+ */
-    color: #ffaaff
-  }
-  :-moz-placeholder { /* Firefox 18- */
-    color: #ffaaff
+}
+
+h1 {
+  font-size: 3em;
+  font-family: ZingRust;
+  margin: 0.5em auto;
+}
+
+.big-logo {
+  position: relative;
+  padding: 10px;
+  min-width: 280px;
+  max-width: 90vw;
+  max-height: 70vh;
+  filter: drop-shadow(20px 10px 12px #222f);
+
+  @media screen and (orientation: landscape) {
+    margin-top: calc(-70px + 20vh - 1vw);
   }
 
-  #submit
-    margin-top 10vmin
-    max-width 180px
-    cursor pointer
+  @media screen and (orientation: portrait) {
+    margin-top: calc(-120px + 37vh - 5vw);
+  }
+}
 
-  #result-wrapper
-    transform all 1s
-    .logo-wrap
-      text-align center
-      transition opacity 1s ease
-      .logo
-        width calc(300px + 7vmin)
-        background-color white
-        border-radius 15px
-  .back
-    margin-top 0
-    cursor pointer
-  td
-    padding 10px
+.field {
+  text-align: center;
+}
+
+.input {
+  background-color: #eee;
+  color: white;
+  text-align: center;
+  font-size: calc(9px + 1vmin + 1vw);
+  font-family: ZingRust;
+  font-weight: regular;
+  font-style: normal;
+  letter-spacing: 0.07em;
+  padding: 0;
+  width: 300px;
+  background-color: #333e;
+  border: none;
+
+  @media screen and (min-width: 600px) {
+    width: 500px;
+  }
+
+  @media screen and (min-width: 1025px) {
+    width: 600px;
+  }
+}
+
+::placeholder {
+  color: #ffaaff;
+}
+
+::-webkit-input-placeholder { /* Chrome/Opera/Safari */
+  color: #ffaaff;
+}
+
+::-moz-placeholder { /* Firefox 19+ */
+  color: #ffaaff;
+}
+
+:-ms-input-placeholder { /* IE 10+ */
+  color: #ffaaff;
+}
+
+:-moz-placeholder { /* Firefox 18- */
+  color: #ffaaff;
+}
+
+#submit {
+  margin-top: 10vmin;
+  max-width: 180px;
+  cursor: pointer;
+}
+
+#result-wrapper {
+  transform: all 1s;
+
+  .logo-wrap {
+    text-align: center;
+    transition: opacity 1s ease;
+
+    .logo {
+      width: calc(300px + 7vmin);
+      background-color: white;
+      border-radius: 15px;
+    }
+  }
+}
+
+.back {
+  margin-top: 0;
+  cursor: pointer;
+}
+
+td {
+  padding: 10px;
+}
 </style>

@@ -35,29 +35,20 @@ div
 </template>
 
 <script>
-import {RotateSquare5} from 'vue-loading-spinner'
-import VueCountdown from '@xkeshi/vue-countdown';
+import { RotateSquare5 } from "vue-loading-spinner";
+import VueCountdown from "@xkeshi/vue-countdown";
 export default {
-  props: ['timeLeft', 'formState', 'loading', 'success', 'expired', 'countdown'],
-  components: {RotateSquare5, VueCountdown},
+  props: ["timeLeft", "formState", "loading", "success", "expired", "countdown"],
+  components: { RotateSquare5, VueCountdown },
   data() {
-    return {
-    }
+    return {};
   }
-}
+};
 </script>
 
 <style lang='stylus' scoped>
 </style>
 
 <style lang='stylus' scoped>
-  .scale-x2
-    transform: scale(2)
-  .zingR
-    font-family: ZingRust
-  .space
-    font-family: Superspace
-  #expired
-    color: #f53131a6
 </style>
 
